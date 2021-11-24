@@ -233,7 +233,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      25k 字
+      12k 字
     </span>
   
 
@@ -242,7 +242,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      77 分钟
+      38 分钟
     </span>
   
 
@@ -276,7 +276,6 @@
             <div class="markdown-body">
               <p>就硬卷…</p>
 <a id="more"></a>
-
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度学习是机器学习和人工智能研究的最新且最热门的趋势之一。深度学习方法为计算机视觉带来了革命性的进步，新的深度学习理论和技术正在不断诞生，在计算机视觉领域超越传统的机器学习甚至是现有的深度学习方法。近年来，有关深度学习方面的研究成果爆炸式地增长，由于其发展迅猛，导致了它的进展很难被新的研究者入手并跟进。此外，深度学习已有的方法数量上过于庞大，种类上过于繁多，虽然有大量的深度学习综述为研究者提供现有的研究发展情况，但是其往往是全面地介绍整个深度学习方法。因而，本文将着重于计算机视觉领域，从深度学习方法中的图像采样对深度学习展开叙述。</p>
 <h2 id="1-序言"><a href="#1-序言" class="headerlink" title="1.序言"></a>1.序言</h2><p>深度学习（DeepLearning，DL）被认为是机器学习（Machine Learning ，ML）子领域，其采用多层次的非线性信息处理和抽象，用于有监督、无监督、半监督、自监督、弱监督等的特征学习、表示、分类、回归和模式识别等[1-01]。在 2000 年时深度学习的方法被用于人工神经网络（ANN），随着层数的加深，人工神经网络的被单独提出深层神经网络（DNN）这一分支。在2012年 ImageNet大规模视觉识别挑战赛上卷积神经网络AlexNet获得冠军，并且误判率令人惊艳[1-02]，从此卷积神经网络受到众多研究者的瞩目，并促使了深度学习的快速发展，目前计算机视觉（CV）领域多使用卷积神经网络，并且神经网络深度逐渐加深[1-03]。在自然语言处理（NLP）领域，由于循环神经网络（RNN）结构使得其较适合处理文本分析等场景从而受到众多研究者的欢迎。生成对抗网络以零和博弈的思想依赖生成模型和判别模型使得在图像生成方面效果良好。此外，较为常用的深度学习方法还有自编码器[1-04]、胶囊网络[1-05]、属于循环神经网络的长短记忆网络[1-06]、增强神经网络、深度信念网络、 深度朗伯网络、循环支持向量机等[1-07]。</p>
 <p>对于图像分类、处理任务，神经网络中一大部分操作是采样，尤其是卷积神经网络。而神经网络的采样操作中较为常见的为卷积和池化，另外还有反卷积、反池化等多种多样的采样操作。各种采样的目的与原理都不尽相同，正是这些不一样的采样构成了神经网络结构中重要的部分。</p>
@@ -285,7 +284,7 @@
 <p>反卷积和反池化等则常在卷积神经网络中出现。</p>
 <h3 id="下采样"><a href="#下采样" class="headerlink" title="下采样"></a>下采样</h3><p> 下采样（subsampled）也称为降采样downsampled），其采样层是使用池化的相关技术来实现，目的是降低维度并保留有效特征，可在一定程度避免过拟合。</p>
 <p>池化属于降采用的一种，池化除了降低维度，其目的还有保持旋转、平移、伸缩不变形，增大感受野等。采样有最大值采样，平均值采样，求和区域采样和随机区域采样等；池化也类似地有最大值池化，平均值池化，随机池化，求和区域池化等。</p>
-<p>降采样原理：对一个尺寸大小为M * N地图像 ，对其进行 s倍下采样，即得到$\frac{M * N}{s^2}$分辨率地图像，其中$s$是$M$,$N$的公约数。具体对于特征图，则是把原始图像像素点为$s*s$的区域的变成一个像素，这个像素点的值就是该区域内所有像素的均值：$p_k=\sum_{i \in win(k)}I_i/s^2$</p>
+<p>降采样原理：对一个尺寸大小为M <em> N地图像 ，对其进行 s倍下采样，即得到$\frac{M </em> N}{s^2}$分辨率地图像，其中$s$是$M$,$N$的公约数。具体对于特征图，则是把原始图像像素点为$s*s$的区域的变成一个像素，这个像素点的值就是该区域内所有像素的均值：$p<em>k=\sum</em>{i \in win(k)}I_i/s^2$</p>
 <p>降采样的作用主要有：</p>
 <ol>
 <li><p>保持平移、旋转等的不变性；</p>
@@ -305,38 +304,77 @@
 <center><img src="http://deeplearning.stanford.edu/wiki/images/f/f9/Autoencoder636.png" srcset="/img/loading.gif" lazyload="" width="300"></center>
 <center>图 卷积自编码器</center>
 
-<p>假设有k个卷积核，每个卷积核由参数$w^k$和$b^k$组成，用和$h^k$表示卷积层，则<br>$$<br>h^k=σ(x∗w^k+b^k)<br>$$<br>将得到的$h^k$进行特征重构，可以得到下式：<br>$$<br>y=σ(h^k∗w^k+c)<br>$$</p>
-<p>将输入的样本和最终利用特征重构得出来的结果进行欧几里得距离比较，通过BP算法进行优化，就可以得到一个完整的卷积自编码器（CAE）:<br>$$<br>E=\frac{1}{2n}∑(x_i−y_i)^2<br>$$</p>
-<h3 id="3-2-经典卷积神经网络"><a href="#3-2-经典卷积神经网络" class="headerlink" title="3.2 经典卷积神经网络"></a>3.2 经典卷积神经网络</h3><h4 id="3-2-1-LeNet"><a href="#3-2-1-LeNet" class="headerlink" title="3.2.1 LeNet"></a>3.2.1 LeNet</h4><p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200408004128834.png" srcset="/img/loading.gif" lazyload="" alt="image-20200408004128834"></p>
-<p>从最早的卷积神经网络LetNet-5的结构图中可看出其具有两个卷积层和两个池化层（图中表示为降采样层），输入32 * 32 *3的图像，第一个卷积层将三个通道的RGB图按照卷积计算的规则提取低级特征得到6个28 * 28的特征图，第一个池化层对3 * 32 *32 的图像经过卷积运算后得到的的特征图进行采样，得到 6个14 * 14 的特征图。 这是神经网络中最早利用图像局部相关性的原理而对图像抽样，以达到减少数据处理量并保留有用信息。第二个池化层通过降采样将16个10 * 10的特征图转变为16个5 * 5的特征图。不难看出，LetNet-5的计算量都是经过降采样减少的，而图像特征则是经过卷积提取的。</p>
+<p>假设有k个卷积核，每个卷积核由参数$w^k$和$b^k$组成，用和$h^k$表示卷积层，则</p>
+<script type="math/tex; mode=display">
+h^k=σ(x∗w^k+b^k)</script><p>将得到的$h^k$进行特征重构，可以得到下式：</p>
+<script type="math/tex; mode=display">
+y=σ(h^k∗w^k+c)</script><p>将输入的样本和最终利用特征重构得出来的结果进行欧几里得距离比较，通过BP算法进行优化，就可以得到一个完整的卷积自编码器（CAE）:</p>
+<script type="math/tex; mode=display">
+E=\frac{1}{2n}∑(x_i−y_i)^2</script><h3 id="3-2-经典卷积神经网络"><a href="#3-2-经典卷积神经网络" class="headerlink" title="3.2 经典卷积神经网络"></a>3.2 经典卷积神经网络</h3><h4 id="3-2-1-LeNet"><a href="#3-2-1-LeNet" class="headerlink" title="3.2.1 LeNet"></a>3.2.1 LeNet</h4><p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200408004128834.png" srcset="/img/loading.gif" lazyload="" alt="image-20200408004128834"></p>
+<p>从最早的卷积神经网络LetNet-5的结构图中可看出其具有两个卷积层和两个池化层（图中表示为降采样层），输入32 <em> 32 </em>3的图像，第一个卷积层将三个通道的RGB图按照卷积计算的规则提取低级特征得到6个28 <em> 28的特征图，第一个池化层对3 </em> 32 <em>32 的图像经过卷积运算后得到的的特征图进行采样，得到 6个14 </em> 14 的特征图。 这是神经网络中最早利用图像局部相关性的原理而对图像抽样，以达到减少数据处理量并保留有用信息。第二个池化层通过降采样将16个10 <em> 10的特征图转变为16个5 </em> 5的特征图。不难看出，LetNet-5的计算量都是经过降采样减少的，而图像特征则是经过卷积提取的。</p>
 <h5 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h5><p>卷积操作通过卷积核（Convolution Kernel ）实现，卷积核并非在深度学习中最早提出，早在边缘检测等研究例如Sobel 算子等滤波算子就已出现，当时被称为Filter[3.2.1-1]。卷积核具有的一局部性，即它只关注局部特征，局部的程度取决于卷积核的大小，其意义在于比较图像邻近像素的相似性，而图像相邻像素通常有一定的关联，故卷积这种采样方式很适合用于深度学习中对图像的处理。</p>
 <p>时域卷积对应频域相乘，故原图像与卷积核的卷积，其实是对频域信息的选择。例如，图像中的边缘和轮廓属于是高频信息，图像中某区域强度的综合考量属于低频信息。</p>
-<p>信号与图像处理中的一维信号的卷积：<br>$$<br>y[n]=x[n]*h[n]= \sum_k x[k]h[n-k]<br>$$<br>其中 $x[n]$是输入信号 $h[n]$是单位响应。于是输出信号 $y[n]$就是输入信号 $x[n]$的延迟响应的叠加。这也就是一维卷积本质：加权叠加/积分。</p>
-<p>那么对于二维信号，比如图像，卷积的公式为：<br>$$<br>y[m,n]=x[m,n]<em>h[m,n]=\sum_j \sum_i x[i,j]h[m-i,n-j]<br>$$<br>若卷积核大小是3</em>3，则卷积核如图：</p>
+<p>信号与图像处理中的一维信号的卷积：</p>
+<script type="math/tex; mode=display">
+y[n]=x[n]*h[n]= \sum_k x[k]h[n-k]</script><p>其中 $x[n]$是输入信号 $h[n]$是单位响应。于是输出信号 $y[n]$就是输入信号 $x[n]$的延迟响应的叠加。这也就是一维卷积本质：加权叠加/积分。</p>
+<p>那么对于二维信号，比如图像，卷积的公式为：</p>
+<script type="math/tex; mode=display">
+y[m,n]=x[m,n]*h[m,n]=\sum_j \sum_i x[i,j]h[m-i,n-j]</script><p>若卷积核大小是3*3，则卷积核如图：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122143230026.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p> 输入图像到输出图像的变化如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122143341925.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p>二维卷积也有加权叠加/积分的作用,其中卷积核进行了水平和竖直方向的翻转。</p>
-<p>kernel size（卷积核大小） =3 ,stride（步长）=1 的反卷积计算过程：<br>$$<br>\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad<br>\vec{x}=[x_1 \quad x_2 \quad x_3 \quad x_4]^T \<br>\vec{w}*^T \vec{x}=<br>\left[<br> \begin{matrix}</p>
-<p> w_1 \quad w_2 \quad w_3 \quad 0 \quad 0 \quad 0\<br> 0 \quad w_1 \quad w_2 \quad w_3 \quad 0 \quad 0 \<br> 0 \quad 0 \quad w_1 \quad w_2 \quad w_3 \quad 0  \<br> 0 \quad 0 \quad 0 \quad w_1 \quad w_2 \quad w_3  \</p>
-<p> \end{matrix}<br>  \right]</p>
-<p>  \left[<br> \begin{matrix}<br> 0\<br> x_1 \x_2 \x_3 \x_4 \<br> 0<br>   \end{matrix}<br>  \right]</p>
-<p>  =</p>
-<p>  \left[<br> \begin{matrix}</p>
-<p> w_2 x_1+w_3x_2 \<br>  w_1x_1+w_2x_2+w_3x_3 \<br> w_1x_2+w_2x_3+ w_3x_4  \<br> w_1x_3+w_2x_4 \</p>
-<p> \end{matrix}<br>  \right]<br>$$</p>
-<h5 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h5><p>池化层又成为降采样层或（下）欠采样层，其与卷积都是卷积神经网络中不可缺少的一部分，较早的卷积神经网络例如AlexNet通常会是卷积层后会紧跟一个池化层。池化的主要功能是对特征进行降维，减少参数量以降低计算量，避免过拟合，最大池化和平均池化是最为常见的两种池化方式。最大池化保留了图像纹理特征,平均池化保留了图像的整体数据特征，池化都达到了降维的作用。</p>
+<p>kernel size（卷积核大小） =3 ,stride（步长）=1 的反卷积计算过程：</p>
+<script type="math/tex; mode=display">
+\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad
+\vec{x}=[x_1 \quad x_2 \quad x_3 \quad x_4]^T \\
+\vec{w}*^T \vec{x}=
+\left[
+ \begin{matrix}
+
+ w_1 \quad w_2 \quad w_3 \quad 0 \quad 0 \quad 0\\
+ 0 \quad w_1 \quad w_2 \quad w_3 \quad 0 \quad 0 \\
+ 0 \quad 0 \quad w_1 \quad w_2 \quad w_3 \quad 0  \\
+ 0 \quad 0 \quad 0 \quad w_1 \quad w_2 \quad w_3  \\
+
+
+
+ \end{matrix}
+  \right]
+
+  \left[
+ \begin{matrix}
+ 0\\
+ x_1 \\x_2 \\x_3 \\x_4 \\
+ 0
+   \end{matrix}
+  \right]
+
+  =
+
+  \left[
+ \begin{matrix}
+
+ w_2 x_1+w_3x_2 \\
+  w_1x_1+w_2x_2+w_3x_3 \\
+ w_1x_2+w_2x_3+ w_3x_4  \\
+ w_1x_3+w_2x_4 \\
+
+
+ \end{matrix}
+  \right]</script><h5 id="池化"><a href="#池化" class="headerlink" title="池化"></a>池化</h5><p>池化层又成为降采样层或（下）欠采样层，其与卷积都是卷积神经网络中不可缺少的一部分，较早的卷积神经网络例如AlexNet通常会是卷积层后会紧跟一个池化层。池化的主要功能是对特征进行降维，减少参数量以降低计算量，避免过拟合，最大池化和平均池化是最为常见的两种池化方式。最大池化保留了图像纹理特征,平均池化保留了图像的整体数据特征，池化都达到了降维的作用。</p>
 <p>以最大池化为例，其过程如图所示：</p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/fsafsa13213.jpg" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p>和卷积层类似，池化层也有<strong>窗口</strong>和<strong>步长</strong>的概念，其中<strong>步长</strong>在里面的作用也是完全相同的，就是窗口每次移动的像素个数。</p>
 <h4 id="3-2-2-AlexNet"><a href="#3-2-2-AlexNet" class="headerlink" title="3.2.2 AlexNet"></a>3.2.2 AlexNet</h4><p> <img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122143517475.png" srcset="/img/loading.gif" lazyload="" alt=""> </p>
 <p>AlexNet是2012年 ImageNet大规模视觉识别挑战赛（ ILSVRC ）的冠军，正是它的出现让沉寂14年的卷积神经网络受到瞩目，因而促使了深度学习快速的快速发展。</p>
-<p>因为显存的关系，AlexNet在两个GPU上训练，输入的是227 * 227 * 3的RGB图像。对于单个GPU，图像是经过卷积运算之后为55 * 55 *3，该神经网络总过对特征图经过三次最大池化（降采样）分别得到27 * 27 *96 ，13 * 13 * 256，6 * 6 * 256 。<br>相较于LeNet，AlexNet采用了分组卷积，其分布式计算使得图像特征得以分散在不同的计算设备上计算；另外其卷积步长不再完全为1，这种步长大于1的卷积被称之为跨步卷积。</p>
+<p>因为显存的关系，AlexNet在两个GPU上训练，输入的是227 <em> 227 </em> 3的RGB图像。对于单个GPU，图像是经过卷积运算之后为55 <em> 55 </em>3，该神经网络总过对特征图经过三次最大池化（降采样）分别得到27 <em> 27 </em>96 ，13 <em> 13 </em> 256，6 <em> 6 </em> 256 。<br>相较于LeNet，AlexNet采用了分组卷积，其分布式计算使得图像特征得以分散在不同的计算设备上计算；另外其卷积步长不再完全为1，这种步长大于1的卷积被称之为跨步卷积。</p>
 <h5 id="分组卷积（-Group-convolution-）"><a href="#分组卷积（-Group-convolution-）" class="headerlink" title="分组卷积（ Group convolution ）"></a>分组卷积（ Group convolution ）</h5><p>由于计算资源有限，AlexNet使用两个GPU训练模型，故卷积操作在两个GPU处理，特征图也在两个GPU上处理，最后把两个GPU的计算结果融合。</p>
 <p>此后许多轻量级的SOTA网络（State Of The Art， 指在该项研究中当前最先进的网络结构）都用到了分组卷积，以完成多个计算设备使用有限的算力。</p>
 <h5 id="跨步卷积（Strided-Convolution）"><a href="#跨步卷积（Strided-Convolution）" class="headerlink" title="跨步卷积（Strided Convolution）"></a>跨步卷积（Strided Convolution）</h5><p>相比LeNet-5，AlexNet的卷积操作开始出现充填(padding)和步长(stride)，此后的卷积神经网络中跨步卷积成了常见的卷积操作。</p>
-<p>kernel size（卷积核大小） =3 ,stride（步长）&gt;1 的反卷积计算过程：<br>$$<br>\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad\vec{x}=[x_1 \quad x_2 \quad x_3 \quad x_4]^T \\vec{w}*^T \vec{x}=\left[ \begin{matrix}  w_1 \quad w_2 \quad w_3 \quad 0 \quad 0 \quad 0\ \0 \quad w_1 \quad w_2 \quad w_3 \quad 0 \quad   \end{matrix}  \right]    \left[ \begin{matrix}0\ x_1 \x_2 \x_3 \x_4 \0   \end{matrix}  \right]    =    \left[ \begin{matrix}  w_2 x_1+w_3x_2 \  w_1x_2+w_2x_3+w_3x_4 \      \end{matrix}  \right]<br>$$</p>
-<p>当卷积stride（步长）&gt;1时可起到降采样的作用。</p>
+<p>kernel size（卷积核大小） =3 ,stride（步长）&gt;1 的反卷积计算过程：</p>
+<script type="math/tex; mode=display">
+\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad\vec{x}=[x_1 \quad x_2 \quad x_3 \quad x_4]^T \\\vec{w}*^T \vec{x}=\left[ \begin{matrix}  w_1 \quad w_2 \quad w_3 \quad 0 \quad 0 \quad 0\\ \\0 \quad w_1 \quad w_2 \quad w_3 \quad 0 \quad   \end{matrix}  \right]    \left[ \begin{matrix}0\\ x_1 \\x_2 \\x_3 \\x_4 \\0   \end{matrix}  \right]    =    \left[ \begin{matrix}  w_2 x_1+w_3x_2 \\  w_1x_2+w_2x_3+w_3x_4 \\      \end{matrix}  \right]</script><p>当卷积stride（步长）&gt;1时可起到降采样的作用。</p>
 <h4 id="3-2-3-ZFNet"><a href="#3-2-3-ZFNet" class="headerlink" title="3.2.3 ZFNet"></a>3.2.3 ZFNet</h4><h5 id="反卷积"><a href="#反卷积" class="headerlink" title="反卷积"></a>反卷积</h5><p>反卷积（Deconvolution） 的概念首次出现在Zeiler在2010年发表的论文中[3.2.3-1]，而Zeiler在2011年发表的论文中反卷积作为术语正式使用[3.2.3-2]。ZFNet沿袭AlexNet的网络架构，并提出了有关优化性能的一些关键想法 ， 展示了将滤波器和权重可视化的正确方法 ， 反卷积可视化训练过程中特征的演化及发现潜在的问题[3.2.3-3]。随后反卷积在神经网络可视化上的成功应用的案例逐渐增多，例如场景分割、生成模型等的工作也逐渐采用反卷积。反卷积也有很多其他的叫法，比如：Transposed Convolution，Fractional Strided Convolution等。</p>
 <p> 反卷积是上采样的一种，由于其是通过转置卷积核来达到去除卷积的目的，因而也称为转置卷积(transpose convolution)或者分数步长卷积(convolution with fractional strides)或者后向卷积(backwards strided convolution)，其名称具有一定的争议性。 反卷积并非正向卷积的完全逆向，从目前的实现方法上看我们可以将其视作一种较特殊的正向卷积。反卷积按照一定的比例在图像边缘补0来扩大图像的尺寸，再旋转卷积核，最后进行正向卷积。</p>
 <p>反卷积的数学表达：</p>
@@ -346,27 +384,90 @@
 <li>若是正向卷积，则由$Y=CX$得到稀疏矩阵$C$；若是反向卷积，则由$Y=C^T X$ 得到$ C $</li>
 </ul>
 <p>当卷积 stride &gt;1(步长大于1)时，可以实现降采样；类似的，反卷积也可以实现升采样。</p>
-<p>kernel size（卷积核大小） =3 ,stride（步长）=1的反卷积计算过程：<br>$$<br>\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad<br>\vec{x}=[x_1 \quad x_2 \quad x_3 \quad x_4]^T \<br>\vec{w}*^T \vec{x}=<br>\left[<br> \begin{matrix}</p>
-<p> w_1 \quad 0\quad 0\quad 0 \<br> w_2 \quad w_1\quad 0\quad 0 \<br> w_3 \quad w_2 \quad w_1 \quad 0  \<br> 0 \quad  w_3 \quad w_2 \quad w_1  \<br> 0 \quad  0 \quad w_3 \quad w_2 \<br> 0 \quad  0 \quad 0 \quad w_3 \</p>
-<p> \end{matrix}<br>  \right]</p>
-<p>  \left[<br> \begin{matrix}<br> x_1 \x_2 \x_3 \x_4<br>   \end{matrix}<br>  \right]</p>
-<p>  =</p>
-<p>  \left[<br> \begin{matrix}</p>
-<p> w_1 x_1 \<br>  w_3x_1+w_1x_2 \<br> w_3x_2+w_2x_3+ w_1x_3  \<br> w_3x_2+w_2x_3+ w_1x_4  \<br> w_3x_3+w_2x_4  \<br> w_3x_4 \</p>
-<p> \end{matrix}<br>  \right]<br>$$<br>kernel size（卷积核大小） =3 ,stride（步长）&gt;1 的反卷积计算过程：<br>$$<br>\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad<br>\vec{x}=[x_1 \quad x_2 \quad x_3]^T \<br>\vec{w}*^T \vec{x}=<br>\left[<br> \begin{matrix}</p>
-<p> w_1 \quad 0 \<br> w_2 \quad 0 \<br> w_3 \quad w_1  \<br> 0 \quad  w_2  \<br> 0 \quad  w_3  \<br> 0 \quad  0 \</p>
-<p> \end{matrix}<br>  \right]</p>
-<p>  \left[<br> \begin{matrix}<br> x_1 \x_2<br>   \end{matrix}<br>  \right]</p>
-<p>  =</p>
-<p>  \left[<br> \begin{matrix}</p>
-<p> w_1 x_1 \<br> w_2 x_1 \<br> w_3x_1+w_1x_2  \<br> w_2x_2  \<br> w_3x_2  \<br> 0  \</p>
-<p> \end{matrix}<br>  \right]<br>$$</p>
-<h5 id="反池化"><a href="#反池化" class="headerlink" title="反池化"></a>反池化</h5><p>反池化是上采样的一种，ZFNet作者在论文中首次使用反池化。反池化是池化的逆操作，因为经过池化之后部分信息已丢失，因而想要以池化后的信息恢复到全部信息，则存只能通过补位来实现最大程度上的信息完整。</p>
+<p>kernel size（卷积核大小） =3 ,stride（步长）=1的反卷积计算过程： </p>
+<script type="math/tex; mode=display">
+\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad
+\vec{x}=[x_1 \quad x_2 \quad x_3 \quad x_4]^T \\
+\vec{w}*^T \vec{x}=
+\left[
+ \begin{matrix}
+
+ w_1 \quad 0\quad 0\quad 0 \\
+ w_2 \quad w_1\quad 0\quad 0 \\
+ w_3 \quad w_2 \quad w_1 \quad 0  \\
+ 0 \quad  w_3 \quad w_2 \quad w_1  \\
+ 0 \quad  0 \quad w_3 \quad w_2 \\
+ 0 \quad  0 \quad 0 \quad w_3 \\
+
+
+ \end{matrix}
+  \right]
+
+  \left[
+ \begin{matrix}
+ x_1 \\x_2 \\x_3 \\x_4
+   \end{matrix}
+  \right]
+
+  =
+
+  \left[
+ \begin{matrix}
+
+ w_1 x_1 \\
+  w_3x_1+w_1x_2 \\
+ w_3x_2+w_2x_3+ w_1x_3  \\
+ w_3x_2+w_2x_3+ w_1x_4  \\
+ w_3x_3+w_2x_4  \\
+ w_3x_4 \\
+
+
+ \end{matrix}
+  \right]</script><p>kernel size（卷积核大小） =3 ,stride（步长）&gt;1 的反卷积计算过程：</p>
+<script type="math/tex; mode=display">
+\vec{w}=[w_1 \quad w_2 \quad w_3]^T \quad
+\vec{x}=[x_1 \quad x_2 \quad x_3]^T \\
+\vec{w}*^T \vec{x}=
+\left[
+ \begin{matrix}
+
+ w_1 \quad 0 \\
+ w_2 \quad 0 \\
+ w_3 \quad w_1  \\
+ 0 \quad  w_2  \\
+ 0 \quad  w_3  \\
+ 0 \quad  0 \\
+
+
+ \end{matrix}
+  \right]
+
+  \left[
+ \begin{matrix}
+ x_1 \\x_2
+   \end{matrix}
+  \right]
+
+  =
+
+  \left[
+ \begin{matrix}
+
+ w_1 x_1 \\
+ w_2 x_1 \\
+ w_3x_1+w_1x_2  \\
+ w_2x_2  \\
+ w_3x_2  \\
+ 0  \\
+
+
+ \end{matrix}
+  \right]</script><h5 id="反池化"><a href="#反池化" class="headerlink" title="反池化"></a>反池化</h5><p>反池化是上采样的一种，ZFNet作者在论文中首次使用反池化。反池化是池化的逆操作，因为经过池化之后部分信息已丢失，因而想要以池化后的信息恢复到全部信息，则存只能通过补位来实现最大程度上的信息完整。</p>
 <p>池化有两种：最大池化和平均池化，其反池化也需要与其对应。反池化无法直接实现，ZFNet作者在训练神经网络的过程中记录每个池化操作z*z的区域内输入最大值的位置，反池化时，将最大值返回其对应的位置，其余位置的数值补为0，由此近似得实现了反池化。 </p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122143601820.png" srcset="/img/loading.gif" lazyload="" alt=""> </p>
 <p> <img src="https://img-blog.csdnimg.cn/20200220230126232.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2d3cGppYXlvdQ==,size_16,color_FFFFFF,t_70#pic_center" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> </p>
-<h4 id="3-2-4-VGGNet"><a href="#3-2-4-VGGNet" class="headerlink" title="3.2.4 VGGNet"></a>3.2.4 VGGNet</h4><p>VGGNet为此前卷积神经网络的加深网络，VGGNet的层数更深，大量的卷积层更利于图像从低级特征提取到高级特征。VGGNet-19 训练输出的图像大小为 224 * 224 *3，经过第一次卷积之后的图像特征大小为 224 *224 * 64。VGGNet-19 一共有五个池化层，池化后的特征图大小分别是 112 * 112 * 65，56 * 56 * 128，28 * 28 *256，14 * 14 * 512，7 * 7 * 512.</p>
-<p>VGGNet中每个最大池化层后的滤波器数量都增加一倍，因而加强了缩小空间尺寸并保持深度增长。在此前，如AlexNet的卷积大小为11*11，而在VGGNet中，卷积核大小都较小，至此已充分证明卷积核两个3 * 3jchang的卷积采样效果会比一个5 * 5的卷积核好，且计算量也相对较小，故此后的神经网络中除了一些特定的应用场景所需否则都一般采用较小的卷积核。</p>
+<h4 id="3-2-4-VGGNet"><a href="#3-2-4-VGGNet" class="headerlink" title="3.2.4 VGGNet"></a>3.2.4 VGGNet</h4><p>VGGNet为此前卷积神经网络的加深网络，VGGNet的层数更深，大量的卷积层更利于图像从低级特征提取到高级特征。VGGNet-19 训练输出的图像大小为 224 <em> 224 </em>3，经过第一次卷积之后的图像特征大小为 224 <em>224 </em> 64。VGGNet-19 一共有五个池化层，池化后的特征图大小分别是 112 <em> 112 </em> 65，56 <em> 56 </em> 128，28 <em> 28 </em>256，14 <em> 14 </em> 512，7 <em> 7 </em> 512.</p>
+<p>VGGNet中每个最大池化层后的滤波器数量都增加一倍，因而加强了缩小空间尺寸并保持深度增长。在此前，如AlexNet的卷积大小为11<em>11，而在VGGNet中，卷积核大小都较小，至此已充分证明卷积核两个3 </em> 3jchang的卷积采样效果会比一个5 * 5的卷积核好，且计算量也相对较小，故此后的神经网络中除了一些特定的应用场景所需否则都一般采用较小的卷积核。</p>
 <h4 id="3-2-5-GoogLeNet"><a href="#3-2-5-GoogLeNet" class="headerlink" title="3.2.5 GoogLeNet"></a>3.2.5 GoogLeNet</h4><h4 id="V1"><a href="#V1" class="headerlink" title="V1"></a>V1</h4><p>GoogLeNet是 ImageNet 2014比赛分类的冠军，其错误率低至6.656%，相比此前的卷积神经网络，其大大增加了卷积神经网络的深度。 GoogLeNet Incepetion V1相比AlexNet的卷积神经网络更深，但是计算量却更少，准确率确远高于AlexNet。GoogLeNet参数少是相比其他神经网络计算量更小的直接原因，造成参数少的原因除了模型精心设计因而参数复用率高以外，另外用全局平均池化层代替了以往的网络结构中最后的全连接。</p>
 <h4 id="V2"><a href="#V2" class="headerlink" title="V2"></a>V2</h4><h4 id="V3"><a href="#V3" class="headerlink" title="V3"></a>V3</h4><h4 id="3-2-6-ResNet"><a href="#3-2-6-ResNet" class="headerlink" title="3.2.6 ResNet"></a>3.2.6 ResNet</h4><p>ResNet（残差网络）在网络架构上参照了Inception V1，其快捷连接(shortcut connection)降低了池化层的重要性，以ResNet-34为例，从网络结构中可以清楚地看到只有第一次卷积以及倒数第二层池化层，此外便全是卷积层。通过恒等映射的方式解决神经网络准确率饱和退化的问题，因而这种网络结构可以达到远超过此前的深层次，并且除了输入输出的邻近层外都可以采用卷积核逐步提取图像特征，由此可以在保证增加层数并使用卷积将图像从低级特征逐步提取到高级特征，在不考虑降维的情况下无需在中间加入池化层。</p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/shendu153135.jpg" srcset="/img/loading.gif" lazyload="" alt=""></p>
@@ -374,7 +475,7 @@
 <p>ResNet最为重要的是恒等映射的思想，其后大量著名的神经网络借鉴或以其为模板，衍生出了：用不同长度子路径组合选择合适的子路径集合提高模型表达能力的FractalNet[3.6.2-1]； 以ResNetv2为基础增大残差块中的卷积核数量以此学习到更多有用信息的WideResNet[3.6.2-2]；每个分支都用相同的拓扑结构，通过变量基数达到控制组的数量目的的ResNeXt[3.6.2-3]；每一层和前面所有层相连并构建结构窄的网络，学习少量特征图以降低了冗余性的 DenseNet[3.6.2-4] ； 使用残差连接复用特征并大量抛弃最大池化避免高频高幅的DarkNet-53[3.6.2-5] ； 采用空洞卷积而非降采样的方法扩大感受野的 Dilated ResNet[3.6.2-6] 。</p>
 <h4 id="3-2-7-Dilated-ResNet（空洞卷积神经网络）"><a href="#3-2-7-Dilated-ResNet（空洞卷积神经网络）" class="headerlink" title="3.2.7 Dilated ResNet（空洞卷积神经网络）"></a>3.2.7 Dilated ResNet（空洞卷积神经网络）</h4><p>空洞卷积（Dilated Convolution）也被称为扩展卷积或者膨胀卷积，是在2016年由 普林斯顿大学的 Fisher Yu 等人在其参考残差网络构建的空洞卷积神经网络中的一种上采样方法[3.2.7-1] 。扩张卷积是在标准卷积核中注入空洞，以此增加模型的感受野（reception field）。相比常规的卷积操作，扩张卷积增多了一个卷积核的点的间隔数量dilation rate这个参数，常规的卷积操作dilatation rate为1。<br>感受野的大小在目标检测和图像分割尤其重要，而感受野需要依靠下采样，然而图像经过下采样会导致小目标不容易被检测到；虽然多层特征图提取目标在此方面有一定程度的应对效果，，但是前面的特征图语义信息不够因而并不合适 ；<br>如果没有下采样，神经网络的计算量会增大，另外会因为没有逐渐将低级特征提取到高级特征导致效果不佳，感受野也不会有变化。而空洞卷积可以不牺牲特征图尺寸增大感受野[3-02]。空洞卷积的目的是扩大感受野，实际上并没有扩大特征图，因而并不能当作上采样方法。 </p>
 <h4 id="3-2-8-YOLO2"><a href="#3-2-8-YOLO2" class="headerlink" title="3.2.8 YOLO2"></a>3.2.8 YOLO2</h4><p>yolo2是继2015年Joseph Redmon等人提出yolo [3.28-1 ] 之后在2017提出的一种改进 [3-04] 。yolo在工业界应用广泛，大量目标检测的落地都依赖yolo实现。其中在yolo2中提到穿透层(passthrough layer)。</p>
-<p>穿透层的本质是特征重排，26 * 26 * 512的特征图按行和列隔点采样，得到4个13 * 13 * 512的特征图并按通道顺序串联，得到13 * 13 * 2048的特征图.还有就是，穿透层不学习参数，其直接将前面的层的特征重排拼接到后面的层，故网络越在前面的层，感受野越小，因而有利于小目标的检测。</p>
+<p>穿透层的本质是特征重排，26 <em> 26 </em> 512的特征图按行和列隔点采样，得到4个13 <em> 13 </em> 512的特征图并按通道顺序串联，得到13 <em> 13 </em> 2048的特征图.还有就是，穿透层不学习参数，其直接将前面的层的特征重排拼接到后面的层，故网络越在前面的层，感受野越小，因而有利于小目标的检测。</p>
 <h4 id="SENet"><a href="#SENet" class="headerlink" title="SENet"></a>SENet</h4><p>SENet考虑特征通道之间的关系，其显式地建模特征通道之间的相互依赖关系。其采用了一种全新的特征重标定策略。 SENet通过学习的方式获取到每个特征通道的重要程度，再依照此重要程度提升有用的特征并且抑制对当前任务用处不大的特征，以此达到更高效并准确的完成图像分类。 </p>
 <h3 id="3-3-全卷积神经网络"><a href="#3-3-全卷积神经网络" class="headerlink" title="3.3 全卷积神经网络"></a>3.3 全卷积神经网络</h3><p>全卷积神经网络是在2015年由UC Berkeley的Jonathan Long等提出的用于图像语义分割的一种卷积神经网络[3.3-1]。</p>
 <p>普通的卷积神经网络结构适用于图像级别的分类和回归任务，因为其最后得到输入图像的分类的概率。特征图（feature map）在经过最后的卷积操作之后会经过若干个全连接层计算，被映射成为固定长度的特征向量以此完成分类。如AlexNet为完成ImageNet大规模图像分类挑战赛中一千种图像分类故而最后输出一个1000维的向量表示输入图像属于每一类的概率。<br>全卷积神经网络（FCN）对图像进行像素级的分类，其适用于语义级别的图像分割问题。相比经典的CNN在最后使用全连接层得到固定长度的特征向量进行分类不同，FCN可接受任意尺寸的输入图像，采用反卷积对最后一个卷基层的特征图（feature map）进行上采样，使它恢复到输入图像相同的尺寸，从而可以对每一个像素都产生一个预测，同时保留了原始输入图像中的空间信息，最后奇偶在上采样的特征图进行像素的分类。FCN从抽象的特征中恢复出每个像素所属的类别，即从图像级别的分类进一步延伸到像素级别的分类。<br>FCN将传统CNN中的全连接层转化成一个个的卷积层。在传统的CNN结构中，前5层是卷积层，第6层和第7层分别是一个长度为4096的一维向量，第8层是长度为1000的一维向量，分别对应1000个类别的概率。FCN将这3层表示为卷积层，卷积核的大小(通道数，宽，高)分别为（4096,7,7）、（4096,1,1）、（1000,1,1）。所有的层都是卷积层，故称为全卷积神经网络，如下图所示：</p>
@@ -393,8 +494,8 @@
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/sadasd315164.jpg" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p>仔细观察两个时刻之间的连线，它与图的连线密切相关。比如说在 T1T1 时刻，结点 1 的状态接受来自结点 3 的上一时刻的隐藏状态，因为结点 1 与结点 3相邻。直到 TnTn 时刻，各个结点隐藏状态收敛，每个结点后面接一个 gg 即可得到该结点的输出 oo。</p>
 <p>对于不同的图来说，收敛的时刻可能不同，因为收敛是通过两个时刻pp-范数的差值是否小于某个阈值 ϵϵ来判定的，比如：</p>
-<p>$$<br>||Ht+1||2−||Ht||2&lt;ϵ<br>$$</p>
-<h3 id="3-5-时序卷积神经网络"><a href="#3-5-时序卷积神经网络" class="headerlink" title="3.5 时序卷积神经网络"></a>3.5 时序卷积神经网络</h3><h4 id="TCN"><a href="#TCN" class="headerlink" title="TCN"></a>TCN</h4><p>卷积核大小的限制使得卷积不能很好的抓取长时的依赖信息，因而对于时序问题的建模较多采用由于循环自回归而对时间序列的表示较好的循环神经网络（RNN）。 但一些特殊的卷积神经网络结构在时序建模上也有良好的表现，比如Goolgle用于语音合成的wavenet，Facebook提出的用于翻译的卷积神经网络特殊的卷积神经网络——时序卷积网络（Temporal convolutional network， TCN）与多种RNN结构相对比，发现在多种任务上TCN都能达到甚至超过RNN模型。 </p>
+<script type="math/tex; mode=display">
+||Ht+1||2−||Ht||2<ϵ</script><h3 id="3-5-时序卷积神经网络"><a href="#3-5-时序卷积神经网络" class="headerlink" title="3.5 时序卷积神经网络"></a>3.5 时序卷积神经网络</h3><h4 id="TCN"><a href="#TCN" class="headerlink" title="TCN"></a>TCN</h4><p>卷积核大小的限制使得卷积不能很好的抓取长时的依赖信息，因而对于时序问题的建模较多采用由于循环自回归而对时间序列的表示较好的循环神经网络（RNN）。 但一些特殊的卷积神经网络结构在时序建模上也有良好的表现，比如Goolgle用于语音合成的wavenet，Facebook提出的用于翻译的卷积神经网络特殊的卷积神经网络——时序卷积网络（Temporal convolutional network， TCN）与多种RNN结构相对比，发现在多种任务上TCN都能达到甚至超过RNN模型。 </p>
 <p>TCN相比RNN有并行性、感受野尺寸可以灵活调整、梯度稳定、占用内存更低、相比LSTM更快的特点；与之相对的，这种单向结构的TCN 在迁移学习方面适应能力较弱，并且在实际应用中仍旧受限于卷积神经网络普遍存在的因感受野而带来的某些限制。</p>
 <h4 id="DeepTCN"><a href="#DeepTCN" class="headerlink" title="DeepTCN"></a>DeepTCN</h4><p> DeepTCN是一种基于卷积神经网络的多关联时间序列预测的概率预测模型。该模型可用于估计参数和非参数设置下的概率密度。其构建了基于膨胀因果卷积网的叠加残差块来捕获序列的时间依赖性。与表示学习相结合，能够学习复杂的模式，如季节性、系列内和跨系列的假日效应，并利用这些模式进行更准确的预测，特别是在历史数据稀少或不可用的情况下。</p>
 <p>1.提出了一种基于卷积的预测框架，该框架同时提供了估计概率密度的参数和非参数方法。</p>
@@ -409,15 +510,25 @@
 <p>  DUpsampling在对特征图的操作上有所不同，是先通过将单个像素所对应的C个通道reshape成一个1xC的向量，与CxN的矩阵相乘得到1xN的向量，再reshape成为2x2xN/4（2应该指的是放大倍数，即rxrxN/r2）的扩大后的亚像素块,组合成放大后的特征图。<br>  以上这两种算法都是基于数据去训练的，可以获得比线性插值更好的效果，但是与线性插值相比存在的问题是：1、对于不同的放大倍数的图像需要训练不同的网络（因为通道数的改变）；2、不容易进行连续的放大，比如1.1倍，1.2倍这样。说不容易而不是不能是因为可以适当放大输入图像或者对权重和步长进行调整后放缩，但是计算很复杂，效果没有整数倍好，线性插值却很容易办到。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122144815796.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <h5 id="3-6-3-Meta-Upscale"><a href="#3-6-3-Meta-Upscale" class="headerlink" title="3.6.3 Meta-Upscale"></a>3.6.3 Meta-Upscale</h5><p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122144856779.png" srcset="/img/loading.gif" lazyload="" alt=""> </p>
+<blockquote id="fn_ ">
+<sup> </sup>. 原来的方法要如何做一次非整数尺度的放缩，这样方便进一步了解Meta-SR的思路。<a href="#reffn_ " title="Jump back to footnote [ ] in the text."> ↩</a>
+</blockquote>
 <p>   Meta-SR中的Meta-Upscale是在CVPR2019上的Meta-SR: A Magnifification-Arbitrary Network for Super-Resolution一文中提出来的，作者提出了一种可以任意尺度缩放的方法，可以实现较好效果的非整数的放缩。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122144934656.png" srcset="/img/loading.gif" lazyload="" alt="">  </p>
-<p>   FLR 表示由特征学习模块提取的特征，并假定缩放因子是 r。对于 SR 图像上的每个像素（i, j），文中认为它由 ILR 图像上像素（i′,j′）的特征与一组相应卷积滤波器的权重所共同决定。从这一角度看，放大模块可视为从 FLR 到 ISR 的映射函数。<br>$$<br>I^{SR}(i,j)=\Phi(F^{LR}(i^{‘},j^{‘}),W(i,j))<br>$$<br>k * k为设定的与I^SR所相关的一个像素搜索范围。及这个范围内的所有像素都是和最后输出的像素是有关系的，需要对其计算相应的权重并加权计算。HWx（InCxoutC）我的理解是图像最后输出的长x宽x输入的通道数（文中为64）x输出的通道数（文中为3）做为权值生成的输出的通道数。对于一个像素的计算我们需要对64个通道上feature map上的对应9个值加权求和，就可以计算出输出的一个通道值，重复3次就是一个值的3个通道数的值，重复HW次就可以计算出整个输出。<br>   那么知道最后如何计算输出之后，我们关心的是文中提到的是怎么来做对不同的放缩大小的权值计算的以及如何在任意尺度下完成输出像素和LR特征图上的对应。<br>   作者把 Meta-Upscale 模块由三个重要的函数，即 Location Projection、Weight Prediction、Feature Mapping（这个就是上文讲的如何乘以权值得到最后的输出）。<br>   先说下文中的Location Projection，如下图：</p>
+<p>   FLR 表示由特征学习模块提取的特征，并假定缩放因子是 r。对于 SR 图像上的每个像素（i, j），文中认为它由 ILR 图像上像素（i′,j′）的特征与一组相应卷积滤波器的权重所共同决定。从这一角度看，放大模块可视为从 FLR 到 ISR 的映射函数。</p>
+<script type="math/tex; mode=display">
+I^{SR}(i,j)=\Phi(F^{LR}(i^{'},j^{'}),W(i,j))</script><p>k * k为设定的与I^SR所相关的一个像素搜索范围。及这个范围内的所有像素都是和最后输出的像素是有关系的，需要对其计算相应的权重并加权计算。HWx（InCxoutC）我的理解是图像最后输出的长x宽x输入的通道数（文中为64）x输出的通道数（文中为3）做为权值生成的输出的通道数。对于一个像素的计算我们需要对64个通道上feature map上的对应9个值加权求和，就可以计算出输出的一个通道值，重复3次就是一个值的3个通道数的值，重复HW次就可以计算出整个输出。<br>   那么知道最后如何计算输出之后，我们关心的是文中提到的是怎么来做对不同的放缩大小的权值计算的以及如何在任意尺度下完成输出像素和LR特征图上的对应。<br>   作者把 Meta-Upscale 模块由三个重要的函数，即 Location Projection、Weight Prediction、Feature Mapping（这个就是上文讲的如何乘以权值得到最后的输出）。<br>   先说下文中的Location Projection，如下图：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145040963.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
-<p>$$<br>(i^{‘},j^{‘} )=T(i,j)=([\frac{i}{r}],[\frac{j}{r}])<br>$$<br>通过向下取整使得ISR中的每一个值都可以在ILR上找到一个对应的值。如放大1.5倍，那么ILR上的0对应ISR中的0和1（0/1.5&lt;1,1/1.5&lt;1）。</p>
-<p>   而权重预测Weight Prediction在网络中是通过构建了两层全链接层和relu来实现的，输出在上文已经讲过了就不再重复，而文中用于预测的输入是这样获得的，如下式：<br>$$<br>V_{ij}=(\frac{i}{r}-[\frac{i}{r}],\frac{j}{r}-[\frac{j}{r}],\frac{1}{r})<br>$$<br>   总结一下，Meta-SR中的思路有点像RPN，做了一个外部的推荐网络，来推荐放缩的权值及像素的对应关系，在非整数倍放大上起的不错的效果。</p>
+<script type="math/tex; mode=display">
+(i^{'},j^{'} )=T(i,j)=([\frac{i}{r}],[\frac{j}{r}])</script><p>通过向下取整使得ISR中的每一个值都可以在ILR上找到一个对应的值。如放大1.5倍，那么ILR上的0对应ISR中的0和1（0/1.5&lt;1,1/1.5&lt;1）。</p>
+<p>   而权重预测Weight Prediction在网络中是通过构建了两层全链接层和relu来实现的，输出在上文已经讲过了就不再重复，而文中用于预测的输入是这样获得的，如下式：</p>
+<script type="math/tex; mode=display">
+V_{ij}=(\frac{i}{r}-[\frac{i}{r}],\frac{j}{r}-[\frac{j}{r}],\frac{1}{r})</script><p>   总结一下，Meta-SR中的思路有点像RPN，做了一个外部的推荐网络，来推荐放缩的权值及像素的对应关系，在非整数倍放大上起的不错的效果。</p>
 <h5 id="3-6-4-CAPAFE"><a href="#3-6-4-CAPAFE" class="headerlink" title="3.6.4 CAPAFE"></a>3.6.4 CAPAFE</h5><p>​       CAPAFE是出自ICCV2019的一种内容感知并重组特征的上采样方法，结构思路与此前的上采样方法较多的不同之处。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145107859.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
-<p>   CAPAFE的整个网络结构由两部分组成，一部分是核预测模块（Kernel Prediction Module），用于生成用于重组计算的核上的权重。另一部分是内容感知重组模块（Content-aware Reassembly Module），用于将计算到的权重将通道reshape成一个kxk的矩阵作为核与原本输入的特征图上的对应点及以其为中心点的kxk区域做卷积计算，获得输出。<br>   首先我们先关注下核预测模块是如何预测出权重值的，这一部分文中分为三部分：通道压缩器（Channel Compressor）、内容编码（Content Encoder）、核归一化（Kernel Normaliaer）。输入的Feature map通过1x1的卷积核，完成对通道数的压缩，文中提及这一步的原因是为了减少计算量，而且文中说通过实验将通道数压缩在64不会影响效果，文中给的Cm为64。之后通过多层Kenconder x Kenconder的卷积核完成对特征图的计算，输出HxWxσ2xKup2的特征图，这里Kenconder的大小与感受野有关，越大生成的权重与周围的内容的关联性越高。最后将特征图reshape成σHxσWxKup2，之后单独对每一个像素的所有通道用softmax做归一化，为了是最后生成的重组核内权重值和为1。这样权重的预测就完成了。<br>   之后将预测好的权重对每一个像素都拉成kupxkup的卷积核即图中对应的Wl，通过对（i/σ，j/σ）向下映射的方法（floor function）找到每个像素在原来的feature map上对应的点，以其为中心点构建出kupxkup的区域做卷积计算，就可以得到一个像素的输出，重复操作可以获得整个输出。<br>$$<br>X^{‘}<em>{l’}=\sum^{r}</em>{n=-r}\sum^{r}<em>{m=-r}W</em>{l’(n,m)}*X_{(i+n,j+m)}<br>$$<br>   CAPAFE的整个网络内的参数量特别少，只有Content Encoder中的NxKenconder x Kenconderxσ2xKup2的卷积核的参数，同时它的上采样思路也比较不同，当然它无法如Meta-SR那样做连续缩放。</p>
+<p>   CAPAFE的整个网络结构由两部分组成，一部分是核预测模块（Kernel Prediction Module），用于生成用于重组计算的核上的权重。另一部分是内容感知重组模块（Content-aware Reassembly Module），用于将计算到的权重将通道reshape成一个kxk的矩阵作为核与原本输入的特征图上的对应点及以其为中心点的kxk区域做卷积计算，获得输出。<br>   首先我们先关注下核预测模块是如何预测出权重值的，这一部分文中分为三部分：通道压缩器（Channel Compressor）、内容编码（Content Encoder）、核归一化（Kernel Normaliaer）。输入的Feature map通过1x1的卷积核，完成对通道数的压缩，文中提及这一步的原因是为了减少计算量，而且文中说通过实验将通道数压缩在64不会影响效果，文中给的Cm为64。之后通过多层Kenconder x Kenconder的卷积核完成对特征图的计算，输出HxWxσ2xKup2的特征图，这里Kenconder的大小与感受野有关，越大生成的权重与周围的内容的关联性越高。最后将特征图reshape成σHxσWxKup2，之后单独对每一个像素的所有通道用softmax做归一化，为了是最后生成的重组核内权重值和为1。这样权重的预测就完成了。<br>   之后将预测好的权重对每一个像素都拉成kupxkup的卷积核即图中对应的Wl，通过对（i/σ，j/σ）向下映射的方法（floor function）找到每个像素在原来的feature map上对应的点，以其为中心点构建出kupxkup的区域做卷积计算，就可以得到一个像素的输出，重复操作可以获得整个输出。</p>
+<script type="math/tex; mode=display">
+X^{'}_{l'}=\sum^{r}_{n=-r}\sum^{r}_{m=-r}W_{l'(n,m)}*X_{(i+n,j+m)}</script><p>   CAPAFE的整个网络内的参数量特别少，只有Content Encoder中的NxKenconder x Kenconderxσ2xKup2的卷积核的参数，同时它的上采样思路也比较不同，当然它无法如Meta-SR那样做连续缩放。</p>
 <h2 id="4-循环神经网络中的图像采样"><a href="#4-循环神经网络中的图像采样" class="headerlink" title="4.循环神经网络中的图像采样"></a>4.循环神经网络中的图像采样</h2><p>循环神经网络(RNN)也被称为递归神经网络，相比卷积神经网络，其有更悠久的发展历史[4-1]。其被大量用于语音识别[4-2]、机器翻译、文本/音乐生成、情感分类、DNA序列分析、视频行为识别、实体名字识别、场景标记[4-3]，可见其同样在视觉任务中有一定作用。</p>
 <h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><h4 id="4-1-LSTM采样"><a href="#4-1-LSTM采样" class="headerlink" title="4.1 LSTM采样"></a>4.1 LSTM采样</h4><p>LSTM常用于自然语言处理（NLP），但其作为RNN最为经典的模型同样也可以完成图像分类任务。</p>
 <p>在每个时间步，LSTM 都使用了 softmax 输出了一个在字符集上的概率分布。</p>
@@ -428,7 +539,9 @@
 <li>获取前 k 个结果，使用 beam 搜索</li>
 </ol>
 <h4 id="评价采样的质量"><a href="#评价采样的质量" class="headerlink" title="评价采样的质量"></a>评价采样的质量</h4><p>最简单的方法：可视化数据！诸如“the”或者“and”这样的词出现得非常频繁，即使就是训练很多的时间。随着训练的继续，样本会越来越像真的英语。</p>
-<p>而更加形式化的性能评估就是测量 <strong>perplexity</strong> 在一个新的测试集合上。Perplexity 是测试集的逆概率，使用词的数目正规化。最小化 perplexity 和最大化概率是一样的，所以一个更低的 perplexity 模型能够更好地描述数据。Perplexity 是一种常用的度量语言模型的测度，其定义如下：<br>$$<br>PP=P(w_1w_2…w_N)^{\frac{-1}{N}}=(\prod_{i=1}^N \frac{1}{(w_i|w_1w_2…w_{i-1})})<br>$$<br>其中的 $$w_1, …, w_N$$ 是训练数据的整个序列；我们将整个这些看成是一个序列。在 bigram 模型中，条件是截断的，$PP==(\prod_{i=1}^N \frac{1}{(P(w_i|w_{i-1})})^{\frac{1}{N}}$</p>
+<p>而更加形式化的性能评估就是测量 <strong>perplexity</strong> 在一个新的测试集合上。Perplexity 是测试集的逆概率，使用词的数目正规化。最小化 perplexity 和最大化概率是一样的，所以一个更低的 perplexity 模型能够更好地描述数据。Perplexity 是一种常用的度量语言模型的测度，其定义如下：</p>
+<script type="math/tex; mode=display">
+PP=P(w_1w_2...w_N)^{\frac{-1}{N}}=(\prod_{i=1}^N \frac{1}{(w_i|w_1w_2...w_{i-1})})</script><p>其中的 <script type="math/tex">w_1, ..., w_N</script> 是训练数据的整个序列；我们将整个这些看成是一个序列。在 bigram 模型中，条件是截断的，$PP==(\prod<em>{i=1}^N \frac{1}{(P(w_i|w</em>{i-1})})^{\frac{1}{N}}$</p>
 <p>在实践中，我们没有测试集，所以就不会测量 perplexity，我们训练的字符层的模型。perplexity 通常用在词层的语言模型上。</p>
 <p>相比Bi-LSTM，LSTM的结构很适合社交网络等文本分析等并应用于推荐系统。</p>
 <h3 id="4-2-SRCNN"><a href="#4-2-SRCNN" class="headerlink" title="4.2 SRCNN"></a>4.2 SRCNN</h3><p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145141623.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
@@ -464,13 +577,13 @@
 <p>[2-09]  Hwang, Jung Woo, and Hwang Soo Lee. “Adaptive image interpolation based on local gradient features.” <em>IEEE signal processing letters</em> 11.3 (2004): 359-362. </p>
 <p>[2-10]   Dong, Weisheng, et al. “Sparse representation based image interpolation with nonlocal autoregressive modeling.” <em>IEEE Transactions on Image Processing</em> 22.4 (2013): 1382-1394. </p>
 <p>[3-01]  Krizhevsky A, Sutskever I, Hinton G E. Imagenet classification with deep convolutional neural networks[C]//Advances in neural information processing systems. 2012: 1097-1105. </p>
-<p>[ ]:AlexNet</p>
 <p>[3-02]  Simonyan K, Zisserman A. Very deep convolutional networks for large-scale image recognition[J]. arXiv preprint arXiv:1409.1556, 2014. </p>
-<p>[ ]:VGG</p>
 <p>[3-03]  Szegedy C, Liu W, Jia Y, et al. Going deeper with convolutions[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 1-9. </p>
-<p>[ ]:GoogLetNet</p>
 <p>[3-04] He K , Zhang X , Ren S , et al. Deep Residual Learning for Image Recognition[C]// IEEE Conference on Computer Vision &amp; Pattern Recognition. IEEE Computer Society, 2016.</p>
 <p>[3-05]  Sun, Ke, et al. “Igcv3: Interleaved low-rank group convolutions for efficient deep neural networks.” <em>arXiv preprint arXiv:1806.00178</em> (2018). </p>
+<blockquote id="fn_ ">
+<sup> </sup>. IGCV3<a href="#reffn_ " title="Jump back to footnote [ ] in the text."> ↩</a>
+</blockquote>
 <p>[3-06] 陈超, 齐峰. 卷积神经网络的发展及其在计算机视觉领域中的应用综述[J]. 计算机科学, 2019, 46(03):69-79. </p>
 <p>[3.1-1]  Masci, Jonathan, et al. “Stacked convolutional auto-encoders for hierarchical feature extraction.” <em>International conference on artificial neural networks</em>. Springer, Berlin, Heidelberg, 2011. </p>
 <p>[3.2.1-1]  Vincent, O. Rebecca, and Olusegun Folorunso. “A descriptive algorithm for sobel image edge detection.” <em>Proceedings of Informing Science &amp; IT Education Conference (InSITE)</em>. Vol. 40. California: Informing Science Institute, 2009. </p>

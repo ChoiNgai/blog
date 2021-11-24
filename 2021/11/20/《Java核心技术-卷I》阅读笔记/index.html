@@ -263,7 +263,6 @@
             <div class="markdown-body">
               <p>仅阅读了Java基础部分，完结撒花<em>★,°</em>:.☆(￣▽￣)/$:<em>.°★</em></p>
 <a id="more"></a>
-
 <h2 id="第1章-Java程序设计概述"><a href="#第1章-Java程序设计概述" class="headerlink" title="第1章 Java程序设计概述"></a>第1章 Java程序设计概述</h2><h3 id="1-1-Java程序设计平台"><a href="#1-1-Java程序设计平台" class="headerlink" title="1.1 Java程序设计平台"></a>1.1 Java程序设计平台</h3><p>Java是一个完整的平台，提供了可移植性、垃圾回收、庞大的库、网络连接以及数据块存取等功能。</p>
 <h3 id="1-2-Java“白皮书”的关键术语"><a href="#1-2-Java“白皮书”的关键术语" class="headerlink" title="1.2 Java“白皮书”的关键术语"></a>1.2 Java“白皮书”的关键术语</h3><p>关键术语：</p>
 <p>1）简单性</p>
@@ -277,7 +276,7 @@
 <p>9）高性能</p>
 <p>10）多线程</p>
 <p>11）动态性</p>
-<h2 id="第2章-Java程序设计环境"><a href="#第2章-Java程序设计环境" class="headerlink" title="第2章 Java程序设计环境"></a>第2章 Java程序设计环境</h2><p>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="noopener">www.oracle.com/technetwork/java/javase/downloads</a></p>
+<h2 id="第2章-Java程序设计环境"><a href="#第2章-Java程序设计环境" class="headerlink" title="第2章 Java程序设计环境"></a>第2章 Java程序设计环境</h2><p>下载地址：www.oracle.com/technetwork/java/javase/downloads</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211118140650.png" srcset="/img/loading.gif" lazyload="" alt="表2-1 Java术语"></p>
 <p>接下来，Java SE会大量出现，相对于Java EE（Enterprise Edition）和Java ME（Micro Edition），它是Java的标准版。</p>
 <h2 id="第3章-Java的基本程序设计结构"><a href="#第3章-Java的基本程序设计结构" class="headerlink" title="第3章 Java的基本程序设计结构"></a>第3章 Java的基本程序设计结构</h2><h3 id="3-1-一个简单的Java应用程序"><a href="#3-1-一个简单的Java应用程序" class="headerlink" title="3.1 一个简单的Java应用程序"></a>3.1 一个简单的Java应用程序</h3><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FirstSample</span> </span>{
@@ -286,7 +285,6 @@
         System.out.println(<span class="hljs-string">"Hello World"</span>);
     }
 }</code></pre></div>
-
 <p>关键字<strong>public</strong>称为访问修饰符（accessmodifier），这些修饰符用于控制程序的其他部分对这段代码的访问级别。</p>
 <p>关键字<strong>class</strong>表明Java程序中的全部内容都包含在类中，class后面是类名（文件名跟公共类名必须相同，即这个文件为<code>FirstSample.java</code>），此外<strong>Java区分大小写</strong></p>
 <p>static void声明这个主程序的类型（Java的main方法必须是静态的，void也表示没有返回值），Java SE7 及之后的版本<strong>每个java程序都必须有一个main方法</strong></p>
@@ -296,8 +294,8 @@
 <span class="hljs-comment">多行注释</span>
 <span class="hljs-comment">多行注释</span>
 <span class="hljs-comment">*/</span></code></pre></div>
-
-<h3 id="3-3-数据类型"><a href="#3-3-数据类型" class="headerlink" title="3.3 数据类型"></a>3.3 数据类型</h3><table>
+<h3 id="3-3-数据类型"><a href="#3-3-数据类型" class="headerlink" title="3.3 数据类型"></a>3.3 数据类型</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>类型</th>
@@ -305,7 +303,8 @@
 <th>取值范围</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>int</td>
 <td>4字节</td>
 <td>-2147483648 ~ 2147483647</td>
@@ -343,9 +342,10 @@
 <tr>
 <td>boolean</td>
 <td></td>
-<td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="3-4-变量"><a href="#3-4-变量" class="headerlink" title="3.4 变量"></a>3.4 变量</h3><ul>
 <li>变量声明</li>
 </ul>
@@ -353,7 +353,6 @@
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> salary;	<span class="hljs-comment">//注意：需要以分号结尾</span>
 <span class="hljs-keyword">int</span> vacationDats;
 <span class="hljs-keyword">int</span> i,j;	<span class="hljs-comment">//一行声明多个变量（不提倡）</span></code></pre></div>
-
 <p>变量名必须是一个以字母开头并由字母或数字构成的序列</p>
 <ul>
 <li>初始化变量</li>
@@ -361,28 +360,23 @@
 <p>声明变量之后，需要初始化这个变量，例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> i;
 i = <span class="hljs-number">1</span>;</code></pre></div>
-
 <p>也可以写成：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;</code></pre></div>
-
 <ul>
 <li>常量</li>
 </ul>
 <p>关键字final表示这个变量只能被赋值一次（习惯上，常量名使用全大写），例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> CM_PER_INCH = <span class="hljs-number">2.54</span>;</code></pre></div>
-
 <h3 id="3-5-运算符"><a href="#3-5-运算符" class="headerlink" title="3.5 运算符"></a>3.5 运算符</h3><p><strong>+</strong>   ：加</p>
 <p><strong>-</strong>    ：减</p>
-<p>*****    ：乘</p>
+<p><strong>*</strong>    ：乘</p>
 <p><strong>/</strong>    ：除</p>
 <h4 id="3-5-1-数学函数与常量"><a href="#3-5-1-数学函数与常量" class="headerlink" title="3.5.1 数学函数与常量"></a>3.5.1 数学函数与常量</h4><p>计算平方根：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> = <span class="hljs-number">4</span>;
 <span class="hljs-keyword">double</span> y = Math.sqrt(x);
 System.out.println(y);	<span class="hljs-comment">//输出结果：2.0</span></code></pre></div>
-
 <p>幂运算：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs cpp"><span class="hljs-keyword">double</span> y = Math.<span class="hljs-built_in">pow</span>(x,a);	<span class="hljs-comment">//x的a次幂</span></code></pre></div>
-
 <p>此外Math类还提供了一些其他常用的函数：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Math.sin
 Math.cos
@@ -390,7 +384,6 @@ math.tan
 Math.exp
 Math.log
 Math.log10</code></pre></div>
-
 <h4 id="3-5-2-数值类型之间的转换"><a href="#3-5-2-数值类型之间的转换" class="headerlink" title="3.5.2 数值类型之间的转换"></a>3.5.2 数值类型之间的转换</h4><p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211118151550.png" srcset="/img/loading.gif" lazyload="" alt="数值类型之间的合法转换"></p>
 <p>实心箭头：表示无信息丢失的转换；</p>
 <p>虚箭头：表示可能有精度损失的转换。</p>
@@ -408,15 +401,12 @@ Math.log10</code></pre></div>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> x = <span class="hljs-number">9.99</span>;
 <span class="hljs-keyword">int</span> nx = (<span class="hljs-keyword">int</span>)x;	<span class="hljs-comment">//此时nx变为9</span>
 <span class="hljs-keyword">int</span> nx = (<span class="hljs-keyword">int</span>)Math.round(x);	<span class="hljs-comment">//此时nx变为10</span></code></pre></div>
-
 <h4 id="3-5-4-结合赋值和运算符"><a href="#3-5-4-结合赋值和运算符" class="headerlink" title="3.5.4 结合赋值和运算符"></a>3.5.4 结合赋值和运算符</h4><p>可以在赋值中使用二元运算符来简化写法，例如</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">x += <span class="hljs-number">4</span>;
 x = x + <span class="hljs-number">4</span>;
 <span class="hljs-comment">//上面两行语句是一样的</span></code></pre></div>
-
 <h4 id="3-5-5-自增与自减运算符"><a href="#3-5-5-自增与自减运算符" class="headerlink" title="3.5.5 自增与自减运算符"></a>3.5.5 自增与自减运算符</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = <span class="hljs-number">12</span>;
 n++ ;	<span class="hljs-comment">//n为13</span></code></pre></div>
-
 <h4 id="3-5-6-关系和boolean运算符"><a href="#3-5-6-关系和boolean运算符" class="headerlink" title="3.5.6 关系和boolean运算符"></a>3.5.6 关系和boolean运算符</h4><p>3 == 7； //false<br>3 != 7； //true</p>
 <h4 id="3-5-7-位运算符"><a href="#3-5-7-位运算符" class="headerlink" title="3.5.7 位运算符"></a>3.5.7 位运算符</h4><p><strong>&amp;</strong> ：and</p>
 <p><strong>|</strong>   ：or</p>
@@ -425,76 +415,59 @@ n++ ;	<span class="hljs-comment">//n为13</span></code></pre></div>
 <h4 id="3-5-8-括号与运算符级别"><a href="#3-5-8-括号与运算符级别" class="headerlink" title="3.5.8 括号与运算符级别"></a>3.5.8 括号与运算符级别</h4><p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211118152825.png" srcset="/img/loading.gif" lazyload="" alt="运算符优先级"></p>
 <h4 id="3-5-9-枚举类型"><a href="#3-5-9-枚举类型" class="headerlink" title="3.5.9 枚举类型"></a>3.5.9 枚举类型</h4><p>有时候，变量的取值只在一个有限的集合内（比如衣服只有几种尺寸）。针对这种情况，可以自定义枚举类型。枚举类型包括有限个命名的值。例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">enum</span> Size{SMALL,MEDIUM,LARGE,EXTRA_LARGE};</code></pre></div>
-
 <p>现在，可以声明这种类型的变量：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Size s = Size.MEDIUM;</code></pre></div>
-
 <p>Size类型的变量只能存储这个类型声明中给定的某个枚举值，或者null值，null表示这个变量没有设置任何值。</p>
 <h3 id="3-6-字符串"><a href="#3-6-字符串" class="headerlink" title="3.6 字符串"></a>3.6 字符串</h3><h4 id="3-6-1-子串"><a href="#3-6-1-子串" class="headerlink" title="3.6.1 子串"></a>3.6.1 子串</h4><p>String类的substring方法可以从一个较大的字符串提取出一个子串。例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">String a = <span class="hljs-string">"Hello"</span>;
 String s = s.substring(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>);	<span class="hljs-comment">//s是"Hel"</span></code></pre></div>
-
 <p><code>s.substring(a, b)</code>表示字符串 s 取 a到 b，其字符长度为 b - a </p>
 <h4 id="3-6-2-拼接"><a href="#3-6-2-拼接" class="headerlink" title="3.6.2 拼接"></a>3.6.2 拼接</h4><p>Java允许使用+号连接（拼接）两个字符串，例如</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">String a = <span class="hljs-string">"Em"</span>;
 String b = <span class="hljs-string">"mmm"</span>;
 String c = a + b;</code></pre></div>
-
 <h4 id="3-6-3-不可变字符串"><a href="#3-6-3-不可变字符串" class="headerlink" title="3.6.3 不可变字符串"></a>3.6.3 不可变字符串</h4><p>字符串的部分内容不可修改，比如”Hello”不能直接修改为”Help! “，但是可以通过拼接实现，例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">String a = <span class="hljs-string">"Hello"</span>
 String a = a.substring(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>) + <span class="hljs-string">"p!"</span></code></pre></div>
-
 <h4 id="3-6-4-检测字符串是否相等"><a href="#3-6-4-检测字符串是否相等" class="headerlink" title="3.6.4 检测字符串是否相等"></a>3.6.4 检测字符串是否相等</h4><p>可以使用equals方法检测两个字符串是否相等。对于表达式：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">s = <span class="hljs-string">"Hello"</span>
 t = <span class="hljs-string">"World"</span>
 s.equals(t)</code></pre></div>
-
 <p>如果字符串s与字符串t相等，则返回true；否则，返回false。</p>
 <p>上述也可以写成：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-string">"Hello"</span>.equals(<span class="hljs-string">"World"</span>)</code></pre></div>
-
 <h4 id="3-6-5-空串与Null串"><a href="#3-6-5-空串与Null串" class="headerlink" title="3.6.5 空串与Null串"></a>3.6.5 空串与Null串</h4><p>空串是长度为0的字符串，检验：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(str.length()==<span class="hljs-number">0</span>)
 <span class="hljs-comment">//或</span>
 <span class="hljs-keyword">if</span>(str.equals(<span class="hljs-string">""</span>))</code></pre></div>
-
 <p>空串是一个Java对象，有自己的串长度（0）和内容（空）。而 <strong>null</strong> 表示目前没有任何对象与该变量关联，用以下语句判断：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(str == <span class="hljs-keyword">null</span>)</code></pre></div>
-
 <p>检查一个字符串既不是null也不为空串：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(str.length() !=<span class="hljs-number">0</span>) &amp;&amp; str != <span class="hljs-keyword">null</span>)</code></pre></div>
-
 <p>（因为显示问题，代码框中的 != 变成了<code>!=</code>，记住实际上是写<strong>!=</strong> ）</p>
 <h4 id="3-6-6-码点与代码单元"><a href="#3-6-6-码点与代码单元" class="headerlink" title="3.6.6 码点与代码单元"></a>3.6.6 码点与代码单元</h4><div class="hljs code-wrapper"><pre><code class="hljs java">String a = <span class="hljs-string">"Hello"</span>;
 <span class="hljs-keyword">int</span> n = a.length(); 	<span class="hljs-comment">// n = 5</span>
 <span class="hljs-keyword">char</span> b = a.charAt(<span class="hljs-number">0</span>);	<span class="hljs-comment">// b = "H"</span></code></pre></div>
-
 <h3 id="3-7-输入输出"><a href="#3-7-输入输出" class="headerlink" title="3.7 输入输出"></a>3.7 输入输出</h3><h4 id="3-7-1-读取输入"><a href="#3-7-1-读取输入" class="headerlink" title="3.7.1 读取输入"></a>3.7.1 读取输入</h4><p>要想通过控制台进行输入，首先需要构造一个Scanner对象，并与“标准输入流”System.in关联</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Scanner in = <span class="hljs-keyword">new</span> Scanner(System.in);</code></pre></div>
-
 <p>现在，就可以使用Scanner类的各种方法实现输入操作了。例如，nextLine方法将输入一行</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">System.out.println(<span class="hljs-string">"What is your name?"</span>);
 String name = in.nextLine();</code></pre></div>
-
 <p>在这里，使用nextLine方法是因为在输入行中有可能包含空格。要想读取一个单词（以空白符作为分隔符），就调用</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">String firstName = in.next();
 
 <span class="hljs-keyword">int</span> age = in.nextInt();	<span class="hljs-comment">//读取整数</span></code></pre></div>
-
 <h4 id="3-7-2-格式化输出"><a href="#3-7-2-格式化输出" class="headerlink" title="3.7.2 格式化输出"></a>3.7.2 格式化输出</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> x = <span class="hljs-number">10000.00</span>/<span class="hljs-number">3.0</span>;
 System.out.print(x);					<span class="hljs-comment">//输出3333.3333333333335</span>
 System.out.printf(<span class="hljs-string">"%8.2f"</span>,x);			<span class="hljs-comment">//表示8个字符的宽度和小数点后两位，输出3333.33</span>
 System.out.printf(<span class="hljs-string">"%.2f"</span>,<span class="hljs-number">10000.00</span>/<span class="hljs-number">3.0</span>);	<span class="hljs-comment">//输出3,333.33</span>
 System.out.printf(<span class="hljs-string">"%tc"</span>,<span class="hljs-keyword">new</span> Date());	<span class="hljs-comment">//打印当前日期和时间</span></code></pre></div>
-
 <h4 id="3-7-3-文件输入与输出"><a href="#3-7-3-文件输入与输出" class="headerlink" title="3.7.3 文件输入与输出"></a>3.7.3 文件输入与输出</h4><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner in = <span class="hljs-keyword">new</span> Scanner(Paths.get(<span class="hljs-string">"myfile.txt"</span>),<span class="hljs-string">"UTF-8"</span>);</code></pre></div>
-
 <h3 id="3-8-控制流程"><a href="#3-8-控制流程" class="headerlink" title="3.8 控制流程"></a>3.8 控制流程</h3><h4 id="3-8-1-块作用域"><a href="#3-8-1-块作用域" class="headerlink" title="3.8.1 块作用域"></a>3.8.1 块作用域</h4><p>块（block）是指由一对大括号括起来的若干条简单的Java语句，块确定了变量的作用域</p>
 <h4 id="3-8-2-条件语句"><a href="#3-8-2-条件语句" class="headerlink" title="3.8.2 条件语句"></a>3.8.2 条件语句</h4><p>条件语句格式：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(condition) statement
 <span class="hljs-comment">//或</span>
 <span class="hljs-keyword">if</span>(condition) statement <span class="hljs-keyword">else</span> statement</code></pre></div>
-
 <p>例如：</p>
 <ul>
 <li>case1</li>
@@ -504,7 +477,6 @@ System.out.printf(<span class="hljs-string">"%tc"</span>,<span class="hljs-keywo
 	performance = <span class="hljs-string">"Satisfactory"</span>;
 	bonus = <span class="hljs-number">100</span>;
 }</code></pre></div>
-
 <ul>
 <li>case2</li>
 </ul>
@@ -518,11 +490,9 @@ System.out.printf(<span class="hljs-string">"%tc"</span>,<span class="hljs-keywo
 	performance = <span class="hljs-string">"UnSatisfactory"</span>;
 	bonus = <span class="hljs-number">0</span>;
 }</code></pre></div>
-
 <h4 id="3-8-3-while循环"><a href="#3-8-3-while循环" class="headerlink" title="3.8.3 while循环"></a>3.8.3 while循环</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">while</span>(condition) statement
 <span class="hljs-comment">//或</span>
 <span class="hljs-function"><span class="hljs-keyword">do</span> statement <span class="hljs-title">while</span><span class="hljs-params">(condition)</span></span></code></pre></div>
-
 <p>例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> i = <span class="hljs-number">10</span>;
 <span class="hljs-keyword">while</span>(i&gt;<span class="hljs-number">1</span>)
@@ -537,10 +507,8 @@ System.out.printf(<span class="hljs-string">"%tc"</span>,<span class="hljs-keywo
     i = i - <span class="hljs-number">1</span>;
 }
 <span class="hljs-keyword">while</span>(i&gt;<span class="hljs-number">1</span>)</code></pre></div>
-
 <h4 id="3-8-4-for循环"><a href="#3-8-4-for循环" class="headerlink" title="3.8.4 for循环"></a>3.8.4 for循环</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span>（<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">10</span>; i++)
 	System.out.println(i);</code></pre></div>
-
 <h4 id="3-8-5-多重选择：switch语句"><a href="#3-8-5-多重选择：switch语句" class="headerlink" title="3.8.5 多重选择：switch语句"></a>3.8.5 多重选择：switch语句</h4><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner in = <span class="hljs-keyword">new</span> Scanner(System.in);
 System.out.print(<span class="hljs-string">"select an option (1,2)"</span>);
 <span class="hljs-keyword">int</span> choice = in.nextln();
@@ -556,7 +524,6 @@ System.out.print(<span class="hljs-string">"select an option (1,2)"</span>);
         ...
         <span class="hljs-keyword">break</span>;
 }</code></pre></div>
-
 <h4 id="3-8-6-中断控制流程语句"><a href="#3-8-6-中断控制流程语句" class="headerlink" title="3.8.6 中断控制流程语句"></a>3.8.6 中断控制流程语句</h4><ul>
 <li>break：跳出该层循环（抵消掉整个for/while语句）</li>
 <li>continue：跳过这一次循环（抵消掉for/while中的一次执行）</li>
@@ -564,38 +531,28 @@ System.out.print(<span class="hljs-string">"select an option (1,2)"</span>);
 <h3 id="3-9-大数值"><a href="#3-9-大数值" class="headerlink" title="3.9 大数值"></a>3.9 大数值</h3><p>如果基本的整数和浮点数精度不能够满足需求，那么可以使用java.math包中的两个很有用的类：<strong>BigInteger</strong>（任意精度的整数运算）和<strong>BigDecimal</strong>（任意精度的浮点数运算）。</p>
 <h3 id="3-10-数组"><a href="#3-10-数组" class="headerlink" title="3.10 数组"></a>3.10 数组</h3><p>声明数组（仅仅声明）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] a;	<span class="hljs-comment">// 也可以写成 int a[]</span></code></pre></div>
-
 <p>（书上说Java程序员喜欢写第一种，我喜欢写成第二种）</p>
 <p>声明并初始化数组：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] a =<span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">100</span>];	<span class="hljs-comment">//创建一个可以存储100个整数的数组</span></code></pre></div>
-
 <h4 id="3-10-1-for-each循环"><a href="#3-10-1-for-each循环" class="headerlink" title="3.10.1 for each循环"></a>3.10.1 for each循环</h4><p>例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> element:a)
 	System.out.println(element);</code></pre></div>
-
 <p>这个循环读作“循环a中的每一个元素”（for each element in a），当然也可以用传统的for循环代替：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; a.length; i++)
 	System.out.println(a[i]);</code></pre></div>
-
 <h4 id="3-10-2-数组初始化以及匿名数组"><a href="#3-10-2-数组初始化以及匿名数组" class="headerlink" title="3.10.2 数组初始化以及匿名数组"></a>3.10.2 数组初始化以及匿名数组</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] smallPrimes = {<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>};</code></pre></div>
-
 <p>这种写法不需要new，甚至还可以初始化一个匿名数组：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[] {<span class="hljs-number">17</span>,<span class="hljs-number">19</span>,<span class="hljs-number">23</span>,<span class="hljs-number">29</span>,<span class="hljs-number">31</span>,<span class="hljs-number">37</span>}</code></pre></div>
-
 <p>（备注：匿名数组一般用在只用一次的时候）</p>
 <h4 id="3-10-3-数组拷贝"><a href="#3-10-3-数组拷贝" class="headerlink" title="3.10.3 数组拷贝"></a>3.10.3 数组拷贝</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> [] luckyNumbers = smallPrimes;
 luckyNumbers[<span class="hljs-number">5</span>] = <span class="hljs-number">12</span>;</code></pre></div>
-
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211118181002.png" srcset="/img/loading.gif" lazyload="" alt="拷贝一个数组变量"></p>
 <p>如果希望将一个数组的所有值拷贝到一个新的数组中去，就要使用Arrays类的copyOf方法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] luckyNumbers2 = Arrays.copyOf(luckyNumbers,luckyNumbers.length);</code></pre></div>
-
 <h4 id="3-10-5-数组排序"><a href="#3-10-5-数组排序" class="headerlink" title="3.10.5 数组排序"></a>3.10.5 数组排序</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">100</span>];
 Arrays.sort(a)</code></pre></div>
-
 <h4 id="3-10-6-多维数组"><a href="#3-10-6-多维数组" class="headerlink" title="3.10.6 多维数组"></a>3.10.6 多维数组</h4><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span>[][] a;
 a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[<span class="hljs-number">100</span>][<span class="hljs-number">100</span>];</code></pre></div>
-
 <p>如果知道数组元素，就可以不调用new，而直接使用简化的书写形式对多维数组进行初始化。例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[][] magicSquare = 
 {
@@ -604,7 +561,6 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
 	{<span class="hljs-number">9</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">12</span>},
 	{<span class="hljs-number">4</span>,<span class="hljs-number">15</span>,<span class="hljs-number">14</span>,<span class="hljs-number">1</span>}
 }</code></pre></div>
-
 <p>（可以看出：Java实际上没有多维数组，只有一维数组。多维数组被解释为“数组的数组。）</p>
 <h2 id="第4章-对象与类"><a href="#第4章-对象与类" class="headerlink" title="第4章 对象与类"></a>第4章 对象与类</h2><h3 id="4-1-面向对象程序设计概述"><a href="#4-1-面向对象程序设计概述" class="headerlink" title="4.1 面向对象程序设计概述"></a>4.1 面向对象程序设计概述</h3><ul>
 <li>面向过程与面向对象的程序设计对比</li>
@@ -634,23 +590,17 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
 <p>在标准Java库中包含一个Date类。它的对象将描述一个时间点，例如：“December 31, 1999, 23:59:59GMT”。</p>
 <p>构造器的名字应该与类名相同。因此Date类的构造器名为Date。要想构造一个Date对象，需要在构造器前面加上new操作符，如下所示：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">new</span> Date()</code></pre></div>
-
 <p>这个表达式构造了一个新对象。这个对象被初始化为当前的日期和时间。</p>
 <p>如果需要的话，也可以将这个对象传递给一个方法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">System.out.println(<span class="hljs-keyword">new</span> Date())</code></pre></div>
-
 <p>Date类中有一个toString方法。这个方法将返回日期的字符串描述：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">String s = <span class="hljs-keyword">new</span> Date().toString</code></pre></div>
-
 <h4 id="4-2-2-Java类库中的LocalDate类"><a href="#4-2-2-Java类库中的LocalDate类" class="headerlink" title="4.2.2 Java类库中的LocalDate类"></a>4.2.2 Java类库中的LocalDate类</h4><p>不要使用构造器来构造LocalDate类的对象。实际上，应当使用静态工厂方法（factory method）代表你调用构造器。下面的表达式：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">LocalDate.now()</code></pre></div>
-
 <p>会构造一个新对象，表示构造这个对象时的日期。</p>
 <p>可以提供年、月和日来构造对应一个特定日期的对象：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">LocalDate.of(<span class="hljs-number">1999</span>,<span class="hljs-number">12</span>,<span class="hljs-number">31</span>)</code></pre></div>
-
 <h4 id="4-2-3-更改器方法与访问器方法"><a href="#4-2-3-更改器方法与访问器方法" class="headerlink" title="4.2.3 更改器方法与访问器方法"></a>4.2.3 更改器方法与访问器方法</h4><div class="hljs code-wrapper"><pre><code class="hljs java">LocalDate aThousandDaysLater = newYearsEve.plusDays(<span class="hljs-number">1000</span>);</code></pre></div>
-
 <p>newYearsEve日期没变化，aThousandDaysLater是newYearsEve的1000天之后</p>
 <h3 id="4-3-用户自定义类"><a href="#4-3-用户自定义类" class="headerlink" title="4.3 用户自定义类"></a>4.3 用户自定义类</h3><h4 id="4-3-1-Employee类"><a href="#4-3-1-Employee类" class="headerlink" title="4.3.1 Employee类"></a>4.3.1 Employee类</h4><p>在Java中，最简单的类定义形式为：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">calss ClassName
@@ -664,7 +614,6 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
     method_1
     method_2
 }</code></pre></div>
-
 <p>下面看一个非常简单的Employee类（在编写薪金管理系统时可能会用到）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Class Employee
 {
@@ -690,7 +639,6 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
     <span class="hljs-comment">// more methods</span>
     <span class="hljs-comment">// ...</span>
 }</code></pre></div>
-
 <h4 id="4-3-2-多个源文件的使用"><a href="#4-3-2-多个源文件的使用" class="headerlink" title="4.3.2 多个源文件的使用"></a>4.3.2 多个源文件的使用</h4><p>如果有多个.java文件，编译其中一个使用了另一个时会自动跨文件查找另一个类</p>
 <h4 id="4-3-3-剖析Employee类"><a href="#4-3-3-剖析Employee类" class="headerlink" title="4.3.3 剖析Employee类"></a>4.3.3 剖析Employee类</h4><p>从Employee类开始，通过查看源码会发现这个类包含了1个<strong>构造器</strong>和4个<strong>方法</strong>：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(String n, <span class="hljs-keyword">double</span> s, <span class="hljs-keyword">int</span> year, <span class="hljs-keyword">int</span> month, <span class="hljs-keyword">int</span> day)</span></span>
@@ -698,13 +646,11 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span></span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> LocalDate <span class="hljs-title">getHireDay</span><span class="hljs-params">()</span></span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">raiseSalary</span><span class="hljs-params">(<span class="hljs-keyword">double</span> byPercent)</span></span></code></pre></div>
-
 <p>这个类的所有方法都被标记为public，关键字<strong>public</strong>意味着任何类的<strong>任何方法都可以调用这个方法</strong>（共有4种访问级别）</p>
 <p>接下来，需要注意在Employee类的实例中有三个实例域用来存放将要操作的数据：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getSalary</span><span class="hljs-params">()</span></span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> LocalDate <span class="hljs-title">getHireDay</span><span class="hljs-params">()</span></span></code></pre></div>
-
 <blockquote>
 <p>注释：</p>
 <p>可以用public标记实例域，但这是一种极为不提倡的做法。public数据域允许程序中的任何方法对其进行读取和修改。这就完全破坏了封装。任何类的任何方法都可以修改public域，某些代码将使用这种存取权限，这样并不合适。</p>
@@ -718,7 +664,6 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
     salary = s;
     hireDay = LocalDate.of(year,month,day)
 }</code></pre></div>
-
 <p>可以看到，构造器与类同名。在构造Employee类的对象时，构造器会运行，以便将实例域初始化为所希望的状态。</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 例如，当使用下面这条代码创建Employee类实例时：</span>
 <span class="hljs-keyword">new</span> Employee(<span class="hljs-string">"James Bond"</span>,<span class="hljs-number">100000</span>,<span class="hljs-number">1950</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)
@@ -727,10 +672,8 @@ a = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</spa
 name = <span class="hljs-string">"James Bond"</span>;
 salary = <span class="hljs-number">100000</span>;
 hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>); <span class="hljs-comment">// January 1,1950</span></code></pre></div>
-
 <p>构造器与其他的方法有一个重要的不同。构造器总是伴随着new操作符的执行被调用，而不能对一个已经存在的对象调用构造器来达到重新设置实例域的目的。例如以下操作会产生<code>编译错误</code>：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">james.Employee(<span class="hljs-string">"James Bond"</span>,<span class="hljs-number">100000</span>,<span class="hljs-number">1950</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)</code></pre></div>
-
 <p>（即构造器只能 new一个对象，而不能对已经存在的这个<code>james</code>对象重新设置数据）</p>
 <blockquote>
 <p>构造器的特点：</p>
@@ -749,7 +692,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
     <span class="hljs-keyword">double</span> salary = s;	<span class="hljs-comment">//Error</span>
 	...
 }</code></pre></div>
-
 <p>注意：上面的name、salary前面不应该写String、double（注意在所有的方法中不要命名与实例域同名的变量）</p>
 <h4 id="4-3-5-隐式参数与显式参数"><a href="#4-3-5-隐式参数与显式参数" class="headerlink" title="4.3.5 隐式参数与显式参数"></a>4.3.5 隐式参数与显式参数</h4><p>方法用于操作对象以及存取它们的实例域。例如，方法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">raiseSalary</span><span class="hljs-params">(<span class="hljs-keyword">double</span> byPercent)</span></span>
@@ -757,10 +699,8 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
     <span class="hljs-keyword">double</span> raise = salary * byPercent / <span class="hljs-number">100</span>;
     salary += raise;	<span class="hljs-comment">//也可以写成 this.salary += raise;</span>
 }</code></pre></div>
-
 <p>将调用这个方法的对象的salary实例域设置为新值：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">number007.raiseSalary(<span class="hljs-number">5</span>);</code></pre></div>
-
 <p>它的结果将number007.salary域的值增加5%</p>
 <p>raiseSalary方法有两个参数。第一个参数称为隐式（implicit）参数，是出现在方法名前的Employee类对象。第二个参数位于方法名后面括号中的数值，这是一个显式（explicit）参数。在raiseSalary方法中，隐式参数是salary，显式参数是byPercent。</p>
 <h4 id="4-3-6-封装的优点"><a href="#4-3-6-封装的优点" class="headerlink" title="4.3.6 封装的优点"></a>4.3.6 封装的优点</h4><p>有些时候，需要获得或设置实例域的值。因此，应该提供下面三项内容：</p>
@@ -779,7 +719,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
         <span class="hljs-keyword">return</span> hireDay;	<span class="hljs-comment">//bad</span>
     }
 }</code></pre></div>
-
 <h4 id="4-3-7基于类的访问权限"><a href="#4-3-7基于类的访问权限" class="headerlink" title="4.3.7基于类的访问权限"></a>4.3.7基于类的访问权限</h4><p>方法可以访问所调用对象的私有数据，此外一个方法可以访问所属类的所有对象的私有数据。</p>
 <h4 id="4-3-8-私有方法"><a href="#4-3-8-私有方法" class="headerlink" title="4.3.8 私有方法"></a>4.3.8 私有方法</h4><p>在实现一个类时，由于公有数据非常危险，所以应该将所有的数据域都设置为私有的。</p>
 <p>在Java中，为了实现一个私有的方法，只需将关键字public改为private即可。</p>
@@ -790,7 +729,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 	<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name;
     ...
 }</code></pre></div>
-
 <p>final修饰符大都应用于基本（primitive）类型域，或不可变（immutable）类的域</p>
 <p>（如果类中的每个方法都不会改变其对象，这种类就是不可变的类。例如，String类就是一个不可变的类）</p>
 <h3 id="4-4-静态域与静态方法"><a href="#4-4-静态域与静态方法" class="headerlink" title="4.4 静态域与静态方法"></a>4.4 静态域与静态方法</h3><h4 id="4-4-1-静态域"><a href="#4-4-1-静态域" class="headerlink" title="4.4.1 静态域"></a>4.4.1 静态域</h4><p>如果将域定义为static，每个类中只有一个这样的域。</p>
@@ -801,7 +739,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 	<span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
 	...
 }</code></pre></div>
-
 <p>每一个雇员对象都有一个自己的id域（多个id），但这个类的所有实例将共享一个nextId域（一个静态数据域）。</p>
 <p>（即使没有一个雇员对象，静态域nextId也存在。它属于类，而不属于任何独立的对象。）</p>
 <h4 id="4-4-2-静态常量"><a href="#4-4-2-静态常量" class="headerlink" title="4.4.2 静态常量"></a>4.4.2 静态常量</h4><p>静态变量使用得比较少，但静态常量却使用得比较多。例如，在Math类中定义了一个静态常量</p>
@@ -811,10 +748,8 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.14159265358979323846</span>;
 	...
 }</code></pre></div>
-
 <h4 id="4-4-3-静态方法"><a href="#4-4-3-静态方法" class="headerlink" title="4.4.3 静态方法"></a>4.4.3 静态方法</h4><p>静态方法是一种不能向对象实施操作的方法。例如，Math类的pow方法就是一个静态方法。表达式</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Math.pow(x,a)</code></pre></div>
-
 <p>这里Math类是对象，显然没法对Math类施加操作</p>
 <h4 id="4-4-4-工厂方法"><a href="#4-4-4-工厂方法" class="headerlink" title="4.4.4 工厂方法"></a>4.4.4 工厂方法</h4><p>类似<code>LocalDate</code>和<code>NumberFormat</code>的类使用静态工厂方法（factory method）来构造对象。</p>
 <h4 id="4-4-5-main方法"><a href="#4-4-5-main方法" class="headerlink" title="4.4.5 main方法"></a>4.4.5 main方法</h4><p>不需要使用对象调用静态方法，例如：不需要构造Math类对象就可以调用Math.pow</p>
@@ -832,7 +767,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 	salary = <span class="hljs-number">0</span>;
 	hireDay = LocalDate.now();
 }</code></pre></div>
-
 <p>如果类中提供了至少一个构造器，但是没有提供无参数的构造器，则在构造对象时如果没有提供参数就会被视为不合法。</p>
 <h4 id="4-6-4-显式域初始化"><a href="#4-6-4-显式域初始化" class="headerlink" title="4.6.4 显式域初始化"></a>4.6.4 显式域初始化</h4><p>通过重载类的构造器方法，有很多形式可以设置类的实例域的初始状态。确保不管怎样调用构造器，每个实例域都可以被设置为一个有意义的初值，这是一种很好的设计习惯。</p>
 <p>例如，可以在类定义中，直接将一个值赋给任何域：</p>
@@ -840,14 +774,12 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 {
 	<span class="hljs-keyword">private</span> String name = <span class="hljs-string">""</span>;
 }</code></pre></div>
-
 <h4 id="4-6-5-参数名"><a href="#4-6-5-参数名" class="headerlink" title="4.6.5 参数名"></a>4.6.5 参数名</h4><p>参数名写通俗易懂点，比如可以写成这样：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(String aName, <span class="hljs-keyword">double</span> aSalary)</span>	<span class="hljs-comment">//如果这两个参数写成 n和 s别人就看不懂了</span></span>
 <span class="hljs-function"></span>{
 	name = aName;
 	salary = aSalary;
 }</code></pre></div>
-
 <h4 id="4-6-6-调用另一个构造器"><a href="#4-6-6-调用另一个构造器" class="headerlink" title="4.6.6 调用另一个构造器"></a>4.6.6 调用另一个构造器</h4><p><code>this</code>除了可以引用方法的隐式参数以外，还能调用同一个类的另一个构造器，例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Employee</span><span class="hljs-params">(<span class="hljs-keyword">double</span> s)</span></span>
 <span class="hljs-function"></span>{
@@ -855,7 +787,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 	<span class="hljs-keyword">this</span>(<span class="hljs-string">"Employee #"</span> + nextId, s);
 	nextId++;
 }</code></pre></div>
-
 <p>当调用new Employee(60000)时，Employee(double)构造器将调用Employee(String, double)构造器。</p>
 <h4 id="4-6-7-初始化块"><a href="#4-6-7-初始化块" class="headerlink" title="4.6.7 初始化块"></a>4.6.7 初始化块</h4><p>前面已经讲过两种初始化数据域的方法：</p>
 <ul>
@@ -890,7 +821,6 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
     }
     <span class="hljs-comment">//...</span>
 }</code></pre></div>
-
 <p>在这个示例中，无论使用哪个构造器构造对象，id域都在对象初始化块中被初始化。首先运行初始化块，然后才运行构造器的主体部分。（很少用这种，通常会直接将初始化代码放在构造器中）</p>
 <h4 id="4-6-8-对象析构与finalize方法"><a href="#4-6-8-对象析构与finalize方法" class="headerlink" title="4.6.8 对象析构与finalize方法"></a>4.6.8 对象析构与finalize方法</h4><p>C++中每个类都能有一个析构函数，用来回收分配给对象的存储空间。</p>
 <p>由于Java有自动的垃圾回收器，不需要人工回收内存，所以Java不支持析构器。</p>
@@ -899,18 +829,14 @@ hireDay = LocalDate.of(<span class="hljs-number">1950</span>,<span class="hljs-n
 <p>Sun公司建议将域名以逆序的形式作为包名，比如 horstmann.com 的逆序形式是 com.horstmann，这个包还可以被进一步地划分成子包，如com.horstmann. corejava</p>
 <h4 id="4-7-1-类的导入"><a href="#4-7-1-类的导入" class="headerlink" title="4.7.1 类的导入"></a>4.7.1 类的导入</h4><p>一个类可以使用所属包中的所有类，以及其他包中的公有类（public class），可以在每个类名前添加完整的包名访问，例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">java.time.LocalDate today = java.time.LocalDate.now()</code></pre></div>
-
 <p>写起来太麻烦，所以一般用<code>import</code>的方式导入（之后就不用写完整的包名了），例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.time.*		<span class="hljs-comment">//导入 java.time 包中所有的类</span>
    
 LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></code></pre></div>
-
 <h4 id="4-7-2-静态导入"><a href="#4-7-2-静态导入" class="headerlink" title="4.7.2 静态导入"></a>4.7.2 静态导入</h4><p><code>import</code>语句不仅可以导入类，还增加了导入静态方法和静态域的功能，例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> java.lang.System.*</code></pre></div>
-
 <p>就可以使用System类的静态方法和静态域，而不必加类名前缀：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">out.println(<span class="hljs-string">"Goodbye, World!"</span>)</code></pre></div>
-
 <h4 id="4-7-3-将类放入包中"><a href="#4-7-3-将类放入包中" class="headerlink" title="4.7.3 将类放入包中"></a>4.7.3 将类放入包中</h4><p>如果没有在源文件中放置package语句，这个源文件中的类就被放置在一个默认包（defaulf package）中，默认包是一个没有名字的包。</p>
 <p>下面将类分别放在不同的包中（com. horstmann.corejava和com.mycompany）</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211119203950.png" srcset="/img/loading.gif" lazyload="" width="40%"></p>
@@ -930,7 +856,6 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
 </ul>
 <p>例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">/home/user/calssdir:.:/home/user/archives/archive.jar</code></pre></div>
-
 <p>（在UNIX环境中，类路径中的不同项目之间采用冒号<code>:</code>分隔，window中用分号<code>;</code>分隔）</p>
 <p>SE6 开始用<code>*</code>或<code>'*'</code>表示通配符（但是UNIX中禁止使用<code>*</code>以防止shell命令进一步扩展，所以推荐用<code>'*'</code>）</p>
 <h3 id="4-9-文档注释"><a href="#4-9-文档注释" class="headerlink" title="4.9 文档注释"></a>4.9 文档注释</h3><p>JDK包含一个很有用的工具，叫做javadoc，它可以由源文件生成一个HTML文档。</p>
@@ -949,7 +874,6 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
 <span class="hljs-class"></span>{
 	...
 }</code></pre></div>
-
 <h4 id="4-9-3-方法注释"><a href="#4-9-3-方法注释" class="headerlink" title="4.9.3 方法注释"></a>4.9.3 方法注释</h4><p>每一个方法注释必须放在所描述的方法之前。除了通用标记之外，还可以使用下面的标记：</p>
 <ul>
 <li>@param变量描述这个标记将对当前方法的“param”（参数）部分添加一个条目。这个描述可以占据多行，并可以使用HTML标记。一个方法的所有@param标记必须放在一起。</li>
@@ -968,7 +892,6 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
     <span class="hljs-keyword">this</span>.salary += raise;
     <span class="hljs-keyword">return</span> raise;
 }</code></pre></div>
-
 <h3 id="4-10-类设计技巧"><a href="#4-10-类设计技巧" class="headerlink" title="4.10 类设计技巧"></a>4.10 类设计技巧</h3><ol>
 <li>一定要保证数据私有</li>
 <li>一定要对数据初始化</li>
@@ -984,7 +907,6 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
 <span class="hljs-class"></span>{
 	<span class="hljs-comment">// 添加实例域和方法</span>
 }</code></pre></div>
-
 <ul>
 <li>已存在的类称为：<strong>父类</strong>（parent class）、超类（<code>superclass</code>）或基类（base class）</li>
 <li>新类称为<strong>子类</strong>（subclass）、派生类（derived class）或孩子类（child class）</li>
@@ -1001,7 +923,6 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
         <span class="hljs-keyword">return</span> baseSalary += bonus;
     }
 }</code></pre></div>
-
 <p>如果只写<code>super(a,b,c)</code>表示调用父类中有(a,b,c)参数的构造器</p>
 <h4 id="5-1-3-子类构造器"><a href="#5-1-3-子类构造器" class="headerlink" title="5.1.3 子类构造器"></a>5.1.3 子类构造器</h4><p>由于子类的构造器不饿能访问子类的私有域，所以必须通过父类的构造器对这部分私有域进行初始化，可以通过<code>super</code>实现对子类构造器的调用。（使用<code>super</code>调用构造器必须是子类构造器的第一条语句）</p>
 <blockquote>
@@ -1056,14 +977,12 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
 <div class="hljs code-wrapper"><pre><code class="hljs java">Manager boss = (Manager) staff[<span class="hljs-number">0</span>];	<span class="hljs-comment">//对象引用强制转换</span>
 
 <span class="hljs-keyword">int</span> nx = (<span class="hljs-keyword">int</span>) x;	<span class="hljs-comment">//这是数据类型强制转换</span></code></pre></div>
-
 <h4 id="5-1-9-抽象类"><a href="#5-1-9-抽象类" class="headerlink" title="5.1.9 抽象类"></a>5.1.9 抽象类</h4><p>为了提高程序的清晰度，包含一个或多个<strong>抽象方法</strong>的类本身必须通过关键字<code>abstract</code>声明为抽象类。例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span></span>
 <span class="hljs-class"></span>{
 	...
 	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> String <span class="hljs-title">getDescription</span><span class="hljs-params">()</span></span>;
 }</code></pre></div>
-
 <blockquote>
 <p><strong>抽象方法</strong>：指不确定的方法，即没有明确定义的方法</p>
 </blockquote>
@@ -1072,10 +991,8 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
 <h3 id="5-2-Object：所有类的父类"><a href="#5-2-Object：所有类的父类" class="headerlink" title="5.2 Object：所有类的父类"></a>5.2 Object：所有类的父类</h3><p>Java中所有类都由Object类扩展而来，如果没有明确指出父类，Object就被认为是这个类的父类。</p>
 <p>例如可以使用Object类型的变量引用任何类型的对象：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Object obj = <span class="hljs-keyword">new</span> Employee(<span class="hljs-string">"Harry Hacker"</span>,<span class="hljs-number">35000</span>)</code></pre></div>
-
 <p>Object类型的变量只能用于作为各种值的通用持有者。要想对其中的内容进行具体的操作，还需要清楚对象的原始类型，并进行相应的类型转换：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Employee e = (Employee) obj;</code></pre></div>
-
 <blockquote>
 <p>在Java中，只有基本类型（primitive types）不是对象，例如，数值、字符和布尔类型的值都不是对象</p>
 </blockquote>
@@ -1096,37 +1013,29 @@ LocalDate today = LocalDate.now()	<span class="hljs-comment">//调用</span></co
 <span class="hljs-function"></span>{
     <span class="hljs-keyword">return</span> <span class="hljs-string">"Employee[name="</span> + name <span class="hljs-string">",salary="</span> + salary + <span class="hljs-string">",hireDay="</span> + hireDay + <span class="hljs-string">"]"</span>;
 }</code></pre></div>
-
 <h3 id="5-3-泛型数组列表"><a href="#5-3-泛型数组列表" class="headerlink" title="5.3 泛型数组列表"></a>5.3 泛型数组列表</h3><p>Java中运行时确定数组的大小（而不是在编译时就必须确定），可以通过<code>ArrayList</code>类来实现。</p>
 <p>ArrayList是一个采用类型参数（type parameter）的泛型类（generic class）。为了指定数组列表保存的元素对象类型，需要用一对尖括号将类名括起来加在后面，例如：<code>ArrayList&lt;Employee&gt;</code></p>
 <p>下面声明和构造一个保存Employee对象的数组列表：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">ArrayList&lt;Employee&gt; staff = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre></div>
-
 <p>使用add方法可以将元素添加到数组列表中。例如，下面展示了如何将Employee对象添加到数组列表中：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">staff.add(<span class="hljs-keyword">new</span> Employee(<span class="hljs-string">"Harry Hacker"</span>,...));</code></pre></div>
-
 <p>如果知道要存储多少个元素，可以通过<code>ensureCapacity</code>方法分配空间（然后还是要add）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">staff.ensureCapacity(<span class="hljs-number">100</span>);</code></pre></div>
-
 <p>通过<code>size</code>方法查看数组列表的实际元素数目：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">staff.size()</code></pre></div>
-
 <p>使用<strong>get</strong>和<strong>set</strong>方法实现访问或改变数组元素的操作（而不常见的<code>变量[ ]</code>语法格式）</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Employee e = staff.get(i);	<span class="hljs-comment">// 获取数组列表的元素,类似: Employee e = a[i]</span>
 staff.set(i,harry);			<span class="hljs-comment">// 设置第i个元素的值,类似: staff[i] = harry</span></code></pre></div>
-
 <h3 id="5-4-对象包装器与自动装箱"><a href="#5-4-对象包装器与自动装箱" class="headerlink" title="5.4 对象包装器与自动装箱"></a>5.4 对象包装器与自动装箱</h3><p>Java中int这样的基本类型也可以转换为对象。所有的基本类型都有一个与之对应的类。例如，Integer类对应基本类型int。通常，这些类称为包装器（wrapper）。包装器类拥有的关键字：Integer、Long、Float、Double、Short、Byte、Character、Void和Boolean。</p>
 <blockquote>
 <p>对象包装器类是不可变的，即一旦构造了包装器，就不允许更改包装在其中的值。同时，对象包装器类还是final，因此不能定义它们的子类</p>
 </blockquote>
 <p>比如声明一个整型数组列表（尖括号参数不能是基本类型，即不能写成 ArrayList&lt; int &gt;），通过Integer对象包装器来声明：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">ArrayList&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</code></pre></div>
-
 <p>元素添加还是和ArrayList操作一样，例如：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">list.add(<span class="hljs-number">3</span>);			 <span class="hljs-comment">// 自动装箱：自动转为成 list.add(Integer.valueOf(3))</span>
     
 <span class="hljs-keyword">int</span> n = list.get(i);	 <span class="hljs-comment">// 自动拆箱：自动转换成 list.get(i).intValue()</span></code></pre></div>
-
 <h3 id="5-5-参数数量可变的方法"><a href="#5-5-参数数量可变的方法" class="headerlink" title="5.5 参数数量可变的方法"></a>5.5 参数数量可变的方法</h3><p>Java SE 5.0之后的版本提供了可以用可变的参数数量调用的方法，例如下面这段代码接受任意个double类型的参数，从中寻找其中的最大值并在控制台输出：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>{
 	
@@ -1145,12 +1054,10 @@ staff.set(i,harry);			<span class="hljs-comment">// 设置第i个元素的值,�
 		System.out.println(m);
 	}
 }</code></pre></div>
-
 <h3 id="5-6-枚举类"><a href="#5-6-枚举类" class="headerlink" title="5.6 枚举类"></a>5.6 枚举类</h3><p>所有的枚举类型都是Enum类的子类，最常用的方法是<code>toString</code>（所有的枚举类型都是Enum类的子类）</p>
 <p>toString的逆方法是静态方法<code>valueOf</code></p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Size.SMALL.toString() 	<span class="hljs-comment">//返回字符串"SMALL"</span>
 Size s = Enum.valueOf(Size.calss,<span class="hljs-string">"SMALL"</span>)	<span class="hljs-comment">//将s设置成Size.SMALL</span></code></pre></div>
-
 <p>每个枚举类型都有一个静态的values方法，它将返回一个包含全部枚举值的数组</p>
 <h3 id="5-7-反射"><a href="#5-7-反射" class="headerlink" title="5.7 反射"></a>5.7 反射</h3><p>能够分析类能力的程序称为<strong>反射（reflective）</strong>，有个反射库用以编写能够动态操纵Java代码的程序。</p>
 <p>反射机制可以用来：</p>
@@ -1169,7 +1076,6 @@ Size s = Enum.valueOf(Size.calss,<span class="hljs-string">"SMALL"</span>)	<span
 {
 	<span class="hljs-comment">// 针对异常进行处理的代码</span>
 }</code></pre></div>
-
 <p>（反射还有很多内容，略）</p>
 <h3 id="5-8-继承的设计技巧"><a href="#5-8-继承的设计技巧" class="headerlink" title="5.8 继承的设计技巧"></a>5.8 继承的设计技巧</h3><ol>
 <li>将公共操作和实例域放在父类</li>
@@ -1186,7 +1092,6 @@ Size s = Enum.valueOf(Size.calss,<span class="hljs-string">"SMALL"</span>)	<span
 <span class="hljs-class"></span>{
 	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Object other)</span></span>;
 }</code></pre></div>
-
 <p><strong>对象所属的类必须实现了接口的方法</strong>，即在上面的例子中，任何实现Comparable接口的类都需要包含compareTo方法，并且这个方法的参数必须是一个Object对象，返回一个整型数值。</p>
 <h4 id="6-1-2-接口的特性"><a href="#6-1-2-接口的特性" class="headerlink" title="6.1.2 接口的特性"></a>6.1.2 接口的特性</h4><p>接口的特性：</p>
 <ul>
@@ -1204,7 +1109,6 @@ Size s = Enum.valueOf(Size.calss,<span class="hljs-string">"SMALL"</span>)	<span
 <span class="hljs-class"></span>{
     <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(T other)</span> </span>{<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;}
 }</code></pre></div>
-
 <p>一般没啥用，因为这个接口的每个实际实现都要覆盖这个方法</p>
 <h4 id="6-1-6-解决默认方法冲突"><a href="#6-1-6-解决默认方法冲突" class="headerlink" title="6.1.6 解决默认方法冲突"></a>6.1.6 解决默认方法冲突</h4><p>如果先在一个接口中将一个方法定义为默认方法，然后又在父类或另一个接口中定义了同样的方法，那么会这样：</p>
 <ol>
@@ -1217,17 +1121,14 @@ Size s = Enum.valueOf(Size.calss,<span class="hljs-string">"SMALL"</span>)	<span
 <h3 id="6-3-lambda表达式"><a href="#6-3-lambda表达式" class="headerlink" title="6.3 lambda表达式"></a>6.3 lambda表达式</h3><h4 id="6-3-1-为什么引入lambda表达式"><a href="#6-3-1-为什么引入lambda表达式" class="headerlink" title="6.3.1 为什么引入lambda表达式"></a>6.3.1 为什么引入lambda表达式</h4><p>如果要将代码块作为参数传递到某个对象，还是比较麻烦的（因为只有String类型比较符合，所以处理起来麻烦）</p>
 <h4 id="6-3-2-lambda表达式的语法"><a href="#6-3-2-lambda表达式的语法" class="headerlink" title="6.3.2 lambda表达式的语法"></a>6.3.2 lambda表达式的语法</h4><p>lambda表达式就是一个代码块，以及写上代码的变量规范</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">(String first, String second) -&gt; first.length() - second.length()</code></pre></div>
-
 <p>lambda表达式形式：<kbd>参数,箭头(-&gt;),表达式</kbd>，即使没有参数也要提供空括号</p>
 <h4 id="6-3-3-函数式接口"><a href="#6-3-3-函数式接口" class="headerlink" title="6.3.3 函数式接口"></a>6.3.3 函数式接口</h4><p>对于只有一个抽象方法的接口，需要这种接口的对象时，就可以提供一个lambda表达式。这种接口称为函数式接口（functional interface）。</p>
 <h4 id="6-3-4-方法引用"><a href="#6-3-4-方法引用" class="headerlink" title="6.3.4 方法引用"></a>6.3.4 方法引用</h4><p>利用方法引用可以实现现成的方法可以完成你想要传递到其他代码的某个动作</p>
 <p>例如希望出现定时器事件就打印这个事件对象，可以调用：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Timer t = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>, event -&gt; System.out.println(event));</code></pre></div>
-
 <p>上面这个例子本来参数是(1000,event)的，加上了lambda表达式就调用完这个方法后打印一遍event</p>
 <p>通过方法引用，可以直接把println方法传递到Timer构造器这样就更方便了，具体实现：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs java">Timer t = <span class="hljs-keyword">new</span> Timer(<span class="hljs-number">1000</span>,System.out::println)</code></pre></div>
-
 <p>表达式<code>System.out::println</code>是一个方法引用（method reference），它等价于lambda表达式<code>x -&gt; System.out.println(x)</code></p>
 <h4 id="6-3-5-构造器引用"><a href="#6-3-5-构造器引用" class="headerlink" title="6.3.5 构造器引用"></a>6.3.5 构造器引用</h4><p>构造器引用与方法引用很类似，只不过方法名为new</p>
 <h4 id="6-3-6-变量作用域"><a href="#6-3-6-变量作用域" class="headerlink" title="6.3.6 变量作用域"></a>6.3.6 变量作用域</h4><p>略</p>

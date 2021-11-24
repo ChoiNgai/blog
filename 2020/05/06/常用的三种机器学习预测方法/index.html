@@ -252,7 +252,6 @@
             <div class="markdown-body">
               <p>三种常用的机器学习预测方法</p>
 <a id="more"></a>
-
 <p>以下代码统一为读入xlsx文件，其中第一列为因变量，其余列为自变量,每一行代表一个样本</p>
 <h2 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h2><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%读取数据</span>
 [X,TXT,RAW]=xlsread(<span class="hljs-string">'train_element.xlsx'</span>);
@@ -277,18 +276,12 @@ TY(<span class="hljs-number">1</span>,:) = b(<span class="hljs-number">1</span>)
 <span class="hljs-built_in">plot</span>(TX(:,<span class="hljs-number">1</span>))
 <span class="hljs-built_in">legend</span>(<span class="hljs-string">'预测值'</span>,<span class="hljs-string">'真实值'</span>);
 TY</code></pre></div>
-
-
-
 <h2 id="BP网络"><a href="#BP网络" class="headerlink" title="BP网络"></a>BP网络</h2><p>在应用程序处打开<code>Neural Net Fitting</code>训练神经网络模型</p>
 <p>参见 (如何利用matlab做BP神经网络分析-利用matlab神经网络工具箱)[ <a href="https://blog.csdn.net/ljyljyok/article/details/81362465" target="_blank" rel="noopener">https://blog.csdn.net/ljyljyok/article/details/81362465</a> ]</p>
 <div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[ ]</span> = <span class="hljs-title">BP_Forecast</span><span class="hljs-params">( X,TX )</span></span>
 load BP_202054_14.mat         <span class="hljs-comment">%导入网络模型</span>
 X = X';			     	<span class="hljs-comment">%转置</span>
 Y=sim(net,X);         <span class="hljs-comment">%使用训练好的BP网络模型预测</span></code></pre></div>
-
-
-
 <h2 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h2><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[ ]</span> = <span class="hljs-title">SVM_R</span><span class="hljs-params">( X,TX )</span></span>
 <span class="hljs-comment">%load svm_r			%若没有数据则读取模型</span>
 
@@ -340,7 +333,6 @@ test_train = TX;
 <span class="hljs-built_in">plot</span>(dv_t)
 xlswrite(<span class="hljs-string">'预测结果.xlsx'</span>,dv_t)
 <span class="hljs-built_in">legend</span>(<span class="hljs-string">'原始数据'</span>,<span class="hljs-string">'新数据预测'</span>);</code></pre></div>
-
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

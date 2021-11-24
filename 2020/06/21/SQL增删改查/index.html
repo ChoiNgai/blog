@@ -252,548 +252,590 @@
             <div class="markdown-body">
               <p>数据库curd</p>
 <a id="more"></a>
-
 <p>内容来自<a href="https://www.w3school.com.cn/sql/index.asp" target="_blank" rel="noopener">W3school</a>，侵删</p>
 <h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><h3 id="INSERT-INTO"><a href="#INSERT-INTO" class="headerlink" title="INSERT INTO"></a>INSERT INTO</h3><p>INSERT INTO 语句用于向表格中插入新的行。</p>
 <p>基本语法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> 表名称 <span class="hljs-keyword">VALUES</span> (值<span class="hljs-number">1</span>, 值<span class="hljs-number">2</span>,....)</code></pre></div>
-
 <p>我们也可以指定所要插入数据的列：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> table_name (列<span class="hljs-number">1</span>, 列<span class="hljs-number">2</span>,...) <span class="hljs-keyword">VALUES</span> (值<span class="hljs-number">1</span>, 值<span class="hljs-number">2</span>,....)</code></pre></div>
-
-
-
 <h3 id="插入新的行"><a href="#插入新的行" class="headerlink" title="插入新的行"></a>插入新的行</h3><p>“Persons” 表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>SQL 语句：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Persons <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'Gates'</span>, <span class="hljs-string">'Bill'</span>, <span class="hljs-string">'Xuanwumen 10'</span>, <span class="hljs-string">'Beijing'</span>)</code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="在指定的列中插入数据"><a href="#在指定的列中插入数据" class="headerlink" title="在指定的列中插入数据"></a>在指定的列中插入数据</h3><p>“Persons” 表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>SQL 语句：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Persons (LastName, Address) <span class="hljs-keyword">VALUES</span> (<span class="hljs-string">'Wilson'</span>, <span class="hljs-string">'Champs-Elysees'</span>)</code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Wilson</td>
-<td align="left"></td>
-<td align="left">Champs-Elysees</td>
-<td align="left"></td>
+<td style="text-align:left">Wilson</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Champs-Elysees</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><h3 id="DELETE-语句"><a href="#DELETE-语句" class="headerlink" title="DELETE 语句"></a>DELETE 语句</h3><p>DELETE 语句用于删除表中的行。</p>
 <p>基本语法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> 表名称 <span class="hljs-keyword">WHERE</span> 列名称 = 值</code></pre></div>
-
 <p>Person:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Wilson</td>
-<td align="left">Fred</td>
-<td align="left">Zhongshan 23</td>
-<td align="left">Nanjing</td>
+<td style="text-align:left">Wilson</td>
+<td style="text-align:left">Fred</td>
+<td style="text-align:left">Zhongshan 23</td>
+<td style="text-align:left">Nanjing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="删除某行"><a href="#删除某行" class="headerlink" title="删除某行"></a>删除某行</h3><p>“Fred Wilson” 会被删除：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> Person <span class="hljs-keyword">WHERE</span> LastName = <span class="hljs-string">'Wilson'</span></code></pre></div>
-
 <p>结果:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="删除所有行"><a href="#删除所有行" class="headerlink" title="删除所有行"></a>删除所有行</h3><p>可以在不删除表的情况下删除所有的行。这意味着表的结构、属性和索引都是完整的：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> table_name</code></pre></div>
-
 <p>或者：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">DELETE</span> * <span class="hljs-keyword">FROM</span> table_name</code></pre></div>
-
-
-
 <h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><h3 id="Update-语句"><a href="#Update-语句" class="headerlink" title="Update 语句"></a>Update 语句</h3><p>Update 语句用于修改表中的数据。</p>
 <p>基本语法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> 表名称 <span class="hljs-keyword">SET</span> 列名称 = 新值 <span class="hljs-keyword">WHERE</span> 列名称 = 某值</code></pre></div>
-
 <p>Person:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Wilson</td>
-<td align="left"></td>
-<td align="left">Champs-Elysees</td>
-<td align="left"></td>
+<td style="text-align:left">Wilson</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Champs-Elysees</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="更新某一行中的一个列"><a href="#更新某一行中的一个列" class="headerlink" title="更新某一行中的一个列"></a>更新某一行中的一个列</h3><p>我们为 lastname 是 “Wilson” 的人添加 firstname：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> Person <span class="hljs-keyword">SET</span> FirstName = <span class="hljs-string">'Fred'</span> <span class="hljs-keyword">WHERE</span> LastName = <span class="hljs-string">'Wilson'</span></code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Wilson</td>
-<td align="left">Fred</td>
-<td align="left">Champs-Elysees</td>
-<td align="left"></td>
+<td style="text-align:left">Wilson</td>
+<td style="text-align:left">Fred</td>
+<td style="text-align:left">Champs-Elysees</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="更新某一行中的若干列"><a href="#更新某一行中的若干列" class="headerlink" title="更新某一行中的若干列"></a>更新某一行中的若干列</h3><p>我们会修改地址（address），并添加城市名称（city）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> Person <span class="hljs-keyword">SET</span> Address = <span class="hljs-string">'Zhongshan 23'</span>, City = <span class="hljs-string">'Nanjing'</span>
 <span class="hljs-keyword">WHERE</span> LastName = <span class="hljs-string">'Wilson'</span></code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Wilson</td>
-<td align="left">Fred</td>
-<td align="left">Zhongshan 23</td>
-<td align="left">Nanjing</td>
+<td style="text-align:left">Wilson</td>
+<td style="text-align:left">Fred</td>
+<td style="text-align:left">Zhongshan 23</td>
+<td style="text-align:left">Nanjing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><h3 id="SELECT-语句"><a href="#SELECT-语句" class="headerlink" title="SELECT 语句"></a>SELECT 语句</h3><p>SELECT 语句用于从表中选取数据。</p>
 <p>结果被存储在一个结果表中（称为结果集）。</p>
 <p>SQL SELECT 语法</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 列名称 <span class="hljs-keyword">FROM</span> 表名称</code></pre></div>
-
 <p>以及：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> 表名称</code></pre></div>
-
 <p><strong>注释：</strong>SQL 语句对大小写不敏感。SELECT 等效于 select。</p>
 <p>SQL SELECT 实例</p>
 <p>如需获取名为 “LastName” 和 “FirstName” 的列的内容（从名为 “Persons” 的数据库表），请使用类似这样的 SELECT 语句：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> LastName,FirstName <span class="hljs-keyword">FROM</span> Persons</code></pre></div>
-
 <p>“Persons” 表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Id</th>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">Id</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left">Adams</td>
-<td align="left">John</td>
-<td align="left">Oxford Street</td>
-<td align="left">London</td>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">Adams</td>
+<td style="text-align:left">John</td>
+<td style="text-align:left">Oxford Street</td>
+<td style="text-align:left">London</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="left">Bush</td>
-<td align="left">George</td>
-<td align="left">Fifth Avenue</td>
-<td align="left">New York</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">Bush</td>
+<td style="text-align:left">George</td>
+<td style="text-align:left">Fifth Avenue</td>
+<td style="text-align:left">New York</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Adams</td>
-<td align="left">John</td>
+<tbody>
+<tr>
+<td style="text-align:left">Adams</td>
+<td style="text-align:left">John</td>
 </tr>
 <tr>
-<td align="left">Bush</td>
-<td align="left">George</td>
+<td style="text-align:left">Bush</td>
+<td style="text-align:left">George</td>
 </tr>
 <tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>SQL SELECT * 实例</p>
 <p>现在我们希望从 “Persons” 表中选取所有的列。</p>
 <p>请使用符号 * 取代列的名称，就像这样：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons</code></pre></div>
-
 <p><strong>提示：</strong>星号（*）是选取所有列的快捷方式。</p>
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Id</th>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">Id</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="left">Adams</td>
-<td align="left">John</td>
-<td align="left">Oxford Street</td>
-<td align="left">London</td>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">Adams</td>
+<td style="text-align:left">John</td>
+<td style="text-align:left">Oxford Street</td>
+<td style="text-align:left">London</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="left">Bush</td>
-<td align="left">George</td>
-<td align="left">Fifth Avenue</td>
-<td align="left">New York</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">Bush</td>
+<td style="text-align:left">George</td>
+<td style="text-align:left">Fifth Avenue</td>
+<td style="text-align:left">New York</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="SELECT-DISTINCT-语句"><a href="#SELECT-DISTINCT-语句" class="headerlink" title="SELECT DISTINCT 语句"></a>SELECT DISTINCT 语句</h4><p>在表中，可能会包含重复值。这并不成问题，不过，有时您也许希望仅仅列出不同（distinct）的值。</p>
 <p>关键词 DISTINCT 用于返回唯一不同的值。</p>
 <p>基本语法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> 列名称 <span class="hljs-keyword">FROM</span> 表名称</code></pre></div>
-
-
-
 <h4 id="使用-DISTINCT-关键词"><a href="#使用-DISTINCT-关键词" class="headerlink" title="使用 DISTINCT 关键词"></a>使用 DISTINCT 关键词</h4><p>如果要从 “Company” 列中选取所有的值，我们需要使用 SELECT 语句：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Company <span class="hljs-keyword">FROM</span> Orders</code></pre></div>
-
 <p>“Orders”表：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
-<th align="left">OrderNumber</th>
+<th style="text-align:left">Company</th>
+<th style="text-align:left">OrderNumber</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">IBM</td>
-<td align="left">3532</td>
+<tbody>
+<tr>
+<td style="text-align:left">IBM</td>
+<td style="text-align:left">3532</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">2356</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">2356</td>
 </tr>
 <tr>
-<td align="left">Apple</td>
-<td align="left">4698</td>
+<td style="text-align:left">Apple</td>
+<td style="text-align:left">4698</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">6953</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">6953</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
+<th style="text-align:left">Company</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">IBM</td>
+<tbody>
+<tr>
+<td style="text-align:left">IBM</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
+<td style="text-align:left">W3School</td>
 </tr>
 <tr>
-<td align="left">Apple</td>
+<td style="text-align:left">Apple</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
+<td style="text-align:left">W3School</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>请注意，在结果集中，W3School 被列出了两次。</p>
 <p>如需从 Company” 列中仅选取唯一不同的值，我们需要使用 SELECT DISTINCT 语句：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> Company <span class="hljs-keyword">FROM</span> Orders</code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
+<th style="text-align:left">Company</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">IBM</td>
+<tbody>
+<tr>
+<td style="text-align:left">IBM</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
+<td style="text-align:left">W3School</td>
 </tr>
 <tr>
-<td align="left">Apple</td>
+<td style="text-align:left">Apple</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>现在，在结果集中，”W3School” 仅被列出了一次。</p>
 <h3 id="WHERE语句"><a href="#WHERE语句" class="headerlink" title="WHERE语句"></a>WHERE语句</h3><p>如需有条件地从表中选取数据，可将 WHERE 子句添加到 SELECT 语句。</p>
 <p>基本语法：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 列名称 <span class="hljs-keyword">FROM</span> 表名称 <span class="hljs-keyword">WHERE</span> 列 运算符 值</code></pre></div>
-
 <p>下面的运算符可在 WHERE 子句中使用：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">操作符</th>
-<th align="left">描述</th>
+<th style="text-align:left">操作符</th>
+<th style="text-align:left">描述</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">=</td>
-<td align="left">等于</td>
+<tbody>
+<tr>
+<td style="text-align:left">=</td>
+<td style="text-align:left">等于</td>
 </tr>
 <tr>
-<td align="left">&lt;&gt;</td>
-<td align="left">不等于</td>
+<td style="text-align:left">&lt;&gt;</td>
+<td style="text-align:left">不等于</td>
 </tr>
 <tr>
-<td align="left">&gt;</td>
-<td align="left">大于</td>
+<td style="text-align:left">&gt;</td>
+<td style="text-align:left">大于</td>
 </tr>
 <tr>
-<td align="left">&lt;</td>
-<td align="left">小于</td>
+<td style="text-align:left">&lt;</td>
+<td style="text-align:left">小于</td>
 </tr>
 <tr>
-<td align="left">&gt;=</td>
-<td align="left">大于等于</td>
+<td style="text-align:left">&gt;=</td>
+<td style="text-align:left">大于等于</td>
 </tr>
 <tr>
-<td align="left">&lt;=</td>
-<td align="left">小于等于</td>
+<td style="text-align:left">&lt;=</td>
+<td style="text-align:left">小于等于</td>
 </tr>
 <tr>
-<td align="left">BETWEEN</td>
-<td align="left">在某个范围内</td>
+<td style="text-align:left">BETWEEN</td>
+<td style="text-align:left">在某个范围内</td>
 </tr>
 <tr>
-<td align="left">LIKE</td>
-<td align="left">搜索某种模式</td>
+<td style="text-align:left">LIKE</td>
+<td style="text-align:left">搜索某种模式</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong>注释：</strong>在某些版本的 SQL 中，操作符 &lt;&gt; 可以写为 !=。</p>
 <h4 id="使用-WHERE-子句"><a href="#使用-WHERE-子句" class="headerlink" title="使用 WHERE 子句"></a>使用 WHERE 子句</h4><p>如果只希望选取居住在城市 “Beijing” 中的人，我们需要向 SELECT 语句添加 WHERE 子句：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> City=<span class="hljs-string">'Beijing'</span></code></pre></div>
-
 <p>“Persons” 表</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
-<th align="left">Year</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
+<th style="text-align:left">Year</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Adams</td>
-<td align="left">John</td>
-<td align="left">Oxford Street</td>
-<td align="left">London</td>
-<td align="left">1970</td>
+<tbody>
+<tr>
+<td style="text-align:left">Adams</td>
+<td style="text-align:left">John</td>
+<td style="text-align:left">Oxford Street</td>
+<td style="text-align:left">London</td>
+<td style="text-align:left">1970</td>
 </tr>
 <tr>
-<td align="left">Bush</td>
-<td align="left">George</td>
-<td align="left">Fifth Avenue</td>
-<td align="left">New York</td>
-<td align="left">1975</td>
+<td style="text-align:left">Bush</td>
+<td style="text-align:left">George</td>
+<td style="text-align:left">Fifth Avenue</td>
+<td style="text-align:left">New York</td>
+<td style="text-align:left">1975</td>
 </tr>
 <tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
-<td align="left">1980</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
+<td style="text-align:left">1980</td>
 </tr>
 <tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
-<td align="left">1985</td>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
+<td style="text-align:left">1985</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
-<th align="left">Year</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
+<th style="text-align:left">Year</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
-<td align="left">1980</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
+<td style="text-align:left">1980</td>
 </tr>
 <tr>
-<td align="left">Gates</td>
-<td align="left">Bill</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
-<td align="left">1985</td>
+<td style="text-align:left">Gates</td>
+<td style="text-align:left">Bill</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
+<td style="text-align:left">1985</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="引号的使用"><a href="#引号的使用" class="headerlink" title="引号的使用"></a>引号的使用</h4><p>请注意，我们在例子中的条件值周围使用的是单引号。</p>
 <p>SQL 使用单引号来环绕<em>文本值</em>（大部分数据库系统也接受双引号）。如果是<em>数值</em>，请不要使用引号。</p>
 <p>文本值：</p>
@@ -802,269 +844,292 @@
 
 这是错误的：
 <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> FirstName=Bush</code></pre></div>
-
 <p>数值：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql">这是正确的：
 <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">Year</span>&gt;<span class="hljs-number">1965</span>
 
 这是错误的：
 <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">Year</span>&gt;<span class="hljs-string">'1965'</span></code></pre></div>
-
-
-
 <h3 id="AND-和-OR-运算符"><a href="#AND-和-OR-运算符" class="headerlink" title="AND 和 OR 运算符"></a>AND 和 OR 运算符</h3><p>AND 和 OR 可在 WHERE 子语句中把两个或多个条件结合起来。</p>
 <p>如果第一个条件和第二个条件都成立，则 AND 运算符显示一条记录。</p>
 <p>如果第一个条件和第二个条件中只要有一个成立，则 OR 运算符显示一条记录。</p>
 <p>原始的表 (用在例子中的)：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Adams</td>
-<td align="left">John</td>
-<td align="left">Oxford Street</td>
-<td align="left">London</td>
+<tbody>
+<tr>
+<td style="text-align:left">Adams</td>
+<td style="text-align:left">John</td>
+<td style="text-align:left">Oxford Street</td>
+<td style="text-align:left">London</td>
 </tr>
 <tr>
-<td align="left">Bush</td>
-<td align="left">George</td>
-<td align="left">Fifth Avenue</td>
-<td align="left">New York</td>
+<td style="text-align:left">Bush</td>
+<td style="text-align:left">George</td>
+<td style="text-align:left">Fifth Avenue</td>
+<td style="text-align:left">New York</td>
 </tr>
 <tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Carter</td>
-<td align="left">William</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">William</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="AND-运算符实例"><a href="#AND-运算符实例" class="headerlink" title="AND 运算符实例"></a>AND 运算符实例</h4><p>使用 AND 来显示所有姓为 “Carter” 并且名为 “Thomas” 的人：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> FirstName=<span class="hljs-string">'Thomas'</span> <span class="hljs-keyword">AND</span> LastName=<span class="hljs-string">'Carter'</span></code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="OR-运算符实例"><a href="#OR-运算符实例" class="headerlink" title="OR 运算符实例"></a>OR 运算符实例</h4><p>使用 OR 来显示所有姓为 “Carter” 或者名为 “Thomas” 的人：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> firstname=<span class="hljs-string">'Thomas'</span> <span class="hljs-keyword">OR</span> lastname=<span class="hljs-string">'Carter'</span></code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Carter</td>
-<td align="left">William</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">William</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="结合-AND-和-OR-运算符"><a href="#结合-AND-和-OR-运算符" class="headerlink" title="结合 AND 和 OR 运算符"></a>结合 AND 和 OR 运算符</h4><p>我们也可以把 AND 和 OR 结合起来（使用圆括号来组成复杂的表达式）:</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> Persons <span class="hljs-keyword">WHERE</span> (FirstName=<span class="hljs-string">'Thomas'</span> <span class="hljs-keyword">OR</span> FirstName=<span class="hljs-string">'William'</span>)
 <span class="hljs-keyword">AND</span> LastName=<span class="hljs-string">'Carter'</span></code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LastName</th>
-<th align="left">FirstName</th>
-<th align="left">Address</th>
-<th align="left">City</th>
+<th style="text-align:left">LastName</th>
+<th style="text-align:left">FirstName</th>
+<th style="text-align:left">Address</th>
+<th style="text-align:left">City</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Carter</td>
-<td align="left">Thomas</td>
-<td align="left">Changan Street</td>
-<td align="left">Beijing</td>
+<tbody>
+<tr>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">Thomas</td>
+<td style="text-align:left">Changan Street</td>
+<td style="text-align:left">Beijing</td>
 </tr>
 <tr>
-<td align="left">Carter</td>
-<td align="left">William</td>
-<td align="left">Xuanwumen 10</td>
-<td align="left">Beijing</td>
+<td style="text-align:left">Carter</td>
+<td style="text-align:left">William</td>
+<td style="text-align:left">Xuanwumen 10</td>
+<td style="text-align:left">Beijing</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="ORDER-BY-语句"><a href="#ORDER-BY-语句" class="headerlink" title="ORDER BY 语句"></a>ORDER BY 语句</h2><p>ORDER BY 语句用于根据指定的列对结果集进行排序。</p>
 <p>ORDER BY 语句默认按照升序对记录进行排序。</p>
 <p>如果您希望按照降序对记录进行排序，可以使用 DESC 关键字。</p>
 <h4 id="原始的表-用在例子中的-："><a href="#原始的表-用在例子中的-：" class="headerlink" title="原始的表 (用在例子中的)："></a>原始的表 (用在例子中的)：</h4><p>Orders 表:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
-<th align="left">OrderNumber</th>
+<th style="text-align:left">Company</th>
+<th style="text-align:left">OrderNumber</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">IBM</td>
-<td align="left">3532</td>
+<tbody>
+<tr>
+<td style="text-align:left">IBM</td>
+<td style="text-align:left">3532</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">2356</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">2356</td>
 </tr>
 <tr>
-<td align="left">Apple</td>
-<td align="left">4698</td>
+<td style="text-align:left">Apple</td>
+<td style="text-align:left">4698</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">6953</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">6953</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例 1"></a>实例 1</h4><p>以字母顺序显示公司名称：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Company, OrderNumber <span class="hljs-keyword">FROM</span> Orders <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> Company</code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
-<th align="left">OrderNumber</th>
+<th style="text-align:left">Company</th>
+<th style="text-align:left">OrderNumber</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Apple</td>
-<td align="left">4698</td>
+<tbody>
+<tr>
+<td style="text-align:left">Apple</td>
+<td style="text-align:left">4698</td>
 </tr>
 <tr>
-<td align="left">IBM</td>
-<td align="left">3532</td>
+<td style="text-align:left">IBM</td>
+<td style="text-align:left">3532</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">6953</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">6953</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">2356</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">2356</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例 2"></a>实例 2</h4><p>以字母顺序显示公司名称（Company），并以数字顺序显示顺序号（OrderNumber）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Company, OrderNumber <span class="hljs-keyword">FROM</span> Orders <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> Company, OrderNumber</code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
-<th align="left">OrderNumber</th>
+<th style="text-align:left">Company</th>
+<th style="text-align:left">OrderNumber</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">Apple</td>
-<td align="left">4698</td>
+<tbody>
+<tr>
+<td style="text-align:left">Apple</td>
+<td style="text-align:left">4698</td>
 </tr>
 <tr>
-<td align="left">IBM</td>
-<td align="left">3532</td>
+<td style="text-align:left">IBM</td>
+<td style="text-align:left">3532</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">2356</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">2356</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">6953</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">6953</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例 3"></a>实例 3</h4><p>以逆字母顺序显示公司名称：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Company, OrderNumber <span class="hljs-keyword">FROM</span> Orders <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> Company <span class="hljs-keyword">DESC</span></code></pre></div>
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
-<th align="left">OrderNumber</th>
+<th style="text-align:left">Company</th>
+<th style="text-align:left">OrderNumber</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">W3School</td>
-<td align="left">6953</td>
+<tbody>
+<tr>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">6953</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">2356</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">2356</td>
 </tr>
 <tr>
-<td align="left">IBM</td>
-<td align="left">3532</td>
+<td style="text-align:left">IBM</td>
+<td style="text-align:left">3532</td>
 </tr>
 <tr>
-<td align="left">Apple</td>
-<td align="left">4698</td>
+<td style="text-align:left">Apple</td>
+<td style="text-align:left">4698</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="实例-4"><a href="#实例-4" class="headerlink" title="实例 4"></a>实例 4</h4><p>以逆字母顺序显示公司名称，并以数字顺序显示顺序号：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> Company, OrderNumber <span class="hljs-keyword">FROM</span> Orders <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> Company <span class="hljs-keyword">DESC</span>, OrderNumber <span class="hljs-keyword">ASC</span></code></pre></div>
-
-
-
 <p>结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">Company</th>
-<th align="left">OrderNumber</th>
+<th style="text-align:left">Company</th>
+<th style="text-align:left">OrderNumber</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">W3School</td>
-<td align="left">2356</td>
+<tbody>
+<tr>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">2356</td>
 </tr>
 <tr>
-<td align="left">W3School</td>
-<td align="left">6953</td>
+<td style="text-align:left">W3School</td>
+<td style="text-align:left">6953</td>
 </tr>
 <tr>
-<td align="left">IBM</td>
-<td align="left">3532</td>
+<td style="text-align:left">IBM</td>
+<td style="text-align:left">3532</td>
 </tr>
 <tr>
-<td align="left">Apple</td>
-<td align="left">4698</td>
+<td style="text-align:left">Apple</td>
+<td style="text-align:left">4698</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.w3school.com.cn/" target="_blank" rel="noopener">W3school</a></p>
 <script>
         document.querySelectorAll('.github-emoji')

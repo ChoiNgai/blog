@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.5k 字
+      4.4k 字
     </span>
   
 
@@ -252,22 +252,23 @@
             <div class="markdown-body">
               <p>经典半监督模糊聚类SFCM</p>
 <a id="more"></a>
-
-
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>在上一篇中已经介绍过<a href="https://www.studydrive.club/2020/11/02/mo-hu-c-jun-zhi-ju-lei-fcm/" target="_blank" rel="noopener">模糊C均值聚类</a>了，模糊C均值聚类是一种<strong>无监督学习</strong>方法，其无法利用标签信息，在这里将介绍一种<strong>有监督学习</strong>的模糊聚类算法——经典的半监督模糊聚类SFCM。</p>
-<h2 id="FCM"><a href="#FCM" class="headerlink" title="FCM"></a>FCM</h2><p>先来复习一下FCM的目标函数：<br>$$<br>J_{fcm}(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2<br>$$</p>
-<p>$$<br>s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1<br>$$</p>
-<h2 id="SFCM"><a href="#SFCM" class="headerlink" title="SFCM"></a>SFCM</h2><p>再看SFCM的目标函数：<br>$$<br>J_{sfcm}(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2 + \alpha \sum_{i=1}^c \sum_{j=1}^n (u_{ij} - \widetilde{u}_{ij})^m ||x_j - v_i||^2<br>$$</p>
-<p>$$<br>s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1<br>$$</p>
-<p>仔细看一下的话就会发现SFCM的目标函数相比FCM增加了</p>
-<p>$$\alpha \sum_{i=1}^c \sum_{j=1}^n (u_{ij} - \widetilde{u}_{ij})^m ||x_j - v_i||^2$$</p>
-<p>这一项，再看一下增加的这一项是不是跟FCM也很像? 对，就在隶属度矩阵$u_{ij}$后面减去一个$\widetilde{u}_{ij}$（注意区分符号上面有无波浪线），以及在该项前面增加一个正则化项系数$\alpha$（这参数的值是自己设定的）。</p>
-<p>这里来解释一下先验隶属度矩阵$ \widetilde{u}<em>{ij} $，先验隶属度矩阵$\widetilde{u}</em>{ij}$的大小与隶属度矩阵$u_{ij}$相同，与$u_{ij}$一样都是​c行​n列。( i={1,2…c}; j={1,2…n} )</p>
-<p>假设某个数据集有5个样本，分为3类，即$n=5,c=3$。假设只给定前面三个样本标签，且前面三个样本分别属于第一类、第二类、第三类，第四第五个样本的标签信息未知（即没有给定标签），则其$\widetilde{u}<em>{ij}$为：<br>$$<br>\left[ \begin{matrix} 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\ 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \end{matrix} \right]<br>$$<br>即样本第i个样本属于第几类，就在第几行写为1，其余的元素全为0。由于需要求目标函数值最小的极小值点，在没有给定样本的隶属度一定的i情况下，SFCM的隶属度矩阵$u</em>{ij}$与给定的先验信息$\widetilde{u}_{ij}$越接近则目标函数值越小（其他标签未知样本的隶属度固定的情况下）。</p>
+<h2 id="FCM"><a href="#FCM" class="headerlink" title="FCM"></a>FCM</h2><p>先来复习一下FCM的目标函数：</p>
+<script type="math/tex; mode=display">
+J_{fcm}(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2</script><script type="math/tex; mode=display">
+s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1</script><h2 id="SFCM"><a href="#SFCM" class="headerlink" title="SFCM"></a>SFCM</h2><p>再看SFCM的目标函数：</p>
+<script type="math/tex; mode=display">
+J_{sfcm}(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2 + \alpha \sum_{i=1}^c \sum_{j=1}^n (u_{ij} - \widetilde{u}_{ij})^m ||x_j - v_i||^2</script><script type="math/tex; mode=display">
+s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1</script><p>仔细看一下的话就会发现SFCM的目标函数相比FCM增加了</p>
+<script type="math/tex; mode=display">\alpha \sum_{i=1}^c \sum_{j=1}^n (u_{ij} - \widetilde{u}_{ij})^m ||x_j - v_i||^2</script><p>这一项，再看一下增加的这一项是不是跟FCM也很像? 对，就在隶属度矩阵$u<em>{ij}$后面减去一个$\widetilde{u}</em>{ij}$（注意区分符号上面有无波浪线），以及在该项前面增加一个正则化项系数$\alpha$（这参数的值是自己设定的）。</p>
+<p>这里来解释一下先验隶属度矩阵$ \widetilde{u}<em>{ij} $，先验隶属度矩阵$\widetilde{u}</em>{ij}$的大小与隶属度矩阵$u<em>{ij}$相同，与$u</em>{ij}$一样都是​c行​n列。( i={1,2…c}; j={1,2…n} )</p>
+<p>假设某个数据集有5个样本，分为3类，即$n=5,c=3$。假设只给定前面三个样本标签，且前面三个样本分别属于第一类、第二类、第三类，第四第五个样本的标签信息未知（即没有给定标签），则其$\widetilde{u}_{ij}$为：</p>
+<script type="math/tex; mode=display">
+\left[ \begin{matrix} 1 & 0 & 0 & 0 & 0\\ 0 & 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 & 0 \end{matrix} \right]</script><p>即样本第i个样本属于第几类，就在第几行写为1，其余的元素全为0。由于需要求目标函数值最小的极小值点，在没有给定样本的隶属度一定的i情况下，SFCM的隶属度矩阵$u<em>{ij}$与给定的先验信息$\widetilde{u}</em>{ij}$越接近则目标函数值越小（其他标签未知样本的隶属度固定的情况下）。</p>
 <p>再来看迭代式，仍然是用拉格朗日乘数法推导得到，在这里设定$m=2$,得到：</p>
-<p>$$<br>u_{ij} = \frac{1}{1+a} [ \frac{1+\alpha(1-\sum_{i=1}^c \widetilde{u}<em>{ij} ) }{ \sum</em>{i=1}^c \frac{||x_j-v_i||^2 }{ ||x_j-v_k||^2 } } +\alpha \widetilde{u}_{ij} ]<br>$$</p>
-<p>$$<br>v_i = \frac{\sum_{j=1}^n u_{ij}^2 x_j }{ \sum_{j=1}^n u_{ij}^2 }<br>$$</p>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U,center]</span> = <span class="hljs-title">SFCMclust</span><span class="hljs-params">(data, cluster_n,data_label)</span></span>
+<script type="math/tex; mode=display">
+u_{ij} = \frac{1}{1+a} [ \frac{1+\alpha(1-\sum_{i=1}^c \widetilde{u}_{ij} ) }{ \sum_{i=1}^c \frac{||x_j-v_i||^2 }{ ||x_j-v_k||^2 } } +\alpha \widetilde{u}_{ij} ]</script><script type="math/tex; mode=display">
+v_i = \frac{\sum_{j=1}^n u_{ij}^2 x_j }{ \sum_{j=1}^n u_{ij}^2 }</script><h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U,center]</span> = <span class="hljs-title">SFCMclust</span><span class="hljs-params">(data, cluster_n,data_label)</span></span>
 data_n = <span class="hljs-built_in">size</span>(data, <span class="hljs-number">1</span>); <span class="hljs-comment">% 求出data的第一维(rows)数,即样本个数</span>
 in_n = <span class="hljs-built_in">size</span>(data, <span class="hljs-number">2</span>);   <span class="hljs-comment">% 求出data的第二维(columns)数，即特征值长度</span>
 <span class="hljs-comment">% 默认操作参数</span>
@@ -421,9 +422,6 @@ out = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size<
    out(k, :) = <span class="hljs-built_in">sqrt</span>(sum(((data-<span class="hljs-built_in">ones</span>(<span class="hljs-built_in">size</span>(data,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>)*center(k,:)).^<span class="hljs-number">2</span>)',<span class="hljs-number">1</span>));
  <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre></div>
-
-
-
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a href="https://blog.csdn.net/weixin_42663919/article/details/89525967" target="_blank" rel="noopener">半监督模糊聚类算法FCM，SFCM，SSFCM理论和代码</a></p>
 <script>
         document.querySelectorAll('.github-emoji')

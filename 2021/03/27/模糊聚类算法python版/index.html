@@ -255,7 +255,6 @@
             <div class="markdown-body">
               <p>多种无监督和半监督的模糊聚类算法python实现</p>
 <a id="more"></a>
-
 <h2 id="introduce"><a href="#introduce" class="headerlink" title="introduce"></a>introduce</h2><p>本开源项目为模糊聚类算法python代码，主要算法包括：</p>
 <ul>
 <li>FCM（模糊C均值算法）</li>
@@ -267,7 +266,7 @@
 </ul>
 <p>项目链接：<a href="https://github.com/ChoiNgai/FuzzyClustering" target="_blank" rel="noopener">https://github.com/ChoiNgai/FuzzyClustering</a></p>
 <p>以这些算法为基础的相关论文可参考本人的谷歌学术主页：<a href="https://scholar.google.com/citations?view_op=list_works&amp;hl=zh-CN&amp;user=pYX8lisAAAAJ" target="_blank" rel="noopener">Wei Cai，Guangdong University of Technology</a></p>
-<p>如有问题欢迎邮件一起探讨：<a href="mailto:caiwei-email@qq.com">caiwei-email@qq.com</a></p>
+<p>如有问题欢迎邮件一起探讨：caiwei-email@qq.com</p>
 <h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><ul>
 <li>dataset：数据集</li>
 <li>ClusterAidedComputing.py ：包括聚类常用的一些函数</li>
@@ -287,16 +286,13 @@
 <li>FCM</li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = fcm(data,cluster_n,m = <span class="hljs-number">2</span>,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,printOn = <span class="hljs-number">1</span>)</code></pre></div>
-
 <p>或</p>
 <div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = fcm(data,cluster_n)</code></pre></div>
-
 <p>如上，m ,max_iter,e ,printOn这四个参数已有默认参数，可不设置 </p>
 <ul>
 <li>MEC</li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = mec(data,cluster_n,gamma=<span class="hljs-number">0.01</span>,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,printOn = <span class="hljs-number">1</span>)</code></pre></div>
-
 <p>gamma ：惩罚系数</p>
 <ul>
 <li><p>KFCM</p>
@@ -305,25 +301,21 @@
 </li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs python">kfcm(data,cluster_n,sigma=<span class="hljs-number">2</span>,m=<span class="hljs-number">2</span>,lamda=<span class="hljs-number">0.1</span>,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,printOn = <span class="hljs-number">1</span>)</code></pre></div>
-
 <ul>
 <li>SFCM</li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = sfcm(data,cluster_n,label,m = <span class="hljs-number">2</span>,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,alpha=<span class="hljs-number">5</span>,printOn = <span class="hljs-number">1</span>)</code></pre></div>
-
 <p>label ：标签（array格式）</p>
 <ul>
 <li>eSFCM</li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = esfcm(data,cluster_n,label,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,lamda=<span class="hljs-number">1</span>,printOn = <span class="hljs-number">1</span>)</code></pre></div>
-
 <ul>
 <li>SMUC</li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs smuc">U,V,obj_fcn = smuc(data,cluster_n,label,max_iter = 1000,e = 0.5,lamda=1,printOn = 1)</code></pre></div>
-
 <h3 id="例"><a href="#例" class="headerlink" title="例"></a>例</h3><p>迭代目标函数值变化图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/Figure_1.png" srcset="/img/loading.gif" lazyload="" alt="Figure_1">)<img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210325193158437.png" srcset="/img/loading.gif" lazyload="" alt="image-20210325193158437"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/Figure_1.png" srcset="/img/loading.gif" lazyload="" alt="Figure_1"><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210325193158437.png" srcset="/img/loading.gif" lazyload="" alt="image-20210325193158437"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

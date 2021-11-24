@@ -252,7 +252,6 @@
             <div class="markdown-body">
               <p>数据仓库命名规范</p>
 <a id="more"></a>
-
 <p>这里分为<strong>表命名规范</strong>、<strong>字段命名规范</strong>、<strong>指标命名规范</strong>、<strong>作业命名规范</strong>，通常涉及表命名规范</p>
 <h2 id="表命名规范"><a href="#表命名规范" class="headerlink" title="表命名规范"></a>表命名规范</h2><p>不同分层的表命名规范不一样（以下命名规范包括了库名），abc为补充的三个参数，具体见后面</p>
 <ul>
@@ -271,13 +270,11 @@
 </li>
 <li><p>dwm（周期汇总）</p>
 <div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述<span class="hljs-literal">_</span>统计范围cycle[N]_abc</code></pre></div>
-
 <p>例如：</p>
 <p><code>projectname_dw.dwm_projectname_store_activity_byr_currcy_order_cycle7_sdt</code>说明：projectname是项目名，其数据粒度为店铺（store）+活动（activity）+买家（byr）+币种（currcy）;业务描述为下单（order）；统计的时间范围为近7天。</p>
 </li>
 <li><p>dws层（数据汇总服务）</p>
 <div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述_abc</code></pre></div>
-
 </li>
 </ul>
 </li>
@@ -295,7 +292,6 @@
 <li><p>数据采集作业（后缀import）</p>
 <p>一般是采集变成ods层数据</p>
 <div class="hljs code-wrapper"><pre><code class="hljs elm">项目名_ods.ods_系统名称_源表名_abc_<span class="hljs-keyword">import</span></code></pre></div>
-
 <p>如：projectname_ods.ods_projectname_orders_fct_import</p>
 </li>
 <li><p>数据导出作业（后缀export）</p>

@@ -257,7 +257,6 @@
             <div class="markdown-body">
               <p>去除图像的大量锯齿</p>
 <a id="more"></a>
-
 <p> 图像预处理算法的好坏直接关系到后续图像处理的效果，如图像分割、目标识别、边缘提取等，为了获取高质量的数字图像，很多时候都需要对图像进行降噪处理，尽可能的保持原始信息完整性（即主要特征）的同时，又能够去除信号中无用的信息。 </p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200705234702375.png" srcset="/img/loading.gif" lazyload="" alt="鲁迅：我没说过"></p>
 <p>如果图片有大量的锯齿难免会显得拙糙，那么这时候降噪也不是一种去除锯齿的好方法。 </p>
@@ -293,9 +292,6 @@ img = np.array(img)
 img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)
 img = Image.fromarray(img_gaosi)		
 img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">16</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">16</span>), Image.ANTIALIAS)</code></pre></div>
-
-
-
 <p>注：示例图片来自<a href="https://www.hanspub.org/journal/PaperInformation.aspx?paperID=36204" target="_blank" rel="noopener">《应用数学进展》</a></p>
 <script>
         document.querySelectorAll('.github-emoji')

@@ -254,7 +254,6 @@
             <div class="markdown-body">
               <p>一个代替word的简洁文本编辑器</p>
 <a id="more"></a>
-
 <h2 id="为什么要用markdown？"><a href="#为什么要用markdown？" class="headerlink" title="为什么要用markdown？"></a>为什么要用markdown？</h2><p>emmm……word相比markdown，其优点在于不用排版（word不刻意去排版真的很难看）</p>
 <p>对新手来说，会觉得这纯粹找事，但是熟练之后不管是做笔记还是会议记录，甚至是写论文markdown都比已有的工具方便得多。</p>
 <p>此外markdown支持html和 latex 语法（word也支持latex，但那个渲染真的无语了）</p>
@@ -265,8 +264,8 @@
 <ul>
 <li>支持latex</li>
 </ul>
-<p>$$<br>y_{\theta}=\sum_{i=1}^n   \int_0^{+\infty}\frac{\sigma}{x^2} dx<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+y_{\theta}=\sum_{i=1}^n   \int_0^{+\infty}\frac{\sigma}{x^2} dx</script><ul>
 <li>代码块~语法高亮</li>
 </ul>
 <div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2
@@ -276,9 +275,6 @@
 				 cv_img=cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), <span class="hljs-number">-1</span>)
         		 cv_img = cv2.IMREAD_GRAYSCALE(img)
 		<span class="hljs-keyword">return</span> cv_img</code></pre></div>
-
-
-
 <ul>
 <li>流程图</li>
 </ul>
@@ -329,20 +325,7 @@ E[接收设备]--&gt;F[信宿]</pre></div>
 </ul>
 <ul>
 <li><p>表格</p>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th align="center">B</th>
-<th align="right">C</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>哈哈</td>
-<td align="center">呵呵</td>
-<td align="right">嗯哼</td>
-</tr>
-</tbody></table>
+<p>| A    |  B   |    C |<br>| —— | :—: | —-: |<br>| 哈哈 | 呵呵 | 嗯哼 |</p>
 </li>
 </ul>
 <p>编写的文档很自然地可以导出成<kbd>html</kbd>或者<kbd>PDF</kbd>、<kbd>word</kbd>等,图像品质不会压缩。另外大多数博客平台都支持markdown排版，例如这篇就是用markdown写的(都是统一的，就不会像word那样出现乱码或者排版不对这些情况)。相比word，markdown更简洁，功能较少但能让人<strong>专注于写作</strong>（就是不需要去排版，但排版仍然会很好看）</p>
@@ -355,7 +338,7 @@ E[接收设备]--&gt;F[信宿]</pre></div>
 <p>六级标题: <kbd>######</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
 <h2 id="黑体斜体"><a href="#黑体斜体" class="headerlink" title="黑体斜体"></a>黑体斜体</h2><p><kbd> * </kbd>  + <kbd>文字</kbd>+ <kbd> * </kbd>让文字变成斜体，注意中间不带空格，如：</p>
 <p><em>文字</em></p>
-<p><kbd>* *</kbd>+<kbd>文字</kbd>+ <kbd>**</kbd>  让文字变成黑体，注意中间不带空格，如：</p>
+<p><kbd><em> </em></kbd>+<kbd>文字</kbd>+ <kbd>**</kbd>  让文字变成黑体，注意中间不带空格，如：</p>
 <p><strong>文字</strong></p>
 <p>只一个<kbd>*</kbd>+<kbd>空格</kbd> 会出现一个点，如：</p>
 <ul>

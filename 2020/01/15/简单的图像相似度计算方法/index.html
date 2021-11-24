@@ -258,7 +258,6 @@
             <div class="markdown-body">
               <p>用于完成图片两两之间的相似度计算</p>
 <a id="more"></a>
-
 <h2 id="塑料瓶图像检测"><a href="#塑料瓶图像检测" class="headerlink" title="塑料瓶图像检测"></a>塑料瓶图像检测</h2><p>目的：用于判断一张图片是否为塑料瓶；</p>
 <p>条件：总计300多张图片分为70多类，同一类塑料瓶分别放置在同一个文件夹；</p>
 <p>思路：选取每个文件夹的一张图片与目标图片对比计算返回相似度最高的值，通过多次试验确定阈值，超过阈值则判定为是塑料瓶，否则不是；</p>
@@ -298,10 +297,8 @@
 </li>
 <li><p>互信息</p>
 </li>
-<li><p>余弦相似度 </p>
-</li>
-<li><p>感知哈希算法</p>
-</li>
+<li>余弦相似度 </li>
+<li>感知哈希算法</li>
 </ul>
 <h2 id="2-测试结果（单张图片比对）"><a href="#2-测试结果（单张图片比对）" class="headerlink" title="2.测试结果（单张图片比对）"></a>2.测试结果（单张图片比对）</h2><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
 begin_time = time()
@@ -332,7 +329,7 @@ begin_time = time()
 end_time = time()
 run_time = end_time-begin_time
 <span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -342,7 +339,8 @@ run_time = end_time-begin_time
 <th>Result</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>0.055361032485961914</td>
@@ -372,7 +370,9 @@ run_time = end_time-begin_time
 <td>0.07813024520874023</td>
 <td>0.7189068678053613</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a>互信息</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
 begin_time = time()
 
@@ -396,7 +396,7 @@ print(mutual_infor)
 end_time = time()
 run_time = end_time-begin_time
 <span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -406,7 +406,8 @@ run_time = end_time-begin_time
 <th>Result</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>1.459466791152954</td>
@@ -436,7 +437,9 @@ run_time = end_time-begin_time
 <td>1.5644567012786865</td>
 <td>(6220800,)<br>(6220800,)<br>0.6813656974353114</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
 begin_time = time()
 
@@ -477,9 +480,7 @@ print(cosin)
 end_time = time()
 run_time = end_time-begin_time
 <span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
-
-
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -489,7 +490,8 @@ run_time = end_time-begin_time
 <th>Result</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>19.579540729522705</td>
@@ -519,7 +521,9 @@ run_time = end_time-begin_time
 <td>0.9038901804349453</td>
 <td>19.01563835144043</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="感知哈希算法"><a href="#感知哈希算法" class="headerlink" title="感知哈希算法"></a>感知哈希算法</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
 begin_time = time()
 
@@ -578,7 +582,7 @@ end_time = time()
 
 run_time = end_time-begin_time
 <span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
-
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -589,7 +593,8 @@ run_time = end_time-begin_time
 <th>similarity</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>0.20314764976501465</td>
@@ -624,7 +629,9 @@ run_time = end_time-begin_time
 <td>8</td>
 <td>0.875</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="3-评价"><a href="#3-评价" class="headerlink" title="3.评价"></a>3.评价</h2><ul>
 <li>直方图计算结果与直观视觉严重不符合</li>
 <li>余弦相似度准确度较高，但太耗时，比对平均耗时19s</li>
