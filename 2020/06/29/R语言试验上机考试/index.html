@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="又是期末考哦">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="问题一、某单位招聘2500人，按考试成绩从高到低依次录用，共有10000人报名，假设报名者的成绩$X~N(u,\sigma^2)$ ，已知90分以上有359人，60分以有下1151人，问被录用者中最低分为多少？试用R软件相关函数功能计算。（15分） 二、已知20位学生的体重（单位：kg）如下：75.0， 64.5， 47.5， 66.9， 62.2，62.2, 58.7, 63.5, 66.7,">
+  <meta name="description" content="又是期末考哦">
 <meta property="og:type" content="article">
 <meta property="og:title" content="R语言试验上机考试">
 <meta property="og:url" content="http://example.com/2020/06/29/R%E8%AF%AD%E8%A8%80%E8%AF%95%E9%AA%8C%E4%B8%8A%E6%9C%BA%E8%80%83%E8%AF%95/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="问题一、某单位招聘2500人，按考试成绩从高到低依次录用，共有10000人报名，假设报名者的成绩$X~N(u,\sigma^2)$ ，已知90分以上有359人，60分以有下1151人，问被录用者中最低分为多少？试用R软件相关函数功能计算。（15分） 二、已知20位学生的体重（单位：kg）如下：75.0， 64.5， 47.5， 66.9， 62.2，62.2, 58.7, 63.5, 66.7,">
+<meta property="og:description" content="又是期末考哦">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzM3NTQ5MDQucG5n?x-oss-process=image/format,png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzM4MjA3NjkucG5n?x-oss-process=image/format,png">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzQxMjkxODIucG5n?x-oss-process=image/format,png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzQyNDkwNDYucG5n?x-oss-process=image/format,png">
 <meta property="article:published_time" content="2020-06-29T08:24:27.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.246Z">
+<meta property="article:modified_time" content="2021-11-24T08:31:16.849Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="R语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -257,12 +257,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：20 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一、某单位招聘2500人，按考试成绩从高到低依次录用，共有10000人报名，假设报名者的成绩$X~N(u,\sigma^2)$ ，已知90分以上有359人，60分以有下1151人，问被录用者中最低分为多少？试用R软件相关函数功能计算。（15分）</p>
+              <p>又是期末考哦</p>
+<a id="more"></a>
+
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一、某单位招聘2500人，按考试成绩从高到低依次录用，共有10000人报名，假设报名者的成绩$X~N(u,\sigma^2)$ ，已知90分以上有359人，60分以有下1151人，问被录用者中最低分为多少？试用R软件相关函数功能计算。（15分）</p>
 <p>二、已知20位学生的体重（单位：kg）如下：75.0， 64.5， 47.5， 66.9， 62.2，62.2, 58.7, 63.5, 66.7, 64.0, 57.8, 56.9, 50.2, 72.8, 65.3, 52.3,  63.6, 70.0, 63.9, 68.1 用R软件编程求学生体重的平均值、最大值、最小值、中位数。（10分）</p>
 <p>三、美国联邦贸易委员会（FTC）每年根据焦油、尼古丁、一氧化碳的含量对国内烟草排名，美国调查机构一般认为这三种物质的第一种对吸烟者的健康都有害。过去的研究表明，香烟的焦油和尼古丁含量的增加通常伴随着烟雾释放一氧化碳的增加。表FTC2文件列出了某年测试的25个（过滤）品牌样本中焦油、尼古丁、一氧化碳含量（mg）与重量(g)的数据。假定要建立一氧化碳含量$y$ 与焦油含量$x_1$ 、尼古丁含量 $x_2$、与重量函数$x_3$的模型。用R软件和FTC2数据文件中的数据拟合模型$E(y)=\beta_0+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3$，并检查是否存在共线性现象。（30分）  </p>
 <p>四、环境保护署（EPA）对所有新车型推行广泛的测试以确定它们的行车里程等级（英里/加仑）。数据文件EPAGAS列出了某种新车型进行100次测试获得的行车里程等级数据。用R软件绘制直方图和QQ正态概率图，并判断数据是否服从近似正态分布。（30分）</p>

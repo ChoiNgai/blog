@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="用于完成图片两两之间的相似度计算">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="塑料瓶图像检测目的：用于判断一张图片是否为塑料瓶； 条件：总计300多张图片分为70多类，同一类塑料瓶分别放置在同一个文件夹； 思路：选取每个文件夹的一张图片与目标图片对比计算返回相似度最高的值，通过多次试验确定阈值，超过阈值则判定为是塑料瓶，否则不是； 目录： [TOC] 说明 所有测试结果均为程序第一次运行结果  每一组测试的第一个（第一个样本）都是同一张图片相互比对  每一组测试的第二三四五">
+  <meta name="description" content="用于完成图片两两之间的相似度计算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的图像相似度计算方法">
 <meta property="og:url" content="http://example.com/2020/01/15/%E7%AE%80%E5%8D%95%E7%9A%84%E5%9B%BE%E5%83%8F%E7%9B%B8%E4%BC%BC%E5%BA%A6%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="塑料瓶图像检测目的：用于判断一张图片是否为塑料瓶； 条件：总计300多张图片分为70多类，同一类塑料瓶分别放置在同一个文件夹； 思路：选取每个文件夹的一张图片与目标图片对比计算返回相似度最高的值，通过多次试验确定阈值，超过阈值则判定为是塑料瓶，否则不是； 目录： [TOC] 说明 所有测试结果均为程序第一次运行结果  每一组测试的第一个（第一个样本）都是同一张图片相互比对  每一组测试的第二三四五">
+<meta property="og:description" content="用于完成图片两两之间的相似度计算">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200114104340189-1592736787820.jpg">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200114104446378-1592736787433.jpg">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200114104502540-1592736787890.jpg">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200114104509945-1592736787431.jpg">
 <meta property="article:published_time" content="2020-01-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.255Z">
+<meta property="article:modified_time" content="2021-11-24T08:39:36.919Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="图像处理">
 <meta name="twitter:card" content="summary_large_image">
@@ -257,12 +257,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：12 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="塑料瓶图像检测"><a href="#塑料瓶图像检测" class="headerlink" title="塑料瓶图像检测"></a>塑料瓶图像检测</h2><p>目的：用于判断一张图片是否为塑料瓶；</p>
+              <p>用于完成图片两两之间的相似度计算</p>
+<a id="more"></a>
+
+<h2 id="塑料瓶图像检测"><a href="#塑料瓶图像检测" class="headerlink" title="塑料瓶图像检测"></a>塑料瓶图像检测</h2><p>目的：用于判断一张图片是否为塑料瓶；</p>
 <p>条件：总计300多张图片分为70多类，同一类塑料瓶分别放置在同一个文件夹；</p>
 <p>思路：选取每个文件夹的一张图片与目标图片对比计算返回相似度最高的值，通过多次试验确定阈值，超过阈值则判定为是塑料瓶，否则不是；</p>
 <p>目录：</p>

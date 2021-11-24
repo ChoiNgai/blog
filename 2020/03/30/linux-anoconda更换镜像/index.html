@@ -13,19 +13,19 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="这破网速受不了">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="linux anaconda 镜像">
-  <meta name="description" content="介绍国内使用linux&#x2F;anaconda官方源很慢，所以一般都使用镜像源 （PS：镜像网站是指每隔一段时间就同步更新到与另外一个网站资源相同的网站） linuxubuntu 18.04LTS12345678910111213# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F;">
+  <meta name="description" content="这破网速受不了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux&#x2F;anoconda更换镜像">
 <meta property="og:url" content="http://example.com/2020/03/30/linux-anoconda%E6%9B%B4%E6%8D%A2%E9%95%9C%E5%83%8F/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="介绍国内使用linux&#x2F;anaconda官方源很慢，所以一般都使用镜像源 （PS：镜像网站是指每隔一段时间就同步更新到与另外一个网站资源相同的网站） linuxubuntu 18.04LTS12345678910111213# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释deb https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;ubuntu&#x2F;">
+<meta property="og:description" content="这破网速受不了">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/515/515-bigskin-1.jpg">
 <meta property="article:published_time" content="2020-03-29T17:10:13.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.248Z">
+<meta property="article:modified_time" content="2021-11-24T08:25:33.005Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="linux anaconda 镜像">
 <meta name="twitter:card" content="summary_large_image">
@@ -253,12 +253,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：26 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>国内使用linux/anaconda官方源很慢，所以一般都使用镜像源</p>
+              <p>这破网速受不了</p>
+<a id="more"></a>
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>国内使用linux/anaconda官方源很慢，所以一般都使用镜像源</p>
 <p>（PS：镜像网站是指每隔一段时间就同步更新到与另外一个网站资源相同的网站）</p>
 <h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="ubuntu-18-04LTS"><a href="#ubuntu-18-04LTS" class="headerlink" title="ubuntu 18.04LTS"></a>ubuntu 18.04LTS</h3><figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vim"># 默认注释了源码镜像以提高 apt <span class="hljs-keyword">update</span> 速度，如有需要可自行取消注释<br><span class="hljs-keyword">deb</span> http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic main restricted universe multiverse<br># <span class="hljs-keyword">deb</span>-src http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic main restricted universe multiverse<br><span class="hljs-keyword">deb</span> http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-updates main restricted universe multiverse<br># <span class="hljs-keyword">deb</span>-src http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-updates main restricted universe multiverse<br><span class="hljs-keyword">deb</span> http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-backports main restricted universe multiverse<br># <span class="hljs-keyword">deb</span>-src http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-backports main restricted universe multiverse<br><span class="hljs-keyword">deb</span> http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-security main restricted universe multiverse<br># <span class="hljs-keyword">deb</span>-src http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-security main restricted universe multiverse<br><br># 预发布软件源，不建议启用<br># <span class="hljs-keyword">deb</span> http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-proposed main restricted universe multiverse<br># <span class="hljs-keyword">deb</span>-src http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-proposed main restricted universe multiverse<br></code></pre></td></tr></tbody></table></figure>
 

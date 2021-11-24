@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="生成对抗网络（GAN）">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="对抗神经网络">
-  <meta name="description" content="参照2013年的论文《Intriguing properties of neural networks》的论文中指出神经网络的两个特性 1.神经网络中包含语义信息的部分并不是在每个独立的神经元，而是整个空间； 2.神经网络学习到的从输入到输出的映射在很大程度上是不连续的。  其造成的结果简单直观地用图表示如图1：  图1 2014年的《Threat of Addversarial Attacks">
+  <meta name="description" content="生成对抗网络（GAN）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络中的对抗样本">
 <meta property="og:url" content="http://example.com/2020/03/10/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%AF%B9%E6%8A%97%E6%A0%B7%E6%9C%AC/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="参照2013年的论文《Intriguing properties of neural networks》的论文中指出神经网络的两个特性 1.神经网络中包含语义信息的部分并不是在每个独立的神经元，而是整个空间； 2.神经网络学习到的从输入到输出的映射在很大程度上是不连续的。  其造成的结果简单直观地用图表示如图1：  图1 2014年的《Threat of Addversarial Attacks">
+<meta property="og:description" content="生成对抗网络（GAN）">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-2.jpg">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-4.jpg">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-5.jpg">
 <meta property="article:published_time" content="2020-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.255Z">
+<meta property="article:modified_time" content="2021-11-24T08:44:26.072Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="对抗神经网络">
 <meta name="twitter:card" content="summary_large_image">
@@ -257,12 +257,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：7 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <p>参照2013年的论文《Intriguing properties of neural networks》的论文中指出神经网络的两个特性</p>
+              <p>生成对抗网络（GAN）</p>
+<a id="more"></a>
+
+<p>参照2013年的论文《Intriguing properties of neural networks》的论文中指出神经网络的两个特性</p>
 <p>1.神经网络中包含语义信息的部分并不是在每个独立的神经元，而是整个空间；</p>
 <p>2.神经网络学习到的从输入到输出的映射在很大程度上是<strong>不连续</strong>的。</p>
 <p> 其造成的结果简单直观地用图表示如图1：</p>

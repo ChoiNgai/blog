@@ -220,11 +220,7 @@
           
             
           
-          
-转载自广告大数据平台核心架构设计，侵删
-本篇文章讲解了腾讯广告大数据的整体架构，讲解了具体细分的模块以及多年的更新迭代，个人觉得对大数据领域的广告业务很有参考价值，故转载。
-
-腾讯广告平台产品部大数据平台承担着腾讯视频、腾讯新闻客户端、腾讯网、腾讯体育、QQ音乐等腾讯系媒体和部分外部媒体的广告数据的接入、处理和应用。在过去的几年中，伴随着广告业务的快速发展，大数据平台架构也经历了一系列的升级。本
+          腾讯广告大数据架构
         </a>
       </p>
 
@@ -280,13 +276,7 @@
           
             
           
-          算法分类
-非线性时间比较类排序：通过比较来决定元素间的相对次序，由于其时间复杂度不能突破O(nlogn)，因此称为非线性时间比较类排序。
-线性时间非比较类排序：不通过比较来决定元素间的相对次序，它可以突破基于比较排序的时间下界，以线性时间运行，因此称为线性时间非比较类排序。
-
-flowchart LR
-    P[排序算法] --&gt; A(非线性时间比较类排序)
-    P --&gt; B(
+          常见的排序算法
         </a>
       </p>
 
@@ -454,16 +444,7 @@ flowchart LR
           
             
           
-          牛客SQL题
-112SELECT * FROM employees WHERE hire_date == ( SELECT MAX(hire_date) FROM employees )
-
-或
-123SELECT * FROM employees ORDER BY hire_date DESCLIMIT 0,1
-
-
-
-错误写法：
-1SELECT emp_no,MAX(hire_date),firs
+          二刷牛客80道SQL题
         </a>
       </p>
 
@@ -519,19 +500,7 @@ flowchart LR
           
             
           
-          Hive表数据同步（数据采集）业务库MySQL表的步骤：
-
-找到MySQL表，查看表结构或建表语句
-创建Hive表
-创建调度作业
-触发调度调度，核对数据
-
-具体来看看常见的全量同步和增量同步两种方式
-全量同步采集我们以天表为例（也有小时表，但都一样的）
-
-找到mysql建表语句
-我们假设建表语句如下，这里只有三个字段
-123456CREATE TABLE `mysql_store_gmv` (  
+          一些常见的Hive同步业务库MySQL（MySQL数据导入到Hive表）的操作
         </a>
       </p>
 
@@ -587,19 +556,7 @@ flowchart LR
           
             
           
-          Introduction数据结构里，树是最考验也是最锻炼逻辑思维的。但是对我这种心里没B树的人来说，看到啥二叉树、二叉排序树、平衡二叉树、B树、B+树、B*树就一脸懵逼。在这里将逐一介绍各种树及其用途，从此成为心里有B树的人。
-树的一些概念
-结点
-结点是数据结构中的基础，是构成复杂数据结构的基本组成单位。（有些也写作“节点”）
-
-
-结点的度
-度表示每个结点拥有的子树个数
-
-
-结点关系
-
-孩子结点：
+          介绍数据结构里的各种树
         </a>
       </p>
 
@@ -655,11 +612,7 @@ flowchart LR
           
             
           
-          
-阅读提示：
-为了SQL语句的简洁和便于阅读，每道题中的子查询在下一步骤中可能用表别名表示而不全写出来
-例如：
-123456789-- 子查询（表别名命名为a）SELECT * FROM tSELECT id FROM a --这里的a表示上面的子查询，在SQL中这样是不可运行的，这里只是为了方便阅读-- 正确写法（鉴于易读性，中间步骤通常不这样写，会写成像上面那样，只有最后的完整SQL语句才这样
+           两万字牛客、leetcode的SQL题型总结
         </a>
       </p>
 
@@ -715,10 +668,7 @@ flowchart LR
           
             
           
-          数据模型相关概念01. 基本概念
-维度建模，是数据仓库大师Ralph Kimball提出的，是数据仓库工程领域最流行的数仓建模经典。
-维度建模以分析决策的需求出发构建模型，构建的数据模型为分析需求服务，因此它重点解决用户如何更快速完成分析需求，同时还有较好的大规模复杂查询的响应性能。它是面向分析的，为了提高查询性能可以增加数据冗余，反规范化的设计技术。
-数据模型是指用数据来表达分析、决策的模型，而
+          数仓模型里最常见的建模方法：维度建模
         </a>
       </p>
 
@@ -774,12 +724,7 @@ flowchart LR
           
             
           
-          这里分为表命名规范、字段命名规范、指标命名规范、作业命名规范，通常涉及表命名规范
-表命名规范不同分层的表命名规范不一样（以下命名规范包括了库名），abc为补充的三个参数，具体见后面
-
-ODS层
-即贴源层，由业务方直接导入，不会经过数据清洗转化。操作数据层定位于业务明细数据保留区，负责保留数据接入时点后历史变更数据，数据原则上全量保留。
-1项目名_ods.ods_系统名称(默认为空)_源表名_abc
+          数据仓库命名规范
         </a>
       </p>
 
@@ -816,7 +761,7 @@ ODS层
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -13,19 +13,19 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="特征选择方法Laplacian Score">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="Introduction上次介绍了一种特征选择方法：FisherScore，但是没有介绍特征选择，更没有介绍特征工程。这里上一张别人的图简单介绍一下整个框架（找找特征选择在哪）。    Laplacian Score数据集$X&#x3D;{x_{ij} }$,$i&#x3D;1,2…n;j&#x3D;1,2…d.$其中$n$为样本数，$d$为样本特征数。标签信息$y_k,k&#x3D;{1,2…c}$,其中$c$为类簇数，$d_k^{i">
+  <meta name="description" content="特征选择方法Laplacian Score">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特征选择 LaplacianScore">
 <meta property="og:url" content="http://example.com/2020/11/03/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9-Laplacian-Score/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="Introduction上次介绍了一种特征选择方法：FisherScore，但是没有介绍特征选择，更没有介绍特征工程。这里上一张别人的图简单介绍一下整个框架（找找特征选择在哪）。    Laplacian Score数据集$X&#x3D;{x_{ij} }$,$i&#x3D;1,2…n;j&#x3D;1,2…d.$其中$n$为样本数，$d$为样本特征数。标签信息$y_k,k&#x3D;{1,2…c}$,其中$c$为类簇数，$d_k^{i">
+<meta property="og:description" content="特征选择方法Laplacian Score">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-blog.csdn.net/20180920175451704">
 <meta property="article:published_time" content="2020-11-03T15:21:24.000Z">
-<meta property="article:modified_time" content="2020-11-06T12:57:17.964Z">
+<meta property="article:modified_time" content="2021-11-24T08:45:48.712Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="特征工程">
 <meta name="twitter:card" content="summary_large_image">
@@ -253,12 +253,16 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：5 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>上次介绍了<a href="">一种特征选择方法：FisherScore</a>，但是没有介绍特征选择，更没有介绍特征工程。这里上一张别人的图简单介绍一下整个框架（找找特征选择在哪）。</p>
+              <p>特征选择方法Laplacian Score</p>
+<a id="more"></a>
+
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>上次介绍了<a href="">一种特征选择方法：FisherScore</a>，但是没有介绍特征选择，更没有介绍特征工程。这里上一张别人的图简单介绍一下整个框架（找找特征选择在哪）。</p>
 <p> <img src="https://img-blog.csdn.net/20180920175451704?" srcset="/img/loading.gif" lazyload="" alt="img"> </p>
 <h2 id="Laplacian-Score"><a href="#Laplacian-Score" class="headerlink" title="Laplacian Score"></a>Laplacian Score</h2><p>数据集$X={x_{ij} }$,$i=1,2…n;j=1,2…d.$其中$n$为样本数，$d$为样本特征数。标签信息$y_k,k={1,2…c}$,其中$c$为类簇数，$d_k^{ii’}$表示样本$i$与样本$i’$之间最近邻$k$个样本的最大距离。</p>
 <p>构建无向权重图$G(V,E)$，其节点由图集$V=x_i$构成，样本间的近邻关系表示为图的边形成边集$E$。如果$||x_i-x_i^{‘}||\le d_k^{ii’}$，则样本$i$与样本$i’$连接成边。可定义下生成相似度矩阵 ：<br>$$<br>S_{ii’} =<br>\left{<br>             \begin{array}{<strong>lr</strong>}<br>            \dfrac{1}{n_k} , &amp; y_i=y_{i’}=k \<br>             0,&amp; 其他\  </p>

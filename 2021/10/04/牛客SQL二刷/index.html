@@ -13,18 +13,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="二刷牛客80道SQL题">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="牛客SQL题 112SELECT * FROM employees WHERE hire_date &#x3D;&#x3D; ( SELECT MAX(hire_date) FROM employees )  或 123SELECT * FROM employees ORDER BY hire_date DESCLIMIT 0,1    错误写法： 1SELECT emp_no,MAX(hire_date),firs">
+  <meta name="description" content="二刷牛客80道SQL题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="牛客SQL二刷">
 <meta property="og:url" content="http://example.com/2021/10/04/%E7%89%9B%E5%AE%A2SQL%E4%BA%8C%E5%88%B7/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="牛客SQL题 112SELECT * FROM employees WHERE hire_date &#x3D;&#x3D; ( SELECT MAX(hire_date) FROM employees )  或 123SELECT * FROM employees ORDER BY hire_date DESCLIMIT 0,1    错误写法： 1SELECT emp_no,MAX(hire_date),firs">
+<meta property="og:description" content="二刷牛客80道SQL题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-04T07:04:37.000Z">
-<meta property="article:modified_time" content="2021-10-04T07:09:15.335Z">
+<meta property="article:modified_time" content="2021-11-24T08:42:19.665Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary_large_image">
@@ -251,12 +251,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 个月前
+                  本文最后更新于：9 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <p><a href="https://www.nowcoder.com/activity/oj?tab=1" target="_blank" rel="noopener">牛客SQL题</a></p>
+              <p>二刷牛客80道SQL题</p>
+<a id="more"></a>
+
+<p><a href="https://www.nowcoder.com/activity/oj?tab=1" target="_blank" rel="noopener">牛客SQL题</a></p>
 <h4 id="1"><a href="#1" class="headerlink" title="1"></a>1</h4><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees <br><span class="hljs-keyword">WHERE</span> hire_date == ( <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MAX</span>(hire_date) <span class="hljs-keyword">FROM</span> employees )<br></code></pre></td></tr></tbody></table></figure>
 
 <p>或</p>

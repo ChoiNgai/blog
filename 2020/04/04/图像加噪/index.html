@@ -13,18 +13,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="图像增加噪声（防止过拟合）">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="介绍在有些情况下，会因为研究需要所以用一些增加了噪声的图片  文件目录树 123456789101112│  GaussianNoise.py				#高斯噪声│  SpicedSaltNoise.py			#盐椒噪声│  ├─images		 #将所有需要处理的所有图片该文件夹内│      test.jpg	#原图│      └─noise_img    ├─Gussian_noise_im">
+  <meta name="description" content="图像增加噪声（防止过拟合）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像加噪">
 <meta property="og:url" content="http://example.com/2020/04/04/%E5%9B%BE%E5%83%8F%E5%8A%A0%E5%99%AA/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="介绍在有些情况下，会因为研究需要所以用一些增加了噪声的图片  文件目录树 123456789101112│  GaussianNoise.py				#高斯噪声│  SpicedSaltNoise.py			#盐椒噪声│  ├─images		 #将所有需要处理的所有图片该文件夹内│      test.jpg	#原图│      └─noise_img    ├─Gussian_noise_im">
+<meta property="og:description" content="图像增加噪声（防止过拟合）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.251Z">
+<meta property="article:modified_time" content="2021-11-24T08:46:59.393Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="图像处理">
@@ -252,12 +252,16 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：4 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在有些情况下，会因为研究需要所以用一些增加了噪声的图片</p>
+              <p>图像增加噪声（防止过拟合）</p>
+<a id="more"></a>
+
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在有些情况下，会因为研究需要所以用一些增加了噪声的图片</p>
 <ul>
 <li><p>文件目录树</p>
 <figure class="highlight mipsasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">│  GaussianNoise.py				<span class="hljs-comment">#高斯噪声</span><br>│  SpicedSaltNoise.py			<span class="hljs-comment">#盐椒噪声</span><br>│  <br>├─images		 <span class="hljs-comment">#将所有需要处理的所有图片该文件夹内</span><br>│      test.<span class="hljs-keyword">jpg	</span><span class="hljs-comment">#原图</span><br>│      <br>└─noise_img<br>    ├─Gussian_noise_img			<span class="hljs-comment">#存放加入高斯噪声图像的文件夹</span><br>    │      Gussian_noise_test.<span class="hljs-keyword">jpg </span><br>    │      <br>    └─salt-<span class="hljs-keyword">and-pepper_noise_img	</span>	<span class="hljs-comment">#存放加入盐椒噪声图像的文件夹</span><br>            salt-<span class="hljs-keyword">and-pepper_noise_test.jpg</span><br></code></pre></td></tr></tbody></table></figure>

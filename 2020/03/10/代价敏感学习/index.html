@@ -13,19 +13,19 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="深度学习的一个方向">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="代价敏感的学习是分类中错误产生导致不同的惩罚力度时该如何训练分类器。通常，不同的代价用一个$N×N$的矩阵$Cost$表示，其中$N$ 是类别的个数。$Cost_{[i, j]}$表示将一个$i $类的对象错分到$j$ 类中的代价。代价敏感分类就是为不同类型的错误分配不同的代价，使得在分类时，高代价错误产生的数量和错误分类的代价总和最小。常用的方法有如下几种。  调整样本分布（Stratifica">
+  <meta name="description" content="深度学习的一个方向">
 <meta property="og:type" content="article">
 <meta property="og:title" content="代价敏感学习">
 <meta property="og:url" content="http://example.com/2020/03/10/%E4%BB%A3%E4%BB%B7%E6%95%8F%E6%84%9F%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="代价敏感的学习是分类中错误产生导致不同的惩罚力度时该如何训练分类器。通常，不同的代价用一个$N×N$的矩阵$Cost$表示，其中$N$ 是类别的个数。$Cost_{[i, j]}$表示将一个$i $类的对象错分到$j$ 类中的代价。代价敏感分类就是为不同类型的错误分配不同的代价，使得在分类时，高代价错误产生的数量和错误分类的代价总和最小。常用的方法有如下几种。  调整样本分布（Stratifica">
+<meta property="og:description" content="深度学习的一个方向">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-6.jpg">
 <meta property="article:published_time" content="2020-03-09T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.251Z">
+<meta property="article:modified_time" content="2021-11-24T08:37:44.347Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      2k 字
     </span>
   
 
@@ -253,12 +253,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：13 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <p>代价敏感的学习是分类中错误产生导致不同的惩罚力度时该如何训练分类器。通常，不同的代价用一个$N×N$的矩阵$Cost$表示，其中$N$ 是类别的个数。$Cost_{[i, j]}$表示将一个$i $类的对象错分到$j$ 类中的代价。代价敏感分类就是为不同类型的错误分配不同的代价，使得在分类时，高代价错误产生的数量和错误分类的代价总和最小。常用的方法有如下几种。</p>
+              <p>深度学习的一个方向</p>
+<a id="more"></a>
+
+<p>代价敏感的学习是分类中错误产生导致不同的惩罚力度时该如何训练分类器。通常，不同的代价用一个$N×N$的矩阵$Cost$表示，其中$N$ 是类别的个数。$Cost_{[i, j]}$表示将一个$i $类的对象错分到$j$ 类中的代价。代价敏感分类就是为不同类型的错误分配不同的代价，使得在分类时，高代价错误产生的数量和错误分类的代价总和最小。常用的方法有如下几种。</p>
 <ol>
 <li>调整样本分布（Stratification）。这是一种传统的方法，它根据错误分类的代价，按照比例变换训练集中类别的频率。其缺点是改变了样本的分布情况，有时会影响算法的性能。</li>
 <li>元代价（MetaCost）。这是一种将一般分类模型转换成代价敏感模型的方法。它通过一个“元学习”过程，根据最小期望代价修改训练样本的类标记，并使用修改过的训练集重新学习新的模型。</li>

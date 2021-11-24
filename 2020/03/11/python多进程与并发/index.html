@@ -13,19 +13,19 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="介绍多线程与多进程的区别，以及python实现并发">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="介绍 多线程与多进程 进程就是一个程序在一个数据集上的一次动态执行过程。  线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能。  通常是单个进程里包含多个线程，cpu上运行的是线程，但是python因为GUI锁导致单个进程只有一个线程，故python里没有多线程一说。  并行与并发             有些硬件只有单核处理，然而为">
+  <meta name="description" content="介绍多线程与多进程的区别，以及python实现并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python多进程与并发">
 <meta property="og:url" content="http://example.com/2020/03/11/python%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%B9%B6%E5%8F%91/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="介绍 多线程与多进程 进程就是一个程序在一个数据集上的一次动态执行过程。  线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能。  通常是单个进程里包含多个线程，cpu上运行的是线程，但是python因为GUI锁导致单个进程只有一个线程，故python里没有多线程一说。  并行与并发             有些硬件只有单核处理，然而为">
+<meta property="og:description" content="介绍多线程与多进程的区别，以及python实现并发">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/caiwei_study_2020.3-7.jpg">
 <meta property="article:published_time" content="2020-03-10T17:41:26.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.250Z">
+<meta property="article:modified_time" content="2021-11-24T08:30:11.173Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      576 字
+      601 字
     </span>
   
 
@@ -253,12 +253,16 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：21 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
+              <p>介绍多线程与多进程的区别，以及python实现并发</p>
+<a id="more"></a>
+
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><ul>
 <li><p>多线程与多进程</p>
 <p>进程就是一个程序在一个数据集上的一次动态执行过程。 </p>
 <p>线程的出现是为了降低上下文切换的消耗，提高系统的并发性，并突破一个进程只能干一样事的缺陷，使到进程内并发成为可能。 </p>

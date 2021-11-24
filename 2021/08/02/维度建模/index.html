@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="数仓模型里最常见的建模方法：维度建模">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="数据模型相关概念01. 基本概念 维度建模，是数据仓库大师Ralph Kimball提出的，是数据仓库工程领域最流行的数仓建模经典。 维度建模以分析决策的需求出发构建模型，构建的数据模型为分析需求服务，因此它重点解决用户如何更快速完成分析需求，同时还有较好的大规模复杂查询的响应性能。它是面向分析的，为了提高查询性能可以增加数据冗余，反规范化的设计技术。 数据模型是指用数据来表达分析、决策的模型，而">
+  <meta name="description" content="数仓模型里最常见的建模方法：维度建模">
 <meta property="og:type" content="article">
 <meta property="og:title" content="维度建模">
 <meta property="og:url" content="http://example.com/2021/08/02/%E7%BB%B4%E5%BA%A6%E5%BB%BA%E6%A8%A1/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="数据模型相关概念01. 基本概念 维度建模，是数据仓库大师Ralph Kimball提出的，是数据仓库工程领域最流行的数仓建模经典。 维度建模以分析决策的需求出发构建模型，构建的数据模型为分析需求服务，因此它重点解决用户如何更快速完成分析需求，同时还有较好的大规模复杂查询的响应性能。它是面向分析的，为了提高查询性能可以增加数据冗余，反规范化的设计技术。 数据模型是指用数据来表达分析、决策的模型，而">
+<meta property="og:description" content="数仓模型里最常见的建模方法：维度建模">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210815050950.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210815051025.png">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/zWSuIP8rdu1xpCsHSKOlS1xSo5WWsufMzATAjpktT6dZD89zaX1GZ9sryv7uaTQ4RIhULj4DX12RXbuTetudAA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210802010318.png">
 <meta property="article:published_time" content="2021-08-02T15:11:32.000Z">
-<meta property="article:modified_time" content="2021-08-14T21:13:02.049Z">
+<meta property="article:modified_time" content="2021-11-24T08:48:06.243Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="数仓入门">
 <meta name="twitter:card" content="summary_large_image">
@@ -231,7 +231,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18 分钟
+      19 分钟
     </span>
   
 
@@ -264,12 +264,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：3 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="数据模型相关概念"><a href="#数据模型相关概念" class="headerlink" title="数据模型相关概念"></a>数据模型相关概念</h2><p><strong>01. 基本概念</strong></p>
+              <p>数仓模型里最常见的建模方法：维度建模</p>
+<a id="more"></a>
+
+<h2 id="数据模型相关概念"><a href="#数据模型相关概念" class="headerlink" title="数据模型相关概念"></a>数据模型相关概念</h2><p><strong>01. 基本概念</strong></p>
 <p>维度建模，是数据仓库大师Ralph Kimball提出的，是数据仓库工程领域最流行的数仓建模经典。</p>
 <p>维度建模以分析决策的需求出发构建模型，构建的数据模型为分析需求服务，因此它重点解决用户如何更快速完成分析需求，同时还有较好的大规模复杂查询的响应性能。它是面向分析的，为了提高查询性能可以增加数据冗余，反规范化的设计技术。</p>
 <p>数据模型是指用数据来表达分析、决策的模型，而建立数据模型的方法有很多，维度建模就是众多方法的其中之一。</p>

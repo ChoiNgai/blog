@@ -13,19 +13,19 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="从kmeans到FCM(模糊C均值聚类)">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="Introduction模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用隶属度来表示每个样本属于每一类的程度。 模糊聚类中最为经典(古老)的是模糊C均值聚类（FCM），但在里哦了解FCM之前先了解一下kmeans吧。 kmeans先来看看kmeans的具体过程,已有大佬写得很清晰明了了，我这里直接Ctrl CV$[1]$：    上图a表达了初始的数据集，假设类簇数（分类数）k&#x3D;2。在图">
+  <meta name="description" content="从kmeans到FCM(模糊C均值聚类)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模糊C均值聚类(FCM)">
 <meta property="og:url" content="http://example.com/2020/11/02/%E6%A8%A1%E7%B3%8AC%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB(FCM)/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="Introduction模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用隶属度来表示每个样本属于每一类的程度。 模糊聚类中最为经典(古老)的是模糊C均值聚类（FCM），但在里哦了解FCM之前先了解一下kmeans吧。 kmeans先来看看kmeans的具体过程,已有大佬写得很清晰明了了，我这里直接Ctrl CV$[1]$：    上图a表达了初始的数据集，假设类簇数（分类数）k&#x3D;2。在图">
+<meta property="og:description" content="从kmeans到FCM(模糊C均值聚类)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/1042406/201612/1042406-20161212135954464-1143551568.png">
 <meta property="article:published_time" content="2020-11-02T06:52:12.000Z">
-<meta property="article:modified_time" content="2020-11-02T12:33:39.856Z">
+<meta property="article:modified_time" content="2021-11-24T08:40:50.227Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="模糊聚类">
 <meta name="twitter:card" content="summary_large_image">
@@ -253,12 +253,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：10 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用<strong>隶属度</strong>来表示每个样本属于每一类的程度。</p>
+              <p>从kmeans到FCM(模糊C均值聚类)</p>
+<a id="more"></a>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用<strong>隶属度</strong>来表示每个样本属于每一类的程度。</p>
 <p>模糊聚类中最为经典(古老)的是模糊C均值聚类（FCM），但在里哦了解FCM之前先了解一下kmeans吧。</p>
 <h2 id="kmeans"><a href="#kmeans" class="headerlink" title="kmeans"></a>kmeans</h2><p>先来看看kmeans的具体过程,已有大佬写得很清晰明了了，我这里直接Ctrl CV$[1]$：</p>
 <p> <img src="https://images2015.cnblogs.com/blog/1042406/201612/1042406-20161212135954464-1143551568.png" srcset="/img/loading.gif" lazyload="" alt="kmeans迭代过程"> </p>
@@ -398,8 +401,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/09/30/%E6%88%91%E7%9A%84%E7%A7%8B%E6%8B%9B%E4%B9%8B%E8%B7%AF/">
-                        <span class="hidden-mobile">我的秋招之路</span>
+                      <a href="/2020/07/21/gitbook%E5%AE%89%E8%A3%85%E2%80%94-install%E5%8D%A1%E4%BD%8F%E8%A7%A3%E5%86%B3/">
+                        <span class="hidden-mobile">gitbook安装—_install卡住解决</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -13,21 +13,21 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="去除图像的大量锯齿">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="图像预处理算法的好坏直接关系到后续图像处理的效果，如图像分割、目标识别、边缘提取等，为了获取高质量的数字图像，很多时候都需要对图像进行降噪处理，尽可能的保持原始信息完整性（即主要特征）的同时，又能够去除信号中无用的信息。   如果图片有大量的锯齿难免会显得拙糙，那么这时候降噪也不是一种去除锯齿的好方法。  例如：  用该方法去除锯齿之后：  123456789101112131415161718">
+  <meta name="description" content="去除图像的大量锯齿">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像去锯齿(降噪、插值、缩略三连)">
 <meta property="og:url" content="http://example.com/2020/05/21/%E5%9B%BE%E5%83%8F%E5%8E%BB%E9%94%AF%E9%BD%BF(%E9%99%8D%E5%99%AA+%E6%8F%92%E5%80%BC)/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="图像预处理算法的好坏直接关系到后续图像处理的效果，如图像分割、目标识别、边缘提取等，为了获取高质量的数字图像，很多时候都需要对图像进行降噪处理，尽可能的保持原始信息完整性（即主要特征）的同时，又能够去除信号中无用的信息。   如果图片有大量的锯齿难免会显得拙糙，那么这时候降噪也不是一种去除锯齿的好方法。  例如：  用该方法去除锯齿之后：  123456789101112131415161718">
+<meta property="og:description" content="去除图像的大量锯齿">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200705234702375.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20230f5dd0c4d285330a78cee1bbe5f.jpg">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/PIL_Image6.png">
 <meta property="article:published_time" content="2020-05-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-21T14:19:58.251Z">
+<meta property="article:modified_time" content="2021-11-24T08:47:12.320Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="图像处理">
@@ -256,12 +256,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：1 年前
+                  本文最后更新于：4 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <p> 图像预处理算法的好坏直接关系到后续图像处理的效果，如图像分割、目标识别、边缘提取等，为了获取高质量的数字图像，很多时候都需要对图像进行降噪处理，尽可能的保持原始信息完整性（即主要特征）的同时，又能够去除信号中无用的信息。 </p>
+              <p>去除图像的大量锯齿</p>
+<a id="more"></a>
+
+<p> 图像预处理算法的好坏直接关系到后续图像处理的效果，如图像分割、目标识别、边缘提取等，为了获取高质量的数字图像，很多时候都需要对图像进行降噪处理，尽可能的保持原始信息完整性（即主要特征）的同时，又能够去除信号中无用的信息。 </p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200705234702375.png" srcset="/img/loading.gif" lazyload="" alt="鲁迅：我没说过"></p>
 <p>如果图片有大量的锯齿难免会显得拙糙，那么这时候降噪也不是一种去除锯齿的好方法。 </p>
 <p>例如：</p>

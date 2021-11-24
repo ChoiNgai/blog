@@ -220,8 +220,7 @@
           
             
           
-          因为数据仓库是面向主题的，所以主题域的划分显得很重要，因为主题域的确定也意味着数据的目的是干什么的。有关于主题划分的文章较少，阿里大数据之路这本书也没有单独的章节来讲主题域的划分，因为这个是需要对业务场景来说的，而且就算确定的业务场景也没有说百分百该如何划分，我还见过一群在互联网大数据领域有着多年工作经验的数仓专家们讨论某个表该划分到哪个主题域。所以，以下内容仅代表我在数仓主题域的一些拙见。
-什么
+          数据仓库主体域划分一直是个难题
         </a>
       </p>
 
@@ -277,15 +276,7 @@
           
             
           
-          1. 数据仓库的定义问：什么是数据仓库?
-数据仓库面向主题（整个处理流程）、具有集成（数据整合）、随时间相对稳定、反映历史变化。
-2. 事实表与维度表维表是观察该事物的角度（维度），事实表是要关注的内容（结果）
-
-维度表的特点
-维度表的冗余很大，主要是维度一般不大（相对事实表来说），而维度表的冗余度可以使事实表节省很多空间。
-
-事实表的特点
-事实表一般都很大，如果以普通方式查询的话，得到结果所需要
+          了解数据仓库
         </a>
       </p>
 
@@ -341,10 +332,7 @@
           
             
           
-          开篇语大数据技术最早源自于Google，主要是因为Google需要面对的数据量太大了（2003年的时候Google就已经有几百亿的搜索量了）。为了省去重复造轮子节省劳动成本，Google内部以及工业界都亟须一套工具来处理大规模的数据。
-接下来，将从大数据计算框架的演变来观看大数据技术的前世今生。
-Hadoop
-2003 年，Google工程师Jeffrey Dean等人的论文《MapReduce:
+          从计算框架的角度来看大数据技术18年来的变化
         </a>
       </p>
 
@@ -404,7 +392,7 @@ Hadoop
           
             
           
-          摘要深度学习是机器学习和人工智能研究的最新且最热门的趋势之一。深度学习方法为计算机视觉带来了革命性的进步，新的深度学习理论和技术正在不断诞生，在计算机视觉领域超越传统的机器学习甚至是现有的深度学习方法。近年来，有关深度学习方面的研究成果爆炸式地增长，由于其发展迅猛，导致了它的进展很难被新的研究者入手并跟进。此外，深度学习已有的方法数量上过于庞大，种类上过于繁多，虽然有大量的深度学习综述为研究者提供
+          就硬卷…
         </a>
       </p>
 
@@ -460,13 +448,7 @@ Hadoop
           
             
           
-          Hadoop
-安装
-
-建议安装版本：Hadoop3.0.0+Spark3.0.0+Hive3.1
-windows安装Spark3.0.0+hadoop+JDK大数据开发平台_我本将心向明月丶的博客-CSDN博客
-已编译包下载：
-GitHub - steveloughran/winutils: Windows binaries for Hadoop versions (built from the 
+          win10安装Hadooop记录（安装过程与在linux环境安装类似）
         </a>
       </p>
 
@@ -524,24 +506,7 @@ GitHub - steveloughran/winutils: Windows binaries for Hadoop versions (built fro
           
             
           
-          
-Python中文文档
-
-MySql 中文文档
-
-Apache Hive 中文手册
-
-Apache HBase 中文文档
-
-Apache Flume 用户指南
-
-ZooKeeper
-
-
-
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.
+          中文学习文档（很详细）
         </a>
       </p>
 
@@ -601,23 +566,7 @@ ZooKeeper
           
             
           
-          动态规划分为3个部分：
-
-确定状态
-转移方程
-初始条件和边界情况
-
-
-确定状态
-即数列每个元素$f[i]$或矩阵每个元素$f[i][j]$代表着什么
-
-转移方程
-例如斐波那契数列的转移方程是$F(n) = F(n-1)+F(n-2)$，这个表示的是每个元素的关系
-
-初始条件和边界情况
-初始条件，例如$f[0]$等于多少
-边界情况，什么时候停下，$i$的范围是多少
-参考：肝了好多天-动态规划十连-超
+          动态规划方法解题
         </a>
       </p>
 
@@ -673,13 +622,7 @@ ZooKeeper
           
             
           
-          IntroductionMySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）
-MySQL底层原理MySQL实操记录环境准备
-安装MySQL
-安装Navicat（新手建议安装，非必须）
-
-靠谱参考教程：https://blog.csdn.net/qq_37350706/article/details/81707862
-group byMySQL8.0中的
+          MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）
         </a>
       </p>
 
@@ -735,14 +678,7 @@ group byMySQL8.0中的
           
             
           
-          Introduction题目来自SQL练习题共50道附答案（MySQL）
-此处不是正题，而是建表
-1.学生表  student(s_id,s_name,s_birth,s_sex) 
-– 学生编号,学生姓名, 出生年月,学生性别 
-2.课程表  course(c_id,c_name,t_id) 
-– 课程编号, 课程名称, 教师编号 
-3.教师表  teacher(t_id,t_name) 
--–
+          SQL五十题
         </a>
       </p>
 
@@ -798,20 +734,7 @@ group byMySQL8.0中的
           
             
           
-          Introduction注：本项目仅用于学习/研究，图片等版权均归原公司所有，侵删
-
-python爬取虎牙直播某个时刻的直播数据
-画图
-制作PPT（此处仅放置图片，需要PPT请联系:caiwei-email@qq.com）
-
-项目地址（源码）：https://github.com/ChoiNgai/DataAnalysis_huya
-展示报告
-
-
-
-
-未完待续
-        document.q
+          虎牙直播单日数据分析报告（没做完）
         </a>
       </p>
 
@@ -848,7 +771,7 @@ python爬取虎牙直播某个时刻的直播数据
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#board">9</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

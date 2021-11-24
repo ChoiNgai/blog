@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="数据仓库主体域划分一直是个难题">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="因为数据仓库是面向主题的，所以主题域的划分显得很重要，因为主题域的确定也意味着数据的目的是干什么的。有关于主题划分的文章较少，阿里大数据之路这本书也没有单独的章节来讲主题域的划分，因为这个是需要对业务场景来说的，而且就算确定的业务场景也没有说百分百该如何划分，我还见过一群在互联网大数据领域有着多年工作经验的数仓专家们讨论某个表该划分到哪个主题域。所以，以下内容仅代表我在数仓主题域的一些拙见。 什么">
+  <meta name="description" content="数据仓库主体域划分一直是个难题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数仓主题域划分">
 <meta property="og:url" content="http://example.com/2021/08/01/%E6%95%B0%E4%BB%93%E4%B8%BB%E9%A2%98%E5%9F%9F%E5%88%92%E5%88%86/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="因为数据仓库是面向主题的，所以主题域的划分显得很重要，因为主题域的确定也意味着数据的目的是干什么的。有关于主题划分的文章较少，阿里大数据之路这本书也没有单独的章节来讲主题域的划分，因为这个是需要对业务场景来说的，而且就算确定的业务场景也没有说百分百该如何划分，我还见过一群在互联网大数据领域有着多年工作经验的数仓专家们讨论某个表该划分到哪个主题域。所以，以下内容仅代表我在数仓主题域的一些拙见。 什么">
+<meta property="og:description" content="数据仓库主体域划分一直是个难题">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801204402.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801215033.png">
@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801214947.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801215726.png">
 <meta property="article:published_time" content="2021-08-01T11:55:07.000Z">
-<meta property="article:modified_time" content="2021-08-14T21:18:29.689Z">
+<meta property="article:modified_time" content="2021-11-24T08:44:57.642Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="数仓入门">
 <meta name="twitter:card" content="summary_large_image">
@@ -257,12 +257,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：3 个月前
+                  本文最后更新于：6 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <p>因为数据仓库是面向主题的，所以主题域的划分显得很重要，因为主题域的确定也意味着数据的目的是干什么的。有关于主题划分的文章较少，阿里大数据之路这本书也没有单独的章节来讲主题域的划分，因为这个是需要对业务场景来说的，而且就算确定的业务场景也没有说百分百该如何划分，我还见过一群在互联网大数据领域有着多年工作经验的数仓专家们讨论某个表该划分到哪个主题域。所以，以下内容仅代表我在数仓主题域的一些拙见。</p>
+              <p>数据仓库主体域划分一直是个难题</p>
+<a id="more"></a>
+
+<p>因为数据仓库是面向主题的，所以主题域的划分显得很重要，因为主题域的确定也意味着数据的目的是干什么的。有关于主题划分的文章较少，阿里大数据之路这本书也没有单独的章节来讲主题域的划分，因为这个是需要对业务场景来说的，而且就算确定的业务场景也没有说百分百该如何划分，我还见过一群在互联网大数据领域有着多年工作经验的数仓专家们讨论某个表该划分到哪个主题域。所以，以下内容仅代表我在数仓主题域的一些拙见。</p>
 <h2 id="什么是数据仓库主题域？"><a href="#什么是数据仓库主题域？" class="headerlink" title="什么是数据仓库主题域？"></a>什么是数据仓库主题域？</h2><p>主题域通常是联系较为紧密的数据主题的集合。可以根据业务的关注点，将这些数据主题划分到不同的主题域。主题域的确定必须由最终用户和数据仓库的设计人员共同完成。</p>
 <h2 id="划分主题域方法"><a href="#划分主题域方法" class="headerlink" title="划分主题域方法"></a>划分主题域方法</h2><h3 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h3><p>在业务调研之后，可以进行主题域的划分。划分主题域，需要分析各个业务模块中有哪些业务活动。通常我们按照以下方法划分主题域，可以按照用户企业的部门划分，也可以按照业务过程或者业务板块中的功能模块划分。</p>
 <ul>

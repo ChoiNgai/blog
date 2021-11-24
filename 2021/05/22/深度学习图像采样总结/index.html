@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="就硬卷…">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="摘要深度学习是机器学习和人工智能研究的最新且最热门的趋势之一。深度学习方法为计算机视觉带来了革命性的进步，新的深度学习理论和技术正在不断诞生，在计算机视觉领域超越传统的机器学习甚至是现有的深度学习方法。近年来，有关深度学习方面的研究成果爆炸式地增长，由于其发展迅猛，导致了它的进展很难被新的研究者入手并跟进。此外，深度学习已有的方法数量上过于庞大，种类上过于繁多，虽然有大量的深度学习综述为研究者提供">
+  <meta name="description" content="就硬卷…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习图像采样总结">
 <meta property="og:url" content="http://example.com/2021/05/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E5%83%8F%E9%87%87%E6%A0%B7%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="摘要深度学习是机器学习和人工智能研究的最新且最热门的趋势之一。深度学习方法为计算机视觉带来了革命性的进步，新的深度学习理论和技术正在不断诞生，在计算机视觉领域超越传统的机器学习甚至是现有的深度学习方法。近年来，有关深度学习方面的研究成果爆炸式地增长，由于其发展迅猛，导致了它的进展很难被新的研究者入手并跟进。此外，深度学习已有的方法数量上过于庞大，种类上过于繁多，虽然有大量的深度学习综述为研究者提供">
+<meta property="og:description" content="就硬卷…">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9B%BE%E5%83%8F%E9%87%87%E6%A0%B7%E7%BB%BC%E8%BF%B0(1.jpg">
 <meta property="og:image" content="http://deeplearning.stanford.edu/wiki/images/f/f9/Autoencoder636.png">
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145141623.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/41a59b4bd87f50222e05277057b34ce.png">
 <meta property="article:published_time" content="2021-05-22T06:24:23.000Z">
-<meta property="article:modified_time" content="2021-11-22T07:21:33.233Z">
+<meta property="article:modified_time" content="2021-11-24T08:43:57.195Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,12 +275,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2 天前
+                  本文最后更新于：7 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度学习是机器学习和人工智能研究的最新且最热门的趋势之一。深度学习方法为计算机视觉带来了革命性的进步，新的深度学习理论和技术正在不断诞生，在计算机视觉领域超越传统的机器学习甚至是现有的深度学习方法。近年来，有关深度学习方面的研究成果爆炸式地增长，由于其发展迅猛，导致了它的进展很难被新的研究者入手并跟进。此外，深度学习已有的方法数量上过于庞大，种类上过于繁多，虽然有大量的深度学习综述为研究者提供现有的研究发展情况，但是其往往是全面地介绍整个深度学习方法。因而，本文将着重于计算机视觉领域，从深度学习方法中的图像采样对深度学习展开叙述。</p>
+              <p>就硬卷…</p>
+<a id="more"></a>
+
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度学习是机器学习和人工智能研究的最新且最热门的趋势之一。深度学习方法为计算机视觉带来了革命性的进步，新的深度学习理论和技术正在不断诞生，在计算机视觉领域超越传统的机器学习甚至是现有的深度学习方法。近年来，有关深度学习方面的研究成果爆炸式地增长，由于其发展迅猛，导致了它的进展很难被新的研究者入手并跟进。此外，深度学习已有的方法数量上过于庞大，种类上过于繁多，虽然有大量的深度学习综述为研究者提供现有的研究发展情况，但是其往往是全面地介绍整个深度学习方法。因而，本文将着重于计算机视觉领域，从深度学习方法中的图像采样对深度学习展开叙述。</p>
 <h2 id="1-序言"><a href="#1-序言" class="headerlink" title="1.序言"></a>1.序言</h2><p>深度学习（DeepLearning，DL）被认为是机器学习（Machine Learning ，ML）子领域，其采用多层次的非线性信息处理和抽象，用于有监督、无监督、半监督、自监督、弱监督等的特征学习、表示、分类、回归和模式识别等[1-01]。在 2000 年时深度学习的方法被用于人工神经网络（ANN），随着层数的加深，人工神经网络的被单独提出深层神经网络（DNN）这一分支。在2012年 ImageNet大规模视觉识别挑战赛上卷积神经网络AlexNet获得冠军，并且误判率令人惊艳[1-02]，从此卷积神经网络受到众多研究者的瞩目，并促使了深度学习的快速发展，目前计算机视觉（CV）领域多使用卷积神经网络，并且神经网络深度逐渐加深[1-03]。在自然语言处理（NLP）领域，由于循环神经网络（RNN）结构使得其较适合处理文本分析等场景从而受到众多研究者的欢迎。生成对抗网络以零和博弈的思想依赖生成模型和判别模型使得在图像生成方面效果良好。此外，较为常用的深度学习方法还有自编码器[1-04]、胶囊网络[1-05]、属于循环神经网络的长短记忆网络[1-06]、增强神经网络、深度信念网络、 深度朗伯网络、循环支持向量机等[1-07]。</p>
 <p>对于图像分类、处理任务，神经网络中一大部分操作是采样，尤其是卷积神经网络。而神经网络的采样操作中较为常见的为卷积和池化，另外还有反卷积、反池化等多种多样的采样操作。各种采样的目的与原理都不尽相同，正是这些不一样的采样构成了神经网络结构中重要的部分。</p>
 <h2 id="2-上采样与下采样"><a href="#2-上采样与下采样" class="headerlink" title="2.上采样与下采样"></a>2.上采样与下采样</h2><h3 id="上采样"><a href="#上采样" class="headerlink" title="上采样"></a>上采样</h3><p>在计算机视觉领域，输入图像通过卷积核提取特征后，输出的尺寸可能会变小，虽然在图像分类的是没有需要将图像再次恢复到原来的尺寸，但是图像的语义分割等却是需要恢复图像尺寸以便进行进一步计算。这种扩大图像尺寸，实现图像从小分辨率提升到大分辨率的映射操作，叫做上采样(Upsample)。 目前常见的上采样有插值法、反卷积、反池化，此外深度学习中的上采样方法还有 ： 扩张（空洞）卷积（dilated conv） 、PixelShuffle 、 DUpsampling 、 Meta-Upscale 、 CAPAFE等。</p>

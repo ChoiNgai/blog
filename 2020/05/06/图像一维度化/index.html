@@ -13,18 +13,18 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="将图像拉伸成向量">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="灰度图像一维化众所周知 灰度图像是由元素数值在 [0,255] 范围内的矩阵构成的，因此可以将一个nm的矩阵（分辨率nm）变成一个向量，即图像一维化。常见的彩色图像由RGB三个通道组成（即有3个m*n的矩阵），因而操作其实也是类似的，三个通道分别处理再叠加即可。 直接拉伸在图像处理中，有时候需要将图像拉抻成向量进行处理。 12345678910111213141516171819202122fil">
+  <meta name="description" content="将图像拉伸成向量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像一维化">
 <meta property="og:url" content="http://example.com/2020/05/06/%E5%9B%BE%E5%83%8F%E4%B8%80%E7%BB%B4%E5%BA%A6%E5%8C%96/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="灰度图像一维化众所周知 灰度图像是由元素数值在 [0,255] 范围内的矩阵构成的，因此可以将一个nm的矩阵（分辨率nm）变成一个向量，即图像一维化。常见的彩色图像由RGB三个通道组成（即有3个m*n的矩阵），因而操作其实也是类似的，三个通道分别处理再叠加即可。 直接拉伸在图像处理中，有时候需要将图像拉抻成向量进行处理。 12345678910111213141516171819202122fil">
+<meta property="og:description" content="将图像拉伸成向量">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-01-20T08:23:52.658Z">
+<meta property="article:modified_time" content="2021-11-24T08:47:23.013Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="matlab">
 <meta property="article:tag" content="图像处理">
@@ -210,7 +210,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.8k 字
     </span>
   
 
@@ -252,12 +252,15 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：10 个月前
+                  本文最后更新于：4 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="灰度图像一维化"><a href="#灰度图像一维化" class="headerlink" title="灰度图像一维化"></a>灰度图像一维化</h2><p><del>众所周知</del> 灰度图像是由元素数值在 [0,255] 范围内的矩阵构成的，因此可以将一个n<em>m的矩阵（分辨率n</em>m）变成一个向量，即图像一维化。<br>常见的彩色图像由RGB三个通道组成（即有3个m*n的矩阵），因而操作其实也是类似的，三个通道分别处理再叠加即可。</p>
+              <p>将图像拉伸成向量</p>
+<a id="more"></a>
+
+<h2 id="灰度图像一维化"><a href="#灰度图像一维化" class="headerlink" title="灰度图像一维化"></a>灰度图像一维化</h2><p><del>众所周知</del> 灰度图像是由元素数值在 [0,255] 范围内的矩阵构成的，因此可以将一个n<em>m的矩阵（分辨率n</em>m）变成一个向量，即图像一维化。<br>常见的彩色图像由RGB三个通道组成（即有3个m*n的矩阵），因而操作其实也是类似的，三个通道分别处理再叠加即可。</p>
 <h3 id="直接拉伸"><a href="#直接拉伸" class="headerlink" title="直接拉伸"></a>直接拉伸</h3><p>在图像处理中，有时候需要将图像拉抻成向量进行处理。</p>
 <figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs matlab">file_path = <span class="hljs-string">'D:\Documents\Project\clustering\Semi_Supervised\data\COVID_CT\CT_COVID\';% 需要一维化图像的文件夹路径 </span><br><span class="hljs-string">img_path_list = dir(strcat(file_path,'</span>*.png'));<span class="hljs-comment">%获取该文件夹中所有jpeg格式的图像</span><br>img_num = <span class="hljs-built_in">length</span>(img_path_list);<span class="hljs-comment">%获取图像总数量</span><br>data=<span class="hljs-built_in">zeros</span>(img_num,<span class="hljs-number">600</span>);             <span class="hljs-comment">%创建零矩阵，大小为img_num*600，600自己按需修改</span><br>I=cell(<span class="hljs-number">1</span>,img_num);<br><span class="hljs-keyword">if</span> img_num &gt; <span class="hljs-number">0</span> <span class="hljs-comment">%有满足条件的图像</span><br>            <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:img_num <span class="hljs-comment">%逐一读取图像 </span><br>                 image_name = img_path_list(<span class="hljs-built_in">j</span>).name;<span class="hljs-comment">% 图像名 ?</span><br>                 image = imread(strcat(file_path,image_name)); <br>                 I{<span class="hljs-built_in">j</span>}=image;<br>                 fprintf(<span class="hljs-string">'%d %d %s\n'</span>,<span class="hljs-number">1</span><span class="hljs-built_in">i</span>,<span class="hljs-built_in">j</span>,strcat(file_path,image_name));<span class="hljs-comment">% 显示正在处理的图像名</span><br><br>                 <span class="hljs-comment">%图像处理过程</span><br>                 <span class="hljs-comment">% image_gray = rgb2gray(image);        %将RGB图像转换成灰度图</span><br>                 image=imresize(image,[<span class="hljs-number">600</span>,<span class="hljs-number">600</span>],<span class="hljs-string">'nearest'</span>);   <span class="hljs-comment">%调整图像大小为160×160</span><br>                 [r,c,p]=<span class="hljs-built_in">size</span>(image);            <span class="hljs-comment">%获取图片分辨率大小，大小为m*n</span><br>                 B = <span class="hljs-built_in">reshape</span>(image,<span class="hljs-number">1</span>,r*c*p);        <span class="hljs-comment">%根据图像分辨率拉伸成为长度m*n的向量</span><br>                 data(<span class="hljs-built_in">j</span>,<span class="hljs-number">1</span>:r*c*p) = B;<br>            <span class="hljs-keyword">end</span> <br><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">% xlswrite( "D:\ONE.xlsx",data)  %将一维化之后的图像数据保存为xlsx文件</span><br></code></pre></td></tr></tbody></table></figure>
 

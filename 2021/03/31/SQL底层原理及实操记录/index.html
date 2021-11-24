@@ -13,20 +13,20 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="">
+  <meta name="description" content="MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="数据库,原理">
-  <meta name="description" content="IntroductionMySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性） MySQL底层原理MySQL实操记录环境准备 安装MySQL 安装Navicat（新手建议安装，非必须）  靠谱参考教程：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_37350706&#x2F;article&#x2F;details&#x2F;81707862 group byMySQL8.0中的">
+  <meta name="description" content="MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL底层原理及实操记录">
 <meta property="og:url" content="http://example.com/2021/03/31/SQL%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E6%93%8D%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="IntroductionMySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性） MySQL底层原理MySQL实操记录环境准备 安装MySQL 安装Navicat（新手建议安装，非必须）  靠谱参考教程：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_37350706&#x2F;article&#x2F;details&#x2F;81707862 group byMySQL8.0中的">
+<meta property="og:description" content="MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210331105532759.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210331105924043.png">
 <meta property="article:published_time" content="2021-03-31T02:41:16.000Z">
-<meta property="article:modified_time" content="2021-05-09T15:32:50.737Z">
+<meta property="article:modified_time" content="2021-11-24T08:32:01.288Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="数据库">
 <meta property="article:tag" content="原理">
@@ -213,7 +213,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      546 字
+      595 字
     </span>
   
 
@@ -255,18 +255,21 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：6 个月前
+                  本文最后更新于：19 分钟前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）</p>
-<h1 id="MySQL底层原理"><a href="#MySQL底层原理" class="headerlink" title="MySQL底层原理"></a>MySQL底层原理</h1><h1 id="MySQL实操记录"><a href="#MySQL实操记录" class="headerlink" title="MySQL实操记录"></a>MySQL实操记录</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ol>
+              <p>MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）</p>
+<a id="more"></a>
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）</p>
+<h2 id="MySQL底层原理"><a href="#MySQL底层原理" class="headerlink" title="MySQL底层原理"></a>MySQL底层原理</h2><h2 id="MySQL实操记录"><a href="#MySQL实操记录" class="headerlink" title="MySQL实操记录"></a>MySQL实操记录</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ol>
 <li>安装MySQL</li>
 <li>安装Navicat（新手建议安装，非必须）</li>
 </ol>
 <p>靠谱参考教程：<a href="https://blog.csdn.net/qq_37350706/article/details/81707862" target="_blank" rel="noopener">https://blog.csdn.net/qq_37350706/article/details/81707862</a></p>
-<h2 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h2><p>MySQL8.0中的group by有新特性，默认开启参数ONLY_FULL_GROUP_BY，可以通过输入以下命令查看：</p>
+<h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><p>MySQL8.0中的group by有新特性，默认开启参数ONLY_FULL_GROUP_BY，可以通过输入以下命令查看：</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> @@sql_mode;<br></code></pre></td></tr></tbody></table></figure>
 
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210331105532759.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
