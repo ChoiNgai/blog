@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      459 字
+      457 字
     </span>
   
 
@@ -252,15 +252,10 @@
             <!-- SEO header -->
             <h1 style="display: none">win10安装Hadoop以及pyspark</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：3 分钟前
-                
-              </p>
-            
             <div class="markdown-body">
               <p>win10安装Hadooop记录（安装过程与在linux环境安装类似）</p>
 <a id="more"></a>
+
 <h2 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h2><ul>
 <li>安装</li>
 </ul>
@@ -271,7 +266,10 @@
 <ul>
 <li>启动命令（注：需要打开cmd输入命令，直接打开文件无法启动）：</li>
 </ul>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">start-all.cmd<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">start-all.cmd</code></pre></div>
+
+
+
 <ul>
 <li><p>检测</p>
 <p><strong>出现四个任务管理且不报错，并不一定说明安装成功。测试是否开启成功：输入命令<code>jps</code></strong><br>出现下面四个才能说明安装成功，如果不出现四个说明安装没有成功，可能是上面第四步出现问题，重新配置。</p>
@@ -280,7 +278,8 @@
 <p><img src="https://img-blog.csdnimg.cn/20201031151402658.png#pic_center" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <ul>
 <li><p>打开（Web端）</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">http://localhost:9870/<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">http://localhost:9870/</code></pre></div>
+
 <p>在浏览器地址栏中输入：<a href="http://localhost:8088/" target="_blank" rel="noopener">http://localhost:8088</a>查看集群状态</p>
 </li>
 </ul>

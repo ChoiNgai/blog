@@ -214,7 +214,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      979 字
     </span>
   
 
@@ -254,15 +254,10 @@
             <!-- SEO header -->
             <h1 style="display: none">图像去锯齿(降噪、插值、缩略三连)</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：1 小时前
-                
-              </p>
-            
             <div class="markdown-body">
               <p>去除图像的大量锯齿</p>
 <a id="more"></a>
+
 <p> 图像预处理算法的好坏直接关系到后续图像处理的效果，如图像分割、目标识别、边缘提取等，为了获取高质量的数字图像，很多时候都需要对图像进行降噪处理，尽可能的保持原始信息完整性（即主要特征）的同时，又能够去除信号中无用的信息。 </p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200705234702375.png" srcset="/img/loading.gif" lazyload="" alt="鲁迅：我没说过"></p>
 <p>如果图片有大量的锯齿难免会显得拙糙，那么这时候降噪也不是一种去除锯齿的好方法。 </p>
@@ -270,7 +265,37 @@
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20230f5dd0c4d285330a78cee1bbe5f.jpg" srcset="/img/loading.gif" lazyload="" alt="带锯齿的原图"></p>
 <p>用该方法去除锯齿之后：</p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/PIL_Image6.png" srcset="/img/loading.gif" lazyload="" alt="经过高斯模糊之后的图像"></p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>img_path = (<span class="hljs-string">"1.png"</span>)		<span class="hljs-comment">#获取图片路径</span><br>img = Image.open(img_path)	<br>img_sp = cv2.imread(img_path)	<br>sp = img_sp.shape			<span class="hljs-comment">#读取图片长宽</span><br><br><span class="hljs-comment">#第一次插值、降噪</span><br>img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">2</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">2</span>), Image.BILINEAR)        <span class="hljs-comment">#三次样条插值，图像长宽放大为2倍</span><br>img = np.array(img)<br>img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)						<span class="hljs-comment">#高斯降噪，设置高斯核</span><br>img = Image.fromarray(img_gaosi)							<span class="hljs-comment">#转换回数组，以便numpy可读取</span><br>img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">2</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">2</span>), Image.ANTIALIAS)		<span class="hljs-comment">#保持图像品质缩略</span><br><br><span class="hljs-comment">#第二次插值、降噪</span><br>img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">4</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">4</span>), Image.BILINEAR)       <span class="hljs-comment">#三次样条插值，图像长宽放大为4倍</span><br>img = np.array(img)<br>img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)<br>img = Image.fromarray(img_gaosi)<br>img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">4</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">4</span>), Image.ANTIALIAS)<br><br><span class="hljs-comment">#第三次插值、降噪</span><br>img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">16</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">16</span>), Image.BILINEAR)		<span class="hljs-comment">#三次样条插值，图像长宽放大为16倍</span><br>img = np.array(img)<br>img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)<br>img = Image.fromarray(img_gaosi)		<br>img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">16</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">16</span>), Image.ANTIALIAS)<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+img_path = (<span class="hljs-string">"1.png"</span>)		<span class="hljs-comment">#获取图片路径</span>
+img = Image.open(img_path)	
+img_sp = cv2.imread(img_path)	
+sp = img_sp.shape			<span class="hljs-comment">#读取图片长宽</span>
+
+<span class="hljs-comment">#第一次插值、降噪</span>
+img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">2</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">2</span>), Image.BILINEAR)        <span class="hljs-comment">#三次样条插值，图像长宽放大为2倍</span>
+img = np.array(img)
+img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)						<span class="hljs-comment">#高斯降噪，设置高斯核</span>
+img = Image.fromarray(img_gaosi)							<span class="hljs-comment">#转换回数组，以便numpy可读取</span>
+img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">2</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">2</span>), Image.ANTIALIAS)		<span class="hljs-comment">#保持图像品质缩略</span>
+
+<span class="hljs-comment">#第二次插值、降噪</span>
+img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">4</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">4</span>), Image.BILINEAR)       <span class="hljs-comment">#三次样条插值，图像长宽放大为4倍</span>
+img = np.array(img)
+img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)
+img = Image.fromarray(img_gaosi)
+img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">4</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">4</span>), Image.ANTIALIAS)
+
+<span class="hljs-comment">#第三次插值、降噪</span>
+img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">16</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">16</span>), Image.BILINEAR)		<span class="hljs-comment">#三次样条插值，图像长宽放大为16倍</span>
+img = np.array(img)
+img_gaosi=cv2.GaussianBlur(img,(<span class="hljs-number">5</span>,<span class="hljs-number">5</span>),<span class="hljs-number">0</span>)
+img = Image.fromarray(img_gaosi)		
+img = img.resize((sp[<span class="hljs-number">1</span>]*<span class="hljs-number">16</span>, sp[<span class="hljs-number">0</span>]*<span class="hljs-number">16</span>), Image.ANTIALIAS)</code></pre></div>
+
+
+
 <p>注：示例图片来自<a href="https://www.hanspub.org/journal/PaperInformation.aspx?paperID=36204" target="_blank" rel="noopener">《应用数学进展》</a></p>
 <script>
         document.querySelectorAll('.github-emoji')

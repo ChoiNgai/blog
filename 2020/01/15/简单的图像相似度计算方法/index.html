@@ -215,7 +215,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.1k 字
+      4.9k 字
     </span>
   
 
@@ -224,7 +224,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16 分钟
+      15 分钟
     </span>
   
 
@@ -255,15 +255,10 @@
             <!-- SEO header -->
             <h1 style="display: none">简单的图像相似度计算方法</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：1 小时前
-                
-              </p>
-            
             <div class="markdown-body">
               <p>用于完成图片两两之间的相似度计算</p>
 <a id="more"></a>
+
 <h2 id="塑料瓶图像检测"><a href="#塑料瓶图像检测" class="headerlink" title="塑料瓶图像检测"></a>塑料瓶图像检测</h2><p>目的：用于判断一张图片是否为塑料瓶；</p>
 <p>条件：总计300多张图片分为70多类，同一类塑料瓶分别放置在同一个文件夹；</p>
 <p>思路：选取每个文件夹的一张图片与目标图片对比计算返回相似度最高的值，通过多次试验确定阈值，超过阈值则判定为是塑料瓶，否则不是；</p>
@@ -303,11 +298,41 @@
 </li>
 <li><p>互信息</p>
 </li>
-<li>余弦相似度 </li>
-<li>感知哈希算法</li>
+<li><p>余弦相似度 </p>
+</li>
+<li><p>感知哈希算法</p>
+</li>
 </ul>
-<h2 id="2-测试结果（单张图片比对）"><a href="#2-测试结果（单张图片比对）" class="headerlink" title="2.测试结果（单张图片比对）"></a>2.测试结果（单张图片比对）</h2><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *<br>begin_time = time()<br><br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_regalur_image</span><span class="hljs-params">(img, size=<span class="hljs-params">(<span class="hljs-number">256</span>, <span class="hljs-number">256</span>)</span>)</span>:</span><br>    <span class="hljs-keyword">return</span> img.resize(size).convert(<span class="hljs-string">'RGB'</span>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hist_similar</span><span class="hljs-params">(lh, rh)</span>:</span><br>    <span class="hljs-keyword">assert</span> len(lh) == len(rh)<br>    <span class="hljs-keyword">return</span> sum(<span class="hljs-number">1</span> - (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> l == r <span class="hljs-keyword">else</span> float(abs(l - r)) / max(l, r)) <span class="hljs-keyword">for</span> l, r <span class="hljs-keyword">in</span> zip(lh, rh)) / len(lh)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_similar</span><span class="hljs-params">(li, ri)</span>:</span><br>    <span class="hljs-keyword">return</span> hist_similar(li.histogram(), ri.histogram())<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    img1 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>)<br>    img1 = make_regalur_image(img1)<br>    img2 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_52_Pro.jpg'</span>)<br>    img2 = make_regalur_image(img2)<br>    print(calc_similar(img1, img2))<br><br>end_time = time()<br>run_time = end_time-begin_time<br><span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)<br></code></pre></td></tr></tbody></table></figure>
-<div class="table-container">
+<h2 id="2-测试结果（单张图片比对）"><a href="#2-测试结果（单张图片比对）" class="headerlink" title="2.测试结果（单张图片比对）"></a>2.测试结果（单张图片比对）</h2><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
+begin_time = time()
+
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_regalur_image</span><span class="hljs-params">(img, size=<span class="hljs-params">(<span class="hljs-number">256</span>, <span class="hljs-number">256</span>)</span>)</span>:</span>
+    <span class="hljs-keyword">return</span> img.resize(size).convert(<span class="hljs-string">'RGB'</span>)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hist_similar</span><span class="hljs-params">(lh, rh)</span>:</span>
+    <span class="hljs-keyword">assert</span> len(lh) == len(rh)
+    <span class="hljs-keyword">return</span> sum(<span class="hljs-number">1</span> - (<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> l == r <span class="hljs-keyword">else</span> float(abs(l - r)) / max(l, r)) <span class="hljs-keyword">for</span> l, r <span class="hljs-keyword">in</span> zip(lh, rh)) / len(lh)
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">calc_similar</span><span class="hljs-params">(li, ri)</span>:</span>
+    <span class="hljs-keyword">return</span> hist_similar(li.histogram(), ri.histogram())
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:
+    img1 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>)
+    img1 = make_regalur_image(img1)
+    img2 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_52_Pro.jpg'</span>)
+    img2 = make_regalur_image(img2)
+    print(calc_similar(img1, img2))
+
+end_time = time()
+run_time = end_time-begin_time
+<span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
+
 <table>
 <thead>
 <tr>
@@ -317,8 +342,7 @@
 <th>Result</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>0.055361032485961914</td>
@@ -348,11 +372,31 @@
 <td>0.07813024520874023</td>
 <td>0.7189068678053613</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h3 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a>互信息</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *<br>begin_time = time()<br><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics <span class="hljs-keyword">as</span> mr<br><span class="hljs-keyword">from</span> scipy.misc <span class="hljs-keyword">import</span> imread<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br> <br>img1 = imread(<span class="hljs-string">'1.jpg'</span>)<br>img2 = imread(<span class="hljs-string">'2.jpg'</span>)<br> <br>img2 = np.resize(img2, (img1.shape[<span class="hljs-number">0</span>], img1.shape[<span class="hljs-number">1</span>], img1.shape[<span class="hljs-number">2</span>]))<br> <br>img1 = np.reshape(img1, <span class="hljs-number">-1</span>)<br>img2 = np.reshape(img2, <span class="hljs-number">-1</span>)<br>print(img2.shape)<br>print(img1.shape)<br>mutual_infor = mr.mutual_info_score(img1, img2)<br> <br>print(mutual_infor)<br><br>end_time = time()<br>run_time = end_time-begin_time<br><span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)<br></code></pre></td></tr></tbody></table></figure>
-<div class="table-container">
+</tbody></table>
+<h3 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a>互信息</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
+begin_time = time()
+
+<span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> metrics <span class="hljs-keyword">as</span> mr
+<span class="hljs-keyword">from</span> scipy.misc <span class="hljs-keyword">import</span> imread
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+ 
+img1 = imread(<span class="hljs-string">'1.jpg'</span>)
+img2 = imread(<span class="hljs-string">'2.jpg'</span>)
+ 
+img2 = np.resize(img2, (img1.shape[<span class="hljs-number">0</span>], img1.shape[<span class="hljs-number">1</span>], img1.shape[<span class="hljs-number">2</span>]))
+ 
+img1 = np.reshape(img1, <span class="hljs-number">-1</span>)
+img2 = np.reshape(img2, <span class="hljs-number">-1</span>)
+print(img2.shape)
+print(img1.shape)
+mutual_infor = mr.mutual_info_score(img1, img2)
+ 
+print(mutual_infor)
+
+end_time = time()
+run_time = end_time-begin_time
+<span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
+
 <table>
 <thead>
 <tr>
@@ -362,8 +406,7 @@
 <th>Result</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>1.459466791152954</td>
@@ -393,11 +436,50 @@
 <td>1.5644567012786865</td>
 <td>(6220800,)<br>(6220800,)<br>0.6813656974353114</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h3 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *<br>begin_time = time()<br><br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> average, linalg, dot<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_thumbnail</span><span class="hljs-params">(image, size=<span class="hljs-params">(<span class="hljs-number">1200</span>, <span class="hljs-number">750</span>)</span>, greyscale=False)</span>:</span><br>    image = image.resize(size, Image.ANTIALIAS)<br>    <span class="hljs-keyword">if</span> greyscale:<br>        image = image.convert(<span class="hljs-string">'L'</span>)<br>    <span class="hljs-keyword">return</span> image<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">image_similarity_vectors_via_numpy</span><span class="hljs-params">(image1, image2)</span>:</span><br>    image1 = get_thumbnail(image1)<br>    image2 = get_thumbnail(image2)<br>    images = [image1, image2]<br>    vectors = []<br>    norms = []<br>    <span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> images:<br>        vector = []<br>        <span class="hljs-keyword">for</span> pixel_tuple <span class="hljs-keyword">in</span> image.getdata():<br>            vector.append(average(pixel_tuple))<br>        vectors.append(vector)<br>        norms.append(linalg.norm(vector, <span class="hljs-number">2</span>))<br>    a, b = vectors<br>    a_norm, b_norm = norms<br>    res = dot(a / a_norm, b / b_norm)<br>    <span class="hljs-keyword">return</span> res<br><br><br>image1 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>)<br>image2 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>)<br>cosin = image_similarity_vectors_via_numpy(image1, image2)<br><br>print(cosin)<br><br>end_time = time()<br>run_time = end_time-begin_time<br><span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)<br></code></pre></td></tr></tbody></table></figure>
-<div class="table-container">
+</tbody></table>
+<h3 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
+begin_time = time()
+
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+<span class="hljs-keyword">from</span> numpy <span class="hljs-keyword">import</span> average, linalg, dot
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_thumbnail</span><span class="hljs-params">(image, size=<span class="hljs-params">(<span class="hljs-number">1200</span>, <span class="hljs-number">750</span>)</span>, greyscale=False)</span>:</span>
+    image = image.resize(size, Image.ANTIALIAS)
+    <span class="hljs-keyword">if</span> greyscale:
+        image = image.convert(<span class="hljs-string">'L'</span>)
+    <span class="hljs-keyword">return</span> image
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">image_similarity_vectors_via_numpy</span><span class="hljs-params">(image1, image2)</span>:</span>
+    image1 = get_thumbnail(image1)
+    image2 = get_thumbnail(image2)
+    images = [image1, image2]
+    vectors = []
+    norms = []
+    <span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> images:
+        vector = []
+        <span class="hljs-keyword">for</span> pixel_tuple <span class="hljs-keyword">in</span> image.getdata():
+            vector.append(average(pixel_tuple))
+        vectors.append(vector)
+        norms.append(linalg.norm(vector, <span class="hljs-number">2</span>))
+    a, b = vectors
+    a_norm, b_norm = norms
+    res = dot(a / a_norm, b / b_norm)
+    <span class="hljs-keyword">return</span> res
+
+
+image1 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>)
+image2 = Image.open(<span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>)
+cosin = image_similarity_vectors_via_numpy(image1, image2)
+
+print(cosin)
+
+end_time = time()
+run_time = end_time-begin_time
+<span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
+
+
+
 <table>
 <thead>
 <tr>
@@ -407,8 +489,7 @@
 <th>Result</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>19.579540729522705</td>
@@ -438,11 +519,66 @@
 <td>0.9038901804349453</td>
 <td>19.01563835144043</td>
 </tr>
-</tbody>
-</table>
-</div>
-<h3 id="感知哈希算法"><a href="#感知哈希算法" class="headerlink" title="感知哈希算法"></a>感知哈希算法</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *<br>begin_time = time()<br><br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-comment">#感知哈希算法</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pHash</span><span class="hljs-params">(image)</span>:</span><br>    image = cv2.resize(image,(<span class="hljs-number">32</span>,<span class="hljs-number">32</span>), interpolation=cv2.INTER_CUBIC)<br>    image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)<br><span class="hljs-comment">#     cv2.imshow('image', image)</span><br><span class="hljs-comment">#     cv2.waitKey(0)</span><br><span class="hljs-comment">#     cv2.destroyAllWindows()</span><br>    <span class="hljs-comment"># 将灰度图转为浮点型，再进行dct变换</span><br>    dct = cv2.dct(np.float32(image))<br><span class="hljs-comment">#     print(dct)</span><br>    <span class="hljs-comment"># 取左上角的8*8，这些代表图片的最低频率</span><br>    <span class="hljs-comment"># 这个操作等价于c++中利用opencv实现的掩码操作</span><br>    <span class="hljs-comment"># 在python中进行掩码操作，可以直接这样取出图像矩阵的某一部分</span><br>    dct_roi = dct[<span class="hljs-number">0</span>:<span class="hljs-number">8</span>,<span class="hljs-number">0</span>:<span class="hljs-number">8</span>]<br>    avreage = np.mean(dct_roi)<br>    hash = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(dct_roi.shape[<span class="hljs-number">0</span>]):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(dct_roi.shape[<span class="hljs-number">1</span>]):<br>            <span class="hljs-keyword">if</span> dct_roi[i,j] &gt; avreage:<br>                hash.append(<span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">else</span>:<br>                hash.append(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">return</span> hash<br><br><span class="hljs-comment">#计算汉明距离</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Hamming_distance</span><span class="hljs-params">(hash1,hash2)</span>:</span><br>    num = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> range(len(hash1)):<br>        <span class="hljs-keyword">if</span> hash1[index] != hash2[index]:<br>            num += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> num<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:<br><br>    image_file1 = <span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span><br>    image_file2 = <span class="hljs-string">'images/1.jpg'</span><br><br>    img1 = cv2.imread(image_file1)<br>    img2 = cv2.imread(image_file2)<br>    hash1 = pHash(img1)<br>    hash2 = pHash(img2)<br>    dist = Hamming_distance(hash1, hash2)<br>    <span class="hljs-comment">#将距离转化为相似度</span><br>    similarity = <span class="hljs-number">1</span> - dist * <span class="hljs-number">1.0</span> / <span class="hljs-number">64</span><br>    print(dist)<br>    print(similarity)<br><br>end_time = time()<br><br>run_time = end_time-begin_time<br><span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)<br></code></pre></td></tr></tbody></table></figure>
-<div class="table-container">
+</tbody></table>
+<h3 id="感知哈希算法"><a href="#感知哈希算法" class="headerlink" title="感知哈希算法"></a>感知哈希算法</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> *
+begin_time = time()
+
+<span class="hljs-keyword">import</span> cv2
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> os
+
+<span class="hljs-comment">#感知哈希算法</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pHash</span><span class="hljs-params">(image)</span>:</span>
+    image = cv2.resize(image,(<span class="hljs-number">32</span>,<span class="hljs-number">32</span>), interpolation=cv2.INTER_CUBIC)
+    image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+<span class="hljs-comment">#     cv2.imshow('image', image)</span>
+<span class="hljs-comment">#     cv2.waitKey(0)</span>
+<span class="hljs-comment">#     cv2.destroyAllWindows()</span>
+    <span class="hljs-comment"># 将灰度图转为浮点型，再进行dct变换</span>
+    dct = cv2.dct(np.float32(image))
+<span class="hljs-comment">#     print(dct)</span>
+    <span class="hljs-comment"># 取左上角的8*8，这些代表图片的最低频率</span>
+    <span class="hljs-comment"># 这个操作等价于c++中利用opencv实现的掩码操作</span>
+    <span class="hljs-comment"># 在python中进行掩码操作，可以直接这样取出图像矩阵的某一部分</span>
+    dct_roi = dct[<span class="hljs-number">0</span>:<span class="hljs-number">8</span>,<span class="hljs-number">0</span>:<span class="hljs-number">8</span>]
+    avreage = np.mean(dct_roi)
+    hash = []
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(dct_roi.shape[<span class="hljs-number">0</span>]):
+        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(dct_roi.shape[<span class="hljs-number">1</span>]):
+            <span class="hljs-keyword">if</span> dct_roi[i,j] &gt; avreage:
+                hash.append(<span class="hljs-number">1</span>)
+            <span class="hljs-keyword">else</span>:
+                hash.append(<span class="hljs-number">0</span>)
+    <span class="hljs-keyword">return</span> hash
+
+<span class="hljs-comment">#计算汉明距离</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Hamming_distance</span><span class="hljs-params">(hash1,hash2)</span>:</span>
+    num = <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> range(len(hash1)):
+        <span class="hljs-keyword">if</span> hash1[index] != hash2[index]:
+            num += <span class="hljs-number">1</span>
+    <span class="hljs-keyword">return</span> num
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">"__main__"</span>:
+
+    image_file1 = <span class="hljs-string">'images/WIN_20200111_21_56_10_Pro.jpg'</span>
+    image_file2 = <span class="hljs-string">'images/1.jpg'</span>
+
+    img1 = cv2.imread(image_file1)
+    img2 = cv2.imread(image_file2)
+    hash1 = pHash(img1)
+    hash2 = pHash(img2)
+    dist = Hamming_distance(hash1, hash2)
+    <span class="hljs-comment">#将距离转化为相似度</span>
+    similarity = <span class="hljs-number">1</span> - dist * <span class="hljs-number">1.0</span> / <span class="hljs-number">64</span>
+    print(dist)
+    print(similarity)
+
+end_time = time()
+
+run_time = end_time-begin_time
+<span class="hljs-keyword">print</span> (<span class="hljs-string">'该程序运行时间：'</span>,run_time)</code></pre></div>
+
 <table>
 <thead>
 <tr>
@@ -453,8 +589,7 @@
 <th>similarity</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>素材（自比）</td>
 <td>WIN_20200111_21_56_10_Pro.jpg</td>
 <td>0.20314764976501465</td>
@@ -489,9 +624,7 @@
 <td>8</td>
 <td>0.875</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h2 id="3-评价"><a href="#3-评价" class="headerlink" title="3.评价"></a>3.评价</h2><ul>
 <li>直方图计算结果与直观视觉严重不符合</li>
 <li>余弦相似度准确度较高，但太耗时，比对平均耗时19s</li>

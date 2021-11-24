@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      1.8k 字
     </span>
   
 
@@ -249,38 +249,35 @@
             <!-- SEO header -->
             <h1 style="display: none">数仓命名规范</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：1 小时前
-                
-              </p>
-            
             <div class="markdown-body">
               <p>数据仓库命名规范</p>
 <a id="more"></a>
+
 <p>这里分为<strong>表命名规范</strong>、<strong>字段命名规范</strong>、<strong>指标命名规范</strong>、<strong>作业命名规范</strong>，通常涉及表命名规范</p>
 <h2 id="表命名规范"><a href="#表命名规范" class="headerlink" title="表命名规范"></a>表命名规范</h2><p>不同分层的表命名规范不一样（以下命名规范包括了库名），abc为补充的三个参数，具体见后面</p>
 <ul>
 <li><p>ODS层</p>
 <p>即贴源层，由业务方直接导入，不会经过数据清洗转化。操作数据层定位于业务明细数据保留区，负责保留数据接入时点后历史变更数据，数据原则上全量保留。</p>
-<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_ods</span>.</span></span>ods_系统名称(默认为空)_源表名_abc<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_ods</span>.</span></span>ods_系统名称(默认为空)_源表名_abc</code></pre></div>
 </li>
 <li><p>DW层</p>
 <p>由ODS层数据经过清洗转化而成。这一层整合后的业务过程明细数据，负责各业务场景整合、数据结构化、规范化，常用公共维度冗余加工，以及明细业务标签信息加工。另外，在该层也会做一部分的数据聚合，将相同主题的数据汇集到一张表中，提高数据的可用性。</p>
 <ul>
 <li><p>dim层（维表）</p>
-<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_dw</span>.</span></span>dim_项目名_业务描述_abc<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_dw</span>.</span></span>dim_项目名_业务描述_abc</code></pre></div>
 </li>
 <li><p>dwv（业务明细）</p>
-<figure class="highlight haxe"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">项目名_dw.dwv_项目名<span class="hljs-literal">_</span>一级主题域<span class="hljs-literal">_</span>二级主题域<span class="hljs-literal">_</span>业务描述_abc<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dwv_项目名<span class="hljs-literal">_</span>一级主题域<span class="hljs-literal">_</span>二级主题域<span class="hljs-literal">_</span>业务描述_abc</code></pre></div>
 </li>
 <li><p>dwm（周期汇总）</p>
-<figure class="highlight haxe"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述<span class="hljs-literal">_</span>统计范围cycle[N]_abc<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述<span class="hljs-literal">_</span>统计范围cycle[N]_abc</code></pre></div>
+
 <p>例如：</p>
 <p><code>projectname_dw.dwm_projectname_store_activity_byr_currcy_order_cycle7_sdt</code>说明：projectname是项目名，其数据粒度为店铺（store）+活动（activity）+买家（byr）+币种（currcy）;业务描述为下单（order）；统计的时间范围为近7天。</p>
 </li>
 <li><p>dws层（数据汇总服务）</p>
-<figure class="highlight haxe"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述_abc<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述_abc</code></pre></div>
+
 </li>
 </ul>
 </li>
@@ -297,7 +294,8 @@
 <ul>
 <li><p>数据采集作业（后缀import）</p>
 <p>一般是采集变成ods层数据</p>
-<figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm">项目名_ods.ods_系统名称_源表名_abc_<span class="hljs-keyword">import</span><br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs elm">项目名_ods.ods_系统名称_源表名_abc_<span class="hljs-keyword">import</span></code></pre></div>
+
 <p>如：projectname_ods.ods_projectname_orders_fct_import</p>
 </li>
 <li><p>数据导出作业（后缀export）</p>

@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1k 字
     </span>
   
 
@@ -249,40 +249,86 @@
             <!-- SEO header -->
             <h1 style="display: none">统计计算方法上机考试</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：1 小时前
-                
-              </p>
-            
             <div class="markdown-body">
               <p>统计计算方法期末上级实验</p>
 <a id="more"></a>
+
 <p><strong>1.</strong> 设X服从正态分布N(1,4)，用R计算Pr(X&lt;1.5)。</p>
 <p><strong>2.</strong> 为了估计E(X)，X1,X2,…,X9已经被模拟出，其数据如下：</p>
 <p>11，222，99，33，90，22，33，22，83</p>
 <p>再根据这些数据，如果我们要使E(X)的估计量的标准差小于0.01，大概还需要运行多少次？</p>
 <p><strong>3.</strong> 用对偶模拟方法计算$Cov(U,e^U)$,其中U是(0,1)上的均匀随机变量,并要求它的方差和一般随机模拟方法的方差做比较。</p>
 <p><strong>4.</strong>  用条件期望抽样法估计$\theta = E(W_1+W_2)^{\frac{1}{3}}$，其中$W_1,W_2$是独立同分布的参数为2的指数分布,并要求它的方差和一般随机模拟方法的方差做比较。</p>
-<p><strong>5.</strong> 假设公共汽车数服从Poisson分布（$\lambda=2$），每辆公共汽车等可能地包含20，21，———-，30个运动爱好者，在不同公共汽车中运动爱好者的人数是独立的。写一个算法来模拟这些运动爱好者的达到人数超过100的概率。</p>
+<p><strong>5.</strong> 假设公共汽车数服从Poisson分布（$\lambda=2$），每辆公共汽车等可能地包含20，21，——-，30个运动爱好者，在不同公共汽车中运动爱好者的人数是独立的。写一个算法来模拟这些运动爱好者的达到人数超过100的概率。</p>
 <ul>
-<li><figure class="highlight r"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs r">pnorm(<span class="hljs-number">1.5</span>,mean=<span class="hljs-number">1</span>,sd=<span class="hljs-number">2</span>,lower.tail=<span class="hljs-literal">TRUE</span>)<br></code></pre></td></tr></tbody></table></figure>
+<li><div class="hljs code-wrapper"><pre><code class="hljs r">pnorm(<span class="hljs-number">1.5</span>,mean=<span class="hljs-number">1</span>,sd=<span class="hljs-number">2</span>,lower.tail=<span class="hljs-literal">TRUE</span>)</code></pre></div>
+
+
+
 </li>
 </ul>
 <ul>
-<li><figure class="highlight r"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs r"><span class="hljs-literal">F</span>=<span class="hljs-keyword">function</span>(d){<br>     x=c(<span class="hljs-number">11</span>,<span class="hljs-number">222</span>,<span class="hljs-number">99</span>,<span class="hljs-number">33</span>,<span class="hljs-number">90</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>,<span class="hljs-number">22</span>,<span class="hljs-number">83</span>)<br>     k=<span class="hljs-number">9</span><br>     <span class="hljs-keyword">while</span>(sd(x)/sqrt(length(x))&gt;=d){<br>         k=k+<span class="hljs-number">1</span><br>          x[k]=rnorm(<span class="hljs-number">1</span>)<br>         }<br>     k-<span class="hljs-number">1</span><br>     }<br>  <span class="hljs-literal">F</span>(<span class="hljs-number">0.01</span>)<br></code></pre></td></tr></tbody></table></figure>
+<li><div class="hljs code-wrapper"><pre><code class="hljs r"><span class="hljs-literal">F</span>=<span class="hljs-keyword">function</span>(d){
+     x=c(<span class="hljs-number">11</span>,<span class="hljs-number">222</span>,<span class="hljs-number">99</span>,<span class="hljs-number">33</span>,<span class="hljs-number">90</span>,<span class="hljs-number">22</span>,<span class="hljs-number">33</span>,<span class="hljs-number">22</span>,<span class="hljs-number">83</span>)
+     k=<span class="hljs-number">9</span>
+     <span class="hljs-keyword">while</span>(sd(x)/sqrt(length(x))&gt;=d){
+         k=k+<span class="hljs-number">1</span>
+          x[k]=rnorm(<span class="hljs-number">1</span>)
+         }
+     k-<span class="hljs-number">1</span>
+     }
+  <span class="hljs-literal">F</span>(<span class="hljs-number">0.01</span>)</code></pre></div>
+
+
+
 </li>
 </ul>
 <ul>
-<li><figure class="highlight r"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs r">n&lt;-1000r<br>u&lt;-runif(n)<br>y1&lt;-u<br>y2&lt;-exp(u)<br>y&lt;-c(y1,y2)<br>use&lt;-mean(y)<br>use<br>cov&lt;-mean(u+exp(u))-use^<span class="hljs-number">2</span><br>cov<br></code></pre></td></tr></tbody></table></figure>
+<li><div class="hljs code-wrapper"><pre><code class="hljs r">n&lt;-1000r
+u&lt;-runif(n)
+y1&lt;-u
+y2&lt;-exp(u)
+y&lt;-c(y1,y2)
+use&lt;-mean(y)
+use
+cov&lt;-mean(u+exp(u))-use^<span class="hljs-number">2</span>
+cov</code></pre></div>
+
+
+
 </li>
 </ul>
 <ul>
-<li><figure class="highlight r"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs r">F4=<span class="hljs-keyword">function</span>(n){<br>a=rep(<span class="hljs-number">0</span>,n)<br><span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:n){<br>X=runif(<span class="hljs-number">1000</span>)<br>Y=runif(<span class="hljs-number">1000</span>)<br>f=<span class="hljs-keyword">function</span>(x,y)(((<span class="hljs-number">2</span>*exp(-<span class="hljs-number">2</span>*x))+(<span class="hljs-number">2</span>*exp(-<span class="hljs-number">2</span>*y)))**(<span class="hljs-number">1</span>/<span class="hljs-number">3</span>))<br>a[i]=sum(f(X,Y))/<span class="hljs-number">1000</span>}<br>list(a=mean(a),VAR=var(a))<br>}<br>F4(<span class="hljs-number">50</span>)<br></code></pre></td></tr></tbody></table></figure>
+<li><div class="hljs code-wrapper"><pre><code class="hljs r">F4=<span class="hljs-keyword">function</span>(n){
+a=rep(<span class="hljs-number">0</span>,n)
+<span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:n){
+X=runif(<span class="hljs-number">1000</span>)
+Y=runif(<span class="hljs-number">1000</span>)
+f=<span class="hljs-keyword">function</span>(x,y)(((<span class="hljs-number">2</span>*exp(-<span class="hljs-number">2</span>*x))+(<span class="hljs-number">2</span>*exp(-<span class="hljs-number">2</span>*y)))**(<span class="hljs-number">1</span>/<span class="hljs-number">3</span>))
+a[i]=sum(f(X,Y))/<span class="hljs-number">1000</span>}
+list(a=mean(a),VAR=var(a))
+}
+F4(<span class="hljs-number">50</span>)</code></pre></div>
+
+
+
 </li>
 </ul>
 <ul>
-<li><figure class="highlight r"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs r">F5=<span class="hljs-keyword">function</span>(n){<br>k=<span class="hljs-number">0</span><br>X=c(<span class="hljs-number">20</span>:<span class="hljs-number">30</span>)<br>p=rep(<span class="hljs-number">1</span>/<span class="hljs-number">11</span>,<span class="hljs-number">11</span>)<br><span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:n){<br>Y=rpois(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br>x=sample(X,Y,p,replace=<span class="hljs-literal">TRUE</span>)<br>   <span class="hljs-keyword">if</span>(sum(x)&gt;<span class="hljs-number">10</span>)<br>        k=k+<span class="hljs-number">1</span><br>}<br>k/n<br>}<br>F5(<span class="hljs-number">1000</span>)<br></code></pre></td></tr></tbody></table></figure>
+<li><div class="hljs code-wrapper"><pre><code class="hljs r">F5=<span class="hljs-keyword">function</span>(n){
+k=<span class="hljs-number">0</span>
+X=c(<span class="hljs-number">20</span>:<span class="hljs-number">30</span>)
+p=rep(<span class="hljs-number">1</span>/<span class="hljs-number">11</span>,<span class="hljs-number">11</span>)
+<span class="hljs-keyword">for</span>(i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:n){
+Y=rpois(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)
+x=sample(X,Y,p,replace=<span class="hljs-literal">TRUE</span>)
+   <span class="hljs-keyword">if</span>(sum(x)&gt;<span class="hljs-number">10</span>)
+        k=k+<span class="hljs-number">1</span>
+}
+k/n
+}
+F5(<span class="hljs-number">1000</span>)</code></pre></div>
+
 </li>
 </ul>
 <script>

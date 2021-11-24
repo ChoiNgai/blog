@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7 分钟
+      6 分钟
     </span>
   
 
@@ -251,15 +251,10 @@
             <!-- SEO header -->
             <h1 style="display: none">微信小程序反编译</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：1 小时前
-                
-              </p>
-            
             <div class="markdown-body">
               <p>学习…</p>
 <a id="more"></a>
+
 <p>使用wxappUnpacker安装小程序反编译工具（2020.03）</p>
 <p><strong>关键词:</strong> 小程序 wxss</p>
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>上次分享了<a href="工具：web前端爬取">web前端爬取工具</a> ，那么这次也同样讲讲微信小程序反编译吧，对于像博主这种审美奇低且前端技术渣渣的人来说，实在是利器呀。不过尽量只是反编译来学习研究啦！</p>
@@ -272,7 +267,43 @@
 <ul>
 <li>修改wxappUnpacker文件中的 <code>wuWxss.js</code></li>
 </ul>
-<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">function</span> <span class="hljs-selector-tag">runVM</span>(<span class="hljs-selector-tag">name</span>, <span class="hljs-selector-tag">code</span>) {<br>      // let wxAppCode = {}, handle = {cssFile: name};<br>      // let vm = new VM({<br>      //    sandbox: Object.assign(new GwxCfg(), {<br>      //       __wxAppCode__: wxAppCode,<br>      //       setCssToHead: cssRebuild.bind(handle)<br>      //    })<br>      // });<br>      // vm.run(code);<br>      // for (let name in wxAppCode) if (name.endsWith(".wxss")) {<br>      //    handle.cssFile = path.resolve(frameName, "..", name);<br>      //    wxAppCode[name]();<br>      // }<br> <br>      let wxAppCode = {};<br>      let handle = {cssFile: name};<br>      let gg = new GwxCfg();<br>      let tsandbox = {<br>         $gwx: GwxCfg.prototype["$gwx"],<br>         __mainPageFrameReady__: GwxCfg.prototype["$gwx"],   //解决 $gwx is not defined<br>         __vd_version_info__: GwxCfg.prototype["$gwx"],  //解决 __vd_version_info__ is not defined<br>         __<span class="hljs-selector-tag">wxAppCode__</span>: <span class="hljs-selector-tag">wxAppCode</span>,<br>         <span class="hljs-selector-tag">setCssToHead</span>: <span class="hljs-selector-tag">cssRebuild</span><span class="hljs-selector-class">.bind</span>(<span class="hljs-selector-tag">handle</span>)<br>      }<br> <br>      let vm = new VM({sandbox: tsandbox});<br>      <span class="hljs-selector-tag">vm</span><span class="hljs-selector-class">.run</span>(<span class="hljs-selector-tag">code</span>);<br>      <span class="hljs-selector-tag">for</span> (<span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">name</span> <span class="hljs-selector-tag">in</span> <span class="hljs-selector-tag">wxAppCode</span>) {<br>         if (name.endsWith(".wxss")) {<br>            handle.cssFile = path.resolve(frameName, "..", name);<br>            <span class="hljs-selector-tag">wxAppCode</span><span class="hljs-selector-attr">[name]</span>();<br>         }<br>      }<br>   }<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">function</span> <span class="hljs-selector-tag">runVM</span>(<span class="hljs-selector-tag">name</span>, <span class="hljs-selector-tag">code</span>) {
+      // let wxAppCode = {}, handle = {cssFile: name};
+      // let vm = new VM({
+      //    sandbox: Object.assign(new GwxCfg(), {
+      //       __wxAppCode__: wxAppCode,
+      //       setCssToHead: cssRebuild.bind(handle)
+      //    })
+      // });
+      // vm.run(code);
+      // for (let name in wxAppCode) if (name.endsWith(".wxss")) {
+      //    handle.cssFile = path.resolve(frameName, "..", name);
+      //    wxAppCode[name]();
+      // }
+ 
+      let wxAppCode = {};
+      let handle = {cssFile: name};
+      let gg = new GwxCfg();
+      let tsandbox = {
+         $gwx: GwxCfg.prototype["$gwx"],
+         __mainPageFrameReady__: GwxCfg.prototype["$gwx"],   //解决 $gwx is not defined
+         __vd_version_info__: GwxCfg.prototype["$gwx"],  //解决 __vd_version_info__ is not defined
+         __<span class="hljs-selector-tag">wxAppCode__</span>: <span class="hljs-selector-tag">wxAppCode</span>,
+         <span class="hljs-selector-tag">setCssToHead</span>: <span class="hljs-selector-tag">cssRebuild</span><span class="hljs-selector-class">.bind</span>(<span class="hljs-selector-tag">handle</span>)
+      }
+ 
+      let vm = new VM({sandbox: tsandbox});
+      <span class="hljs-selector-tag">vm</span><span class="hljs-selector-class">.run</span>(<span class="hljs-selector-tag">code</span>);
+      <span class="hljs-selector-tag">for</span> (<span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">name</span> <span class="hljs-selector-tag">in</span> <span class="hljs-selector-tag">wxAppCode</span>) {
+         if (name.endsWith(".wxss")) {
+            handle.cssFile = path.resolve(frameName, "..", name);
+            <span class="hljs-selector-tag">wxAppCode</span><span class="hljs-selector-attr">[name]</span>();
+         }
+      }
+   }</code></pre></div>
+
+
+
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="获取wxapkg文件"><a href="#获取wxapkg文件" class="headerlink" title="获取wxapkg文件"></a>获取wxapkg文件</h3><ol>
 <li><p>安装夜深模拟器（但是这里有个问题，夜深模拟器可能用不了，我只记得是多开器里开一个新的才行，而且以后每次使用都得切换成那个新的）</p>
 <center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/e09793ce1f6c1e1b7df8ee715ffe644.png" srcset="/img/loading.gif" lazyload="" width="50%"></center>
@@ -280,7 +311,7 @@
 <li><p>打开夜深模拟器登录微信，点击需要学(piao)习(qie)的微信小程序</p>
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li><p>打开RE文件管理器（没有的话就先安装吧）,到如下目录,打开这个看着名字是十六进制且很长的文件夹（每个人的会不一样）</p>
 <center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/ee216cc30578465e21856c8e9129287.png" srcset="/img/loading.gif" lazyload="" width="50%"></center>
 </li>
@@ -292,14 +323,17 @@
 </ol>
 <h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><ol>
 <li><p>打开nodejs</p>
-<p> <img src="https://upload-images.jianshu.io/upload_images/19330433-85c7fe8788ed7a1f.png?imageMogr2/auto-orient/strip|imageView2/2/w/338/format/webp" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<p> <img src="https://upload-images.jianshu.io/upload_images/19330433-85c7fe8788ed7a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/338/format/webp" srcset="/img/loading.gif" lazyload="" alt="img"></p>
 <p> 跳转到反编译脚本的目录，例如反编译脚本呢放在D盘，且反编译脚本文件夹名为”wxappUnpacker“，如果是Windows系统( 如果是Linux去掉下面那个蛋疼的 /d)，则在node.js command pormpt输入：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd/d D:\wxappUnpacker<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">cd/d D:\wxappUnpacker</code></pre></div>
+
 <p>或</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd D:\wxappUnpacker<br>cd D:<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">cd D:\wxappUnpacker
+cd D:</code></pre></div>
 </li>
 <li><p>跳转到反编译脚本的根目录之后，在电脑文件夹里找到wxapkg文件，例如wxapkg文件放在D盘，且文件名为_000000_1.wxapkg，则在node.js command pormpt输入：</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">node wuWxapkg.js -d D:\_000000_1.wxapkg<br></code></pre></td></tr></tbody></table></figure>
+<div class="hljs code-wrapper"><pre><code class="hljs shell">node wuWxapkg.js -d D:\_000000_1.wxapkg</code></pre></div>
+
 <p>再回车</p>
 </li>
 <li><p>最后去找和.wxapkg文件相同路径下的同名文件夹，该文件用<strong>微信开发者工具</strong>打开即可。</p>
