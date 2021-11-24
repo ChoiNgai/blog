@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="特征选择方法 FisherScore">
+  <meta name="description" content="Introduction如果了解过数学建模，那么你一定会听说过主成分分析。事实上，数学建模比赛很少用到主成分分析，主要是烂大街了，但不得不说……主成分分析解决某些问题的时候还是挺香的。 主成分分析是一种特征提取方法（对的，不是特征选择方法），主成分分析常用于降维，但有个问题是经过主成分分析降维后的数据不是原数据的子集（特征子空间）。这样的数据并不利于开展后续的一些工作。在这里介绍一种比较常用的特征">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特征选择FisherScore">
+<meta property="og:url" content="http://example.com/2020/11/03/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9FisherScore/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="Introduction如果了解过数学建模，那么你一定会听说过主成分分析。事实上，数学建模比赛很少用到主成分分析，主要是烂大街了，但不得不说……主成分分析解决某些问题的时候还是挺香的。 主成分分析是一种特征提取方法（对的，不是特征选择方法），主成分分析常用于降维，但有个问题是经过主成分分析降维后的数据不是原数据的子集（特征子空间）。这样的数据并不利于开展后续的一些工作。在这里介绍一种比较常用的特征">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-03T13:45:08.000Z">
+<meta property="article:modified_time" content="2020-11-06T12:54:24.673Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="特征选择方法 FisherScore">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>特征选择FisherScore - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="特征选择FisherScore">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-11-03 21:45" pubdate>
+        2020年11月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">特征选择FisherScore</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>如果了解过数学建模，那么你一定会听说过主成分分析。事实上，数学建模比赛很少用到主成分分析，主要是烂大街了，但不得不说……主成分分析解决某些问题的时候还是挺香的。</p>
+<p>主成分分析是一种特征提取方法（对的，不是特征选择方法），主成分分析常用于降维，但有个问题是经过主成分分析降维后的数据不是原数据的子集（特征子空间）。这样的数据并不利于开展后续的一些工作。在这里介绍一种比较常用的特征选择方法。</p>
+<h2 id="特征选择方法"><a href="#特征选择方法" class="headerlink" title="特征选择方法"></a>特征选择方法</h2><p>特征选择方法主要分为三类：1）Filter（过滤式）； 2）Wrapper（包裹式） ；3） Embedded（嵌入式） 。</p>
+<ul>
+<li><p>Filter方法（过滤式）</p>
+<p>​    对每个特征“打分”，然后依据权重排序。</p>
+<p>常见方法：</p>
+<ul>
+<li>Chi-squared test（卡方检验）</li>
+<li>Information gain（信息增益）</li>
+<li>Correlation coefficient scores（相关系数）</li>
+<li>Wrapper方法（包裹式）</li>
+</ul>
+<p>将子集的选择看作是一个搜索寻优问题，生成不同的组合，比较。这样就将子集的选择看作是一个优化问题，这里有很多的优化算法可以解决，如GA、PSO（如：优化算法-粒子群算法）、DE、ABC（如：优化算法-人工蜂群算法）等。</p>
+<p>常见方法：</p>
+<p> 递归特征消除算法 </p>
+</li>
+</ul>
+<ul>
+<li><p>Embedded方法（嵌入式）</p>
+<p>在模型既定的情况下学习出对提高模型准确性最好的特征。也就是在确定模型的过程中，挑选出那些对模型的训练有重要意义的特征。</p>
+<p>常见方法：</p>
+<p>简单易学的机器学习算法–岭回归（Ridge Regression），就是线性回归过程加入了L2正则项。</p>
+</li>
+</ul>
+<h2 id="FisherScore"><a href="#FisherScore" class="headerlink" title="FisherScore"></a>FisherScore</h2><h3 id="数学原理"><a href="#数学原理" class="headerlink" title="数学原理"></a>数学原理</h3><p>Fisher Score是目前较为广泛使用的一种有监督的特征选择方法, 原理较为简单，其核心思想是在最大化类间散度的同时最小化类内散度. 设数据集为${ z_i,y_i },i=1,2..,N$ ,其中$z_i \in R^{N \times 1}$为数据特征, $y_i \in {1,2,…,C } $为类别标签, $D$ 为数据维数, $C$ 为类别总数, $N$ 是样本个数,其中 $tr(·)$ 表示矩阵的迹, 则数据矩阵$z_i \in R^{D \times N}$的Fisher Score 其定义为：<br>$$<br>FS(Z)=tr{(S_t)^{-1}S_b}<br>$$<br>类间散度矩阵：<br>$$<br>S_b=\sum_{i=1}^Cn_i(r_i-r)(r_i-r)^T<br>$$<br>总散度矩阵 ：<br>$$<br>S_t=\sum_{j=1}^N(z_j-r)(z_j-r)^T<br>$$<br>其中$n_i$为第$i$类数据的个数，${ i }$为第$i$类数据下标的集合，</p>
+<p>第$i$类数据的中心：<br>$$<br>r_i= \frac{1}{n_i} \sum_{j \in {i }Z_j }<br>$$<br>所有数据的中心:<br>$$<br>r = \frac{1}{N}\sum^N_{j=1}Z_j<br>$$<br>最终得到的FS即使为各个特征的分数，分数越高则表示该特征对标签的影响程度越高。</p>
+<h3 id="适用情况"><a href="#适用情况" class="headerlink" title="适用情况"></a>适用情况</h3><p>FisherScore适用于对<strong>离散</strong>的数值作为因变量（即标签）筛选出特征评分。所有也有学者用这种方法来完成图像分类。。。</p>
+<p>没了，之后再介绍一下<strong>Laplacian score</strong>吧~</p>
+<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[redu,W,List]</span> = <span class="hljs-title">fsFisher</span><span class="hljs-params">(X,Y,selectrate)</span></span><br><br><span class="hljs-comment">%Fisher Score, use the N var formulation</span><br><span class="hljs-comment">%input:   X, the data, each row is an instance</span><br><span class="hljs-comment">%            Y, the label in 1 2 3 ... format</span><br><span class="hljs-comment">%           selectrate， 0.1 0.2 0.3...0.9选择的属性数目占总属性数目的比例</span><br><span class="hljs-comment">%output</span><br><span class="hljs-comment">%      redu %if selectrate=0.5, redu为top 50% 的属性</span><br><span class="hljs-comment">%     W%各个特征的Fisher score得分</span><br><span class="hljs-comment">%     List%各个特征按照Fisher score得分排序</span><br><span class="hljs-comment">%调用格式 [W,List]=fsFisher(c,d)</span><br>numC = <span class="hljs-built_in">max</span>(Y);<span class="hljs-comment">%类别数目</span><br>[~, numF] = <span class="hljs-built_in">size</span>(X);<span class="hljs-comment">%特征总数numF</span><br>m=<span class="hljs-built_in">ceil</span>(selectrate*numF);<span class="hljs-comment">%最终选择的属性的数目</span><br>W = <span class="hljs-built_in">zeros</span>(<span class="hljs-number">1</span>,numF);<br><br><span class="hljs-comment">% statistic for classes</span><br>cIDX = cell(numC,<span class="hljs-number">1</span>);<span class="hljs-comment">%cIDX存储属于某一类的样本</span><br>n_i = <span class="hljs-built_in">zeros</span>(numC,<span class="hljs-number">1</span>);<span class="hljs-comment">%n_i存储每一类的样本数</span><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:numC<br>    cIDX{<span class="hljs-built_in">j</span>} = <span class="hljs-built_in">find</span>(Y(:)==<span class="hljs-built_in">j</span>);<br>    n_i(<span class="hljs-built_in">j</span>) = <span class="hljs-built_in">length</span>(cIDX{<span class="hljs-built_in">j</span>});<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">% calculate score for each features</span><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:numF<span class="hljs-comment">%</span><br>    temp1 = <span class="hljs-number">0</span>;<br>    temp2 = <span class="hljs-number">0</span>;<br>    f_i = X(:,<span class="hljs-built_in">i</span>);<br>    u_i = <span class="hljs-built_in">mean</span>(f_i);<span class="hljs-comment">%每一个特征的均值</span><br>    <br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:numC<span class="hljs-comment">%类别数numC</span><br>        u_cj = <span class="hljs-built_in">mean</span>(f_i(cIDX{<span class="hljs-built_in">j</span>}));<br>        var_cj = var(f_i(cIDX{<span class="hljs-built_in">j</span>}),<span class="hljs-number">1</span>);<br>        temp1 = temp1 + n_i(<span class="hljs-built_in">j</span>) * (u_cj-u_i)^<span class="hljs-number">2</span>;<br>        temp2 = temp2 + n_i(<span class="hljs-built_in">j</span>) * var_cj;<br>    <span class="hljs-keyword">end</span><br>    <br><span class="hljs-comment">%     if temp1 == 0</span><br><span class="hljs-comment">%         out.W(i) = 0;</span><br><span class="hljs-comment">%     else</span><br>        <span class="hljs-keyword">if</span> temp2 == <span class="hljs-number">0</span><br>            W(<span class="hljs-built_in">i</span>) = <span class="hljs-number">1000000</span>;<span class="hljs-comment">%分母为0，应为正无穷，用一个很大的数代替</span><br>        <span class="hljs-keyword">else</span><br>            W(<span class="hljs-built_in">i</span>) = temp1/temp2;<br>        <span class="hljs-keyword">end</span><br><span class="hljs-comment">%     end</span><br><span class="hljs-keyword">end</span><br>[~, List] = <span class="hljs-built_in">sort</span>(W, <span class="hljs-string">'descend'</span>);<span class="hljs-comment">%各个特征的排序</span><br>redu=List(<span class="hljs-number">1</span>:m);<br><span class="hljs-comment">% redu=[];</span><br><span class="hljs-comment">% for i=1:m</span><br><span class="hljs-comment">%     redu=[redu find(List==i)];</span><br><span class="hljs-comment">% end</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-comment">%clear;clc;close all</span><br>load iris.dat	<span class="hljs-comment">%导入数据</span><br>[redu,FS,List] = fsFisher(iris(:,<span class="hljs-number">1</span>:<span class="hljs-number">4</span>),iris(:,<span class="hljs-number">5</span>),<span class="hljs-number">0.6</span>)<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a href="https://blog.csdn.net/jliang3/article/details/88912464" target="_blank" rel="noopener">特征选择/筛选方法总结</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/">数据科学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">特征工程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/03/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9-Laplacian-Score/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">特征选择 LaplacianScore</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/03/%E6%8B%9F%E5%90%88-%E6%8F%92%E5%80%BC-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/">
+                        <span class="hidden-mobile">拟合&插值&函数逼近</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

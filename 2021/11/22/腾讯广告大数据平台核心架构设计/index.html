@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="">
+  <meta name="description" content="转载自广告大数据平台核心架构设计，侵删 本篇文章讲解了腾讯广告大数据的整体架构，讲解了具体细分的模块以及多年的更新迭代，个人觉得对大数据领域的广告业务很有参考价值，故转载。  腾讯广告平台产品部大数据平台承担着腾讯视频、腾讯新闻客户端、腾讯网、腾讯体育、QQ音乐等腾讯系媒体和部分外部媒体的广告数据的接入、处理和应用。在过去的几年中，伴随着广告业务的快速发展，大数据平台架构也经历了一系列的升级。本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯广告大数据平台核心架构设计">
+<meta property="og:url" content="http://example.com/2021/11/22/%E8%85%BE%E8%AE%AF%E5%B9%BF%E5%91%8A%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="转载自广告大数据平台核心架构设计，侵删 本篇文章讲解了腾讯广告大数据的整体架构，讲解了具体细分的模块以及多年的更新迭代，个人觉得对大数据领域的广告业务很有参考价值，故转载。  腾讯广告平台产品部大数据平台承担着腾讯视频、腾讯新闻客户端、腾讯网、腾讯体育、QQ音乐等腾讯系媒体和部分外部媒体的广告数据的接入、处理和应用。在过去的几年中，伴随着广告业务的快速发展，大数据平台架构也经历了一系列的升级。本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145919366.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145950146.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150022801.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150047975.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150113763.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150142550.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150204557.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150226743.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150249741.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150312441.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150334025.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150359628.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150438918.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150506771.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150532231.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150615727.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150644744.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150717487.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150744034.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150805588.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150831504.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150900580.png">
+<meta property="article:published_time" content="2021-11-22T05:12:32.000Z">
+<meta property="article:modified_time" content="2021-11-22T07:13:22.707Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="数据平台">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145919366.png">
+  
+  <title>腾讯广告大数据平台核心架构设计 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="腾讯广告大数据平台核心架构设计">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-22 13:12" pubdate>
+        2021年11月22日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">腾讯广告大数据平台核心架构设计</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>转载自<a href="https://mp.weixin.qq.com/s/1bVUOnKgpC5mjCvCz4TLdg" target="_blank" rel="noopener">广告大数据平台核心架构设计</a>，侵删</p>
+<p>本篇文章讲解了腾讯广告大数据的整体架构，讲解了具体细分的模块以及多年的更新迭代，个人觉得对大数据领域的广告业务很有参考价值，故转载。</p>
+</blockquote>
+<p>腾讯广告平台产品部大数据平台承担着腾讯视频、腾讯新闻客户端、腾讯网、腾讯体育、QQ音乐等腾讯系媒体和部分外部媒体的广告数据的接入、处理和应用。在过去的几年中，伴随着广告业务的快速发展，大数据平台架构也经历了一系列的升级。本文将从广告数据接入、处理、应用三个层面剖析大数据平台的核心架构设计，重点分享百亿级广告日志数据的接入架构设计（云落地系统）、广告数据  session 化实现（ logjoin 系统)、PB 级数据的 OLAP 查询 Lambda 架构设计。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145919366.png" srcset="/img/loading.gif" lazyload="" alt="图1. 大数据平台整体架构"></p>
+<h2 id="1-数据接入"><a href="#1-数据接入" class="headerlink" title="1 数据接入"></a><strong>1 数据接入</strong></h2><hr>
+<p>大数据平台接入的数据主要包括3个大类：业务维度数据、媒体流量数据、广告流量数据，如图2所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122145950146.png" srcset="/img/loading.gif" lazyload="" alt="图2. 数据接入架构"></p>
+<h3 id="1-1-业务维度数据"><a href="#1-1-业务维度数据" class="headerlink" title="1.1 业务维度数据"></a><strong>1.1 业务维度数据</strong></h3><hr>
+<p>业务维度数据主要包括广告客户数据、广告下单数据、广告排期数据、广告位数据，这些数据原生位于广告投放体系中的其他业务系统如CRM系统、Order系统、Planning系统。大数据平台使用3种方式获取这种维度数据：</p>
+<p>1）业务提供数据接口，平台主动拉</p>
+<p>2）业务提供表schema/IP/端口，平台编写业务逻辑SQL，主动拉取</p>
+<p>3）平台提供接口，业务主动调用接口上传</p>
+<h3 id="1-2-媒体流量数据"><a href="#1-2-媒体流量数据" class="headerlink" title="1.2 媒体流量数据"></a><strong>1.2 媒体流量数据</strong></h3><hr>
+<p>媒体流量数据来源于媒体，主要包括腾讯视频播放数据、腾讯新闻浏览数据，这些媒体数据通过腾讯公司级数据仓库TDW出库到大数据平台侧的Hadoop集群。媒体流量数据主要有两大类用途：</p>
+<p>1）结合媒体数据分析广告的投放效果和售卖效果</p>
+<p>2）ETL清洗后为算法服务提供原始特征数据</p>
+<h3 id="1-3-广告流量数据"><a href="#1-3-广告流量数据" class="headerlink" title="1.3 广告流量数据"></a><strong>1.3 广告流量数据</strong></h3><hr>
+<p>广告流量数据包括广告的检索、曝光、点击数据，是整个大数据平台自有的核心数据。鉴于腾讯视频、腾讯新闻客户端、腾讯网等媒体的巨大流量（日均百亿级广告PV、峰值QPS40万），如何采集和传输这海量广告日志数据成为大数据平台首先需要面对的挑战，这个挑战主要体现在以下3个方面：</p>
+<p>1）数据总量大、峰值压力高</p>
+<p>2）数据的可靠性、实时性要求极高</p>
+<p>3）业务数据种类繁多且业务变化快</p>
+<p>因此，一个良好的数据采集传输系统需要具备下述特性：</p>
+<p>1）高可靠性和高可扩展性，完善的容错和负载均衡机制，可水平扩展的处理能力；</p>
+<p>2）支持离线分析系统和实时计算系统；</p>
+<p>3）能够灵活快速响应业务需求，实现数据字段新增、修改。</p>
+<p>大数据平台2016年前的广告流量数据接入架构如图3-1所示。在这套广告流量数据接入架构中，广告流量数据落地功能是和业务server耦合的，共同部署在接入层server上，通过本地的各配置文件生成多个落地器，在单机上实现数据分拣（分拣：不同流量来源的数据落地到不同的目的路径），并按照配置的字段挑选数据。落地数据定时批量从server磁盘上传HDFS集群。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150022801.png" srcset="/img/loading.gif" lazyload="" alt="图3 - 1. 广告流量数据接入架构（就）"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150047975.png" srcset="/img/loading.gif" lazyload="" alt="图3 - 2. 广告流量数据接入架构（新）"></p>
+<p>这个广告流量数据接入架构的主要缺陷在于：</p>
+<p>1）通过白名单式的配置挑选落地字段，没有完整请求数据，没有可恢复的数据现场</p>
+<p>2）和业务server重度耦合，每条数据都要串行遍历所有落地器处理，性能较差</p>
+<p>3）配置修改比较复杂，在业务较多的服务，如点击服务器，修改配置的复杂度不低于修改代码，易出错</p>
+<p>4）业务变化涉及众多服务器升级，运维工作量大，一致性难保证。</p>
+<p>为了解决这个广告流量数据接入架构存在的上述问题，大数据平台对此架构进行了重构升级，搭建了新一代广告流量数据接入系统——云落地。云落地系统的设计目标是建成广告效果数据总线以实现数据集中接入、秒级实时处理、下游业务各取所需、业务变更不停数据流。</p>
+<p>云落地系统主要由Storm、TDBank(腾讯自研的分布式消息队列)、Hadoop等分布式系统组件构建，总体架构采用分层结构，如图4所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150113763.png" srcset="/img/loading.gif" lazyload="" alt="图4. 云落地系统架构"></p>
+<p>业务服务器包含云落地系统所对接的各种业务日志服务器。发送Agent包含收集业务日志数据并进行转发的Sender。传输层使用TDBank，接收Agent发送的日志数据。核心分拣层包含2个分拣引擎：实时分拣引擎以及作为容错机制的离线分拣引擎。实时分拣在Storm Topology中实现。离线分拣使用Hadoop MapReduce实现。当实时分拣数据流出现问题时，可用离线分拣进行数据分拣，依然能保证数据完整性。存储层是HDFS分布式文件系统以及TDBank，其中HDFS存储支持下游离线数据应用，TDBank存储支持下游实时计算系统。云落地系统整体数据流如图5所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150142550.png" srcset="/img/loading.gif" lazyload="" alt="图5. 云落地系统整体数据流"></p>
+<p>云落地目前接入了腾讯网，腾讯视频，腾讯新闻客户端，微信/手Q新闻插件等业务，已覆盖所有广平数据业务。日均接收原始请求数百亿级，峰值QPS 40W/S。平均处理延迟7.5s。云落地系统将服务和数据解耦，提高了业务响应能力；配置中心化，一个业务，只需要维护一个配置，数据一致性得到保障；Hadoop和Storm结合保证了数据接入和传输的高可靠性和高可扩展性；云落地系统强化数据总线概念，所有的数据都从云分拣“入”，所有的数据需求都从云分拣“出”。</p>
+<h2 id="2-数据处理"><a href="#2-数据处理" class="headerlink" title="2 数据处理"></a><strong>2 数据处理</strong></h2><h3 id="2-1-业务维度表构建"><a href="#2-1-业务维度表构建" class="headerlink" title="2.1 业务维度表构建"></a><strong>2.1 业务维度表构建</strong></h3><hr>
+<p>针对上文中提到的业务维度数据，数据处理流程做的主要工作是生成一系列的维度表，这一系列的维度表将被用于数据建模时维度的扩展。例如对于广告下单数据，数据平台会生成以订单号oid为key的维度表，该维度表中还包括如客户ID，广告排期等其他订单号相关的属性。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150204557.png" srcset="/img/loading.gif" lazyload="" alt="图6. 维度表Schema设计"></p>
+<p>一个维度表最终的物理存储形式为HDFS上的一个文件，大数据平台目前维护着数百份维度表，这些维度表的更新周期包括按天、按小时等等。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150226743.png" srcset="/img/loading.gif" lazyload="" alt="图7. 维度表物理存储"></p>
+<h3 id="2-2-媒体流量数据ETL"><a href="#2-2-媒体流量数据ETL" class="headerlink" title="2.2 媒体流量数据ETL"></a><strong>2.2 媒体流量数据ETL</strong></h3><hr>
+<p>媒体流量数据通过TDW由媒体侧出库到大数据平台侧的Hadoop集群，之后数据平台将进行必要的数据清洗和转换以构建数据模型。</p>
+<h3 id="2-3-广告流量数据ETL"><a href="#2-3-广告流量数据ETL" class="headerlink" title="2.3 广告流量数据ETL"></a><strong>2.3 广告流量数据ETL</strong></h3><hr>
+<p>对于通过云落地系统接入的广告流量数据，ETL流程通过清洗、关联和转换以实现数据的一致性、完整性、标准化。数据平台2017年前的ETL流程和业界通用的ETL流程类似，通过离线的Map/Reduce程序对广告日志进行清洗、关联和转换,清洗程序包括小时级的和天级的，清洗程序的调度通过TDW LZ平台实现，如图8所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150249741.png" srcset="/img/loading.gif" lazyload="" alt="图8. ETL清洗任务"></p>
+<p>这种离线数据ETL方式主要存在以下问题：</p>
+<p>1）数据时效性差: </p>
+<p>采用离线清洗,不能给下游实时统计提供实时流量，下游统计分析仅支持到T+1（1表示小时或者天，绝大部分数据为天）</p>
+<p>2）离线清洗计算引擎落后: </p>
+<p>离线清洗基于Hadoop MapReduce, 一方面计算中间结果需要存放到hdfs中，效率较低，另一方面支持的算子仅有Map和Reduce，表达能力欠缺，需要手工写很多代码，较难维护。</p>
+<p>针对以上不足，大数据平台在2017年对数据ETL系统进行了重构升级，升级后的ETL系统架构如图9所示。新的ETL系统由两大部分组成，实时ETL和离线ETL。</p>
+<p>1）实时ETL: 基于实时LogJoin(下文会介绍)的输出，构建实时清洗，为下游实时业务提供基础数据。</p>
+<p>2）离线ETL: 清洗计算引擎升级为spark，提升处理速度。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150312441.png" srcset="/img/loading.gif" lazyload="" alt="图9. 实时ETL架构图"></p>
+<p>实时ETL分事实数据生成维度数据Join两个主模块。事实数据生成模块主要负责数据过滤，转换，格式化处理，生成事实表模型；维度数据Join模块负责根据不同的实时业务需求，关联不同的维度数据。实时ETL生成的数据将被用于实时查询引擎实时数据的查询以及算法需要的实时特征数据。</p>
+<h3 id="2-4-广告数据Session化"><a href="#2-4-广告数据Session化" class="headerlink" title="2.4 广告数据Session化"></a><strong>2.4 广告数据Session化</strong></h3><hr>
+<p>广告数据session化，即构建从用户产生一个广告请求到曝光以及最终产生点击的session级数据模型，实时logjoin就是用来实现广告数据session化的系统。广告检索日志、曝光日志、点击日志三路数据将通过实时logjoin模块进行整合，曝光、点击数据只需携带关键信息，其他信息由检索数据填充。目前广告曝光点击等效果日志关联是离线任务方式执行，延迟至少2个小时，通过实时logjoin可以有效服务算法实时CTR。LogJoin整体架构图如图10所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150334025.png" srcset="/img/loading.gif" lazyload="" alt="图10. 实时LogJoin架构"></p>
+<p>LogJoin项目主要意义：</p>
+<p>1）提升数据一致性。以发布测数据为准，曝光、点击、动作数据都向发布数据靠，保证数据一条线的一致性；</p>
+<p>2）提升数据完整性。减少大字段导致的http截断等用户侧上报场景下的问题；</p>
+<p>3）提升数据时效性。基于Storm做流式logjoin，秒级完成数据ETL。可供实时CTR预估，在线学习等，提升广告收益，并为海象等下游业务提速打下基础；</p>
+<p>4）精简曝光点击请求上报，节省用户流量；</p>
+<p>5）解耦SDK和数据采集，提升新需求的响应速度；</p>
+<p>6）基础数据底层schema重构优化，对各种业务不同格式数据建立统一底层数据模型，降低系统复杂度；</p>
+<p>7）实时补全日志，纬度信息更加丰富，可支持实时多维分析。</p>
+<h3 id="核心业务逻辑"><a href="#核心业务逻辑" class="headerlink" title="核心业务逻辑"></a><strong>核心业务逻辑</strong></h3><p>LogJoin的核心业务逻辑是将用户产生的一个广告从请求到曝光以及最终产生点击的完整日志数据Join到一起，LogJoin通过将一个广告的请求、曝光、点击写到Hbase的同一行中的Column Family并通过不同的qualifier来标识请求、曝光、点击来实现Join的功能,如图11所示。LogJoin中数据的实时清洗以及读写HBase的操作都是在JStorm中完成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150359628.png" srcset="/img/loading.gif" lazyload="" alt="图11. 实时LogJoin业务逻辑"></p>
+<p>在HBase里一次广告检索对应后续的所有曝光和点击日志都保存在同一个RowKey对应的行，三种日志放在不同的列里，如图12所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150438918.png" srcset="/img/loading.gif" lazyload="" alt="图12. 实时LogJoin HBase设计"></p>
+<p>HBase设计中包含一个Family，其他数据包括</p>
+<p>qualifier[common]  #检索日志中所有订单共享的信息，单列</p>
+<p>qualifier[q_soid]   #检索日志中选中订单相关信息，每个soid占1列</p>
+<p>qualifier[v_soid]   #曝光日志，每个曝光（soid）单独1列</p>
+<p>qualifier[c_soid]   #点击日志，每个点击（soid）单独1列</p>
+<p>LogJoin遇到的一个挑战是同一个用户的一次完整的广告session所产生的请求、曝光、点击数据是乱序上报的。对于用户的一次完整广告，理论上是按照先有请求，接着是曝光，最后是点击的顺序上报，但现实环境中，由于请求、曝光、点击日志数据在不同的服务器上产生，每台服务器的负载不同导致数据上报的速度不一致，这就造成LogJoin的JStorm程序会乱序接收到请求、曝光、点击数据，如图13所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150506771.png" srcset="/img/loading.gif" lazyload="" alt="图13. 检索曝光点击乱序上报"></p>
+<p>针对这种现象，LogJoin采用HBase行级锁并以CheckAndPut方式写入来保证数据的原子性。</p>
+<h3 id="LogJoin-JStorm核心设计"><a href="#LogJoin-JStorm核心设计" class="headerlink" title="LogJoin JStorm核心设计"></a><strong>LogJoin JStorm核心设计</strong></h3><p>LogJoin的核心处理逻辑在JStorm中实现，核心设计如图14所示，设计要点：</p>
+<p>1）流量隔离：按流量分为检索，曝光，点击等Spout，方便task数调整。</p>
+<p>2）多线程&amp;批处理：提升并发度，减少网络IO，提升吞吐量batch_num设为50，性能提升5倍。</p>
+<p>3）多级重试队列：提升点击join的时效性</p>
+<p>4）在线升级：落地字段增减，分拣规则调整等在线升级</p>
+<p>5）优雅重启：发送停止消费命令，先停止tube消费，再停止应用。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150532231.png" srcset="/img/loading.gif" lazyload="" alt="图14. LogJoin JStorm核心设计"></p>
+<h3 id="LogJoin-HBase核心设计"><a href="#LogJoin-HBase核心设计" class="headerlink" title="LogJoin HBase核心设计"></a><strong>LogJoin HBase核心设计</strong></h3><p>LogJoin中HBase设计要点是保证高吞吐与稳定性。HBase高吞吐与稳定性的保证主要通过RowKey的合理设计来防热点。LogJoin中HBase的RowKey长度设计固定为16字节，包括1字节前缀、2字节时间、13字节request_id，如图15所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150615727.png" srcset="/img/loading.gif" lazyload="" alt="图15. Rowkey设计"></p>
+<p>唯一键为广告投放体系生成的的request_id，request_id的生成规则如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150644744.png" srcset="/img/loading.gif" lazyload="" alt="图16. request_id设计"></p>
+<p>离线数据统计分析发现request_id不够散列，容易造成访问热点，需要增加散列前缀，因此RowKey中增加了1个字节长度的前缀，前缀计算方法为:</p>
+<p>(byte)Math.abs(hashCode(request_id)%256)</p>
+<p>RowKey中增加2字节的时间是为了实现基于时间局部性的IO优化。分析数据发现98%以上的Join动作可以在1分钟内完成，具有很强的时间相关性，BlockCache读缓存命中率低导致频繁访问HFile，造成IO利用率过高。对此的改进思路是尽可能的把相同时间的记录写到HFile中相邻的数据块(HBlock),从而提升 BlockCache缓存命中率。因此在RowKey中增加了时间信息，两个字节(小时,分钟)。效果是单机IO利用率从50%下降到20%以下。</p>
+<p>针对HBase，LogJoin还做了一系列的优化，这些优化包括：预分区，避免region split带来集群访问毛刺;BlockCache优化提升读效率;启用压缩算法:节省存储空间;MajorCompaction优化: 禁用，夜间流量低时，定时手工触发。</p>
+<p>截止目前，LogJoin系统运行指标：</p>
+<p>1）高吞吐：日均接入60亿检索，16亿曝光，峰值QPS 20w/s</p>
+<p>2）低延迟：数据秒级延迟，延迟（处理时间-数据时间）超过30s的比例&lt;0.16%, 超过60s的比例&lt;0.11%</p>
+<p>3）Join成功率高：曝光join检索的成功率&gt;99.4%;点击join曝光和检索的成功率&gt;99%</p>
+<p>4）业务效果: 实时CTR预估提升2%；点击过滤系统中可以将点击关联到的曝光、检索相关的信息作为过滤依据。</p>
+<h2 id="3-数据服务"><a href="#3-数据服务" class="headerlink" title="3 数据服务"></a><strong>3 数据服务</strong></h2><hr>
+<p>数据平台的数据服务可以分成在线数据服务和离线数据服务两大类。在线数据服务包括为实时CTR预估提供数据的LogJoin数据流、实时播控、点击过滤、计费，如图17所示。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150717487.png" srcset="/img/loading.gif" lazyload="" alt="图17. 在线数据服务"></p>
+<p>离线数据服务主要包括广告效果分析平台(Measurement)、广告运营分析平台(灯塔)以及自助查询OLAP系统 (盖亚 &amp; Walrus)、各个业务系统所需的广告执行数据的推送服务(涉及公司20+个部分，100+团队)。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150744034.png" srcset="/img/loading.gif" lazyload="" alt="图18. 离线数据服务"></p>
+<h3 id="3-1-数据建模"><a href="#3-1-数据建模" class="headerlink" title="3.1 数据建模"></a><strong>3.1 数据建模</strong></h3><hr>
+<p>离线数据服务的核心是数据的建模以及基于建模的异构数据的OLAP查询。</p>
+<p>数据建模的目标是基于业务视角，将原始的广告日志数据转化成业务所需的数据模型以便于业务侧的高效查询，这个过程中做的主要工作是维度的聚合、指标的计算。数据平台的数据模型包括实时模型和离线模型两个部分。</p>
+<p>实时模型通过接入实时ETL的结果数据利用Spark-streaming或Storm进行窗口聚合提供40+维度的广告曝光点击数据的实时查询(数据延迟在分钟级)。</p>
+<p>离线模型主要通过Spark或Hadoop任务基于任务DAG生成数据模型，数据平台现有模型21个，每个模型可查询维度40~250个，时间跨度为最近2年。</p>
+<h3 id="3-2-数据查询"><a href="#3-2-数据查询" class="headerlink" title="3.2 数据查询"></a><strong>3.2 数据查询</strong></h3><hr>
+<p>数据平台的数据查询服务主要包括两大类：</p>
+<p>1）通用型的多维聚合类查询，如库存计算、频次计算</p>
+<p>2）广告明细提取，人群包提取</p>
+<p>数据查询的挑战在于：</p>
+<p>1）数据量大（PB级别）、纬度多（单表200+纬）</p>
+<p>2）查询时间跨度大、聚合纬度多</p>
+<p>3）数据准确性高（不允许非精确值）</p>
+<p>4）查询性能要求高</p>
+<p>随着业务的不停增长，数据平台的查询引擎从也进行了一系列的升级</p>
+<p>1）第1代：以开源Infobright为基础的查询引擎</p>
+<p>2）第2代：以PIG为主要计算引擎的查询引擎(查询耗时小时级)</p>
+<p>3）第3代：Rocket AdHoc查询引擎(查询耗时秒级)</p>
+<p>4）第4代：当前的lambda架构查询引擎。</p>
+<h4 id="第1代查询引擎"><a href="#第1代查询引擎" class="headerlink" title="第1代查询引擎"></a><strong>第1代查询引擎</strong></h4><p>Infobright是开源的MySQL数据仓库解决方案，它将列存储、高强度的数据压缩、优化的统计计算引入到了MySQL中，对于处理亿级规模以下的数据具有较好的性能，但无法支持百亿级、千亿级数据的查询。随着业务的发展，数据平台需要查询的数据规模达到了万亿级，Infobright因为其有限的吞吐量已不能满足业务需求。</p>
+<h4 id="第2代查询引擎"><a href="#第2代查询引擎" class="headerlink" title="第2代查询引擎"></a><strong>第2代查询引擎</strong></h4><p>为了处理万亿级规模的数据，Pig被引入到了查询引擎中。Pig本质上是Map Reduce ON HDFS，由Yahoo在2006年开始开发，在2010成为Apache顶级项目。Pig是MapReduce的一个抽象，它提供了一种称为Pig Latin的高级语言来编写数据处理脚本。所有这些脚本都在Pig内部的Pig Engine组件转换为Map和Reduce任务。</p>
+<p>Pig提供了丰富的运算符集如join，sort，filer等来操作数据;Pig内部也会对Pig脚本进行优化，开发人员只需要关注语言的语义而不需要过度关注底层Map Reduce实现;Pig提供UDF(用户定义函数)的功能,开发人员可以通过其他编程语言（如Java、Python）创建UDF的功能，并且可以调用或嵌入到Pig脚本中。</p>
+<p>和其他基于Map Reduce的批处理工具类似，基于Pig的数据处理也是典型的IO密集型计算，其效率相对低下。对于例行化的批处理任务，Pig由于其支持大吞吐量的特性是一个不错的选择，但对于面向用户的查询引擎，Pig效率的低下(用户查询耗时在小时级)，越来越不能满足业务需求。</p>
+<h4 id="第3代查询引擎"><a href="#第3代查询引擎" class="headerlink" title="第3代查询引擎"></a><strong>第3代查询引擎</strong></h4><p>为了解决基于Pig的查询引擎查询性能低下的缺陷，Rocket查询引擎应运而生，其架构如图19所示。Rocket查询引擎是SparkSQL和Paruqet存储格式的结合。数据平台查询引擎的业务特点是计算多个维度聚合下的指标，计算引擎的查询压力集中在reduce端，极易发生数据倾和大规模shuffle的触发。因此Rocket采用了大宽表结构的数据模型。通过合理的数据预处理和Parquet列式存储的选择，Rocket查询引擎将用户查询的时间开销降低到了秒级。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150805588.png" srcset="/img/loading.gif" lazyload="" alt="图19. Rocket查询引擎架构图"></p>
+<p>Rocket查询引擎的数据预处理包括：</p>
+<p>1）大宽表构建：预先join所有常用维度;</p>
+<p>2）String转Int：更高的数据压缩比、更好的查询性能；</p>
+<p>3）行转列：高效数据压缩。</p>
+<p>Rocket查询引擎的数据组织：</p>
+<p>1）多分区方式：按全量、年、月分区，各分区独立schema、独立中间表。</p>
+<p>2）多版本管理：读写分离</p>
+<p>3）视图模型：多模型联合查询</p>
+<p>4）广播模型： 小表预先broadcast</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150831504.png" srcset="/img/loading.gif" lazyload="" alt="图20. Rocket查询引擎数据组织方式"></p>
+<h4 id="第4代查询引擎"><a href="#第4代查询引擎" class="headerlink" title="第4代查询引擎"></a><strong>第4代查询引擎</strong></h4><p>数据平台当前的查询引擎采用了lambda架构的经典设计，相比于之前3代查询引擎只支持离线数据的查询，当前lambda架构引入了实时数据的查询。</p>
+<p>Lambda 架构由Storm的作者NathanMarz提出，其设计目的在于提供一个能满足大数据系统关键特性的架构，包括高容错、低延迟、可扩展等。其整合离线计算与实时计算，融合不可变性、读写分离和复杂性隔离等原则，可集成Hadoop, Kafka, Spark，Storm等各类大数据组件。Lambda 架构可分解为三层Layer，即Batch Layer, Real-Time(Speed) Layer和ServingLayer。其中Batch Layer用于离线数据的处理和查询，Speed Layer用于实时数据的处理和查询，Serving Layer用于合并离线数据的查询结果和实时数据的查询结果作为最终的数据结果集。</p>
+<p>当前查询引擎lambda架构如图21所示，该设计架构支持万级别数据的查询能力，支持任意纬度的聚合、明细提取，95%的任务查询时间开销在秒级。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20211122150900580.png" srcset="/img/loading.gif" lazyload="" alt="图21. 查询引擎Lambda 架构设计"></p>
+<p>在接口层，当前架构支持两种类型的接口，包括HTTP接口和类SQL查询，{模型名，时间范围，筛选条件，聚合维度，指标} 五元素定义一个查询。在视图层，当前架构屏蔽了底层异构计算引擎；屏蔽模型中实体表与维度表的关联关系，对外以大宽表形式，降低使用门槛。在计算层，当前架构整体构建在spark on yarn之上。</p>
+<p>当前查询引擎的运营指标数据：</p>
+<p>1)当前对外开放查询数据总量：1.5P</p>
+<p>2)当前对方开放查询数据维度：250+</p>
+<p>3)日均查询读取数据量：500T</p>
+<p>4)近半年数据推送及查询涉及团队：28个部门、112个团队</p>
+<p>5)曝光收入类查询中位数耗时15s</p>
+<p>本文从数据接入、数据处理、数据应用三个层面剖析了大数据平台的架构设计，鉴于篇幅的限制，本文无法对数据平台中的每一个模块进行细致而全面的介绍，之后我们将通过开辟新的文章的方式对上文中提到的核心系统进行全面的分享。除了上文中提到的应用和服务之外，数据平台还负责着统一缓存服务(提供用户的基础属性等的查询)、TencentAdId服务、Poseidon海量标签检索服务等相对独立的数据服务，后面我们也将对此进行分享。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF/">大数据技术</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0/">数据平台</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/21/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB/">
+                        <span class="hidden-mobile">十种常见的排序算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

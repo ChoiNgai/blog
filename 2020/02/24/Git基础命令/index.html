@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="Git 版本管理">
+  <meta name="description" content="介绍Git是一个开源的分布式版本控制系统，现在基本上是软件开发、深度学习等各种与敲代码有关的项目都要是Git来完成版本管理了。 当然还有其他的版本控制工具，像是SVN等，但是现在基本上都是老一批的程序员大叔们在用了。 为什么要用Git软件开发，深度学习调参，代码肯定会有各种各种的改变，说不定这个版本还能运行，下个版本就GG了，与其找半天bug甚至根本找不出来还不如回滚旧版本。 Git有两种使用方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git基础命令">
+<meta property="og:url" content="http://example.com/2020/02/24/Git%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="介绍Git是一个开源的分布式版本控制系统，现在基本上是软件开发、深度学习等各种与敲代码有关的项目都要是Git来完成版本管理了。 当然还有其他的版本控制工具，像是SVN等，但是现在基本上都是老一批的程序员大叔们在用了。 为什么要用Git软件开发，深度学习调参，代码肯定会有各种各种的改变，说不定这个版本还能运行，下个版本就GG了，与其找半天bug甚至根本找不出来还不如回滚旧版本。 Git有两种使用方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-2.jpg">
+<meta property="article:published_time" content="2020-02-24T04:25:16.000Z">
+<meta property="article:modified_time" content="2020-09-21T14:19:58.242Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="Git 版本管理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-2.jpg">
+  
+  <title>Git基础命令 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git基础命令">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-02-24 12:25" pubdate>
+        2020年2月24日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Git基础命令</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：1 年前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Git是一个开源的分布式版本控制系统，现在基本上是软件开发、深度学习等各种与敲代码有关的项目都要是Git来完成版本管理了。 当然还有其他的版本控制工具，像是SVN等，但是现在基本上都是老一批的程序员大叔们在用了。</p>
+<h2 id="为什么要用Git"><a href="#为什么要用Git" class="headerlink" title="为什么要用Git"></a>为什么要用Git</h2><p>软件开发，深度学习调参，代码肯定会有各种各种的改变，说不定这个版本还能运行，下个版本就GG了，与其找半天bug甚至根本找不出来还不如回滚旧版本。</p>
+<p>Git有两种使用方式，Git Bash 、Git GUI </p>
+<ul>
+<li>Git Bash</li>
+</ul>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/c730cd900c1d6171737c0351c49396c.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p>对于新手特别是没接触过linux的童鞋来说，一开始就用Git bash可能会挺蓝瘦。但是，我建议用Git Bash</p>
+<ul>
+<li><p>Git GUI</p>
+<p>相比Git Bash，Git GUI的界面就没那么简洁啦（git bash界面确实简洁，就用户名+命令行）</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/484fdb423dc5c1c555fea3d98aa88bb.png" srcset="/img/loading.gif" lazyload="" alt="a995486c3a745d4cee7f2bdbb8557fb"></p>
+<p>功能来说Git GUI也确实没有Git Bash灵活，唯一的好(坏)处就是不用敲命令行</p>
+</li>
+</ul>
+<p>建议不管打算用Git Bash还是Git GUI都先了解下Git Bash的基础命令以便更快速地了解<strong>分布式版本控制</strong>，这里先只介绍Git Bash的基础命令</p>
+<h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p>下载并安装Git，在<code>我的电脑-鼠标右键添加属性-高级系统设置-环境变量-系统变量-Path</code>处添加变量，例如安装路径是<code>D:\Git</code>，那么就添加变量</p>
+<p><code>D:\Git\usr\bin\</code></p>
+<p><code>D:\Git\usr\bin\ssh-keygen.exe</code></p>
+<p>这样就能在电脑的任意文件夹位置打开git</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/80ef2b6371e96bf39133297493ccf7e.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<h2 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h2><h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><p>在你存放项目代码的文件夹，输入代码新建Git本地仓库</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git init</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>新建之后会出现一个git文件夹，并且存放项目代码的文件夹会出现一个<strong>绿色的勾</strong>,表示已经同步到本地分支；命令行用户最后面有个<strong>master</strong>，表示在本地的master分支。</p>
+<p> 此时可以通过命令git branch查看本地分支</p>
+<figure class="highlight mipsasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">git <span class="hljs-keyword">branch </span> <span class="hljs-comment">#查看本地分支</span><br>git <span class="hljs-keyword">branch </span>-r  <span class="hljs-comment">#查看远程分支</span><br>git <span class="hljs-keyword">branch </span>-a  <span class="hljs-comment">#查看所有分支</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>在这里先不介绍远程，先学会本地版本控制</p>
+<p>如果需要创建其他分支，可以用切换分支的命令加上参数创建分支</p>
+<figure class="highlight q"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs q">git checkout <span class="hljs-built_in">dev</span> #切换到本地的<span class="hljs-built_in">dev</span>分支<br>git checkout -b <span class="hljs-built_in">dev</span> #创建并切换到本地的<span class="hljs-built_in">dev</span>分支<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>修改文件后，<strong>绿色的勾</strong>会变成<strong>红色的感叹号</strong>，表示更新到git的分支(如果切换到了master分支，就表示该文件没有更新到master分支，如果切换到dev分支就表示该文件没有更新到dev分支)</p>
+<figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">git <span class="hljs-keyword">add</span> -A  <span class="hljs-meta">#将所有文件添加到暂存区</span><br>git commit -m <span class="hljs-string">"first commit"</span> <span class="hljs-meta">#这一步是备注，注意这个步骤一定要有，否则会提交失败</span><br>git <span class="hljs-keyword">push</span> -u origin master <span class="hljs-meta">#表示提交到远程master分支，在此只是因为没有关联远程分支暂且不管</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>如果某个分支要更新到跟另一个分支的文件一样，使用merge</p>
+<p>假设现在是在本地dev分支</p>
+<figure class="highlight crmsh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git checkout <span class="hljs-keyword">master</span> <span class="hljs-title">#切换到本地master</span><br>git merge dev <span class="hljs-comment">#把本地dev分支合并到当前本地分支(master)中</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="关联远程"><a href="#关联远程" class="headerlink" title="关联远程"></a>关联远程</h3><figure class="highlight crmsh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git checkout <span class="hljs-literal">master</span><br>git remote add origin https://github.com/coneycode/hexo-git-backup.git <span class="hljs-comment">#使用https，之后介绍ssh</span><br>git fetch origin <span class="hljs-keyword">master</span> <span class="hljs-title">#取回(名称为)origin</span>服务器的<span class="hljs-literal">master</span>分支，即拉取远程<span class="hljs-literal">master</span>分支<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><h4 id="首次创建仓库提交"><a href="#首次创建仓库提交" class="headerlink" title="首次创建仓库提交"></a>首次创建仓库提交</h4><figure class="highlight dockerfile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">git init   <span class="hljs-comment"># 本地创建仓库 </span><br>git <span class="hljs-keyword">add</span><span class="bash"> -A  <span class="hljs-comment"># 提交所有文件</span></span><br>git commit -m <span class="hljs-string">"first commit"</span>  <span class="hljs-comment"># 提交文件至本地缓存区</span><br>git remote <span class="hljs-keyword">add</span><span class="bash"> origin https://github.com/githubusername/githubrepositories.git <span class="hljs-comment">#添加远程仓库</span></span><br>git push -u origin master <span class="hljs-comment">#提交代码至远程仓库master分支</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h4 id="已有本地仓库提交"><a href="#已有本地仓库提交" class="headerlink" title="已有本地仓库提交"></a>已有本地仓库提交</h4><figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">git remote <span class="hljs-keyword">add</span> origin https://github.com/githubusername/githubrepositories.git <span class="hljs-meta">#添加远程仓库</span><br>git <span class="hljs-keyword">push</span> -u origin master <span class="hljs-meta">#提交代码至远程仓库master分支</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>如果是按照上面的方式提交，那么输入完<code>git push -u origin master</code>会弹出openssh的窗口，先输入<strong>账号名</strong>（就是仓库前的那个名字），再输入密码。每次都要这样岂不是很烦，所以推荐用SSH的方式提交。</p>
+<h2 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h2><p>如果是使用https拉取远程分支或者提交代码的话，是要输入账号密码的，麻烦的很，但是只要使用ssh就能省去填写账号密码啦～</p>
+<p>原理是本地生产ssh公钥和私钥，将<strong>公钥</strong>放在远程服务器（github、gitlab、coding、gitee），私钥放在本地，识别到能配对就不用填账号密码了。</p>
+<ul>
+<li><pre><code>  ssh-keygen -t rsa -C "your_email@example.com" #生产ssh密钥，文件位置在C:\Users\用户名\.ssh
+<figure class="highlight haml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs haml"><br>    <br>  <br>-<span class="ruby"> 登录github，头像处下拉框选择settings ；</span><br><br><span class="ruby">    </span><br><br><span class="ruby">- 点击侧边栏的<span class="hljs-string">`SSH and GPG keys`</span> ；</span><br><br><span class="ruby">    </span><br><br><span class="ruby">- 点击<span class="hljs-string">`New SSH key`</span>,title可以任意填，并且将之前生成的 id_rsa.pub 的内容用文本编辑器打开复制到key<span class="hljs-string">`输入框中。</span></span><br><br><br><br><span class="ruby">-</span><br></code></pre></td></tr></tbody></table></figure>
+  ssh -T git@github.com   #在本地电脑任意位置打开git bash输入此命令确认是否成功</code></pre><p>如果返回<code>Hi username! You’ve successfully authenticated, but GitHub does not provide shell access.</code>就说明成功啦！</p>
+<p>接下来就可以愉快地push代码了（前提是网速行，像baidu.com都打开的网速绝对不愉快）</p>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">git官方中文文档</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/tips/">tips</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/24/Git%E4%B8%8EGithub/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Github基础操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/02/23/tool/">
+                        <span class="hidden-mobile">工具箱</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

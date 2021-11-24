@@ -1,0 +1,1437 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="SQL">
+  <meta name="description" content="IntroductionSQL是目前数据分析必备的技能，Hadoop生态中的Hive与SQL语法也几乎一样，所以入门数据分析，SQL是必须掌握的。因为如果连取数都不熟练甚至取数不准确，怎么做数据分析呢？ SQLLesson0（体验）SQL不多介绍了，练习内容来自自学SQL网（侵删），题目答案均为自己写。 表格如下（表名 Movies ）：    Id Title Director Year Len">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL练习">
+<meta property="og:url" content="http://example.com/2021/02/23/SQL%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="IntroductionSQL是目前数据分析必备的技能，Hadoop生态中的Hive与SQL语法也几乎一样，所以入门数据分析，SQL是必须掌握的。因为如果连取数都不熟练甚至取数不准确，怎么做数据分析呢？ SQLLesson0（体验）SQL不多介绍了，练习内容来自自学SQL网（侵删），题目答案均为自己写。 表格如下（表名 Movies ）：    Id Title Director Year Len">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-23T15:39:14.000Z">
+<meta property="article:modified_time" content="2021-11-10T03:30:02.723Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>SQL练习 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL练习">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-23 23:39" pubdate>
+        2021年2月23日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL练习</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：14 天前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>SQL是目前数据分析必备的技能，Hadoop生态中的Hive与SQL语法也几乎一样，所以入门数据分析，SQL是必须掌握的。因为如果连取数都不熟练甚至取数不准确，怎么做数据分析呢？</p>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><h3 id="Lesson0（体验）"><a href="#Lesson0（体验）" class="headerlink" title="Lesson0（体验）"></a>Lesson0（体验）</h3><p>SQL不多介绍了，练习内容来自<a href="http://xuesql.cn/" target="_blank" rel="noopener">自学SQL网</a>（侵删），题目答案均为自己写。</p>
+<p>表格如下（表名 Movies ）：</p>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Title</th>
+<th>Director</th>
+<th>Year</th>
+<th>Length_minutes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Toy Story</td>
+<td>John Lasseter</td>
+<td>1995</td>
+<td>81</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A Bug’s Life</td>
+<td>John Lasseter</td>
+<td>1998</td>
+<td>95</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Toy Story 2</td>
+<td>John Lasseter</td>
+<td>1999</td>
+<td>93</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Monsters, Inc.</td>
+<td>Pete Docter</td>
+<td>2001</td>
+<td>92</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Finding Nemo</td>
+<td>Finding Nemo</td>
+<td>2003</td>
+<td>107</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The Incredibles</td>
+<td>Brad Bird</td>
+<td>2004</td>
+<td>116</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Cars</td>
+<td>John Lasseter</td>
+<td>2006</td>
+<td>117</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Ratatouille</td>
+<td>Brad Bird</td>
+<td>2007</td>
+<td>115</td>
+</tr>
+<tr>
+<td>9</td>
+<td>WALL-E</td>
+<td>Andrew Stanton</td>
+<td>2008</td>
+<td>104</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Up</td>
+<td>Pete Docter</td>
+<td>2009</td>
+<td>101</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Toy Story 3</td>
+<td>Lee Unkrich</td>
+<td>2010</td>
+<td>103</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Cars 2</td>
+<td>John Lasseter</td>
+<td>2011</td>
+<td>120</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Brave</td>
+<td>Brenda Chapman</td>
+<td>2012</td>
+<td>102</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Monsters University</td>
+<td>Dan Scanlon</td>
+<td>2013</td>
+<td>110</td>
+</tr>
+</tbody></table>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【初体验】这是第一题,请你先将左侧的输入框里的内容清空，然后请输入下面的SQL，您将看到所有电影标题：<br><code>SELECT title FROM movies</code> </li>
+<li>【初体验】请输入如下SQL你将看到4条电影（切记先清空数据框且出错要耐心比对）：<br><code>SELECT title,director FROM movies WHERE Id &lt; 5</code></li>
+<li>【初体验】输入如下SQL你将看到电影总条数：<br><code>SELECT count(*) FROM movies</code></li>
+<li>【初体验】SQL可以直接做计算，下面的SQL计算1+1的和,请输入：<br>SELECT 1+1</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title,director <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span> &lt;<span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span>(*) <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-number">1</span>+<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson1（查询）"><a href="#Lesson1（查询）" class="headerlink" title="Lesson1（查询）"></a>Lesson1（查询）</h3><p>表格与<strong>Lesson0</strong>相同</p>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【简单查询】找到所有电影的名称<code>title</code></li>
+<li>【简单查询】找到所有电影的导演</li>
+<li>【简单查询】找到所有电影的名称和导演</li>
+<li>【简单查询】找到所有电影的名称和上映年份</li>
+<li>【简单查询】找到所有电影的所有信息</li>
+<li>【简单查询】找到所有电影的名称,Id和播放时长</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>2、</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> director <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title,director <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title,<span class="hljs-keyword">year</span> <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>5.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+<p>6.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title,<span class="hljs-keyword">id</span>,length_minutes <span class="hljs-keyword">from</span> movies<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="Lesson2-条件查询-constraints-Pt-1"><a href="#Lesson2-条件查询-constraints-Pt-1" class="headerlink" title="Lesson2 :条件查询 (constraints) (Pt. 1)"></a>Lesson2 :<strong>条件查询 (constraints) (Pt. 1)</strong></h3><p>表格与<strong>Lesson0</strong>相同</p>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【简单条件】找到<code>id</code>为6的电影 ✓</li>
+<li>【简单条件】找到在2000-2010年间<code>year</code>上映的电影</li>
+<li>【简单条件】找到不是在2000-2010年间<code>year</code>上映的电影</li>
+<li>【简单条件】找到头5部电影</li>
+<li>【简单条件】找到2010（含）年之后的电影里片长小于两个小时的片子</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span>=<span class="hljs-number">6</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">between</span> <span class="hljs-number">2000</span> <span class="hljs-keyword">and</span> <span class="hljs-number">2010</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">between</span> <span class="hljs-number">2000</span> <span class="hljs-keyword">and</span> <span class="hljs-number">2010</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">id</span> &lt;=<span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>5.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">year</span> &gt;=<span class="hljs-number">2010</span> <span class="hljs-keyword">and</span> length_minutes &lt;<span class="hljs-number">120</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-3-条件查询-constraints-Pt-2"><a href="#Lesson-3-条件查询-constraints-Pt-2" class="headerlink" title="Lesson 3: 条件查询(constraints) (Pt. 2)"></a><strong>Lesson 3: 条件查询(constraints) (Pt. 2)</strong></h3><p>表格与<strong>Lesson0</strong>相同</p>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li><p>【复杂条件】找到所有<code>Toy Story</code>系列电影</p>
+</li>
+<li><p>【复杂条件】找到所有<code>John Lasseter</code>导演的电影</p>
+</li>
+<li><p>【复杂条件】找到所有不是<code>John Lasseter</code>导演的电影</p>
+</li>
+<li><p>【复杂条件】找到所有电影名为<code>"WALL-"</code>开头的电影</p>
+</li>
+<li><p>【复杂条件】有一部98年电影中文名《虫虫危机》请给我找出来</p>
+<p>1.</p>
+</li>
+</ol>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> movies <span class="hljs-keyword">where</span> title = <span class="hljs-string">'Toy Story'</span> <span class="hljs-keyword">or</span> title <span class="hljs-keyword">like</span> <span class="hljs-string">'Toy Story %'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>字符串用<kbd>' '</kbd>表示，字符串区分大小写</p>
+<p>like(模糊查询)， %（通配符） </p>
+<p>当使用通配符时，需要用like；当没有用通配符时，like没有用通配符等价于=，not like等价于!=</p>
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> movies <span class="hljs-keyword">where</span> Director = <span class="hljs-string">'John Lasseter'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> movies <span class="hljs-keyword">where</span> Director != <span class="hljs-string">'John Lasseter'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> movies <span class="hljs-keyword">where</span> title <span class="hljs-keyword">like</span> <span class="hljs-string">'WALL-%'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>5.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> movies <span class="hljs-keyword">where</span> <span class="hljs-keyword">year</span> = <span class="hljs-number">1998</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-4-查询结果Filtering过滤-和-sorting排序"><a href="#Lesson-4-查询结果Filtering过滤-和-sorting排序" class="headerlink" title="Lesson 4: 查询结果Filtering过滤 和 sorting排序"></a><strong>Lesson 4: 查询结果Filtering过滤 和 sorting排序</strong></h3><p>表格与<strong>Lesson0</strong>相同</p>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【结果排序】按导演名<code>排重</code>列出所有电影(只显示导演)，并按导演名正序排列</li>
+<li>【结果排序】列出按上映年份<code>最新</code>上线的4部电影</li>
+<li>【结果排序】按电影名字母序<code>升序</code>排列，列出前5部电影</li>
+<li>【结果排序】按电影名字母序升序排列，列出上一题<code>之后</code>的5部电影</li>
+<li>【结果排序】如果按片长排列，John Lasseter导演导过片长第3长的电影是哪部，列出名字即可</li>
+</ol>
+<p>1.</p>
+<p> <strong>DISTINCT</strong> 去重</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> director <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> director <span class="hljs-keyword">asc</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<p> 通过 <code>OFFSET</code> 指定从哪里开始剪，用 <code>LIMIT</code> 指定剪下多少长度 </p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">desc</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">4</span> <span class="hljs-keyword">offset</span> <span class="hljs-number">0</span><br><br><br><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">year</span> <span class="hljs-keyword">desc</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> title <span class="hljs-keyword">limit</span> <span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> title <span class="hljs-keyword">limit</span> <span class="hljs-number">5</span> <span class="hljs-keyword">offset</span> <span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>5.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> title <span class="hljs-keyword">from</span> movies <span class="hljs-keyword">where</span> director = <span class="hljs-string">'John Lasseter'</span><br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> length_minutes <span class="hljs-keyword">desc</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">1</span> <span class="hljs-keyword">offset</span> <span class="hljs-number">2</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-5（Review）-复习-SELECT-查询"><a href="#Lesson-5（Review）-复习-SELECT-查询" class="headerlink" title="Lesson 5（Review） 复习 SELECT 查询"></a><strong>Lesson 5（Review） 复习 SELECT 查询</strong></h3><p>Table(表）: North_american_cities</p>
+<table>
+<thead>
+<tr>
+<th>City</th>
+<th>Country</th>
+<th>Population</th>
+<th>Latitude</th>
+<th>Longitude</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Guadalajara</td>
+<td>Mexico</td>
+<td>1500800</td>
+<td>20.659699</td>
+<td>-103.349609</td>
+</tr>
+<tr>
+<td>Toronto</td>
+<td>Canada</td>
+<td>2795060</td>
+<td>43.653226</td>
+<td>-79.383184</td>
+</tr>
+<tr>
+<td>Houston</td>
+<td>United States</td>
+<td>2195914</td>
+<td>29.760427</td>
+<td>-95.369803</td>
+</tr>
+<tr>
+<td>New York</td>
+<td>United States</td>
+<td>8405837</td>
+<td>40.712784</td>
+<td>-74.005941</td>
+</tr>
+<tr>
+<td>Philadelphia</td>
+<td>United States</td>
+<td>1553165</td>
+<td>39.952584</td>
+<td>-75.165222</td>
+</tr>
+<tr>
+<td>Havana</td>
+<td>Cuba</td>
+<td>2106146</td>
+<td>23.05407</td>
+<td>-82.345189</td>
+</tr>
+<tr>
+<td>Mexico City</td>
+<td>Mexico</td>
+<td>8555500</td>
+<td>19.432608</td>
+<td>-99.133208</td>
+</tr>
+<tr>
+<td>Phoenix</td>
+<td>United States</td>
+<td>1513367</td>
+<td>33.448377</td>
+<td>-112.074037</td>
+</tr>
+<tr>
+<td>Los Angeles</td>
+<td>United States</td>
+<td>3884307</td>
+<td>34.052234</td>
+<td>-118.243685</td>
+</tr>
+<tr>
+<td>Ecatepec de Morelos</td>
+<td>Mexico</td>
+<td>1742000</td>
+<td>19.601841</td>
+<td>-99.050674</td>
+</tr>
+<tr>
+<td>Montreal</td>
+<td>Canada</td>
+<td>1717767</td>
+<td>45.501689</td>
+<td>-73.567256</td>
+</tr>
+<tr>
+<td>Chicago</td>
+<td>United States</td>
+<td>2718782</td>
+<td>41.878114</td>
+<td>-87.629798</td>
+</tr>
+</tbody></table>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【复习】列出所有加拿大人的<code>Canadian</code>信息(包括所有字段)</li>
+<li>【复习】列出所有在<code>Chicago</code>西部的城市，从西到东排序(包括所有字段)</li>
+<li>【复习】用人口数<code>population</code>排序,列出墨西哥<code>Mexico</code>最大的2个城市(包括所有字段)</li>
+<li>【复习】列出美国<code>United States</code>人口3-4位的两个城市和他们的人口(包括所有字段)</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> North_american_cities <span class="hljs-keyword">where</span> country=<span class="hljs-string">'Canada'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> North_american_cities <span class="hljs-keyword">where</span> longitude &lt; <span class="hljs-number">-87.629798</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> longitude<br></code></pre></td></tr></tbody></table></figure>
+
+<p>（此处需改进）</p>
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> North_american_cities <span class="hljs-keyword">where</span> country = <span class="hljs-string">'Mexico'</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> population <span class="hljs-keyword">desc</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">2</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> North_american_cities <span class="hljs-keyword">where</span> country = <span class="hljs-string">'United States'</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> population <span class="hljs-keyword">desc</span>  <span class="hljs-keyword">limit</span> <span class="hljs-number">2</span> <span class="hljs-keyword">offset</span> <span class="hljs-number">2</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-6-用JOINs进行多表联合查询"><a href="#Lesson-6-用JOINs进行多表联合查询" class="headerlink" title="Lesson 6: 用JOINs进行多表联合查询"></a><strong>Lesson 6: 用JOINs进行多表联合查询</strong></h3><p>在<strong>Lesson0</strong>的Movies表基础上增加另外一个表：</p>
+<p>Table: Boxoffice (Read-Only)</p>
+<table>
+<thead>
+<tr>
+<th>Movie_id</th>
+<th>Rating</th>
+<th>Domestic_sales</th>
+<th>International_sales</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5</td>
+<td>8.2</td>
+<td>380843261</td>
+<td>555900000</td>
+</tr>
+<tr>
+<td>14</td>
+<td>7.4</td>
+<td>268492764</td>
+<td>475066843</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>206445654</td>
+<td>417277164</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6.4</td>
+<td>191452396</td>
+<td>368400000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7.9</td>
+<td>245852179</td>
+<td>239163000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>8</td>
+<td>261441092</td>
+<td>370001000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>8.5</td>
+<td>223808164</td>
+<td>297503696</td>
+</tr>
+<tr>
+<td>11</td>
+<td>8.4</td>
+<td>415004880</td>
+<td>648167031</td>
+</tr>
+<tr>
+<td>1</td>
+<td>8.3</td>
+<td>191796233</td>
+<td>170162503</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7.2</td>
+<td>244082982</td>
+<td>217900167</td>
+</tr>
+<tr>
+<td>10</td>
+<td>8.3</td>
+<td>293004164</td>
+<td>438338580</td>
+</tr>
+<tr>
+<td>4</td>
+<td>8.1</td>
+<td>289916256</td>
+<td>272900000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7.2</td>
+<td>162798565</td>
+<td>200600000</td>
+</tr>
+<tr>
+<td>13</td>
+<td>7.2</td>
+<td>237283207</td>
+<td>301700000</td>
+</tr>
+</tbody></table>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【联表】找到所有电影的国内<code>Domestic_sales</code>和国际销售额</li>
+<li>【联表】找到所有国际销售额比国内销售大的电影</li>
+<li>【联表】找出所有电影按市场占有率<code>rating</code>倒序排列</li>
+<li>【联表】每部电影按国际销售额比较,排名最靠前的导演是谁,国际销量多少</li>
+</ol>
+<p>1.</p>
+<p> <code>INNER JOIN</code> 可以简写做 <code>JOIN</code> </p>
+<p>（<kbd>INNER</kbd>必须大写）</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">join</span> boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.movie_id<br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">join</span> boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.movie_id<br><span class="hljs-keyword">where</span> 	domestic_sales&lt;international_sales<br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> movies <br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">join</span> boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.movie_id<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> rating<br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> director,international_sales <span class="hljs-keyword">from</span> movies <br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">join</span> boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.movie_id<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> international_sales <span class="hljs-keyword">desc</span><br><span class="hljs-keyword">limit</span> <span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-7-外连接（OUTER-JOINs）"><a href="#Lesson-7-外连接（OUTER-JOINs）" class="headerlink" title="Lesson 7: 外连接（OUTER JOINs）"></a><strong>Lesson 7: 外连接（OUTER JOINs）</strong></h3><p>Table: Employees</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Building</th>
+<th>Years_employed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Engineer</td>
+<td>Becky A.</td>
+<td>1e</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Engineer</td>
+<td>Dan B.</td>
+<td>1e</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Engineer</td>
+<td>Sharon F.</td>
+<td>1e</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Engineer</td>
+<td>Dan M.</td>
+<td>1e</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Engineer</td>
+<td>Malcom S.</td>
+<td>1e</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Artist</td>
+<td>Tylar S.</td>
+<td>2w</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Artist</td>
+<td>Sherman D.</td>
+<td>2w</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Artist</td>
+<td>Jakob J.</td>
+<td>2w</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Artist</td>
+<td>Lillia A.</td>
+<td>2w</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Artist</td>
+<td>Brandon J.</td>
+<td>2w</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Manager</td>
+<td>Scott K.</td>
+<td>1e</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Manager</td>
+<td>Shirlee M.</td>
+<td>1e</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Manager</td>
+<td>Daria O.</td>
+<td>2w</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Engineer</td>
+<td>Yancy I.</td>
+<td>null</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Artist</td>
+<td>Oliver P.</td>
+<td>null</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>Table: Buildings</p>
+<table>
+<thead>
+<tr>
+<th>Building_name</th>
+<th>Capacity</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1e</td>
+<td>24</td>
+</tr>
+<tr>
+<td>1w</td>
+<td>32</td>
+</tr>
+<tr>
+<td>2e</td>
+<td>16</td>
+</tr>
+<tr>
+<td>2w</td>
+<td>20</td>
+</tr>
+</tbody></table>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【复习】找到所有有雇员的办公室(<code>buildings</code>)名字</li>
+<li>【复习】找到所有办公室里的所有角色（包含没有雇员的）,并做唯一输出(<code>DISTINCT</code>)</li>
+<li>【难题】找到所有有雇员的办公室(<code>buildings</code>)和对应的容量</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> building <span class="hljs-keyword">from</span> employees <span class="hljs-keyword">where</span> building <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> Building_name, <span class="hljs-keyword">Role</span> <span class="hljs-keyword">from</span> Buildings<br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> Employees  <span class="hljs-keyword">on</span>  Buildings.Building_name = Employees.Building<br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> Building_name,<span class="hljs-keyword">Capacity</span> <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Buildings <span class="hljs-keyword">on</span>  Buildings.Building_name = Employees.Building<br><span class="hljs-keyword">where</span> Building_name <span class="hljs-keyword">not</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-8-关于特殊关键字-NULLs"><a href="#Lesson-8-关于特殊关键字-NULLs" class="headerlink" title="Lesson 8: 关于特殊关键字 NULLs"></a><strong>Lesson 8: 关于特殊关键字 NULLs</strong></h3><p>表格与<strong>Lesson7</strong>相同</p>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【复习】找到雇员里还没有分配办公室的(列出名字和角色就可以)</li>
+<li>【难题】找到还没有雇员的办公室</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">Role</span>,<span class="hljs-keyword">Name</span> <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">where</span> 	Building <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> Building_name <span class="hljs-keyword">from</span> Buildings<br><span class="hljs-keyword">where</span> Building_name <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span><br>(<span class="hljs-keyword">select</span>	Building <span class="hljs-keyword">from</span> Employees <span class="hljs-keyword">where</span> building <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span>)<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-9-在查询中使用表达式"><a href="#Lesson-9-在查询中使用表达式" class="headerlink" title="Lesson 9: 在查询中使用表达式"></a><strong>Lesson 9: 在查询中使用表达式</strong></h3><p>Table: Movies (Read-Only)</p>
+<table>
+<thead>
+<tr>
+<th>Id</th>
+<th>Title</th>
+<th>Director</th>
+<th>Year</th>
+<th>Length_minutes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Toy Story</td>
+<td>John Lasseter</td>
+<td>1995</td>
+<td>81</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A Bug’s Life</td>
+<td>John Lasseter</td>
+<td>1998</td>
+<td>95</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Toy Story 2</td>
+<td>John Lasseter</td>
+<td>1999</td>
+<td>93</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Monsters, Inc.</td>
+<td>Pete Docter</td>
+<td>2001</td>
+<td>92</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Finding Nemo</td>
+<td>Finding Nemo</td>
+<td>2003</td>
+<td>107</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The Incredibles</td>
+<td>Brad Bird</td>
+<td>2004</td>
+<td>116</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Cars</td>
+<td>John Lasseter</td>
+<td>2006</td>
+<td>117</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Ratatouille</td>
+<td>Brad Bird</td>
+<td>2007</td>
+<td>115</td>
+</tr>
+<tr>
+<td>9</td>
+<td>WALL-E</td>
+<td>Andrew Stanton</td>
+<td>2008</td>
+<td>104</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Up</td>
+<td>Pete Docter</td>
+<td>2009</td>
+<td>101</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Toy Story 3</td>
+<td>Lee Unkrich</td>
+<td>2010</td>
+<td>103</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Cars 2</td>
+<td>John Lasseter</td>
+<td>2011</td>
+<td>120</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Brave</td>
+<td>Brenda Chapman</td>
+<td>2012</td>
+<td>102</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Monsters University</td>
+<td>Dan Scanlon</td>
+<td>2013</td>
+<td>110</td>
+</tr>
+</tbody></table>
+<p>Table: Boxoffice (Read-Only)</p>
+<table>
+<thead>
+<tr>
+<th>Movie_id</th>
+<th>Rating</th>
+<th>Domestic_sales</th>
+<th>International_sales</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5</td>
+<td>8.2</td>
+<td>380843261</td>
+<td>555900000</td>
+</tr>
+<tr>
+<td>14</td>
+<td>7.4</td>
+<td>268492764</td>
+<td>475066843</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>206445654</td>
+<td>417277164</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6.4</td>
+<td>191452396</td>
+<td>368400000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>7.9</td>
+<td>245852179</td>
+<td>239163000</td>
+</tr>
+<tr>
+<td>6</td>
+<td>8</td>
+<td>261441092</td>
+<td>370001000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>8.5</td>
+<td>223808164</td>
+<td>297503696</td>
+</tr>
+<tr>
+<td>11</td>
+<td>8.4</td>
+<td>415004880</td>
+<td>648167031</td>
+</tr>
+<tr>
+<td>1</td>
+<td>8.3</td>
+<td>191796233</td>
+<td>170162503</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7.2</td>
+<td>244082982</td>
+<td>217900167</td>
+</tr>
+<tr>
+<td>10</td>
+<td>8.3</td>
+<td>293004164</td>
+<td>438338580</td>
+</tr>
+<tr>
+<td>4</td>
+<td>8.1</td>
+<td>289916256</td>
+<td>272900000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>7.2</td>
+<td>162798565</td>
+<td>200600000</td>
+</tr>
+<tr>
+<td>13</td>
+<td>7.2</td>
+<td>237283207</td>
+<td>301700000</td>
+</tr>
+</tbody></table>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【计算】列出所有的电影ID,名字和销售总额(以百万美元为单位计算) ✓</li>
+<li>【计算】列出所有的电影ID,名字和市场指数(<code>Rating</code>的10倍为市场指数)</li>
+<li>【计算】列出所有偶数年份的电影，需要电影ID,名字和年份</li>
+<li>【难题】John Lasseter导演的每部电影每分钟值多少钱,告诉我最高的3个电影名和价值就可以</li>
+</ol>
+<p>1.</p>
+<p>as 命名别名</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">Id</span>,Title,(International_sales+Domestic_sales)/<span class="hljs-number">1000000</span> <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> Movies.Id = Boxoffice.Movie_id<br><br><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">Id</span>,Title,(International_sales+Domestic_sales)/<span class="hljs-number">1000000</span> <span class="hljs-keyword">as</span> sales <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> Movies.Id = Boxoffice.Movie_id<br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">Id</span>,Title,<span class="hljs-number">10</span>*Rating <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> Movies.Id = Boxoffice.Movie_id<br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">Id</span>,Title,<span class="hljs-keyword">Year</span> <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> Movies.Id = Boxoffice.Movie_id<br><span class="hljs-keyword">where</span> Movies.Year%<span class="hljs-number">2</span> == <span class="hljs-number">0</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> Title,(International_sales+Domestic_sales)/Length_minutes <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> Movies.Id = Boxoffice.Movie_id<br><span class="hljs-keyword">where</span> Director = <span class="hljs-string">'John Lasseter'</span><br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> (International_sales+Domestic_sales)/Length_minutes <span class="hljs-keyword">desc</span><br><span class="hljs-keyword">limit</span> <span class="hljs-number">3</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-10-在查询中进行统计I-Pt-1"><a href="#Lesson-10-在查询中进行统计I-Pt-1" class="headerlink" title="Lesson 10: 在查询中进行统计I (Pt. 1)"></a><strong>Lesson 10: 在查询中进行统计I (Pt. 1)</strong></h3><p>表格为<strong>Lesson7</strong>的Employees</p>
+<p>练习 do it — 请完成如下任务</p>
+<ol>
+<li>【统计】找出就职年份最高的雇员(列出雇员名字+年份） ✓</li>
+<li>【分组】按角色(<code>Role</code>)统计一下每个角色的平均就职年份</li>
+<li>【分组】按办公室名字总计一下就职年份总和</li>
+<li>【难题】每栋办公室按人数排名,不要统计无办公室的雇员</li>
+</ol>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">Name</span>,Years_employed <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> Years_employed <span class="hljs-keyword">desc</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<p> <code>GROUP BY ...</code>，全部数据里有几条，就返回几条数据， 不管是否应用了统计函数. </p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">role</span>,<span class="hljs-keyword">avg</span>(Years_employed) <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">role</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> Building,<span class="hljs-keyword">sum</span>(Years_employed) <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> Building<br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> Building,<span class="hljs-keyword">count</span>(<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">where</span> Building <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span><br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> Building<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-11-在查询中进行统计II-Pt-2"><a href="#Lesson-11-在查询中进行统计II-Pt-2" class="headerlink" title="Lesson 11: 在查询中进行统计II (Pt. 2)"></a><strong>Lesson 11: 在查询中进行统计II (Pt. 2)</strong></h3><p> 在 <code>GROUP BY</code> 分组语法中，我们知道数据库是先对数据做<code>WHERE</code>，然后对结果做分组，如果我们要对分组完的数据再筛选出几条的操作：</p>
+<p>  <code>HAVING</code>  可以对分组之后的数据再做SELECT筛选 。</p>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span>(<span class="hljs-keyword">Role</span>) <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">where</span> <span class="hljs-keyword">Role</span> = <span class="hljs-string">'Artist'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">Role</span>,<span class="hljs-keyword">count</span>(<span class="hljs-keyword">Role</span>) <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">Role</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">sum</span>(Years_employed) <span class="hljs-keyword">from</span> Employees<br><span class="hljs-keyword">where</span> <span class="hljs-keyword">Role</span> = <span class="hljs-string">'Engineer'</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span>(),<span class="hljs-keyword">role</span>,<span class="hljs-string">'1'</span> <span class="hljs-keyword">from</span> Employees <span class="hljs-keyword">where</span> Building <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">null</span> <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">role</span><br><span class="hljs-keyword">union</span><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span>(),<span class="hljs-keyword">role</span>,<span class="hljs-string">'0'</span> <span class="hljs-keyword">from</span> Employees <span class="hljs-keyword">where</span> Building <span class="hljs-keyword">is</span> <span class="hljs-literal">null</span> <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">role</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="Lesson-12-查询执行顺序"><a href="#Lesson-12-查询执行顺序" class="headerlink" title="Lesson 12: 查询执行顺序"></a><strong>Lesson 12: 查询执行顺序</strong></h3><p>表格与<strong>Lesson 6</strong>相同</p>
+<p>1.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> Director,<span class="hljs-keyword">count</span>() <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> Director<br></code></pre></td></tr></tbody></table></figure>
+
+<p>2.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> Director,<span class="hljs-keyword">sum</span>(Domestic_sales+International_sales) <span class="hljs-keyword">as</span> sales <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.Movie_id<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> Director<br></code></pre></td></tr></tbody></table></figure>
+
+<p>3.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">sum</span>(Domestic_sales+International_sales) <span class="hljs-keyword">as</span> sales,Director,<span class="hljs-keyword">count</span>(Title),<span class="hljs-keyword">sum</span>(Domestic_sales+International_sales)/<span class="hljs-keyword">count</span>(Title) <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.Movie_id<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> Director<br><span class="hljs-keyword">having</span> <span class="hljs-keyword">count</span>(Title) != <span class="hljs-number">1</span><br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">sum</span>(Domestic_sales+International_sales)/<span class="hljs-keyword">count</span>(Title) <span class="hljs-keyword">desc</span><br><span class="hljs-keyword">limit</span> <span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>4.</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <br>(<span class="hljs-keyword">select</span> <span class="hljs-keyword">max</span>(Domestic_sales+International_sales) <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.Movie_id)-<br>(Domestic_sales+International_sales),<br>Title <span class="hljs-keyword">from</span> Movies<br><span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> Boxoffice <span class="hljs-keyword">on</span> movies.id = boxoffice.Movie_id<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="http://xuesql.cn/" target="_blank" rel="noopener">http://xuesql.cn/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF/">大数据技术</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SQL/">SQL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/23/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%BB%83%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">机器学习练习笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/11/03/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9-Laplacian-Score/">
+                        <span class="hidden-mobile">特征选择 LaplacianScore</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

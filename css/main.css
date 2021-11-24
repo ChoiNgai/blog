@@ -354,7 +354,7 @@ img[lazyload] {
   --post-link-color: #0366d6;
   --link-hover-color: #30a9de;
   --link-hover-bg-color: #f8f9fa;
-  --navbar-bg-color: #2F4154;
+  --navbar-bg-color: #3cbdfe;
   --navbar-text-color: #fff;
 }
 @media (prefers-color-scheme: dark) {
@@ -1169,7 +1169,7 @@ input[type=checkbox] {
   outline: 0;
   border-radius: 0.1875rem;
   vertical-align: -0.65rem;
-  border: 2px solid #2F4154;
+  border: 2px solid #2f4154;
 }
 input[type=checkbox]:after,
 input[type=checkbox]:before {
@@ -1202,7 +1202,7 @@ input[type=checkbox]:after {
   transition-delay: 0.2s;
 }
 input[type=checkbox]:checked {
-  background: #2F4154;
+  background: #2f4154;
   margin-right: 0.5rem !important;
 }
 input[type=checkbox]:checked:before {
@@ -1756,7 +1756,7 @@ note-default {
   background: #fcf1f2;
 }
 .markdown-body .btn {
-  background: #2F4154;
+  background: #2f4154;
   border-radius: 0.25rem;
   color: #fff !important;
   display: inline-block;
