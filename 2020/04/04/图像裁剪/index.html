@@ -252,25 +252,20 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：5 分钟前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
               <p>图像裁剪成指定的分辨率大小</p>
 <a id="more"></a>
-
 <ul>
 <li><p>文件目录树</p>
 <figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">│  <span class="hljs-selector-tag">ImageCut</span><span class="hljs-selector-class">.py</span><br>│<br>├─<span class="hljs-selector-tag">cut_img</span><br>│     <span class="hljs-selector-tag">cut_test</span><span class="hljs-selector-class">.jpg</span><br>│<br>└─<span class="hljs-selector-tag">images</span><br>      <span class="hljs-selector-tag">test</span><span class="hljs-selector-class">.jpg</span><br></code></pre></td></tr></tbody></table></figure>
-
-
-
 </li>
 </ul>
 <hr>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关的库</span><br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-comment">#读取images文件夹内的图片名称</span><br>images_list = os.listdir(<span class="hljs-string">'images/'</span>)<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,len(images_list),<span class="hljs-number">1</span>):<br><br>    <span class="hljs-comment"># 打开一张图</span><br>    img = Image.open(<span class="hljs-string">"images/"</span>+images_list[i])<br>    <span class="hljs-comment"># 图片尺寸</span><br>    img_size = img.size<br>    h = img_size[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 图片高度</span><br>    w = img_size[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 图片宽度</span><br><br>    x = <span class="hljs-number">0.2</span> * w<br>    y = <span class="hljs-number">0.1</span> * h<br>    w = <span class="hljs-number">0.55</span> * w<br>    h = <span class="hljs-number">0.75</span> * h<br><br>    <span class="hljs-comment"># 开始截取</span><br>    region = img.crop((x, y, x + w, y + h))<br><br>    <span class="hljs-keyword">if</span> (os.path.exists(<span class="hljs-string">'cut_img'</span>)==<span class="hljs-literal">False</span>):<br>        os.mkdir(<span class="hljs-string">"cut_img"</span>)<br><br><br>    <span class="hljs-comment"># 保存图片</span><br>    region.save(<span class="hljs-string">"cut_img"</span>+<span class="hljs-string">"/"</span>+<span class="hljs-string">"cut_"</span>+images_list[i])<br></code></pre></td></tr></tbody></table></figure>
-
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

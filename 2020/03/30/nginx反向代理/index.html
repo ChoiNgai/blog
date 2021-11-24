@@ -253,20 +253,17 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：22 分钟前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
               <p>Nginx是个好东西</p>
 <a id="more"></a>
-
 <p>通过Nginx反向代理加速网站访问速度</p>
 <p>ip示例：106.42.254.40</p>
 <p>二级域名示例：oj.example.com</p>
 <figure class="highlight nginx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> { <br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">443</span>; <br>    <span class="hljs-attribute">server_name</span> onj.example.com; <br>    <br>    <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">ssl_certificate</span> /www/wwwroot/ssl/oj/oj.example.com.crt;<br>    <span class="hljs-attribute">ssl_certificate_key</span> /www/wwwroot/ssl/oj/oj.example.com   ssl_certificate_key /etc/ssl/2_baofeidyz.com.key;<br>        <span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">5m</span>;<br>        <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;<br>        <span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<br>        <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br>        <br>    <span class="hljs-attribute">location</span> / { <br>      <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>; <br>      <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>; <br>      <span class="hljs-attribute">proxy_pass</span> http://106.42.154.40/; <br>    } <br>}<br></code></pre></td></tr></tbody></table></figure>
-
-
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -319,9 +316,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/01/chrome%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+                      <a href="/2020/04/04/%E5%9B%BE%E5%83%8F%E5%8A%A0%E5%99%AA/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">chrome使用技巧</span>
+                        <span class="hidden-mobile">图像加噪</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

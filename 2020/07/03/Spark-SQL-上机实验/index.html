@@ -264,14 +264,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：20 分钟前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
               <p>使用免费的Spark集群databrick,Spark SQL的基本编程方法以及RDD到DataFrame的转化方法</p>
 <a id="more"></a>
-
 <p>一、实验目的：</p>
 <p>1、通过实验掌握Spark SQL的基本编程方法；</p>
 <p>2、熟悉RDD到DataFrame的转化方法；</p>
@@ -289,43 +288,29 @@
 <p>{ “id”:5 , “name”:”Damon” }</p>
 <p>{ “id”:5 , “name”:”Damon” }</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#读取json文件</span><br><br>\<span class="hljs-comment"># File location and type</span><br><br>file_location = <span class="hljs-string">"/FileStore/tables/employee.json"</span><br><br>file_type = <span class="hljs-string">"json"</span><br><br> <br><br>\<span class="hljs-comment"># CSV options</span><br><br>infer_schema = <span class="hljs-string">"false"</span><br><br>first_row_is_header = <span class="hljs-string">"false"</span><br><br>delimiter = <span class="hljs-string">","</span><br><br> <br><br>\<span class="hljs-comment"># The applied options are for CSV files. For other file types, these will be ignored.</span><br><br>df = spark.read.format(file_type) \<br><br> .option(<span class="hljs-string">"inferSchema"</span>, infer_schema) \<br><br> .option(<span class="hljs-string">"header"</span>, first_row_is_header) \<br><br> .option(<span class="hljs-string">"sep"</span>, delimiter) \<br><br> .load(file_location)<br><br> <br><br>display(df)                 <span class="hljs-comment">#打印出文件</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image002-1593878295754.jpg" srcset="/img/loading.gif" lazyload="" alt="1593862725"></p>
 <p># 创建employee临时表</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">df.registerTempTable("employee")<br></code></pre></td></tr></tbody></table></figure>
-
-
-
-
-
 <ol>
 <li>查询所有数据；</li>
 </ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_01 = spark.sql("<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employee<span class="hljs-string">");</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_01.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
-
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image004-1593878295755.jpg" srcset="/img/loading.gif" lazyload="" alt="1593862841">]</p>
 <p> 2.查询所有的数据,并去重</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_02 = spark.sql("<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> * <span class="hljs-keyword">FROM</span> employee<span class="hljs-string">");</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_02.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image005-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="ce49de6c106a6272e85fdcd160f88e0"></p>
 <p>3.查询所有的数据,打印去除id字段（这里只查询了name age）</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_03 = spark.sql("<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">name</span>,age <span class="hljs-keyword">FROM</span> employee<span class="hljs-string">");</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_03.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image006-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="61ab0ab0e4ee72618ab61f05ed7096b"></p>
 <p> 4.查询age&gt;30的数据</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_04 = spark.sql("<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">WHERE</span> age &gt; <span class="hljs-number">30</span><span class="hljs-string">")</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_04.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p>​    </p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image007-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593859876">]</p>
 <p>5.age分组</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_05 = spark.sql("<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> age<span class="hljs-string">");</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_05.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image008-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593860554">]</p>
 <p>6.name升序</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_06 = spark.sql("<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employee <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> <span class="hljs-keyword">name</span><span class="hljs-string">")</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_06.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image009-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593860597">]</p>
 <p>​    </p>
 <p> 7.前三行</p>
@@ -334,21 +319,15 @@
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image010-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593861176"></p>
 <p> 8.修改列名,name改成uersname</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_08 = spark.sql("<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">name</span> <span class="hljs-keyword">AS</span> username <span class="hljs-keyword">FROM</span> employee<span class="hljs-string">")</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_08.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image011-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593861916"></p>
 <p>9.查询age平均值</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_09 = spark.sql("<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">AVG</span>(age) <span class="hljs-keyword">AS</span> ageAverage <span class="hljs-keyword">FROM</span> employee<span class="hljs-string">")</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_09.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image012-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593861967"></p>
 <p> 10.查询age最小值</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">sqlDF_10 = spark.sql("<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">MIN</span>(age) <span class="hljs-keyword">AS</span> ageAverage <span class="hljs-keyword">FROM</span> employee<span class="hljs-string">")</span><br><span class="hljs-string"></span><br><span class="hljs-string">sqlDF_10.show();</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image013-1593878295756.png" srcset="/img/loading.gif" lazyload="" alt="1593862004">]</p>
 <p>2．编程实现将RDD转换为DataFrame. （Scala）</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql">import org.apache.spark.sql.catalyst.encoders.ExpressionEncoder<br><br>import org.apache.spark.sql.Encoder<br><br>import spark.implicits._ //导入包，支持把一个RDD隐式转换为一个DataFrame<br><br>case class students_data(id:Int,name:String,gender:String,age:Int,course_id:Int,score:Double,classes:String) //定义一个case class<br><br>val stuDF = spark.sparkContext.textFile("/FileStore/tables/students_data-7.txt").map(_.split(",")).map(t =&gt; students_data(t(0).trim.toInt, t(1), t(2), t(3).trim.toInt, t(4).trim.toInt, t(5).trim.toDouble, t(6))).toDF()<br><br>stuDF.createOrReplaceTempView("stu") //必须注册为临时表才能供下面的查询<br><br>val stuRDD = spark.sql("<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> stu<span class="hljs-string">")//最终生成一个DataFrame</span><br><span class="hljs-string"></span><br><span class="hljs-string">stuRDD.show()</span><br></code></pre></td></tr></tbody></table></figure>
-
-
-
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image015-1593878295756.jpg" srcset="/img/loading.gif" lazyload="" alt="1593869941">]</p>
 <script>
         document.querySelectorAll('.github-emoji')

@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.6k 字
+      5.5k 字
     </span>
   
 
@@ -251,14 +251,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：29 分钟前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
               <p>此文章转载于<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html" target="_blank" rel="noopener">Hadoop官方中文文档</a></p>
 <a id="more"></a>
-
 <h1 id="Hadoop分布式文件系统使用指南"><a href="#Hadoop分布式文件系统使用指南" class="headerlink" title="Hadoop分布式文件系统使用指南"></a>Hadoop分布式文件系统使用指南</h1><ul>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#目的" target="_blank" rel="noopener">目的</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#概述" target="_blank" rel="noopener">概述</a></li>
@@ -338,9 +337,9 @@
 <p>由于上述多种考虑需要取舍，数据可能并不会均匀分布在DataNode中。HDFS为管理员提供了一个工具，用于分析数据块分布和重新平衡DataNode上的数据分布。<a href="http://issues.apache.org/jira/browse/HADOOP-1652" target="_blank" rel="noopener">HADOOP-1652</a>的附件中的一个<a href="http://issues.apache.org/jira/secure/attachment/12368261/RebalanceDesign6.pdf" target="_blank" rel="noopener">PDF</a>是一个简要的rebalancer管理员指南。</p>
 <p>使用方法请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html#balancer" target="_blank" rel="noopener">balancer 命令</a>.</p>
 <h2 id="机架感知（Rack-awareness）"><a href="#机架感知（Rack-awareness）" class="headerlink" title="机架感知（Rack awareness）"></a>机架感知（Rack awareness）</h2><p>通常，大型Hadoop集群是以机架的形式来组织的，同一个机架上不同节点间的网络状况比不同机架之间的更为理想。另外，NameNode设法将数据块副本保存在不同的机架上以提高容错性。Hadoop允许集群的管理员通过配置dfs.network.script参数来确定节点所处的机架。当这个脚本配置完毕，每个节点都会运行这个脚本来获取它的机架ID。默认的安装假定所有的节点属于同一个机架。这个特性及其配置参数在<a href="http://issues.apache.org/jira/browse/HADOOP-692" target="_blank" rel="noopener">HADOOP-692</a>所附的<a href="http://issues.apache.org/jira/secure/attachment/12345251/Rack_aware_HDFS_proposal.pdf" target="_blank" rel="noopener">PDF</a>上有更详细的描述。</p>
-<h2 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h2><p>NameNode启动时会从fsimage和edits日志文件中装载文件系统的状态信息，接着它等待各个DataNode向它报告它们各自的数据块状态，这样，NameNode就不会过早地开始复制数据块，即使在副本充足的情况下。这个阶段，NameNode处于安全模式下。NameNode的安全模式本质上是HDFS集群的一种只读模式，此时集群不允许任何对文件系统或者数据块修改的操作。通常NameNode会在开始阶段自动地退出安全模式。如果需要，你也可以通过’bin/hadoop dfsadmin -safemode’命令显式地将HDFS置于安全模式。NameNode首页会显示当前是否处于安全模式。关于安全模式的更多介绍和配置信息请参考JavaDoc：<a href="https://hadoop.apache.org/core/docs/current/api/org/apache/hadoop/dfs/NameNode.html#setSafeMode(org.apache.hadoop.dfs.FSConstants.SafeModeAction)" target="_blank" rel="noopener">setSafeMode()</a>。</p>
+<h2 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h2><p>NameNode启动时会从fsimage和edits日志文件中装载文件系统的状态信息，接着它等待各个DataNode向它报告它们各自的数据块状态，这样，NameNode就不会过早地开始复制数据块，即使在副本充足的情况下。这个阶段，NameNode处于安全模式下。NameNode的安全模式本质上是HDFS集群的一种只读模式，此时集群不允许任何对文件系统或者数据块修改的操作。通常NameNode会在开始阶段自动地退出安全模式。如果需要，你也可以通过’bin/hadoop dfsadmin -safemode’命令显式地将HDFS置于安全模式。NameNode首页会显示当前是否处于安全模式。关于安全模式的更多介绍和配置信息请参考JavaDoc：<a href="https://hadoop.apache.org/core/docs/current/api/org/apache/hadoop/dfs/NameNode.html#setSafeMode(org.apache.hadoop.dfs.FSConstants.SafeModeAction" target="_blank" rel="noopener">setSafeMode()</a>)。</p>
 <h2 id="fsck"><a href="#fsck" class="headerlink" title="fsck"></a>fsck</h2><p>HDFS支持fsck命令来检查系统中的各种不一致状况。这个命令被设计来报告各种文件存在的问题，比如文件缺少数据块或者副本数目不够。不同于在本地文件系统上传统的fsck工具，这个命令并不会修正它检测到的错误。一般来说，NameNode会自动修正大多数可恢复的错误。HDFS的fsck不是一个Hadoop shell命令。它通过’bin/hadoop fsck’执行。 命令的使用方法请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html#fsck" target="_blank" rel="noopener">fsck命令</a> fsck可用来检查整个文件系统，也可以只检查部分文件。</p>
-<h2 id="升级和回滚"><a href="#升级和回滚" class="headerlink" title="升级和回滚"></a>升级和回滚</h2><p>当在一个已有集群上升级Hadoop时，像其他的软件升级一样，可能会有新的bug或一些会影响到现有应用的非兼容性变更出现。在任何有实际意义的HDSF系统上，丢失数据是不被允许的，更不用说重新搭建启动HDFS了。HDFS允许管理员退回到之前的Hadoop版本，并将集群的状态回滚到升级之前。更多关于HDFS升级的细节在[升级wiki](<a href="https://wiki.apache.org/hadoop/Hadoop" target="_blank" rel="noopener">https://wiki.apache.org/hadoop/Hadoop</a> Upgrade)上可以找到。HDFS在一个时间可以有一个这样的备份。在升级之前，管理员需要用bin/hadoop dfsadmin -finalizeUpgrade（升级终结操作）命令删除存在的备份文件。下面简单介绍一下一般的升级过程：</p>
+<h2 id="升级和回滚"><a href="#升级和回滚" class="headerlink" title="升级和回滚"></a>升级和回滚</h2><p>当在一个已有集群上升级Hadoop时，像其他的软件升级一样，可能会有新的bug或一些会影响到现有应用的非兼容性变更出现。在任何有实际意义的HDSF系统上，丢失数据是不被允许的，更不用说重新搭建启动HDFS了。HDFS允许管理员退回到之前的Hadoop版本，并将集群的状态回滚到升级之前。更多关于HDFS升级的细节在<a href="https://wiki.apache.org/hadoop/Hadoop Upgrade" target="_blank" rel="noopener">升级wiki</a>上可以找到。HDFS在一个时间可以有一个这样的备份。在升级之前，管理员需要用bin/hadoop dfsadmin -finalizeUpgrade（升级终结操作）命令删除存在的备份文件。下面简单介绍一下一般的升级过程：</p>
 <ul>
 <li>升级 Hadoop 软件之前，请检查是否已经存在一个备份，如果存在，可执行升级终结操作删除这个备份。通过dfsadmin -upgradeProgress status命令能够知道是否需要对一个集群执行升级终结操作。</li>
 <li>停止集群并部署新版本的Hadoop。</li>

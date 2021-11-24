@@ -254,14 +254,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：25 分钟前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
               <p>大坑</p>
 <a id="more"></a>
-
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>linux中python2升级到python3，会出现一系列的依赖项未配置问题，如果不解决，将会影响其他环境的安装配置。 </p>
 <p>比如python2升级到3之后，安装docker就会出现(<strong>大量文字高能警告，可以忽略跳到后面</strong>)</p>
 <p><code>正在读取软件包列表... 完成
@@ -310,9 +309,8 @@ dpkg: 依赖关系问题使得 python-cryptography 的配置工作不能继续�
   软件包 python-pyasn1 尚未配置。
  python-cryptograp</code></p>
 <h4 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo apt-get clean<br>sudo apt-get update<br>sudo apt-get install --reinstall python-minimal python-lockfile<br></code></pre></td></tr></tbody></table></figure>
-
 <p>(某些情况下只执行最后一行命令也许)</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/slvayf/article/details/84336327" target="_blank" rel="noopener">Ubuntu下报错：处理软件包 python-dnspython (–configure)时出错 解决方法</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://blog.csdn.net/slvayf/article/details/84336327" target="_blank" rel="noopener">Ubuntu下报错：处理软件包 python-dnspython (—configure)时出错 解决方法</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

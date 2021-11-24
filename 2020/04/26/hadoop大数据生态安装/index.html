@@ -254,14 +254,13 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：28 分钟前
+                  本文最后更新于：1 小时前
                 
               </p>
             
             <div class="markdown-body">
               <p>环境配置</p>
 <a id="more"></a>
-
 <h2 id="Hadoop安装（2021版）"><a href="#Hadoop安装（2021版）" class="headerlink" title="Hadoop安装（2021版）"></a>Hadoop安装（2021版）</h2><p>Ubuntu18.04 照着这篇教程来啥问题也没有：<br><a href="https://m.linuxidc.com/Linux/2019-12/161628.htm" target="_blank" rel="noopener">Ubuntu 18.04下搭建单机Hadoop和Spark集群环境</a>  </p>
 <h3 id="关于系统"><a href="#关于系统" class="headerlink" title="关于系统"></a>关于系统</h3><p>考虑到可能大多数同学用的都是Windows系统，所以这里附上搭建linux系统的办法： </p>
 <h3 id="win10的linux子系统（WSL）"><a href="#win10的linux子系统（WSL）" class="headerlink" title="win10的linux子系统（WSL）"></a>win10的linux子系统（WSL）</h3><p>WSL是默认安装在C盘的，如果不想占用C盘空间，就需要在<strong>安装子系统之前</strong>建立软连接：（若不在乎C盘空间请忽略）：<br><a href="https://blog.csdn.net/m0_37990055/article/details/89709963?from=groupmessage" target="_blank" rel="noopener">Windows下Linux子系统迁移到非系统盘 原创</a></p>
@@ -283,9 +282,6 @@
 <li>启动命令（注：需要打开cmd输入命令，直接打开文件无法启动）：</li>
 </ul>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">start-all.cmd<br></code></pre></td></tr></tbody></table></figure>
-
-
-
 <ul>
 <li><p>检测</p>
 <p><strong>出现四个任务管理且不报错，并不一定说明安装成功。测试是否开启成功：输入命令<code>jps</code></strong><br>出现下面四个才能说明安装成功，如果不出现四个说明安装没有成功，可能是上面第四步出现问题，重新配置。</p>
@@ -295,7 +291,6 @@
 <ul>
 <li><p>打开（Web端）</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">http://localhost:9870/<br></code></pre></td></tr></tbody></table></figure>
-
 <p>在浏览器地址栏中输入：<a href="http://localhost:8088/" target="_blank" rel="noopener">http://localhost:8088</a>查看集群状态</p>
 </li>
 </ul>
