@@ -253,6 +253,8 @@
             <div class="markdown-body">
               <p>图像增加噪声（防止过拟合）</p>
 <a id="more"></a>
+
+
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在有些情况下，会因为研究需要所以用一些增加了噪声的图片</p>
 <ul>
 <li><p>文件目录树</p>
@@ -268,6 +270,7 @@
     │      
     └─salt-<span class="hljs-keyword">and-pepper_noise_img	</span>	<span class="hljs-comment">#存放加入盐椒噪声图像的文件夹</span>
             salt-<span class="hljs-keyword">and-pepper_noise_test.jpg</span></code></pre></div>
+
 <p>​        </p>
 </li>
 </ul>
@@ -305,6 +308,9 @@
             os.mkdir(<span class="hljs-string">"noise_img\\Gussian_noise_img"</span>)	<span class="hljs-comment">#此步骤用于判断有无存放噪声图片的文件夹，没有则创建</span>
 
         matplotlib.image.imsave(<span class="hljs-string">"noise_img/Gussian_noise_img/"</span>+<span class="hljs-string">"Gussian_noise_"</span> + images_list[i], gauss_img) <span class="hljs-comment">#numpy数组转换为图片保存</span></code></pre></div>
+
+
+
 <h2 id="盐椒噪声"><a href="#盐椒噪声" class="headerlink" title="盐椒噪声"></a>盐椒噪声</h2><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#增加椒盐噪声</span>
 <span class="hljs-keyword">from</span> skimage <span class="hljs-keyword">import</span> io
 <span class="hljs-keyword">import</span> random
@@ -338,6 +344,7 @@
             os.mkdir(<span class="hljs-string">"noise_img\\salt-and-pepper_noise_img"</span>)	<span class="hljs-comment">#此步骤用于判断有无存放噪声图片的文件夹，没有则创建</span>
 
         matplotlib.image.imsave(<span class="hljs-string">"noise_img/salt-and-pepper_noise_img/"</span>+<span class="hljs-string">"salt-and-pepper_noise_"</span> + images_list[i], noise_img) <span class="hljs-comment">#numpy数组转换为图片保存</span></code></pre></div>
+
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

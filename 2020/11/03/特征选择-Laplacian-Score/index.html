@@ -23,13 +23,13 @@
 <meta property="og:site_name" content="CAIWEI的博客">
 <meta property="og:description" content="特征选择方法Laplacian Score">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdn.net/20180920175451704">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211130140417.png">
 <meta property="article:published_time" content="2020-11-03T15:21:24.000Z">
-<meta property="article:modified_time" content="2021-11-24T08:45:48.712Z">
+<meta property="article:modified_time" content="2021-11-30T06:12:26.109Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="特征工程">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20180920175451704">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211130140417.png">
   
   <title>特征选择 LaplacianScore - CAIWEI的博客</title>
 
@@ -254,38 +254,15 @@
             <div class="markdown-body">
               <p>特征选择方法Laplacian Score</p>
 <a id="more"></a>
+
+
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>上次介绍了<a href="">一种特征选择方法：FisherScore</a>，但是没有介绍特征选择，更没有介绍特征工程。这里上一张别人的图简单介绍一下整个框架（找找特征选择在哪）。</p>
-<p> <img src="https://img-blog.csdn.net/20180920175451704?" srcset="/img/loading.gif" lazyload="" alt="img"> </p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20211130140417.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <h2 id="Laplacian-Score"><a href="#Laplacian-Score" class="headerlink" title="Laplacian Score"></a>Laplacian Score</h2><p>数据集$X={x_{ij} }$,$i=1,2…n;j=1,2…d.$其中$n$为样本数，$d$为样本特征数。标签信息$y_k,k={1,2…c}$,其中$c$为类簇数，$d_k^{ii’}$表示样本$i$与样本$i’$之间最近邻$k$个样本的最大距离。</p>
-<p>构建无向权重图$G(V,E)$，其节点由图集$V=x_i$构成，样本间的近邻关系表示为图的边形成边集$E$。如果$||x_i-x_i^{‘}||\le d_k^{ii’}$，则样本$i$与样本$i’$连接成边。可定义下生成相似度矩阵 ：</p>
-<script type="math/tex; mode=display">
-S_{ii'} = 
-\left\{  
-             \begin{array}{**lr**}  
-            \dfrac{1}{n_k} , & y_i=y_{i'}=k \\  
-             0,& 其他\\  
-
-             \end{array}  
-\right.</script><p>定义$L<em>0$为无向权重图$G$中的拉普拉斯矩阵，令邻接矩阵$W</em>{ii’}=S_{ii’}(1\le i,i’ \le n)$，$W$是对称矩阵，其度矩阵$D$为：</p>
-<script type="math/tex; mode=display">
-D_{ii'} = 
-\left\{  
-             \begin{array}{**lr**}  
-            \sum_{i'=1}^n W_{ii'} , & i'= i \\  
-             0,& i' \not=i \\  
-
-             \end{array}  
-\right.</script><p>​        度矩阵反映企业样本周围聚集其他样本的密度，值越大则说明密度越大，由度矩阵与邻接矩阵可得到拉普拉斯矩阵$L$、        正则化的拉普拉斯矩阵$\delta$，计算拉普拉斯评分。  </p>
-<script type="math/tex; mode=display">
-\left\{  
-             \begin{array}{**lr**}  
-            L = D-S  \\  
-            \delta = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} \\  
-
-             \end{array}  
-\right.</script><p>其中$s_j$表示第$j$个特征$x_j$的期望值，定义如下：</p>
-<script type="math/tex; mode=display">
-s_j = \sum(x_{ij} \dfrac{D_{ii}}{\sum_i D_{ii}} ) = \dfrac{ \sum_i x_{ij} D_{ii}}{\sum_i D_{ii}}</script><p>$s_j$即为各个特征的评分，评分越高，表示该特征对标签影响程度越大。</p>
+<p>构建无向权重图$G(V,E)$，其节点由图集$V=x_i$构成，样本间的近邻关系表示为图的边形成边集$E$。如果$||x_i-x_i^{‘}||\le d_k^{ii’}$，则样本$i$与样本$i’$连接成边。可定义下生成相似度矩阵 ：<br>$$<br>S_{ii’} =<br>\left{<br>             \begin{array}{<strong>lr</strong>}<br>            \dfrac{1}{n_k} , &amp; y_i=y_{i’}=k \<br>             0,&amp; 其他\  </p>
+<div class="hljs code-wrapper"><pre><code>\end{array}  </code></pre></div><p>\right.<br>$$<br>定义$L_0$为无向权重图$G$中的拉普拉斯矩阵，令邻接矩阵$W_{ii’}=S_{ii’}(1\le i,i’ \le n)$，$W$是对称矩阵，其度矩阵$D$为：<br>$$<br>D_{ii’} =<br>\left{<br>             \begin{array}{<strong>lr</strong>}<br>            \sum_{i’=1}^n W_{ii’} , &amp; i’= i \<br>             0,&amp; i’ \not=i \  </p>
+<div class="hljs code-wrapper"><pre><code>\end{array}  </code></pre></div><p>\right.<br>$$<br>​        度矩阵反映企业样本周围聚集其他样本的密度，值越大则说明密度越大，由度矩阵与邻接矩阵可得到拉普拉斯矩阵$L$、        正则化的拉普拉斯矩阵$\delta$，计算拉普拉斯评分。<br>$$<br>\left{<br>             \begin{array}{<strong>lr</strong>}<br>            L = D-S  \<br>            \delta = D^{-\frac{1}{2}} L D^{-\frac{1}{2}} \  </p>
+<div class="hljs code-wrapper"><pre><code>\end{array}  </code></pre></div><p>\right.<br>$$<br>其中$s_j$表示第$j$个特征$x_j$的期望值，定义如下：<br>$$<br>s_j = \sum(x_{ij} \dfrac{D_{ii}}{\sum_i D_{ii}} ) = \dfrac{ \sum_i x_{ij} D_{ii}}{\sum_i D_{ii}}<br>$$<br>$s_j$即为各个特征的评分，评分越高，表示该特征对标签影响程度越大。</p>
 <h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><h3 id="constructW-m"><a href="#constructW-m" class="headerlink" title="constructW.m"></a>constructW.m</h3><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">W</span> = <span class="hljs-title">constructW</span><span class="hljs-params">(fea,options)</span></span>
 
 <span class="hljs-comment">%	Usage:</span>
@@ -1329,6 +1306,9 @@ BlockSize = <span class="hljs-built_in">floor</span>(maxM/(nSmp*<span class="hlj
 
 
 W = <span class="hljs-built_in">max</span>(W,W');</code></pre></div>
+
+
+
 <h3 id="EuDist2-m"><a href="#EuDist2-m" class="headerlink" title="EuDist2.m"></a>EuDist2.m</h3><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">D</span> = <span class="hljs-title">EuDist2</span><span class="hljs-params">(fea_a,fea_b,bSqrt)</span></span>
 
 <span class="hljs-comment">%EUDIST2 Efficiently Compute the Euclidean Distance Matrix by Exploring the</span>
@@ -1446,6 +1426,9 @@ W = <span class="hljs-built_in">max</span>(W,W');</code></pre></div>
     <span class="hljs-keyword">end</span>
 
 <span class="hljs-keyword">end</span></code></pre></div>
+
+
+
 <h3 id="LaplacianScore-m"><a href="#LaplacianScore-m" class="headerlink" title="LaplacianScore.m"></a>LaplacianScore.m</h3><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[Y]</span> = <span class="hljs-title">LaplacianScore</span><span class="hljs-params">(X, W)</span></span>
 <span class="hljs-comment">%	Usage:</span>
 <span class="hljs-comment">%	[Y] = LaplacianScore(X, W)</span>
@@ -1510,6 +1493,9 @@ DPrime(<span class="hljs-built_in">find</span>(DPrime &lt; <span class="hljs-num
 Y = LPrime./DPrime;
 Y = Y';
 Y = full(Y);</code></pre></div>
+
+
+
 <h3 id="LS-final-m"><a href="#LS-final-m" class="headerlink" title="LS_final.m"></a>LS_final.m</h3><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[redu,LS,List]</span> = <span class="hljs-title">LS_final</span><span class="hljs-params">(X,Y,selectrate)</span></span>
 <span class="hljs-comment">%laplacian score</span>
 <span class="hljs-comment">%input:   X, the data, each row is an instance</span>
@@ -1542,6 +1528,9 @@ W = constructW(fea,options);
 [LS] = feval(mfilename,a(:,<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>),W);<span class="hljs-comment">%feval求函数的值</span>
 [~, List] = <span class="hljs-built_in">sort</span>(LS', <span class="hljs-string">'descend'</span>);<span class="hljs-comment">%各个特征的排序</span>
 redu=List(<span class="hljs-number">1</span>:m);</code></pre></div>
+
+
+
 <h3 id="mynorm-m"><a href="#mynorm-m" class="headerlink" title="mynorm.m"></a>mynorm.m</h3><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">V</span> = <span class="hljs-title">mynorm</span><span class="hljs-params">(M,dim)</span></span>
 
 <span class="hljs-comment">%   MYNORM: 计算矩阵某个维度上的向量的2范数</span>
@@ -1561,6 +1550,9 @@ redu=List(<span class="hljs-number">1</span>:m);</code></pre></div>
 <span class="hljs-keyword">end</span>
 
 V = sum(M.^<span class="hljs-number">2</span>,dim).^<span class="hljs-number">.5</span>;</code></pre></div>
+
+
+
 <h3 id="NormalizeFea-m"><a href="#NormalizeFea-m" class="headerlink" title="NormalizeFea.m"></a>NormalizeFea.m</h3><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fea</span> = <span class="hljs-title">NormalizeFea</span><span class="hljs-params">(fea,row,norm)</span></span>
 
 <span class="hljs-comment">% if row == 1, normalize each row of fea to have unit norm;</span>
@@ -1698,6 +1690,9 @@ V = sum(M.^<span class="hljs-number">2</span>,dim).^<span class="hljs-number">.5
     <span class="hljs-keyword">end</span>
 
 <span class="hljs-keyword">end</span></code></pre></div>
+
+
+
 <h3 id="readme"><a href="#readme" class="headerlink" title="readme"></a>readme</h3><div class="hljs code-wrapper"><pre><code class="hljs livecodeserver">%LS_final
 <span class="hljs-keyword">the</span> main <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">of</span> <span class="hljs-title">laplacian</span> <span class="hljs-title">score</span>. <span class="hljs-title">this</span> <span class="hljs-title">program</span> <span class="hljs-title">computes</span> <span class="hljs-title">the</span> <span class="hljs-title">laplacian</span> <span class="hljs-title">score</span> <span class="hljs-title">and</span> </span>
 <span class="hljs-built_in">sort</span> attributes <span class="hljs-keyword">in</span> <span class="hljs-keyword">descending</span> order <span class="hljs-keyword">in</span> terms <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> laplacian scores
@@ -1707,6 +1702,9 @@ compute <span class="hljs-keyword">the</span> laplacian score
 
 % example
 this is <span class="hljs-keyword">an</span> example <span class="hljs-keyword">of</span> how <span class="hljs-built_in">to</span> use this program <span class="hljs-keyword">for</span> feature selection</code></pre></div>
+
+
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a href="https://blog.csdn.net/zhenaoxi1077/article/details/82791281" target="_blank" rel="noopener">常用的特征选择方法</a></p>
 <script>
         document.querySelectorAll('.github-emoji')

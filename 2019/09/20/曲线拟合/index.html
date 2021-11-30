@@ -255,6 +255,7 @@
             <div class="markdown-body">
               <p>很古老的拟合方法了</p>
 <a id="more"></a>
+
 <p>当遇到需要用函数表达自变量及因变量的关系时，往往会遇到许多不能直观地看出类似的函数关系式的情况，例如该组自变量和因变量:</p>
 <ul>
 <li><p>x</p>
@@ -266,13 +267,13 @@
 </ul>
 <p>PS:表格处的(0:1:10)是matlab的一种写法，表示从0到10以1为间距（步长），即0，1，2……10</p>
 <p>将图像用plot函数画出即下图：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/数据科学/20190920124407573.png" srcset="/img/loading.gif" lazyload="" alt="xy&quot;曲线&quot;图（数据用得太少了）"><br>这。。。谁看得出来呀，显然不可能是简单的y=ax+b吧<br>所以接下来会用到polyfit这个函数</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/20190920124407573.png" srcset="/img/loading.gif" lazyload="" alt="xy&quot;曲线&quot;图（数据用得太少了）"><br>这。。。谁看得出来呀，显然不可能是简单的y=ax+b吧<br>所以接下来会用到polyfit这个函数</p>
 <h4 id="polyfit函数：示例"><a href="#polyfit函数：示例" class="headerlink" title="polyfit函数：示例"></a>polyfit函数：示例</h4><div class="hljs code-wrapper"><pre><code class="hljs matlab">x=(<span class="hljs-number">0</span>:<span class="hljs-number">1</span>:<span class="hljs-number">10</span>);
 y=x.*x+<span class="hljs-number">2</span>;
 <span class="hljs-built_in">plot</span>(x,y)
 p=polyfit(x,y,<span class="hljs-number">3</span>)  <span class="hljs-comment">%polyfit(x,y,3)中的3为多项式最高次幂，在这里意为最高是3</span></code></pre></div>
 <p>得到结果：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/数据科学/img1fe53f8f6cff405a69960785e4564ab.png" srcset="/img/loading.gif" lazyload="" alt="计算结果"></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/img1fe53f8f6cff405a69960785e4564ab.png" srcset="/img/loading.gif" lazyload="" alt="计算结果"></p>
 <p>即得到函数y= - 0.2422 x^3^ + 3.5845 x^2^ -11.2024 x + 25.7133</p>
 <p>在这里是设置成多项式最高次数为3，因为polyfit函数其数学基础是最小二乘法曲线拟合原理。曲线拟合：已知离散点上的数据集，即已知在点集上的函数值，构造一个解析函数（其图形为一曲线）使在原离散点上尽可能接近给定的值，所以<strong>无论设置多项式次数为多少，理论上得到的结果都是正确的</strong></p>
 <script>
@@ -327,9 +328,9 @@ p=polyfit(x,y,<span class="hljs-number">3</span>)  <span class="hljs-comment">%p
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/09/20/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E6%9E%90%E6%B3%95%E5%8F%8A%E5%85%B6MATLAB%E5%AE%9E%E7%8E%B0/">
+                      <a href="/2019/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6GPU%E7%89%88%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%EF%BC%88%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数学建模常用的分析法MATLAB实现</span>
+                        <span class="hidden-mobile">深度学习框架GPU版前期准备（避坑指南）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -337,8 +338,8 @@ p=polyfit(x,y,<span class="hljs-number">3</span>)  <span class="hljs-comment">%p
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/09/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="hidden-mobile">学习笔记：计算机网络（断更）</span>
+                      <a href="/2019/09/20/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E5%B8%B8%E7%94%A8%E7%9A%84%E5%88%86%E6%9E%90%E6%B3%95%E5%8F%8A%E5%85%B6MATLAB%E5%AE%9E%E7%8E%B0/">
+                        <span class="hidden-mobile">数学建模常用的分析法MATLAB实现</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

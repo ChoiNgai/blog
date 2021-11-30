@@ -252,6 +252,8 @@
             <div class="markdown-body">
               <p>python爬虫</p>
 <a id="more"></a>
+
+
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>爬虫通常需要伪装ip和浏览器，因为较大的数据网站都会做一些反爬虫防护，伪装ip和浏览器型号是<code>模拟登录</code>的基础。</p>
 <h2 id="获取代理ip"><a href="#获取代理ip" class="headerlink" title="获取代理ip"></a>获取代理ip</h2><p>芝麻http等可以拿到一些免费的代码ip，但说实话我不喜欢这样的（量太少）,下面用一个脚本来判断ip是否能ping 通。</p>
 <p>这里先随机生成ip地址放在<code>ip_original.txt</code>这个文件（每个ip地址独自一行），待判断的ip可以随机生成，也可以在某些网站获取，例如：<a href="http://www.shenjidaili.com/shareip/" target="_blank" rel="noopener">http://www.shenjidaili.com/shareip/</a></p>
@@ -296,6 +298,9 @@ Effective_ip = [ ]  <span class="hljs-comment">#创建存储有效ip的列表</s
         print(<span class="hljs-string">"第"</span>+str(i+<span class="hljs-number">1</span>)+<span class="hljs-string">"个ip无效"</span>)
 
     text_save(<span class="hljs-string">'ip_list.txt'</span>, Effective_ip)		<span class="hljs-comment">#保存有效ip</span></code></pre></div>
+
+
+
 <h2 id="伪装后打开网页"><a href="#伪装后打开网页" class="headerlink" title="伪装后打开网页"></a>伪装后打开网页</h2><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> time
@@ -355,6 +360,9 @@ Effective_ip = [ ]  <span class="hljs-comment">#创建存储有效ip的列表</s
         agent = randomUserAgent()					<span class="hljs-comment">#随机选择浏览器型号</span>
         openUrl(ip, agent)							<span class="hljs-comment">#打开网页</span>
         time.sleep(<span class="hljs-number">10</span>)</code></pre></div>
+
+
+
 <p>戛然而止<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f61d.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f61d.png?v8">😝</span>（因为剩下的要干什么我就不提供了，仅供学习或研究使用）</p>
 <script>
         document.querySelectorAll('.github-emoji')

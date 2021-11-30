@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/1042406/201612/1042406-20161212135954464-1143551568.png">
 <meta property="article:published_time" content="2020-11-02T06:52:12.000Z">
-<meta property="article:modified_time" content="2021-11-24T08:40:50.227Z">
+<meta property="article:modified_time" content="2021-11-30T06:12:49.452Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="模糊聚类">
 <meta name="twitter:card" content="summary_large_image">
@@ -254,6 +254,7 @@
             <div class="markdown-body">
               <p>从kmeans到FCM(模糊C均值聚类)</p>
 <a id="more"></a>
+
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用<strong>隶属度</strong>来表示每个样本属于每一类的程度。</p>
 <p>模糊聚类中最为经典(古老)的是模糊C均值聚类（FCM），但在里哦了解FCM之前先了解一下kmeans吧。</p>
 <h2 id="kmeans"><a href="#kmeans" class="headerlink" title="kmeans"></a>kmeans</h2><p>先来看看kmeans的具体过程,已有大佬写得很清晰明了了，我这里直接Ctrl CV$[1]$：</p>
@@ -261,13 +262,10 @@
 <p>上图a表达了初始的数据集，假设类簇数（分类数）k=2。在图b中，我们随机选择了两个k类所对应的类别质心，即图中的红色质心和蓝色质心，然后分别求样本中所有点到这两个质心的距离，并标记每个样本的类别为和该样本距离最小的质心的类别，如图c所示，经过计算样本和红色质心和蓝色质心的距离，我们得到了所有样本点的第一轮迭代后的类别。此时我们对我们当前标记为红色和蓝色的点分别求其新的质心，如图4所示，新的红色质心和蓝色质心的位置已经发生了变动。图e和图f重复了我们在图c和图d的过程，即将所有点的类别标记为距离最近的质心的类别并求新的质心。最终我们得到的两个类别如图f。</p>
 <p>当然在实际K-Mean算法中，我们一般会多次运行图c和图d，才能达到最终的比较优的类别。这个循环多次执行图c和d的过程称之为“迭代”。</p>
 <p>图和文字讲完了，现在来看看数学公式。</p>
-<p>kmeans的思想是让每个聚类中心到属于该类的距离之和<strong>最小</strong>，故这样设置kmeans的目标函数：</p>
-<script type="math/tex; mode=display">
-J = \sum_{i=1}^k \sum_{j=1}^n ||x_j-v_i||^2</script><p>因为想要让每个聚类中心到属于该类的距离之和<strong>最小</strong>，即让<strong>目标函数值最小</strong>。</p>
+<p>kmeans的思想是让每个聚类中心到属于该类的距离之和<strong>最小</strong>，故这样设置kmeans的目标函数：<br>$$<br>J = \sum_{i=1}^k \sum_{j=1}^n ||x_j-v_i||^2<br>$$<br>因为想要让每个聚类中心到属于该类的距离之和<strong>最小</strong>，即让<strong>目标函数值最小</strong>。</p>
 <p>其中$k$为类簇数，$n$为样本数；$x_j$表示第$ j $个样本( $j$的范围是 $[1,n]$ )，$v_i$表示第$i$个聚类中心（因为类簇数是$k$，所以$i$的范围是 $[1,k]$ ）</p>
 <p>注意，在上式中$x_j$和$v_i$都是一个向量。这里以经典聚类数据集<strong>iris</strong> (150个样本，每个样本4个特征，所有样本分为3类) 为例子说明：</p>
 <p><strong>iris前五个样本</strong>（每一行表示一个样本的数据，这里每个样本4个特征）</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -277,8 +275,7 @@ J = \sum_{i=1}^k \sum_{j=1}^n ||x_j-v_i||^2</script><p>因为想要让每个聚�
 <th>0.2</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>4.9</td>
 <td>3</td>
 <td>1.4</td>
@@ -302,29 +299,23 @@ J = \sum_{i=1}^k \sum_{j=1}^n ||x_j-v_i||^2</script><p>因为想要让每个聚�
 <td>1.4</td>
 <td>0.2</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>$x_1$表示第1个样本，例如iris数据集中$x_1= [5.1 , 3.5 , 1.4 ,0.2 ] $</p>
 <p>$v_1$表第一个聚类中心（类簇中心），因为样本是四个特征，所有类簇中心也是4个特征，4个数值分别是第一类样本的各个特征的均值。</p>
 <h2 id="FCM"><a href="#FCM" class="headerlink" title="FCM"></a>FCM</h2><p>在kmeans中，聚类中心$ v_i $确定之后就确定样本所属类别了，属于其他类别的程度为 <strong>0</strong>。在模糊聚类中，增加了一个<strong>隶属度</strong>来表示各个样本属于每一类的<strong>程度</strong>。</p>
 <p>在模糊聚类中通常用$u_{ij}$来表示<strong>隶属度矩阵</strong>，其中$i={1,..c }$，$j= { 1,2,…n }$；$c$为类簇数，$n$为样本数。（跟上面介绍kmeans的符号是一样的）</p>
-<p>模糊C均值聚类的目标函数：</p>
-<script type="math/tex; mode=display">
-J(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2</script><script type="math/tex; mode=display">
-s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1</script><p>其中$c$是类簇数（C均值聚类嘛，所以相比kmeans把k换成了c）。$m$是加权指数幂，是一个自己给定的大于2的参数。</p>
+<p>模糊C均值聚类的目标函数：<br>$$<br>J(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2<br>$$</p>
+<p>$$<br>s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1<br>$$</p>
+<p>其中$c$是类簇数（C均值聚类嘛，所以相比kmeans把k换成了c）。$m$是加权指数幂，是一个自己给定的大于2的参数。</p>
 <p>目标函数的约束条件是<strong>隶属度</strong>的范围是0~1，每个样本的隶属度之和为1。</p>
 <p>上述目标函数只有$ u_{ij} $和$v_i $是未知，其他都为已知。</p>
 <p>为了因为有等式约束条件，所以FCM中用拉格朗日乘数法引入拉格朗日因子让目标函数满足隶属度约束条件，具体方法不在这里讲解[2]。</p>
-<p>得到隶属度矩阵迭代式：</p>
-<script type="math/tex; mode=display">
-u_{ij} = \frac{1}{\sum_{k=1}^c \frac{||x_j-v_i||}{||x_j-v_k||}^ \frac{1}{m-1} }</script><p>聚类中心迭代式：</p>
-<script type="math/tex; mode=display">
-v_i = \frac{\sum_{j=1}^n u_{ij}^m x_j }{ \sum_{j=1}^n{u_{ij}^m}}</script><ul>
-<li><p><strong>随机初始聚类中心/隶属度矩阵:</strong>从上面的隶属度矩阵和聚类中心迭代式可看出，隶属度矩阵迭代式里的未知只有$v<em>i$，而聚类中心跌打式里不知道的只有$u</em>{ij}$。故迭代前先随机给定一个符合条件的隶属度矩阵或聚类中心矩阵，然后即可开始迭代。</p>
+<p>得到隶属度矩阵迭代式：<br>$$<br>u_{ij} = \frac{1}{\sum_{k=1}^c \frac{||x_j-v_i||}{||x_j-v_k||}^ \frac{1}{m-1} }<br>$$<br>聚类中心迭代式：<br>$$<br>v_i = \frac{\sum_{j=1}^n u_{ij}^m x_j }{ \sum_{j=1}^n{u_{ij}^m}}<br>$$</p>
+<ul>
+<li><p><strong>随机初始聚类中心/隶属度矩阵:</strong>从上面的隶属度矩阵和聚类中心迭代式可看出，隶属度矩阵迭代式里的未知只有$v_i$，而聚类中心跌打式里不知道的只有$u_{ij}$。故迭代前先随机给定一个符合条件的隶属度矩阵或聚类中心矩阵，然后即可开始迭代。</p>
 <p>如果初始化给定的是<strong>聚类中心矩阵</strong>，那么将聚类中心矩阵代入<strong>隶属度矩阵迭代式</strong>中计算得到新的隶属度矩阵；否则将初始化给定的<strong>隶属度矩阵</strong>代入<strong>聚类中心迭代式</strong>中计算。</p>
 </li>
-<li><p><strong>迭代</strong>：将聚类中心$v<em>i$（隶属度矩阵$u</em>{ij}$）代入隶属度矩阵迭代式（聚类中心迭代式）中计算得到新的隶属度矩阵$u<em>{ij}$（聚类中心矩阵$v</em>{i}$），再将新的隶属度矩阵$u_{ij}$和聚类中心$v_i$代入目标函数计算一次目标函数值，完成一次迭代。</p>
+<li><p><strong>迭代</strong>：将聚类中心$v_i$（隶属度矩阵$u_{ij}$）代入隶属度矩阵迭代式（聚类中心迭代式）中计算得到新的隶属度矩阵$u_{ij}$（聚类中心矩阵$v_{i}$），再将新的隶属度矩阵$u_{ij}$和聚类中心$v_i$代入目标函数计算一次目标函数值，完成一次迭代。</p>
 </li>
 <li><p><strong>迭代停止:</strong>当两次迭代的目标函数值变化不大（至于多少才算是不大，这个由自己根据情况设定，在此称为<strong>阈值</strong>）或达到预先设定的最大迭代次数，即停止迭代。此时隶属度矩阵$U$和聚类中心矩阵$V$即为聚类结果。（$U=u_{ij},V=v_i$）</p>
 </li>
@@ -332,6 +323,7 @@ v_i = \frac{\sum_{j=1}^n u_{ij}^m x_j }{ \sum_{j=1}^n{u_{ij}^m}}</script><ul>
 <p>没了，下次再写点半监督模糊聚类吧~</p>
 <h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>在matlab中调用自带的FCM</p>
 <div class="hljs code-wrapper"><pre><code class="hljs matlab">[center,U] = fcm(data, cluster_n)	<span class="hljs-comment">% data为样本数据(样本数=数组行数)，cluster_n为类簇数</span></code></pre></div>
+
 <p>FCM的详细实现：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U,center]</span> = <span class="hljs-title">FCMclust</span><span class="hljs-params">(data, cluster_n)</span></span>
 
@@ -436,6 +428,11 @@ out = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size<
     out(k, :) = <span class="hljs-built_in">sqrt</span>(sum(((data-<span class="hljs-built_in">ones</span>(<span class="hljs-built_in">size</span>(data,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>)*center(k,:)).^<span class="hljs-number">2</span>)',<span class="hljs-number">1</span>));
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre></div>
+
+
+
+
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a href="https://blog.csdn.net/weixin_42029738/article/details/81978038" target="_blank" rel="noopener">K-means原理、优化及应用</a></p>
 <p>[2] <a href="https://www.cnblogs.com/wxl845235800/p/11053261.html" target="_blank" rel="noopener">模糊C均值聚类的公式推导</a></p>
 <script>

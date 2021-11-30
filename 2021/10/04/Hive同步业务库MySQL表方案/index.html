@@ -252,6 +252,7 @@
             <div class="markdown-body">
               <p>一些常见的Hive同步业务库MySQL（MySQL数据导入到Hive表）的操作</p>
 <a id="more"></a>
+
 <p>Hive表数据同步（数据采集）业务库MySQL表的步骤：</p>
 <ol>
 <li>找到MySQL表，查看表结构或建表语句</li>
@@ -278,6 +279,7 @@
   <span class="hljs-string">`store_id`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'店铺ID'</span>,
    <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span>
 ) <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span></code></pre></div>
+
 <p>很明显，这里删掉了MySQL字段的一些默认信息，并且去除了主键和选择的存储引擎</p>
 <blockquote>
 <p>MySQL建表语句改成Hive建表的一些常见处理：（在MySQL建表语句的基础上修改）</p>
@@ -320,6 +322,9 @@
     gmv
 )
 <span class="hljs-keyword">VALUES</span>($<span class="hljs-number">0</span>,$<span class="hljs-number">1</span>,$<span class="hljs-number">2</span>)	<span class="hljs-comment">--三个字段</span></code></pre></div>
+
+
+
 </li>
 </ol>
 <h2 id="增量同步采集"><a href="#增量同步采集" class="headerlink" title="增量同步采集"></a>增量同步采集</h2><p>增量同步基本上与全量同步处理方法一样有第二步和第三步</p>
@@ -339,6 +344,9 @@
     gmv
 )
 <span class="hljs-keyword">VALUES</span>($<span class="hljs-number">0</span>,$<span class="hljs-number">1</span>,$<span class="hljs-number">2</span>)	<span class="hljs-comment">--三个字段</span></code></pre></div>
+
+
+
 <h2 id="Hive表导入到MySQL表"><a href="#Hive表导入到MySQL表" class="headerlink" title="Hive表导入到MySQL表"></a>Hive表导入到MySQL表</h2><p>Hive表数据导入（数据采集）业务库MySQL表的步骤：(就Hive表和MySQL表反过来呗)</p>
 <ol>
 <li>找到Hive表，查看表结构或建表语句</li>
@@ -354,6 +362,7 @@
   <span class="hljs-string">`store_id`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'店铺ID'</span>,
    <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span>
 ) <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span></code></pre></div>
+
 <p>而MySQL又需要自增id，则MySQL建表语句是这样的（相比上面的例子，这里增加了id这个字段，注意后面的参数是<kbd>AUTO_INCREMENT</kbd>）</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`mysql_store_gmv`</span> (
   <span class="hljs-string">`id`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT,
@@ -362,6 +371,7 @@
    <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span>
   PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>)
 ) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT=<span class="hljs-number">4090</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8mb4 <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span></code></pre></div>
+
 <p>Hive表插入到MySQL的语句如下（忽略id）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> hive_store_gmv <span class="hljs-keyword">PARTITION</span> (dt=<span class="hljs-keyword">CURDATE</span>()) (
 	dt,
@@ -369,6 +379,7 @@
     gmv
 )
 <span class="hljs-keyword">VALUES</span>($<span class="hljs-number">0</span>,$<span class="hljs-number">1</span>,$<span class="hljs-number">2</span>)	<span class="hljs-comment">--三个字段</span></code></pre></div>
+
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

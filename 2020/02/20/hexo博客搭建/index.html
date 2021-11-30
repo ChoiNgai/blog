@@ -263,6 +263,7 @@
             <div class="markdown-body">
               <p>0元搭建自己的博客</p>
 <a id="more"></a>
+
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Hexo是一种静态网页框架，可以把md文件渲染成网页文件</p>
 <p>优点：简单易用，0成本</p>
 <h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
@@ -278,6 +279,7 @@
 <h3 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h3><p>建议新手安装最新的稳定版本，同样也得在环境变量里添加，比如安装在<code>D:\nodejs</code>就添加<code>D:\nodejs</code></p>
 <h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><p>在某个文件夹位置点击鼠标右键，打开git bash，输入</p>
 <div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo init</span></code></pre></div>
+
 <p>git会自动拉取hexo的安装包</p>
 <p>安装完成会出现以下这些文件</p>
 <blockquote>
@@ -294,9 +296,11 @@
 <p>安装cnpm，命令：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g cnpm --registry=https://registry.npm.taobao.org
 1</code></pre></div>
+
 <p>安装后，使用以下命令测试是否安装成功</p>
 <div class="hljs code-wrapper"><pre><code class="hljs bash">cnpm -v
 1</code></pre></div>
+
 <p>成功后，以后都使用 cnpm 代替以前 npm 来执行命令！</p>
 <ul>
 <li>安装必要插件</li>
@@ -318,7 +322,8 @@ cnpm i -S hexo-prism-plugin
 cnpm i hexo-permalink-pinyin <span class="hljs-comment">--save</span>
 cnpm i <span class="hljs-comment">--save hexo-generator-feed</span>
 cnpm <span class="hljs-keyword">install</span> hexo-generator-<span class="hljs-keyword">search</span> <span class="hljs-comment">--save</span></code></pre></div>
-<p>然后，输入<code>`hexo g</code>，等待md文件渲染成html文件再输入<code>hexo s</code></p>
+
+<p>然后，输入``hexo g<code>，等待md文件渲染成html文件再输入</code>hexo s`</p>
 <p>打开浏览器输入<code>http://localhost:4000/</code></p>
 <h2 id="定制美化"><a href="#定制美化" class="headerlink" title="定制美化"></a>定制美化</h2><p>根据自己的需要定制啦，记得多用git add -A和git commit -m “提交缓存区”  保存，万一搞得报错了至少能用git reflog回滚。</p>
 <h2 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h2><p>如果网速可以建议用PicGo+github pages搭建图床（但是上传速度很慢）；也可以用七牛云、又拍云等搭建图床，但是这种我个人觉得要么收费要么不好用。</p>
@@ -328,6 +333,7 @@ cnpm <span class="hljs-keyword">install</span> hexo-generator-<span class="hljs-
 <p>安装淘宝镜像</p>
 <div class="hljs code-wrapper"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install cnpm -g --registry=http://registry.<span class="hljs-built_in">npm</span>.taobao.org <span class="hljs-comment">#全局安装</span>
 <span class="hljs-built_in">npm</span> install cnpm --registry=http://registry.<span class="hljs-built_in">npm</span>.taobao.org		<span class="hljs-comment">#局部安装</span></code></pre></div>
+
 <p>安装上hexo必备的一些插件</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql">cnpm i <span class="hljs-comment">--save hexo-wordcount</span>
 cnpm i <span class="hljs-comment">--save hexo-deployer-git </span>
@@ -346,6 +352,7 @@ cnpm i <span class="hljs-comment">--save hexo-server</span>
 cnpm i <span class="hljs-comment">--save hexo-wordcount</span>
 cnpm i <span class="hljs-comment">--save hexo-generator-category</span>
 cnpm i <span class="hljs-comment">--save hexo-filter-mermaid-diagrams</span></code></pre></div>
+
 <p>然后需要修改一些必要的配置</p>
 <p>首先在<strong>根目录</strong>的_config.yml修改自己的网站名，作者名等，url处填写自己的网站名</p>
 <p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185000368.png" srcset="/img/loading.gif" lazyload="" alt="网站地址"></p>

@@ -254,6 +254,7 @@
             <div class="markdown-body">
               <p>这破网速受不了</p>
 <a id="more"></a>
+
 <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>国内使用linux/anaconda官方源很慢，所以一般都使用镜像源</p>
 <p>（PS：镜像网站是指每隔一段时间就同步更新到与另外一个网站资源相同的网站）</p>
 <h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><h3 id="ubuntu-18-04LTS"><a href="#ubuntu-18-04LTS" class="headerlink" title="ubuntu 18.04LTS"></a>ubuntu 18.04LTS</h3><div class="hljs code-wrapper"><pre><code class="hljs vim"># 默认注释了源码镜像以提高 apt <span class="hljs-keyword">update</span> 速度，如有需要可自行取消注释
@@ -269,6 +270,7 @@
 # 预发布软件源，不建议启用
 # <span class="hljs-keyword">deb</span> http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-proposed main restricted universe multiverse
 # <span class="hljs-keyword">deb</span>-src http<span class="hljs-variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="hljs-keyword">cn</span>/ubuntu/ bionic-proposed main restricted universe multiverse</code></pre></div>
+
 <h3 id="centos7"><a href="#centos7" class="headerlink" title="centos7"></a>centos7</h3><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-comment"># CentOS-Base.repo</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># The mirror system uses the connecting IP address of the client and the</span>
@@ -320,7 +322,13 @@
 <span class="hljs-attr">gpgcheck</span>=<span class="hljs-number">1</span>
 <span class="hljs-attr">enabled</span>=<span class="hljs-number">0</span>
 <span class="hljs-attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-<span class="hljs-number">7</span></code></pre></div>
+
+
+
 <div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">sudo</span> yum makecache	<span class="hljs-comment">#更新软件包缓存</span></code></pre></div>
+
+
+
 <h2 id="anaconda"><a href="#anaconda" class="headerlink" title="anaconda"></a>anaconda</h2><p>anaconda 添加清华镜像源:</p>
 <p><code>pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</code></p>
 <p>【讲真，有时候清华镜像会挂掉，推荐用阿里镜像】</p>

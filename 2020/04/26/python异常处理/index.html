@@ -254,16 +254,20 @@
             <div class="markdown-body">
               <p>python异常处理解决爬虫遇到404的问题</p>
 <a id="more"></a>
+
 <h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:
     <span class="hljs-comment">#运行可能产生异常的代码</span>
     <span class="hljs-keyword">except</span>：
     <span class="hljs-comment">#如果try后面的代码运行错误则运行这部分代码</span></code></pre></div>
+
 <h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:
 <span class="hljs-comment">#运行可能产生异常的代码</span>
 <span class="hljs-keyword">except</span>：
 <span class="hljs-comment">#如果try后面的代码运行错误则运行这部分代码              </span>
 <span class="hljs-keyword">else</span>：
 <span class="hljs-comment">#如果没有异常发生</span></code></pre></div>
+
+
 <h3 id="没有异常处理的程序"><a href="#没有异常处理的程序" class="headerlink" title="没有异常处理的程序"></a>没有异常处理的程序</h3><p>以爬取王者荣耀图片为例子</p>
 <div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request
 <span class="hljs-keyword">import</span> os

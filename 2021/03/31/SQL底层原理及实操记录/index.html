@@ -256,6 +256,7 @@
             <div class="markdown-body">
               <p>MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）</p>
 <a id="more"></a>
+
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MySQL45讲学习笔记,从底层原理上里理解关系型数据库并记录实操（MySQL8.0的一些新特性）</p>
 <h2 id="MySQL底层原理"><a href="#MySQL底层原理" class="headerlink" title="MySQL底层原理"></a>MySQL底层原理</h2><h2 id="MySQL实操记录"><a href="#MySQL实操记录" class="headerlink" title="MySQL实操记录"></a>MySQL实操记录</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ol>
 <li>安装MySQL</li>
@@ -264,15 +265,21 @@
 <p>靠谱参考教程：<a href="https://blog.csdn.net/qq_37350706/article/details/81707862" target="_blank" rel="noopener">https://blog.csdn.net/qq_37350706/article/details/81707862</a></p>
 <h3 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h3><p>MySQL8.0中的group by有新特性，默认开启参数ONLY_FULL_GROUP_BY，可以通过输入以下命令查看：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> @@sql_mode;</code></pre></div>
+
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210331105532759.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p>默认开启参数ONLY_FULL_GROUP_BY，表示开启group by完全模式：即select后面跟的列group by后面也必须有，但是group by后面跟的列，select后面不一定需要出现。</p>
 <p>故会出现以下情况：</p>
 <p>1）报错：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> anchorinformation <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> AnchorID;</code></pre></div>
+
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210331105924043.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p>2） 成功执行</p>
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> AnchorID <span class="hljs-keyword">from</span> anchorinformation <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> AnchorID;</code></pre></div>
+
+
+
 <div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> AnchorID,ANY_VALUE(anchor) <span class="hljs-keyword">from</span> anchorinformation <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> AnchorID;</code></pre></div>
+
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

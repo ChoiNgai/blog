@@ -254,6 +254,7 @@
             <div class="markdown-body">
               <p>动态规划方法解题</p>
 <a id="more"></a>
+
 <p>动态规划分为3个部分：</p>
 <ol>
 <li>确定状态</li>
@@ -276,9 +277,8 @@
 <h3 id="斐波那契问题"><a href="#斐波那契问题" class="headerlink" title="斐波那契问题"></a>斐波那契问题</h3><ul>
 <li><a href="https://leetcode-cn.com/problems/fibonacci-number/" target="_blank" rel="noopener">509. 斐波那契数</a></li>
 </ul>
-<script type="math/tex; mode=display">
-F(0) = 0,F(1) = 1    \\
-F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
+<p>$$<br>F(0) = 0,F(1) = 1    \<br>F(n) = F(n-1)+F(n-2),n&gt;1<br>$$</p>
+<p>给定$n$，计算$F(n)$</p>
 <p>从上述问题可知，初始条件为$F(0)=1,F(1)=1$</p>
 <p>方法一（<strong>暴力递归-深度优先搜索</strong>）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(self, n: int)</span> -&gt; int:</span>
@@ -287,6 +287,7 @@ F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
     <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:
         <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
     <span class="hljs-keyword">return</span> self.fib(n - <span class="hljs-number">1</span>) + self.fib(n - <span class="hljs-number">2</span>)</code></pre></div>
+
 <p>不超时算我输，这里暴力递归显然没有利用上此前已计算出来的结果</p>
 <p>方法二（<strong>带记忆的方法</strong>）：</p>
 <div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span>
@@ -302,6 +303,7 @@ F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
             <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>,len(f)):
                 f[i] = f[i<span class="hljs-number">-1</span>] + f[i<span class="hljs-number">-2</span>]	<span class="hljs-comment">#转移方程</span>
             <span class="hljs-keyword">return</span> f[<span class="hljs-number">-1</span>]	<span class="hljs-comment">#返回列表最后一个数</span></code></pre></div>
+
 <p>上述代码中，$f[i]$表示的是数列中第$i$个元素的数值（确定状态），$f(i) = f(i-1) + f(i-2)$（转移方程），$f(0) = f(1) = 1$（初始状态），迭代到第$n$个元素就停止（边界条件）</p>
 <p><a href="https://leetcode-cn.com/problems/climbing-stairs/solution/zhi-xin-hua-shi-pa-lou-ti-zhi-cong-bao-l-lo1t/" target="_blank" rel="noopener">参考：【知信】花式爬楼梯，从暴力爬楼梯，到动态规划爬楼梯</a></p>
 <p>斐波那契问题简单，如果换成具体问题呢？</p>
@@ -319,6 +321,7 @@ F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
         <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>,n+<span class="hljs-number">1</span>):
             f[i] = f[i<span class="hljs-number">-1</span>] + f[i<span class="hljs-number">-2</span>]	<span class="hljs-comment">#转移方程</span>
         <span class="hljs-keyword">return</span> f[<span class="hljs-number">-1</span>]	<span class="hljs-comment">#列表的倒数第一个元素（最后一个元素）</span></code></pre></div>
+
 <p>这种是每次可以爬一步或两步的，同理，如果可以爬三步的，那转移方程则为$f(i) = f(i-1) + f(i-2) + f(i-3)$</p>
 <p>具体题目看</p>
 <ul>
@@ -341,6 +344,7 @@ F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
             <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>,n+<span class="hljs-number">1</span>):
                 dp[i] = dp[i<span class="hljs-number">-1</span>] + dp[i<span class="hljs-number">-2</span>] + dp[i<span class="hljs-number">-3</span>]
         <span class="hljs-keyword">return</span> dp[<span class="hljs-number">-1</span>]%<span class="hljs-number">1000000007</span></code></pre></div>
+
 <p>上述代码中if部分为特例，else部分显然包括了状态（$f(i)$表示有多少种爬法）；转移方程则变成了$f(i) = f(i-1) + f(i-2) + f(i-3)$，迭代次数为到$n+1$停止（边界条件）</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/" target="_blank" rel="noopener">746. 使用最小花费爬楼梯</a></li>
@@ -367,6 +371,9 @@ F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
             <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>,len(x)):
                 x[i] = min(x[i<span class="hljs-number">-1</span>]+cost[i],x[i<span class="hljs-number">-2</span>]+cost[i<span class="hljs-number">-1</span>])
             <span class="hljs-keyword">return</span> x[<span class="hljs-number">-1</span>]</code></pre></div>
+
+
+
 <p>leetcode斐波那契问题合集：</p>
 <p><a href="https://leetcode-cn.com/problems/fibonacci-number/" target="_blank" rel="noopener">509. 斐波那契数</a></p>
 <p><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. 爬楼梯</a></p>

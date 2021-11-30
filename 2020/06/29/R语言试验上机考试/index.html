@@ -258,6 +258,7 @@
             <div class="markdown-body">
               <p>又是期末考哦</p>
 <a id="more"></a>
+
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一、某单位招聘2500人，按考试成绩从高到低依次录用，共有10000人报名，假设报名者的成绩$X~N(u,\sigma^2)$ ，已知90分以上有359人，60分以有下1151人，问被录用者中最低分为多少？试用R软件相关函数功能计算。（15分）</p>
 <p>二、已知20位学生的体重（单位：kg）如下：75.0， 64.5， 47.5， 66.9， 62.2，62.2, 58.7, 63.5, 66.7, 64.0, 57.8, 56.9, 50.2, 72.8, 65.3, 52.3,  63.6, 70.0, 63.9, 68.1 用R软件编程求学生体重的平均值、最大值、最小值、中位数。（10分）</p>
 <p>三、美国联邦贸易委员会（FTC）每年根据焦油、尼古丁、一氧化碳的含量对国内烟草排名，美国调查机构一般认为这三种物质的第一种对吸烟者的健康都有害。过去的研究表明，香烟的焦油和尼古丁含量的增加通常伴随着烟雾释放一氧化碳的增加。表FTC2文件列出了某年测试的25个（过滤）品牌样本中焦油、尼古丁、一氧化碳含量（mg）与重量(g)的数据。假定要建立一氧化碳含量$y$ 与焦油含量$x_1$ 、尼古丁含量 $x_2$、与重量函数$x_3$的模型。用R软件和FTC2数据文件中的数据拟合模型$E(y)=\beta_0+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3$，并检查是否存在共线性现象。（30分）  </p>
@@ -271,6 +272,7 @@ x1=matrix(c(<span class="hljs-number">60</span>,<span class="hljs-number">90</sp
 solve(x,x1)
 
 min=qnorm(<span class="hljs-number">0.75</span>)*<span class="hljs-number">10</span>+<span class="hljs-number">72</span>;min</code></pre></div>
+
 <p><strong>2</strong>  程序运行截屏</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzM3NTQ5MDQucG5n?x-oss-process=image/format,png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p><strong>3</strong>  程序运行答案或结果解读</p>
@@ -287,6 +289,9 @@ max(x2)
 min(x2)
 
 median(x2)</code></pre></div>
+
+
+
 <p><strong>2</strong>  程序运行截屏</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzM4MjA3NjkucG5n?x-oss-process=image/format,png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p><strong>3</strong> 程序运行答案或结果解读</p>
@@ -304,25 +309,40 @@ summary(lm.sol)
 
 XX3&lt;-cor(x3[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>])
 kappa(XX3,exact=<span class="hljs-literal">TRUE</span>)</code></pre></div>
+
+
+
 <p><strong>2</strong> 程序运行截屏</p>
 <p> <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzM5MTk4MDMucG5n?x-oss-process=image/format,png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p><strong>2）</strong> <strong>程序运行答案或结果解读</strong></p>
 <div class="hljs code-wrapper"><pre><code class="hljs r">x3 &lt;- read.table(<span class="hljs-string">"D:/R/FTC2.txt"</span>,header=<span class="hljs-literal">T</span>,na.strings = c(<span class="hljs-string">"NA"</span>))</code></pre></div>
+
+
+
 <div class="hljs code-wrapper"><pre><code class="hljs r"><span class="hljs-comment">#线性回归</span>
 lm.sol=lm(TAR~NICOTINE+WEIGHT+CO,data=x3)
 
 summary(lm.sol)</code></pre></div>
+
+
+
 <p>得到拟合结果为y= -2.3696+ 10.0803<em>x1 + 0.1704</em>x2 + 0.4459 *x3<br>(x1~ NICOTINE ,x2~ WEIGHT,x3~ CO)</p>
 <div class="hljs code-wrapper"><pre><code class="hljs r">XX3&lt;-cor(x3[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>])
 
 
 kappa(XX3,exact=<span class="hljs-literal">TRUE</span>)   <span class="hljs-comment">#exact=TRUE表示精确计算条件数；</span></code></pre></div>
+
+
+
 <p>运行结果为189.7185 ，远小于1000则可认为不存在共线性现象。 </p>
 <h2 id="第四题答案"><a href="#第四题答案" class="headerlink" title="第四题答案"></a>第四题答案</h2><p><strong>1</strong> 程序</p>
 <div class="hljs code-wrapper"><pre><code class="hljs r">x4 &lt;- read.table(<span class="hljs-string">"D:/R/EPAGAS.txt"</span>,header=<span class="hljs-literal">T</span>,na.strings = c(<span class="hljs-string">"NA"</span>))
 hist(x4$MPG)
 qqnorm(x4$MPG)
 shapiro.test(x4$MPG)		<span class="hljs-comment">#检验数据是否符合正态分布</span></code></pre></div>
+
+
+
 <p><strong>2</strong> 程序运行截屏</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzQxMjkxODIucG5n?x-oss-process=image/format,png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p><strong>3</strong> 程序运行答案或结果解读</p>
@@ -337,7 +357,12 @@ qqnorm(x4$MPG)         <span class="hljs-comment">#画出qq图</span>
 shapiro.test(x4$MPG)    <span class="hljs-comment">#正态分布检验</span>
 
 <span class="hljs-comment">#p值大于0.05，所以数据为正态分布</span></code></pre></div>
-<h2 id="第五题答案"><a href="#第五题答案" class="headerlink" title="第五题答案"></a>第五题答案</h2><p><strong>1 </strong> 程序</p>
+
+
+
+
+
+<h2 id="第五题答案"><a href="#第五题答案" class="headerlink" title="第五题答案"></a>第五题答案</h2><p>*<em>1 *</em> 程序</p>
 <div class="hljs code-wrapper"><pre><code class="hljs r">f=<span class="hljs-keyword">function</span>(n){
 
 sum=<span class="hljs-number">0</span>
@@ -359,6 +384,9 @@ sum}
  
 
 f(<span class="hljs-number">501</span>)</code></pre></div>
+
+
+
 <p><strong>2</strong>  程序运行截屏</p>
 <p> <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9hdXRvMmRldi5jb2RpbmcubmV0L3AvSW1hZ2VIb3N0aW5nU2VydmljZS9kL0ltYWdlSG9zdGluZ1NlcnZpY2UvZ2l0L3Jhdy9tYXN0ZXIvbWQvaW1hZ2UtMjAyMDA2MjkxNzQyNDkwNDYucG5n?x-oss-process=image/format,png" srcset="/img/loading.gif" lazyload="" alt=""></p>
 <p><strong>3</strong>  程序运行答案或结果解读</p>
@@ -380,6 +408,9 @@ a=-a
 b=b+<span class="hljs-number">2</span>}
 
 sum}</code></pre></div>
+
+
+
 <p>再调用</p>
 <div class="hljs code-wrapper"><pre><code class="hljs r">f(<span class="hljs-number">501</span>)</code></pre></div>
 <script>

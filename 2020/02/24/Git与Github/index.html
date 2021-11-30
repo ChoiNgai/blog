@@ -254,15 +254,23 @@
             <div class="markdown-body">
               <p>把本地git仓库提交到github网站托管</p>
 <a id="more"></a>
+
 <p>坊间流传着“知道github的程序员歧视不知道github的程序员”。我就纳闷了：程序员还会不知道github？<br>好啦，都快要全面迈入小康社会了，再不知道github就要被消灭了[滑稽]</p>
 <p><a href="https://blog.csdn.net/lqlqlq007/article/details/78983879" target="_blank" rel="noopener">首先要在远程仓库配置ssh</a>，然后建立远程仓库</p>
 <p>我们常常会根据远程分支创建本地分支，命令如下</p>
 <div class="hljs code-wrapper"><pre><code class="hljs q">git checkout -b <span class="hljs-built_in">dev</span> origin/<span class="hljs-built_in">dev</span></code></pre></div>
+
+
+
 <p>上面的命令我是想把远程分支 dev 拉到本地来，但是有时候没有用，提示远程分支不存在，我们需要通过下面的命令来操作</p>
 <div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">git fetch origin</span></code></pre></div>
+
+
+
 <p>可以运行 <code>git fetch origin</code> 来同步远程服务器上的数据到本地。</p>
 <p>已经同步了分支，现在就可以拉取远程分支了</p>
 <div class="hljs code-wrapper"><pre><code class="hljs q">git checkout -b <span class="hljs-built_in">dev</span> origin/<span class="hljs-built_in">dev</span></code></pre></div>
+
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
