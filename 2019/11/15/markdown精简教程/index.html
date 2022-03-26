@@ -254,8 +254,8 @@
             <div class="markdown-body">
               <p>一个代替word的简洁文本编辑器</p>
 <a id="more"></a>
-
-<h2 id="为什么要用markdown？"><a href="#为什么要用markdown？" class="headerlink" title="为什么要用markdown？"></a>为什么要用markdown？</h2><p>emmm……word相比markdown，其优点在于不用排版（word不刻意去排版真的很难看）</p>
+<h2 id="为什么要用markdown">为什么要用markdown？</h2>
+<p>emmm......word相比markdown，其优点在于不用排版（word不刻意去排版真的很难看）</p>
 <p>对新手来说，会觉得这纯粹找事，但是熟练之后不管是做笔记还是会议记录，甚至是写论文markdown都比已有的工具方便得多。</p>
 <p>此外markdown支持html和 latex 语法（word也支持latex，但那个渲染真的无语了）</p>
 <p>看看这么多人都用markdown，大部分都是刚学的时候觉得啥玩意？~之后，真香</p>
@@ -265,20 +265,13 @@
 <ul>
 <li>支持latex</li>
 </ul>
-<p>$$<br>y_{\theta}=\sum_{i=1}^n   \int_0^{+\infty}\frac{\sigma}{x^2} dx<br>$$</p>
+<p><span class="math display">\[
+y_{\theta}=\sum_{i=1}^n   \int_0^{+\infty}\frac{\sigma}{x^2} dx
+\]</span></p>
 <ul>
 <li>代码块~语法高亮</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cv_imread</span><span class="hljs-params">(file_path)</span>:</span>
-				 cv_img=cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), <span class="hljs-number">-1</span>)
-        		 cv_img = cv2.IMREAD_GRAYSCALE(img)
-		<span class="hljs-keyword">return</span> cv_img</code></pre></div>
-
-
-
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cv_imread</span><span class="hljs-params">(file_path)</span>:</span><br>				 cv_img=cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), <span class="hljs-number">-1</span>)<br>        		 cv_img = cv2.IMREAD_GRAYSCALE(img)<br>		<span class="hljs-keyword">return</span> cv_img<br></code></pre></div></td></tr></tbody></table></figure>
 <ul>
 <li>流程图</li>
 </ul>
@@ -289,73 +282,73 @@ B[发送设备]--&gt;C[信道]
 D[噪声源]--&gt;C[信道]
 C[信道]--&gt;E[接收设备]
 E[接收设备]--&gt;F[信宿]</pre></div>
-
 <ul>
 <li>有序列表</li>
 </ul>
-<ol>
+<ol type="1">
 <li>任务A</li>
-<li>任务B<ol>
+<li>任务B
+<ol type="1">
 <li>任务C</li>
 <li>任务D</li>
-</ol>
-</li>
+</ol></li>
 </ol>
 <ul>
 <li>无序列表</li>
-<li>列表<ul>
+<li>列表
+<ul>
 <li>A</li>
-<li>B<ul>
-<li>D<ul>
+<li>B
+<ul>
+<li>D
+<ul>
 <li>E</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>C</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>加粗</strong>、<em>斜体</em>、<u>下划线</u></p>
 <p><a href="https://www.baidu.com/" target="_blank" rel="noopener">超链接</a></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg" srcset="/img/loading.gif" lazyload="" alt="引入图像"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg" srcset="/img/loading.gif" lazyload="" alt="引入图像"><figcaption aria-hidden="true">引入图像</figcaption>
+</figure>
 <ul>
 <li><p>支持html，例如用html的<kbd>img</kbd>标签引入图像,<kbd>center</kbd>标签控制居中，<kbd>width</kbd>控制图片大小</p>
-<center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg" srcset="/img/loading.gif" lazyload="" width="30%"></center>
-
-
-
-</li>
-</ul>
-<ul>
+<center>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg" srcset="/img/loading.gif" lazyload="" width="30%"></p>
+</center></li>
 <li><p>表格</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>A</th>
-<th align="center">B</th>
-<th align="right">C</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: right;">C</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>哈哈</td>
-<td align="center">呵呵</td>
-<td align="right">嗯哼</td>
+<td style="text-align: center;">呵呵</td>
+<td style="text-align: right;">嗯哼</td>
 </tr>
-</tbody></table>
-</li>
+</tbody>
+</table></li>
 </ul>
 <p>编写的文档很自然地可以导出成<kbd>html</kbd>或者<kbd>PDF</kbd>、<kbd>word</kbd>等,图像品质不会压缩。另外大多数博客平台都支持markdown排版，例如这篇就是用markdown写的(都是统一的，就不会像word那样出现乱码或者排版不对这些情况)。相比word，markdown更简洁，功能较少但能让人<strong>专注于写作</strong>（就是不需要去排版，但排版仍然会很好看）</p>
 <hr>
 <p>如果刚开始用不熟悉，也不是非得用键盘，有些markdown编辑软件支持鼠标点击打开某项功能，比如黑体、代码块，表格等。</p>
 <p>常见的一些markdown语法（其实语法不多，但一开始就记一堆，难免会让人难以接受，建议先掌握下面这些常用的，以后用写笔记markdown编辑器代替word就好啦，<strong>用过几次后自然熟悉</strong>）</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>一级标题: <kbd>#</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
-<p>二级标题: <kbd>##</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd> </p>
-<p>……</p>
+<h2 id="标题">标题</h2>
+<p>一级标题: <kbd>#</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
+<p>二级标题: <kbd>##</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
+<p>......</p>
 <p>六级标题: <kbd>######</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
-<h2 id="黑体斜体"><a href="#黑体斜体" class="headerlink" title="黑体斜体"></a>黑体斜体</h2><p><kbd> * </kbd>  + <kbd>文字</kbd>+ <kbd> * </kbd>让文字变成斜体，注意中间不带空格，如：</p>
+<h2 id="黑体斜体">黑体斜体</h2>
+<p><kbd> <em>&nbsp;</em></kbd><em> + <kbd>文字</kbd>+&nbsp;<kbd>&nbsp;</kbd></em>&nbsp;让文字变成斜体，注意中间不带空格，如：</p>
 <p><em>文字</em></p>
-<p><kbd>* *</kbd>+<kbd>文字</kbd>+ <kbd>**</kbd>  让文字变成黑体，注意中间不带空格，如：</p>
+<p><kbd>* *</kbd>+<kbd>文字</kbd>+ <kbd>**</kbd> 让文字变成黑体，注意中间不带空格，如：</p>
 <p><strong>文字</strong></p>
 <p>只一个<kbd>*</kbd>+<kbd>空格</kbd> 会出现一个点，如：</p>
 <ul>
@@ -363,14 +356,17 @@ E[接收设备]--&gt;F[信宿]</pre></div>
 </ul>
 <p>连续输入三个<kbd>*</kbd>会变成分割线，如:</p>
 <hr>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>[</kbd>  有序列表</p>
-<p><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>]</kbd>   无序列表</p>
-<h2 id="代码块和公式块"><a href="#代码块和公式块" class="headerlink" title="代码块和公式块"></a>代码块和公式块</h2><p>代码块： <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>K</kbd>  </p>
-<p>latex公式块： <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>M</kbd>  </p>
+<h2 id="列表">列表</h2>
+<p><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>[</kbd> 有序列表</p>
+<p><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>]</kbd> 无序列表</p>
+<h2 id="代码块和公式块">代码块和公式块</h2>
+<p>代码块： <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>K</kbd></p>
+<p>latex公式块： <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>M</kbd></p>
 <p>这些是基础操作，如果各位还会写html或latex语法的话更佳，不会也不要紧，掌握上述命令即可自(wu)由(nai)写作。</p>
 <p>markdown编辑器有很多，我个人比较喜欢用typora，附上win10_64位的下载链接，<a href="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/download/typora-setup-x64.exe" target="_blank" rel="noopener">Typora</a></p>
-<p>官网： <a href="https://www.typora.io/" target="_blank" rel="noopener">https://www.typora.io/</a> (官网下载很慢哦)</p>
-<h2 id="emoji表情"><a href="#emoji表情" class="headerlink" title="emoji表情"></a>emoji表情</h2><p>此外还支持一堆emoji表情，不信你看👉 <a href="https://www.webfx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">emoji</a></p>
+<p>官网： https://www.typora.io/ (官网下载很慢哦)</p>
+<h2 id="emoji表情">emoji表情</h2>
+<p>此外还支持一堆emoji表情，不信你看👉 <a href="https://www.webfx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">emoji</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -508,6 +504,20 @@ E[接收设备]--&gt;F[信宿]</pre></div>
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -625,13 +635,6 @@ E[接收设备]--&gt;F[信宿]</pre></div>
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

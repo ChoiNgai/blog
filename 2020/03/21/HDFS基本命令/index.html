@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      889 字
+      946 字
     </span>
   
 
@@ -252,62 +252,25 @@
             <div class="markdown-body">
               <p>HDFS课程实验</p>
 <a id="more"></a>
-
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本文为Hadoop基础实验中的HDFS基础命令实验</p>
-<h3 id="实验目的："><a href="#实验目的：" class="headerlink" title="实验目的："></a>实验目的：</h3><p>掌握Linux基本命令和HDFS基本命令。</p>
+<h2 id="介绍">介绍</h2>
+<p>本文为Hadoop基础实验中的HDFS基础命令实验</p>
+<h3 id="实验目的">实验目的：</h3>
+<p>掌握Linux基本命令和HDFS基本命令。</p>
 <p>掌握Java程序编写，编译，运行的基本方法。</p>
-<h3 id="实验过程："><a href="#实验过程：" class="headerlink" title="实验过程："></a>实验过程：</h3><p>1、Linux基本命令和HDFS基本命令完成以下操作：（30分）</p>
+<h3 id="实验过程">实验过程：</h3>
+<p>1、Linux基本命令和HDFS基本命令完成以下操作：（30分）</p>
 <p>（1）在Linux根目录下创建一个名为a的文件夹，</p>
-<div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-built_in">mkdir</span> a</code></pre></div>
-
+<figure class="highlight arduino"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino"><span class="hljs-built_in">mkdir</span> a<br></code></pre></div></td></tr></tbody></table></figure>
 <p>（2）用vim命令在文件夹a中创建一个文件b.txt，文件内容是“Hello world”，</p>
-<div class="hljs code-wrapper"><pre><code class="hljs stylus">cd mkdir
-touch <span class="hljs-selector-tag">b</span>.txt
-echo <span class="hljs-string">"Hello world"</span> &gt; <span class="hljs-selector-tag">b</span>.txt</code></pre></div>
-
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">cd mkdir<br>touch <span class="hljs-selector-tag">b</span>.txt<br>echo <span class="hljs-string">"Hello world"</span> &gt; <span class="hljs-selector-tag">b</span>.txt<br></code></pre></div></td></tr></tbody></table></figure>
 <p>（3）在HDFS根目录下创建一个名为test的文件夹，</p>
-<div class="hljs code-wrapper"><pre><code class="hljs dos">hadoop <span class="hljs-built_in">fs</span> -<span class="hljs-built_in">mkdir</span> test</code></pre></div>
-
+<figure class="highlight dos"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dos">hadoop <span class="hljs-built_in">fs</span> -<span class="hljs-built_in">mkdir</span> test<br></code></pre></div></td></tr></tbody></table></figure>
 <p>（4）将b.txt上传到test文件夹中。</p>
-<div class="hljs code-wrapper"><pre><code class="hljs applescript">hdfs dfs -<span class="hljs-keyword">put</span> ~/b.txt</code></pre></div>
-
-<p>2、在eclipse环境下调试下列程序，在HDFS上创建/test/aw1.txt，并写入”hello”</p>
-<div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.hadoop.conf.Configuration;
-
-<span class="hljs-keyword">import</span> org.apache.hadoop.fs.FSDataInputStream;
-
-<span class="hljs-keyword">import</span> org.apache.hadoop.fs.FSDataOutputStream;
-
-<span class="hljs-keyword">import</span> org.apache.hadoop.fs.Path;
-
-<span class="hljs-keyword">import</span> org.apache.hadoop.fs.FileSystem;
-
-
- <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WordCount</span> </span>{
-
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>{
-
-   Configuration conf=<span class="hljs-keyword">new</span> Configuration();
-
-    conf.set(<span class="hljs-string">"fs.defaultFS"</span>,<span class="hljs-string">"hdfs://Cent12:9000/"</span>);
-
-     FileSystem fs=FileSystem.get(conf);
-
-     Path path = <span class="hljs-keyword">new</span> Path(<span class="hljs-string">"/test/aw1.txt"</span>);
-
-     FSDataOutputStream fos = fs.create(path);        
-
-     fos.writeBytes(<span class="hljs-string">"hello"</span>);
-
-  }
-
- }</code></pre></div>
-
-
-
-
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><script>
+<figure class="highlight applescript"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">hdfs dfs -<span class="hljs-keyword">put</span> ~/b.txt<br></code></pre></div></td></tr></tbody></table></figure>
+<p>2、在eclipse环境下调试下列程序，在HDFS上创建/test/aw1.txt，并写入"hello"</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.apache.hadoop.conf.Configuration;<br><br><span class="hljs-keyword">import</span> org.apache.hadoop.fs.FSDataInputStream;<br><br><span class="hljs-keyword">import</span> org.apache.hadoop.fs.FSDataOutputStream;<br><br><span class="hljs-keyword">import</span> org.apache.hadoop.fs.Path;<br><br><span class="hljs-keyword">import</span> org.apache.hadoop.fs.FileSystem;<br><br><br> <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WordCount</span> </span>{<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>{<br><br>   Configuration conf=<span class="hljs-keyword">new</span> Configuration();<br><br>    conf.set(<span class="hljs-string">"fs.defaultFS"</span>,<span class="hljs-string">"hdfs://Cent12:9000/"</span>);<br><br>     FileSystem fs=FileSystem.get(conf);<br><br>     Path path = <span class="hljs-keyword">new</span> Path(<span class="hljs-string">"/test/aw1.txt"</span>);<br><br>     FSDataOutputStream fos = fs.create(path);        <br><br>     fos.writeBytes(<span class="hljs-string">"hello"</span>);<br><br>  }<br><br> }<br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -444,6 +407,20 @@ echo <span class="hljs-string">"Hello world"</span> &gt; <span class="hljs-selec
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -561,13 +538,6 @@ echo <span class="hljs-string">"Hello world"</span> &gt; <span class="hljs-selec
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

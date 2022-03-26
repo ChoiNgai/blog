@@ -252,14 +252,11 @@
             <div class="markdown-body">
               <p>大坑</p>
 <a id="more"></a>
-
 <ul>
-<li><p>打开管理员权限文件管理：<code>sudo nautilus</code><br>（用于拷贝文件的时候出现权限不够的情况）  </p>
-</li>
-<li><p>vim强行保存只读文件 <code>w !sudo tee %</code></p>
-</li>
-<li><p>centos7中python读取文件需要填写绝对路径（试过windows的PC上能运行，但是服务器上提示读取不到该文件）</p>
-</li>
+<li><p>打开管理员权限文件管理：<code>sudo nautilus</code><br>
+（用于拷贝文件的时候出现权限不够的情况）</p></li>
+<li><p>vim强行保存只读文件 <code>w !sudo tee %</code></p></li>
+<li><p>centos7中python读取文件需要填写绝对路径（试过windows的PC上能运行，但是服务器上提示读取不到该文件）</p></li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -398,6 +395,20 @@
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -515,13 +526,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.4k 字
+      4.7k 字
     </span>
   
 
@@ -220,7 +220,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14 分钟
+      15 分钟
     </span>
   
 
@@ -254,186 +254,93 @@
             <div class="markdown-body">
               <p>从kmeans到FCM(模糊C均值聚类)</p>
 <a id="more"></a>
-
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用<strong>隶属度</strong>来表示每个样本属于每一类的程度。</p>
+<h2 id="introduction">Introduction</h2>
+<p>模糊聚类又称为软聚类，相对于硬聚类这种非此即彼的分类，其用<strong>隶属度</strong>来表示每个样本属于每一类的程度。</p>
 <p>模糊聚类中最为经典(古老)的是模糊C均值聚类（FCM），但在里哦了解FCM之前先了解一下kmeans吧。</p>
-<h2 id="kmeans"><a href="#kmeans" class="headerlink" title="kmeans"></a>kmeans</h2><p>先来看看kmeans的具体过程,已有大佬写得很清晰明了了，我这里直接Ctrl CV$[1]$：</p>
-<p> <img src="https://images2015.cnblogs.com/blog/1042406/201612/1042406-20161212135954464-1143551568.png" srcset="/img/loading.gif" lazyload="" alt="kmeans迭代过程"> </p>
+<h2 id="kmeans">kmeans</h2>
+<p>先来看看kmeans的具体过程,已有大佬写得很清晰明了了，我这里直接Ctrl CV<span class="math inline">\([1]\)</span>：</p>
+<figure>
+<img src="https://images2015.cnblogs.com/blog/1042406/201612/1042406-20161212135954464-1143551568.png" srcset="/img/loading.gif" lazyload="" alt="kmeans迭代过程"><figcaption aria-hidden="true">kmeans迭代过程</figcaption>
+</figure>
 <p>上图a表达了初始的数据集，假设类簇数（分类数）k=2。在图b中，我们随机选择了两个k类所对应的类别质心，即图中的红色质心和蓝色质心，然后分别求样本中所有点到这两个质心的距离，并标记每个样本的类别为和该样本距离最小的质心的类别，如图c所示，经过计算样本和红色质心和蓝色质心的距离，我们得到了所有样本点的第一轮迭代后的类别。此时我们对我们当前标记为红色和蓝色的点分别求其新的质心，如图4所示，新的红色质心和蓝色质心的位置已经发生了变动。图e和图f重复了我们在图c和图d的过程，即将所有点的类别标记为距离最近的质心的类别并求新的质心。最终我们得到的两个类别如图f。</p>
 <p>当然在实际K-Mean算法中，我们一般会多次运行图c和图d，才能达到最终的比较优的类别。这个循环多次执行图c和d的过程称之为“迭代”。</p>
 <p>图和文字讲完了，现在来看看数学公式。</p>
-<p>kmeans的思想是让每个聚类中心到属于该类的距离之和<strong>最小</strong>，故这样设置kmeans的目标函数：<br>$$<br>J = \sum_{i=1}^k \sum_{j=1}^n ||x_j-v_i||^2<br>$$<br>因为想要让每个聚类中心到属于该类的距离之和<strong>最小</strong>，即让<strong>目标函数值最小</strong>。</p>
-<p>其中$k$为类簇数，$n$为样本数；$x_j$表示第$ j $个样本( $j$的范围是 $[1,n]$ )，$v_i$表示第$i$个聚类中心（因为类簇数是$k$，所以$i$的范围是 $[1,k]$ ）</p>
-<p>注意，在上式中$x_j$和$v_i$都是一个向量。这里以经典聚类数据集<strong>iris</strong> (150个样本，每个样本4个特征，所有样本分为3类) 为例子说明：</p>
+<p>kmeans的思想是让每个聚类中心到属于该类的距离之和<strong>最小</strong>，故这样设置kmeans的目标函数： <span class="math display">\[
+J = \sum_{i=1}^k \sum_{j=1}^n ||x_j-v_i||^2
+\]</span> 因为想要让每个聚类中心到属于该类的距离之和<strong>最小</strong>，即让<strong>目标函数值最小</strong>。</p>
+<p>其中<span class="math inline">\(k\)</span>为类簇数，<span class="math inline">\(n\)</span>为样本数；<span class="math inline">\(x_j\)</span>表示第$ j $个样本( <span class="math inline">\(j\)</span>的范围是 <span class="math inline">\([1,n]\)</span> )，<span class="math inline">\(v_i\)</span>表示第<span class="math inline">\(i\)</span>个聚类中心（因为类簇数是<span class="math inline">\(k\)</span>，所以<span class="math inline">\(i\)</span>的范围是 <span class="math inline">\([1,k]\)</span> ）</p>
+<p>注意，在上式中<span class="math inline">\(x_j\)</span>和<span class="math inline">\(v_i\)</span>都是一个向量。这里以经典聚类数据集<strong>iris</strong> (150个样本，每个样本4个特征，所有样本分为3类) 为例子说明：</p>
 <p><strong>iris前五个样本</strong>（每一行表示一个样本的数据，这里每个样本4个特征）</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>5.1</th>
 <th>3.5</th>
 <th>1.4</th>
 <th>0.2</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>4.9</td>
 <td>3</td>
 <td>1.4</td>
 <td>0.2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>4.7</td>
 <td>3.2</td>
 <td>1.3</td>
 <td>0.2</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>4.6</td>
 <td>3.1</td>
 <td>1.5</td>
 <td>0.2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>5</td>
 <td>3.6</td>
 <td>1.4</td>
 <td>0.2</td>
 </tr>
-</tbody></table>
-<p>$x_1$表示第1个样本，例如iris数据集中$x_1= [5.1 , 3.5 , 1.4 ,0.2 ] $</p>
-<p>$v_1$表第一个聚类中心（类簇中心），因为样本是四个特征，所有类簇中心也是4个特征，4个数值分别是第一类样本的各个特征的均值。</p>
-<h2 id="FCM"><a href="#FCM" class="headerlink" title="FCM"></a>FCM</h2><p>在kmeans中，聚类中心$ v_i $确定之后就确定样本所属类别了，属于其他类别的程度为 <strong>0</strong>。在模糊聚类中，增加了一个<strong>隶属度</strong>来表示各个样本属于每一类的<strong>程度</strong>。</p>
-<p>在模糊聚类中通常用$u_{ij}$来表示<strong>隶属度矩阵</strong>，其中$i={1,..c }$，$j= { 1,2,…n }$；$c$为类簇数，$n$为样本数。（跟上面介绍kmeans的符号是一样的）</p>
-<p>模糊C均值聚类的目标函数：<br>$$<br>J(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2<br>$$</p>
-<p>$$<br>s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1<br>$$</p>
-<p>其中$c$是类簇数（C均值聚类嘛，所以相比kmeans把k换成了c）。$m$是加权指数幂，是一个自己给定的大于2的参数。</p>
+</tbody>
+</table>
+<p><span class="math inline">\(x_1\)</span>表示第1个样本，例如iris数据集中$x_1= [5.1 , 3.5 , 1.4 ,0.2 ] $</p>
+<p><span class="math inline">\(v_1\)</span>表第一个聚类中心（类簇中心），因为样本是四个特征，所有类簇中心也是4个特征，4个数值分别是第一类样本的各个特征的均值。</p>
+<h2 id="fcm">FCM</h2>
+<p>在kmeans中，聚类中心$ v_i $确定之后就确定样本所属类别了，属于其他类别的程度为 <strong>0</strong>。在模糊聚类中，增加了一个<strong>隶属度</strong>来表示各个样本属于每一类的<strong>程度</strong>。</p>
+<p>在模糊聚类中通常用<span class="math inline">\(u_{ij}\)</span>来表示<strong>隶属度矩阵</strong>，其中<span class="math inline">\(i=\{1,..c \}\)</span>，<span class="math inline">\(j= \{ 1,2,...n \}\)</span>；<span class="math inline">\(c\)</span>为类簇数，<span class="math inline">\(n\)</span>为样本数。（跟上面介绍kmeans的符号是一样的）</p>
+<p>模糊C均值聚类的目标函数： <span class="math display">\[
+J(U,V) = \sum_{i=1}^c \sum_{j=1}^n u_{ij}^m ||x_j-v_i||^2
+\]</span></p>
+<p><span class="math display">\[
+s.t. \quad u_{ij} \in [0,1]; \sum_{i=1}^c u_{ij}=1
+\]</span></p>
+<p>其中<span class="math inline">\(c\)</span>是类簇数（C均值聚类嘛，所以相比kmeans把k换成了c）。<span class="math inline">\(m\)</span>是加权指数幂，是一个自己给定的大于2的参数。</p>
 <p>目标函数的约束条件是<strong>隶属度</strong>的范围是0~1，每个样本的隶属度之和为1。</p>
-<p>上述目标函数只有$ u_{ij} $和$v_i $是未知，其他都为已知。</p>
+<p>上述目标函数只有$ u_{ij} <span class="math inline">\(和\)</span>v_i $是未知，其他都为已知。</p>
 <p>为了因为有等式约束条件，所以FCM中用拉格朗日乘数法引入拉格朗日因子让目标函数满足隶属度约束条件，具体方法不在这里讲解[2]。</p>
-<p>得到隶属度矩阵迭代式：<br>$$<br>u_{ij} = \frac{1}{\sum_{k=1}^c \frac{||x_j-v_i||}{||x_j-v_k||}^ \frac{1}{m-1} }<br>$$<br>聚类中心迭代式：<br>$$<br>v_i = \frac{\sum_{j=1}^n u_{ij}^m x_j }{ \sum_{j=1}^n{u_{ij}^m}}<br>$$</p>
+<p>得到隶属度矩阵迭代式： <span class="math display">\[
+u_{ij} = \frac{1}{\sum_{k=1}^c \frac{||x_j-v_i||}{||x_j-v_k||}^ \frac{1}{m-1} }
+\]</span> 聚类中心迭代式： <span class="math display">\[
+v_i = \frac{\sum_{j=1}^n u_{ij}^m x_j }{ \sum_{j=1}^n{u_{ij}^m}}
+\]</span></p>
 <ul>
-<li><p><strong>随机初始聚类中心/隶属度矩阵:</strong>从上面的隶属度矩阵和聚类中心迭代式可看出，隶属度矩阵迭代式里的未知只有$v_i$，而聚类中心跌打式里不知道的只有$u_{ij}$。故迭代前先随机给定一个符合条件的隶属度矩阵或聚类中心矩阵，然后即可开始迭代。</p>
-<p>如果初始化给定的是<strong>聚类中心矩阵</strong>，那么将聚类中心矩阵代入<strong>隶属度矩阵迭代式</strong>中计算得到新的隶属度矩阵；否则将初始化给定的<strong>隶属度矩阵</strong>代入<strong>聚类中心迭代式</strong>中计算。</p>
-</li>
-<li><p><strong>迭代</strong>：将聚类中心$v_i$（隶属度矩阵$u_{ij}$）代入隶属度矩阵迭代式（聚类中心迭代式）中计算得到新的隶属度矩阵$u_{ij}$（聚类中心矩阵$v_{i}$），再将新的隶属度矩阵$u_{ij}$和聚类中心$v_i$代入目标函数计算一次目标函数值，完成一次迭代。</p>
-</li>
-<li><p><strong>迭代停止:</strong>当两次迭代的目标函数值变化不大（至于多少才算是不大，这个由自己根据情况设定，在此称为<strong>阈值</strong>）或达到预先设定的最大迭代次数，即停止迭代。此时隶属度矩阵$U$和聚类中心矩阵$V$即为聚类结果。（$U=u_{ij},V=v_i$）</p>
-</li>
+<li><p><strong>随机初始聚类中心/隶属度矩阵:</strong>从上面的隶属度矩阵和聚类中心迭代式可看出，隶属度矩阵迭代式里的未知只有<span class="math inline">\(v_i\)</span>，而聚类中心跌打式里不知道的只有<span class="math inline">\(u_{ij}\)</span>。故迭代前先随机给定一个符合条件的隶属度矩阵或聚类中心矩阵，然后即可开始迭代。</p>
+<p>如果初始化给定的是<strong>聚类中心矩阵</strong>，那么将聚类中心矩阵代入<strong>隶属度矩阵迭代式</strong>中计算得到新的隶属度矩阵；否则将初始化给定的<strong>隶属度矩阵</strong>代入<strong>聚类中心迭代式</strong>中计算。</p></li>
+<li><p><strong>迭代</strong>：将聚类中心<span class="math inline">\(v_i\)</span>（隶属度矩阵<span class="math inline">\(u_{ij}\)</span>）代入隶属度矩阵迭代式（聚类中心迭代式）中计算得到新的隶属度矩阵<span class="math inline">\(u_{ij}\)</span>（聚类中心矩阵<span class="math inline">\(v_{i}\)</span>），再将新的隶属度矩阵<span class="math inline">\(u_{ij}\)</span>和聚类中心<span class="math inline">\(v_i\)</span>代入目标函数计算一次目标函数值，完成一次迭代。</p></li>
+<li><p><strong>迭代停止:</strong>当两次迭代的目标函数值变化不大（至于多少才算是不大，这个由自己根据情况设定，在此称为<strong>阈值</strong>）或达到预先设定的最大迭代次数，即停止迭代。此时隶属度矩阵<span class="math inline">\(U\)</span>和聚类中心矩阵<span class="math inline">\(V\)</span>即为聚类结果。（<span class="math inline">\(U=u_{ij},V=v_i\)</span>）</p></li>
 </ul>
 <p>没了，下次再写点半监督模糊聚类吧~</p>
-<h2 id="code"><a href="#code" class="headerlink" title="code"></a>code</h2><p>在matlab中调用自带的FCM</p>
-<div class="hljs code-wrapper"><pre><code class="hljs matlab">[center,U] = fcm(data, cluster_n)	<span class="hljs-comment">% data为样本数据(样本数=数组行数)，cluster_n为类簇数</span></code></pre></div>
-
+<h2 id="code">code</h2>
+<p>在matlab中调用自带的FCM</p>
+<figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">[center,U] = fcm(data, cluster_n)	<span class="hljs-comment">% data为样本数据(样本数=数组行数)，cluster_n为类簇数</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>FCM的详细实现：</p>
-<div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U,center]</span> = <span class="hljs-title">FCMclust</span><span class="hljs-params">(data, cluster_n)</span></span>
-
-<span class="hljs-comment">%% 随机初始隶属度FCM（这个比较符合算法实际情况）</span>
-data_n = <span class="hljs-built_in">size</span>(data, <span class="hljs-number">1</span>); <span class="hljs-comment">% 求出data的第一维(rows)数,即样本个数 [center, U, obj_fcn]= FCMClust(data, cluster_n)</span>
-in_n = <span class="hljs-built_in">size</span>(data, <span class="hljs-number">2</span>);   <span class="hljs-comment">% 求出data的第二维(columns)数，即特征值长度</span>
-<span class="hljs-comment">% 默认操作参数</span>
-options = [<span class="hljs-number">2</span>; <span class="hljs-comment">% 隶属度矩阵U的指数</span>
-    <span class="hljs-number">100</span>;                <span class="hljs-comment">% 最大迭代次数</span>
-    <span class="hljs-number">1e-5</span>;               <span class="hljs-comment">% 隶属度最小变化量,迭代终止条件</span>
-    <span class="hljs-number">1</span>];                 <span class="hljs-comment">% 每次迭代是否输出信息标志</span>
-  
-<span class="hljs-comment">%将options 中的分量分别赋值给四个变量;</span>
-expo = options(<span class="hljs-number">1</span>);          <span class="hljs-comment">% 隶属度矩阵U的指数</span>
-max_iter = options(<span class="hljs-number">2</span>);  <span class="hljs-comment">% 最大迭代次数</span>
-min_impro = options(<span class="hljs-number">3</span>);  <span class="hljs-comment">% 隶属度最小变化量,迭代终止条件</span>
-display = options(<span class="hljs-number">4</span>);  <span class="hljs-comment">% 每次迭代是否输出信息标志</span>
- 
-obj_fcn = <span class="hljs-built_in">zeros</span>(max_iter, <span class="hljs-number">1</span>); <span class="hljs-comment">% 初始化输出参数obj_fcn</span>
- 
-<span class="hljs-comment">% U = initfcm(cluster_n, data_n);     % 初始化模糊分配矩阵,使U满足列上相加为1,cluster_n=2,用户填上去的种类数c=cluster_n</span>
-temp=randperm(<span class="hljs-built_in">size</span>(data,<span class="hljs-number">1</span>));
-center = data(temp(<span class="hljs-number">1</span>:cluster_n),:);
-dist = distfcm(center, data).^<span class="hljs-number">2</span>;
-tmp = dist.^(<span class="hljs-number">-2</span>/(expo<span class="hljs-number">-1</span>));    
-U = tmp./(<span class="hljs-built_in">ones</span>(cluster_n, <span class="hljs-number">1</span>)*sum(tmp));  <span class="hljs-comment">%根据随机选取的样本作为初始聚类中心得到的初始隶属度矩阵</span>
-[a,b] = <span class="hljs-built_in">find</span>(<span class="hljs-built_in">isnan</span>(U));
-U(a,b) = <span class="hljs-number">0</span>;
-
-<span class="hljs-comment">% U = rand(cluster_n,size(data,1)).*100;</span>
-<span class="hljs-comment">% U = U./sum(U);</span>
-
-<span class="hljs-comment">% Main loop  主要循环</span>
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:max_iter
-    <span class="hljs-comment">%在第k步循环中改变聚类中心ceneter,和分配函数U的隶属度值;</span>
-    [U, center, obj_fcn(<span class="hljs-built_in">i</span>)] = stepfcm(data, U, cluster_n, expo);
-    <span class="hljs-keyword">if</span> display
-       fprintf(<span class="hljs-string">'FCMclust:Iteration count = %d, obj. fcn = %f\n'</span>, <span class="hljs-built_in">i</span>, obj_fcn(<span class="hljs-built_in">i</span>));
-    <span class="hljs-keyword">end</span>
- <span class="hljs-comment">% 终止条件判别</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">i</span>&gt;<span class="hljs-number">1</span>
-      <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(obj_fcn(<span class="hljs-built_in">i</span>) - obj_fcn(<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>)) &lt; min_impro
-            <span class="hljs-keyword">break</span>;
-      <span class="hljs-keyword">end</span>
-    <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
- 
-iter_n = <span class="hljs-built_in">i</span>; <span class="hljs-comment">% 实际迭代次数</span>
-<span class="hljs-comment">%obj_fcn(iter_n+1:max_iter) = [];</span>
-<span class="hljs-comment">%% 评价指标</span>
-<span class="hljs-comment">%[V_pc,~,V_pe,V_xb] = V_pcpexb(U,data,center)</span>
-<span class="hljs-keyword">end</span>
-
- 
-<span class="hljs-comment">%% 子函数</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">U</span> = <span class="hljs-title">initfcm</span><span class="hljs-params">(cluster_n, data_n)</span></span>
-<span class="hljs-comment">% 初始化fcm的隶属度函数矩阵</span>
-<span class="hljs-comment">% 输入:</span>
-<span class="hljs-comment">%   cluster_n   ---- 聚类中心个数</span>
-<span class="hljs-comment">%   data_n      ---- 样本点数</span>
-<span class="hljs-comment">% 输出：</span>
-<span class="hljs-comment">%   U           ---- 初始化的隶属度矩阵</span>
-U = <span class="hljs-built_in">rand</span>(cluster_n, data_n);
-col_sum = sum(U);
-U = U./col_sum(<span class="hljs-built_in">ones</span>(cluster_n, <span class="hljs-number">1</span>), :);<span class="hljs-comment">%归一化</span>
-<span class="hljs-keyword">end</span>
- 
- 
-<span class="hljs-comment">%% 子函数</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U_new, center, obj_fcn]</span> = <span class="hljs-title">stepfcm</span><span class="hljs-params">(data, U, cluster_n, expo)</span></span>
-<span class="hljs-comment">% 模糊C均值聚类时迭代的一步</span>
-<span class="hljs-comment">% 输入：</span>
-<span class="hljs-comment">%   data        ---- nxm矩阵,表示n个样本,每个样本具有m的维特征值</span>
-<span class="hljs-comment">%   U           ---- 隶属度矩阵</span>
-<span class="hljs-comment">%   cluster_n   ---- 标量,表示聚合中心数目,即类别数</span>
-<span class="hljs-comment">%   expo        ---- 隶属度矩阵U的指数                     </span>
-<span class="hljs-comment">% 输出：</span>
-<span class="hljs-comment">%   U_new       ---- 迭代计算出的新的隶属度矩阵</span>
-<span class="hljs-comment">%   center      ---- 迭代计算出的新的聚类中心</span>
-<span class="hljs-comment">%   obj_fcn     ---- 目标函数值</span>
-mf = U.^expo;       <span class="hljs-comment">% 隶属度矩阵进行指数运算结果</span>
-center = mf*data./((<span class="hljs-built_in">ones</span>(<span class="hljs-built_in">size</span>(data, <span class="hljs-number">2</span>), <span class="hljs-number">1</span>)*sum(mf'))'); <span class="hljs-comment">% 新聚类中心(5.4)式</span>
-dist = distfcm(center, data);       <span class="hljs-comment">% 计算距离矩阵</span>
-obj_fcn = sum(sum((dist.^<span class="hljs-number">2</span>).*mf));  <span class="hljs-comment">% 计算目标函数值 (5.1)式</span>
-tmp = dist.^(<span class="hljs-number">-2</span>/(expo<span class="hljs-number">-1</span>));    
-U_new = tmp./(<span class="hljs-built_in">ones</span>(cluster_n, <span class="hljs-number">1</span>)*sum(tmp));  <span class="hljs-comment">% 计算新的隶属度矩阵 (5.3)式</span>
- 
-<span class="hljs-keyword">end</span>
- 
- 
-<span class="hljs-comment">%% 子函数</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">out</span> = <span class="hljs-title">distfcm</span><span class="hljs-params">(center, data)</span></span>
-<span class="hljs-comment">% 计算样本点距离聚类中心的距离</span>
-<span class="hljs-comment">% 输入：</span>
-<span class="hljs-comment">%   center     ---- 聚类中心</span>
-<span class="hljs-comment">%   data       ---- 样本点</span>
-<span class="hljs-comment">% 输出：</span>
-<span class="hljs-comment">%   out        ---- 距离</span>
-out = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(center, <span class="hljs-number">1</span>), <span class="hljs-built_in">size</span>(data, <span class="hljs-number">1</span>));
-  <span class="hljs-keyword">for</span> k = <span class="hljs-number">1</span>:<span class="hljs-built_in">size</span>(center, <span class="hljs-number">1</span>) <span class="hljs-comment">% 对每一个聚类中心</span>
-    <span class="hljs-comment">% 每一次循环求得所有样本点到一个聚类中心的距离</span>
-    out(k, :) = <span class="hljs-built_in">sqrt</span>(sum(((data-<span class="hljs-built_in">ones</span>(<span class="hljs-built_in">size</span>(data,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>)*center(k,:)).^<span class="hljs-number">2</span>)',<span class="hljs-number">1</span>));
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span></code></pre></div>
-
-
-
-
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p>[1] <a href="https://blog.csdn.net/weixin_42029738/article/details/81978038" target="_blank" rel="noopener">K-means原理、优化及应用</a></p>
+<figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U,center]</span> = <span class="hljs-title">FCMclust</span><span class="hljs-params">(data, cluster_n)</span></span><br><br><span class="hljs-comment">%% 随机初始隶属度FCM（这个比较符合算法实际情况）</span><br>data_n = <span class="hljs-built_in">size</span>(data, <span class="hljs-number">1</span>); <span class="hljs-comment">% 求出data的第一维(rows)数,即样本个数 [center, U, obj_fcn]= FCMClust(data, cluster_n)</span><br>in_n = <span class="hljs-built_in">size</span>(data, <span class="hljs-number">2</span>);   <span class="hljs-comment">% 求出data的第二维(columns)数，即特征值长度</span><br><span class="hljs-comment">% 默认操作参数</span><br>options = [<span class="hljs-number">2</span>; <span class="hljs-comment">% 隶属度矩阵U的指数</span><br>    <span class="hljs-number">100</span>;                <span class="hljs-comment">% 最大迭代次数</span><br>    <span class="hljs-number">1e-5</span>;               <span class="hljs-comment">% 隶属度最小变化量,迭代终止条件</span><br>    <span class="hljs-number">1</span>];                 <span class="hljs-comment">% 每次迭代是否输出信息标志</span><br>  <br><span class="hljs-comment">%将options 中的分量分别赋值给四个变量;</span><br>expo = options(<span class="hljs-number">1</span>);          <span class="hljs-comment">% 隶属度矩阵U的指数</span><br>max_iter = options(<span class="hljs-number">2</span>);  <span class="hljs-comment">% 最大迭代次数</span><br>min_impro = options(<span class="hljs-number">3</span>);  <span class="hljs-comment">% 隶属度最小变化量,迭代终止条件</span><br>display = options(<span class="hljs-number">4</span>);  <span class="hljs-comment">% 每次迭代是否输出信息标志</span><br> <br>obj_fcn = <span class="hljs-built_in">zeros</span>(max_iter, <span class="hljs-number">1</span>); <span class="hljs-comment">% 初始化输出参数obj_fcn</span><br> <br><span class="hljs-comment">% U = initfcm(cluster_n, data_n);     % 初始化模糊分配矩阵,使U满足列上相加为1,cluster_n=2,用户填上去的种类数c=cluster_n</span><br>temp=randperm(<span class="hljs-built_in">size</span>(data,<span class="hljs-number">1</span>));<br>center = data(temp(<span class="hljs-number">1</span>:cluster_n),:);<br>dist = distfcm(center, data).^<span class="hljs-number">2</span>;<br>tmp = dist.^(<span class="hljs-number">-2</span>/(expo<span class="hljs-number">-1</span>));    <br>U = tmp./(<span class="hljs-built_in">ones</span>(cluster_n, <span class="hljs-number">1</span>)*sum(tmp));  <span class="hljs-comment">%根据随机选取的样本作为初始聚类中心得到的初始隶属度矩阵</span><br>[a,b] = <span class="hljs-built_in">find</span>(<span class="hljs-built_in">isnan</span>(U));<br>U(a,b) = <span class="hljs-number">0</span>;<br><br><span class="hljs-comment">% U = rand(cluster_n,size(data,1)).*100;</span><br><span class="hljs-comment">% U = U./sum(U);</span><br><br><span class="hljs-comment">% Main loop  主要循环</span><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:max_iter<br>    <span class="hljs-comment">%在第k步循环中改变聚类中心ceneter,和分配函数U的隶属度值;</span><br>    [U, center, obj_fcn(<span class="hljs-built_in">i</span>)] = stepfcm(data, U, cluster_n, expo);<br>    <span class="hljs-keyword">if</span> display<br>       fprintf(<span class="hljs-string">'FCMclust:Iteration count = %d, obj. fcn = %f\n'</span>, <span class="hljs-built_in">i</span>, obj_fcn(<span class="hljs-built_in">i</span>));<br>    <span class="hljs-keyword">end</span><br> <span class="hljs-comment">% 终止条件判别</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">i</span>&gt;<span class="hljs-number">1</span><br>      <span class="hljs-keyword">if</span> <span class="hljs-built_in">abs</span>(obj_fcn(<span class="hljs-built_in">i</span>) - obj_fcn(<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>)) &lt; min_impro<br>            <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">end</span><br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br> <br>iter_n = <span class="hljs-built_in">i</span>; <span class="hljs-comment">% 实际迭代次数</span><br><span class="hljs-comment">%obj_fcn(iter_n+1:max_iter) = [];</span><br><span class="hljs-comment">%% 评价指标</span><br><span class="hljs-comment">%[V_pc,~,V_pe,V_xb] = V_pcpexb(U,data,center)</span><br><span class="hljs-keyword">end</span><br><br> <br><span class="hljs-comment">%% 子函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">U</span> = <span class="hljs-title">initfcm</span><span class="hljs-params">(cluster_n, data_n)</span></span><br><span class="hljs-comment">% 初始化fcm的隶属度函数矩阵</span><br><span class="hljs-comment">% 输入:</span><br><span class="hljs-comment">%   cluster_n   ---- 聚类中心个数</span><br><span class="hljs-comment">%   data_n      ---- 样本点数</span><br><span class="hljs-comment">% 输出：</span><br><span class="hljs-comment">%   U           ---- 初始化的隶属度矩阵</span><br>U = <span class="hljs-built_in">rand</span>(cluster_n, data_n);<br>col_sum = sum(U);<br>U = U./col_sum(<span class="hljs-built_in">ones</span>(cluster_n, <span class="hljs-number">1</span>), :);<span class="hljs-comment">%归一化</span><br><span class="hljs-keyword">end</span><br> <br> <br><span class="hljs-comment">%% 子函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[U_new, center, obj_fcn]</span> = <span class="hljs-title">stepfcm</span><span class="hljs-params">(data, U, cluster_n, expo)</span></span><br><span class="hljs-comment">% 模糊C均值聚类时迭代的一步</span><br><span class="hljs-comment">% 输入：</span><br><span class="hljs-comment">%   data        ---- nxm矩阵,表示n个样本,每个样本具有m的维特征值</span><br><span class="hljs-comment">%   U           ---- 隶属度矩阵</span><br><span class="hljs-comment">%   cluster_n   ---- 标量,表示聚合中心数目,即类别数</span><br><span class="hljs-comment">%   expo        ---- 隶属度矩阵U的指数                     </span><br><span class="hljs-comment">% 输出：</span><br><span class="hljs-comment">%   U_new       ---- 迭代计算出的新的隶属度矩阵</span><br><span class="hljs-comment">%   center      ---- 迭代计算出的新的聚类中心</span><br><span class="hljs-comment">%   obj_fcn     ---- 目标函数值</span><br>mf = U.^expo;       <span class="hljs-comment">% 隶属度矩阵进行指数运算结果</span><br>center = mf*data./((<span class="hljs-built_in">ones</span>(<span class="hljs-built_in">size</span>(data, <span class="hljs-number">2</span>), <span class="hljs-number">1</span>)*sum(mf'))'); <span class="hljs-comment">% 新聚类中心(5.4)式</span><br>dist = distfcm(center, data);       <span class="hljs-comment">% 计算距离矩阵</span><br>obj_fcn = sum(sum((dist.^<span class="hljs-number">2</span>).*mf));  <span class="hljs-comment">% 计算目标函数值 (5.1)式</span><br>tmp = dist.^(<span class="hljs-number">-2</span>/(expo<span class="hljs-number">-1</span>));    <br>U_new = tmp./(<span class="hljs-built_in">ones</span>(cluster_n, <span class="hljs-number">1</span>)*sum(tmp));  <span class="hljs-comment">% 计算新的隶属度矩阵 (5.3)式</span><br> <br><span class="hljs-keyword">end</span><br> <br> <br><span class="hljs-comment">%% 子函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">out</span> = <span class="hljs-title">distfcm</span><span class="hljs-params">(center, data)</span></span><br><span class="hljs-comment">% 计算样本点距离聚类中心的距离</span><br><span class="hljs-comment">% 输入：</span><br><span class="hljs-comment">%   center     ---- 聚类中心</span><br><span class="hljs-comment">%   data       ---- 样本点</span><br><span class="hljs-comment">% 输出：</span><br><span class="hljs-comment">%   out        ---- 距离</span><br>out = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(center, <span class="hljs-number">1</span>), <span class="hljs-built_in">size</span>(data, <span class="hljs-number">1</span>));<br>  <span class="hljs-keyword">for</span> k = <span class="hljs-number">1</span>:<span class="hljs-built_in">size</span>(center, <span class="hljs-number">1</span>) <span class="hljs-comment">% 对每一个聚类中心</span><br>    <span class="hljs-comment">% 每一次循环求得所有样本点到一个聚类中心的距离</span><br>    out(k, :) = <span class="hljs-built_in">sqrt</span>(sum(((data-<span class="hljs-built_in">ones</span>(<span class="hljs-built_in">size</span>(data,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>)*center(k,:)).^<span class="hljs-number">2</span>)',<span class="hljs-number">1</span>));<br>  <span class="hljs-keyword">end</span><br><span class="hljs-keyword">end</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="references">References</h2>
+<p>[1] <a href="https://blog.csdn.net/weixin_42029738/article/details/81978038" target="_blank" rel="noopener">K-means原理、优化及应用</a></p>
 <p>[2] <a href="https://www.cnblogs.com/wxl845235800/p/11053261.html" target="_blank" rel="noopener">模糊C均值聚类的公式推导</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -572,6 +479,20 @@ out = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size<
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -689,13 +610,6 @@ out = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size<
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

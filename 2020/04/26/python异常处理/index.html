@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.4k 字
     </span>
   
 
@@ -254,51 +254,17 @@
             <div class="markdown-body">
               <p>python异常处理解决爬虫遇到404的问题</p>
 <a id="more"></a>
-
-<h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:
-    <span class="hljs-comment">#运行可能产生异常的代码</span>
-    <span class="hljs-keyword">except</span>：
-    <span class="hljs-comment">#如果try后面的代码运行错误则运行这部分代码</span></code></pre></div>
-
-<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:
-<span class="hljs-comment">#运行可能产生异常的代码</span>
-<span class="hljs-keyword">except</span>：
-<span class="hljs-comment">#如果try后面的代码运行错误则运行这部分代码              </span>
-<span class="hljs-keyword">else</span>：
-<span class="hljs-comment">#如果没有异常发生</span></code></pre></div>
-
-
-<h3 id="没有异常处理的程序"><a href="#没有异常处理的程序" class="headerlink" title="没有异常处理的程序"></a>没有异常处理的程序</h3><p>以爬取王者荣耀图片为例子</p>
-<div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request
-<span class="hljs-keyword">import</span> os
-<span class="hljs-comment"># http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-1.jpg 王者荣耀图床地址   文件夹191～529 -1表示皮肤 ，之后是-2 、-3...</span>
-<span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(<span class="hljs-number">105</span>,<span class="hljs-number">600</span>):
-    <span class="hljs-comment"># try:</span>
-        path = <span class="hljs-string">r'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span>
-        <span class="hljs-comment"># os.mkdir(path + str(num))         #创建文件夹</span>
-        response = urllib.request.urlopen(<span class="hljs-string">"http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/"</span>+str(num)+<span class="hljs-string">"/"</span>+str(num)+<span class="hljs-string">"-bigskin-1"</span>+<span class="hljs-string">".jpg"</span>)  <span class="hljs-comment">#图片地址</span>
-        print(response)
-        wangzhe_img = response.read()
-        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span>+ str(num) + <span class="hljs-string">'.jpg'</span>,<span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> f:
-            f.write(wangzhe_img)
-    <span class="hljs-comment"># except:</span>
-    <span class="hljs-comment">#     continue</span></code></pre></div>
-<h3 id="有异常处理的程序"><a href="#有异常处理的程序" class="headerlink" title="有异常处理的程序"></a>有异常处理的程序</h3><p>按照上述方式爬取图片，会遇到当网址无法打开则无法进行下一步的问题（王者荣耀图片网站并不是191~529都有图片，有些英雄之间的编号可能有间隔，因而运行程序遇到这种情况会出现error）</p>
+<h3 id="方式一">方式一</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br>    <span class="hljs-comment">#运行可能产生异常的代码</span><br>    <span class="hljs-keyword">except</span>：<br>    <span class="hljs-comment">#如果try后面的代码运行错误则运行这部分代码</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="方式二">方式二</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">try</span>:<br><span class="hljs-comment">#运行可能产生异常的代码</span><br><span class="hljs-keyword">except</span>：<br><span class="hljs-comment">#如果try后面的代码运行错误则运行这部分代码              </span><br><span class="hljs-keyword">else</span>：<br><span class="hljs-comment">#如果没有异常发生</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="没有异常处理的程序">没有异常处理的程序</h3>
+<p>以爬取王者荣耀图片为例子</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request<br><span class="hljs-keyword">import</span> os<br><span class="hljs-comment"># http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-1.jpg 王者荣耀图床地址   文件夹191～529 -1表示皮肤 ，之后是-2 、-3...</span><br><span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(<span class="hljs-number">105</span>,<span class="hljs-number">600</span>):<br>    <span class="hljs-comment"># try:</span><br>        path = <span class="hljs-string">r'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span><br>        <span class="hljs-comment"># os.mkdir(path + str(num))         #创建文件夹</span><br>        response = urllib.request.urlopen(<span class="hljs-string">"http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/"</span>+str(num)+<span class="hljs-string">"/"</span>+str(num)+<span class="hljs-string">"-bigskin-1"</span>+<span class="hljs-string">".jpg"</span>)  <span class="hljs-comment">#图片地址</span><br>        print(response)<br>        wangzhe_img = response.read()<br>        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span>+ str(num) + <span class="hljs-string">'.jpg'</span>,<span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> f:<br>            f.write(wangzhe_img)<br>    <span class="hljs-comment"># except:</span><br>    <span class="hljs-comment">#     continue</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="有异常处理的程序">有异常处理的程序</h3>
+<p>按照上述方式爬取图片，会遇到当网址无法打开则无法进行下一步的问题（王者荣耀图片网站并不是191~529都有图片，有些英雄之间的编号可能有间隔，因而运行程序遇到这种情况会出现error）</p>
 <p>为解决该问题，使用try异常处理，当遇到无法打开的网址时，直接跳过继续循环的下一个步骤，如：</p>
-<div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request
-<span class="hljs-keyword">import</span> os
-<span class="hljs-comment"># http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-1.jpg 王者荣耀图床地址   文件夹191～529 -1表示皮肤 ，之后是-2 、-3...</span>
-<span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(<span class="hljs-number">105</span>,<span class="hljs-number">600</span>):
-    <span class="hljs-keyword">try</span>:
-        path = <span class="hljs-string">r'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span>
-        <span class="hljs-comment"># os.mkdir(path + str(num))         #创建文件夹</span>
-        response = urllib.request.urlopen(<span class="hljs-string">"http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/"</span>+str(num)+<span class="hljs-string">"/"</span>+str(num)+<span class="hljs-string">"-bigskin-1"</span>+<span class="hljs-string">".jpg"</span>)  <span class="hljs-comment">#图片地址</span>
-        print(response)
-        wangzhe_img = response.read()
-        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span>+ str(num) + <span class="hljs-string">'.jpg'</span>,<span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> f:
-            f.write(wangzhe_img)
-    <span class="hljs-keyword">except</span>:
-        <span class="hljs-keyword">continue</span></code></pre></div>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request<br><span class="hljs-keyword">import</span> os<br><span class="hljs-comment"># http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/191/191-bigskin-1.jpg 王者荣耀图床地址   文件夹191～529 -1表示皮肤 ，之后是-2 、-3...</span><br><span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> range(<span class="hljs-number">105</span>,<span class="hljs-number">600</span>):<br>    <span class="hljs-keyword">try</span>:<br>        path = <span class="hljs-string">r'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span><br>        <span class="hljs-comment"># os.mkdir(path + str(num))         #创建文件夹</span><br>        response = urllib.request.urlopen(<span class="hljs-string">"http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/"</span>+str(num)+<span class="hljs-string">"/"</span>+str(num)+<span class="hljs-string">"-bigskin-1"</span>+<span class="hljs-string">".jpg"</span>)  <span class="hljs-comment">#图片地址</span><br>        print(response)<br>        wangzhe_img = response.read()<br>        <span class="hljs-keyword">with</span> open(<span class="hljs-string">'D:\文档\code\web前端\王者荣耀图库\皮肤\ '</span>+ str(num) + <span class="hljs-string">'.jpg'</span>,<span class="hljs-string">'wb'</span>) <span class="hljs-keyword">as</span> f:<br>            f.write(wangzhe_img)<br>    <span class="hljs-keyword">except</span>:<br>        <span class="hljs-keyword">continue</span><br></code></pre></div></td></tr></tbody></table></figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -436,6 +402,20 @@
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -553,13 +533,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

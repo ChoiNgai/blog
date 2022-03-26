@@ -220,7 +220,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.1k 字
     </span>
   
 
@@ -229,7 +229,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6 分钟
+      7 分钟
     </span>
   
 
@@ -263,49 +263,62 @@
             <div class="markdown-body">
               <p>稳定、安全、免费地搭建自己的图床</p>
 <a id="more"></a>
-
-<h3 id="为什么要搭建图床？"><a href="#为什么要搭建图床？" class="headerlink" title="为什么要搭建图床？"></a>为什么要搭建图床？</h3><p>直接引用文件内的图片不好吗？少量图片的时候是是没问题，图片多了就麻烦了，而且像coding pages，带上一千多张图片是会部署失败的（其实就是文件数量太多了）。另外如果写博客在<code>博客园</code>、<code>掘金</code>等平台发布，总不能把图片也带上吧。这时候就需要搭建属于自己的图床了。</p>
+<h3 id="为什么要搭建图床">为什么要搭建图床？</h3>
+<p>直接引用文件内的图片不好吗？少量图片的时候是是没问题，图片多了就麻烦了，而且像coding pages，带上一千多张图片是会部署失败的（其实就是文件数量太多了）。另外如果写博客在<code>博客园</code>、<code>掘金</code>等平台发布，总不能把图片也带上吧。这时候就需要搭建属于自己的图床了。</p>
 <p>目前搭建图床的办法很多啦，像是七牛云、又拍云什么的（据说七牛云https流量收费，又拍云https流量免费但是好像有限制）。其实条件允许的话我是很推荐七牛云或腾讯云COS这些对象存储的，我就喜欢用代码托管平台的pages搭建图床，无它，就看上三点：<strong>免费</strong>、<strong>稳定</strong>、<strong>省得再去操心各个对象平台怎么用</strong></p>
 <p>先来说一些老套的办法</p>
-<h3 id="办法一：对象云存储"><a href="#办法一：对象云存储" class="headerlink" title="办法一：对象云存储"></a>办法一：对象云存储</h3><p>就是用七牛云、又拍云、腾讯云COS这些，要么氪金要么用着蓝瘦，二选一吧。</p>
-<h3 id="办法二：GitHub-pages-jsDelivr-picgo"><a href="#办法二：GitHub-pages-jsDelivr-picgo" class="headerlink" title="办法二：GitHub pages + jsDelivr (+ picgo)"></a>办法二：GitHub pages + jsDelivr (+ picgo)</h3><p>github pages 直接设置里打开pages就行啦，至于 jsDelivr 也不是难用的东西，这个<strong>不用学</strong>。</p>
+<h3 id="办法一对象云存储">办法一：对象云存储</h3>
+<p>就是用七牛云、又拍云、腾讯云COS这些，要么氪金要么用着蓝瘦，二选一吧。</p>
+<h3 id="办法二github-pages-jsdelivr-picgo">办法二：GitHub pages + jsDelivr (+ picgo)</h3>
+<p>github pages 直接设置里打开pages就行啦，至于 jsDelivr 也不是难用的东西，这个<strong>不用学</strong>。</p>
 <p>jsDelivr是可以起到CDN加速，众所周知，国内访问github慢得一批，所以这里用一下cdn加速，可以让一些图片访问更快。</p>
 <p>使用jsDelivr仅仅修改github pages 的链接即可</p>
-<p>即 <a href="https://cdn.jsdelivr.net/gh/你的github用户名/你的仓库名@发布的版本号/文件路径" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/你的github用户名/你的仓库名@发布的版本号/文件路径</a> </p>
+<p>即 https://cdn.jsdelivr.net/gh/你的github用户名/你的仓库名@发布的版本号/文件路径</p>
 <p>例如：</p>
-<p> <a href="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@1.0/images/trhx.png" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@1.0/images/trhx.png</a></p>
+<p>https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@1.0/images/trhx.png</p>
 <p>不用发布也可以，其格式为：（直接去掉@版本号）</p>
-<p><a href="https://cdn.jsdelivr.net/gh/你的github用户名/仓库名/md/sadasdd516516156.png" target="_blank" rel="noopener">https://cdn.jsdelivr.net/gh/你的github用户名/仓库名/md/sadasdd516516156.png</a></p>
-<p> 这个虽然是部署在github上，但是经过cdn加速之后显然访问速度还是很快的，有兴趣的同鞋自己琢磨吧，反正我用过之后是不想用了，为啥？访问速度是没问题了，<strong>可我上传图片呢?</strong>（我的网速慢，上传张图片网络良好等个十几秒甚至几十秒，若网络不顺畅就上传失败，这谁顶得住啊！）</p>
+<p>https://cdn.jsdelivr.net/gh/你的github用户名/仓库名/md/sadasdd516516156.png</p>
+<p>这个虽然是部署在github上，但是经过cdn加速之后显然访问速度还是很快的，有兴趣的同鞋自己琢磨吧，反正我用过之后是不想用了，为啥？访问速度是没问题了，<strong>可我上传图片呢?</strong>（我的网速慢，上传张图片网络良好等个十几秒甚至几十秒，若网络不顺畅就上传失败，这谁顶得住啊！）</p>
 <p>所以我推荐用国内coding或者gitee搭建图床。</p>
-<h3 id="办法三：-coding-gitee-picgo"><a href="#办法三：-coding-gitee-picgo" class="headerlink" title="办法三： coding/gitee +picgo"></a>办法三： coding/gitee +picgo</h3><p>下载个PicGo,安装</p>
+<h3 id="办法三-codinggitee-picgo">办法三： coding/gitee +picgo</h3>
+<p>下载个PicGo,安装</p>
 <p>在插件设置里搜索<code>coding</code>或者<code>gitee</code>（搜索gitee会出现两个插件，下载哪个都行），安装插件需要本机安装了nodejs</p>
 <p>安装之后左侧列表就会出现coding图床和gitee图床啦</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706230629.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706230629.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>在用之前先取一下token（就是这个仓库用来识别使用非git的第三方应用有没有权限提交文件到该仓库的东西），在右上角的<kbd>个人设置</kbd>-<kbd>访问令牌</kbd>里新建</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706232108.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706232108.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>按需勾选，我就直接勾选前三个了，必须要保证token可以读写仓库，创建令牌之后会有一串字符，这个就是token，注意这个<strong>只显示一次</strong>（刷新或者退出页面就没了）保存一下这个token</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706232249.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706232249.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>然后在picgo填上信息，分支那里如果是要把图片放在master分支根目录，就直接写<code>master</code>。例如我要放在master分支的md文件夹，那么我就填<code>master/md</code></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706232557.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20200706232557.png" srcset="/img/loading.gif" lazyload=""></p>
 <p><strong>这里对于创建团队之后改过团队名的有个坑</strong>，团队名称要改成项目域名https后边的内容一样（即下面两个划红线的内容要一样）。因为picgo上传图片自动生成的链接是</p>
 <p><code>https://团队现名.coding.net/p/项目名</code></p>
 <p>但你的图片链接前面的部分是</p>
 <p><code>https://团队初始名.coding.net/p/项目名</code></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/e95bed353a8ad8d01314ab242565634.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/e95bed353a8ad8d01314ab242565634.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>设置好了直接把图片<code>拖动</code>或者<code>剪贴板图片上传</code>就好啦，如果有问题检测一下设置。</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708201434930.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708201434930"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708201434930.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708201434930"><figcaption aria-hidden="true">image-20200708201434930</figcaption>
+</figure>
 <p>上传成功之后直接<strong>粘贴</strong>就是图片链接了（windows点击打开picgo，是要在右侧点开<strong>显示隐藏图标</strong>,再<strong>鼠标右键</strong>-<strong>打开详细窗口</strong>才能打开上面的页面）</p>
 <p>PicGo设置成这样也是有道理的，因为这样的话还是需要拖动文件到picgo，然后复制粘贴链接，但是用来markdown写作其实还有更简单的操作。</p>
 <p>请先把Typora更新到0.98之后的版本</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708201926116.png" srcset="/img/loading.gif" lazyload="" alt="Typora帮助-检查更新"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708201926116.png" srcset="/img/loading.gif" lazyload="" alt="Typora帮助-检查更新"><figcaption aria-hidden="true">Typora帮助-检查更新</figcaption>
+</figure>
 <p>然后在Typora的<kbd>偏好设置</kbd>-<kbd>图像</kbd>设置成上传图片，填上PicGO路径</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708202057900.png" srcset="/img/loading.gif" lazyload="" alt="设置自动上传md内图片到图床"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708202057900.png" srcset="/img/loading.gif" lazyload="" alt="设置自动上传md内图片到图床"><figcaption aria-hidden="true">设置自动上传md内图片到图床</figcaption>
+</figure>
 <p>这样不用打开PicGo，直接把图片复制粘贴在Typora，就会自动将图片上传至图床并且改为外部链接，这样就可以直接发送md文件，不用担心在别的电脑/上传博客显示不出来啦。</p>
 <p>（u1s1，Typora的bug也越来越多了，作为少见的几个<strong>所见即所得</strong>的markdown编辑器，Typora的强大与便捷让我觉得其他markdown编辑器真的代替不了。）</p>
 <p>如果不需要在其他博客平台发布或者转换成html，Typora各方面都完美。如果是作为写博客的工具，可能会出现点小问题，如果出现排版混乱或者什么的推荐用vscode下载这两个插件。（之前我就遇到过用Typora写的在Typora看着完全没问题，但是hexo渲染之后却出问题了，我刚开始以为是hexo的某些插件的原因，直到发现复制粘贴在其他博客平台的markdown编辑器也会出现一样的问题，显然~是typora的锅）</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708202942467.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708202942467"></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708202957889.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708202957889"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708202942467.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708202942467"><figcaption aria-hidden="true">image-20200708202942467</figcaption>
+</figure>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708202957889.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708202957889"><figcaption aria-hidden="true">image-20200708202957889</figcaption>
+</figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -443,6 +456,20 @@
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -560,13 +587,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

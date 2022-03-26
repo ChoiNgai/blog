@@ -212,7 +212,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      907 字
+      909 字
     </span>
   
 
@@ -255,18 +255,26 @@
             <div class="markdown-body">
               <p>环境配置</p>
 <a id="more"></a>
-
-<h2 id="Hadoop安装（2021版）"><a href="#Hadoop安装（2021版）" class="headerlink" title="Hadoop安装（2021版）"></a>Hadoop安装（2021版）</h2><p>Ubuntu18.04 照着这篇教程来啥问题也没有：<br><a href="https://m.linuxidc.com/Linux/2019-12/161628.htm" target="_blank" rel="noopener">Ubuntu 18.04下搭建单机Hadoop和Spark集群环境</a>  </p>
-<h3 id="关于系统"><a href="#关于系统" class="headerlink" title="关于系统"></a>关于系统</h3><p>考虑到可能大多数同学用的都是Windows系统，所以这里附上搭建linux系统的办法： </p>
-<h3 id="win10的linux子系统（WSL）"><a href="#win10的linux子系统（WSL）" class="headerlink" title="win10的linux子系统（WSL）"></a>win10的linux子系统（WSL）</h3><p>WSL是默认安装在C盘的，如果不想占用C盘空间，就需要在<strong>安装子系统之前</strong>建立软连接：（若不在乎C盘空间请忽略）：<br><a href="https://blog.csdn.net/m0_37990055/article/details/89709963?from=groupmessage" target="_blank" rel="noopener">Windows下Linux子系统迁移到非系统盘 原创</a></p>
+<h2 id="hadoop安装2021版">Hadoop安装（2021版）</h2>
+<p>Ubuntu18.04 照着这篇教程来啥问题也没有：<br>
+<a href="https://m.linuxidc.com/Linux/2019-12/161628.htm" target="_blank" rel="noopener">Ubuntu 18.04下搭建单机Hadoop和Spark集群环境</a></p>
+<h3 id="关于系统">关于系统</h3>
+<p>考虑到可能大多数同学用的都是Windows系统，所以这里附上搭建linux系统的办法：</p>
+<h3 id="win10的linux子系统wsl">win10的linux子系统（WSL）</h3>
+<p>WSL是默认安装在C盘的，如果不想占用C盘空间，就需要在<strong>安装子系统之前</strong>建立软连接：（若不在乎C盘空间请忽略）：<br>
+<a href="https://blog.csdn.net/m0_37990055/article/details/89709963?from=groupmessage" target="_blank" rel="noopener">Windows下Linux子系统迁移到非系统盘 原创</a></p>
 <p><a href="https://blog.csdn.net/qq_43457125/article/details/94897476?from=singlemessage" target="_blank" rel="noopener">win10系统如何开启子系统 （详细）</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/35735513?from=singlemessage" target="_blank" rel="noopener">从安装到基本设置——Win10子系统入门简明教程</a></p>
 <p>以上任选其一</p>
-<p>之后是图形界面，对新手来说没有图形界面是挺累skr人的，用过之后尽量早点丢开图形界面使用命令行：<br><a href="https://baijiahao.baidu.com/s?id=1596652006568524478&amp;wfr=spider&amp;for=pc&amp;from=singlemessage" target="_blank" rel="noopener">Win10子系统安装图形化界面的两种方法</a><br>可以把这里的Debian当成Ubuntu，命令行是一样的</p>
-<h3 id="双系统"><a href="#双系统" class="headerlink" title="双系统"></a>双系统</h3><p>因为显卡驱动的原因，目前主流的显卡对Linux的支持都不好，所以安装会黑屏。  一般来说第一次开机禁用显卡就好了。    以下仅说明黑屏解决办法：  </p>
+<p>之后是图形界面，对新手来说没有图形界面是挺累skr人的，用过之后尽量早点丢开图形界面使用命令行：<br>
+<a href="https://baijiahao.baidu.com/s?id=1596652006568524478&amp;wfr=spider&amp;for=pc&amp;from=singlemessage" target="_blank" rel="noopener">Win10子系统安装图形化界面的两种方法</a><br>
+可以把这里的Debian当成Ubuntu，命令行是一样的</p>
+<h3 id="双系统">双系统</h3>
+<p>因为显卡驱动的原因，目前主流的显卡对Linux的支持都不好，所以安装会黑屏。 一般来说第一次开机禁用显卡就好了。 以下仅说明黑屏解决办法：</p>
 <p><a href="https://blog.csdn.net/cheneykl/article/details/79111618" target="_blank" rel="noopener">安装ubuntu时黑屏三种解决办法</a></p>
 <p><a href="https://bbs.deepin.org/forum.php?mod=viewthread&amp;tid=174315&amp;from=singlemessage" target="_blank" rel="noopener">AMD锐龙 2200g安装和使用deepin</a></p>
-<h2 id="Win10环境Hadoop安装（2021版）"><a href="#Win10环境Hadoop安装（2021版）" class="headerlink" title="Win10环境Hadoop安装（2021版）"></a>Win10环境Hadoop安装（2021版）</h2><ul>
+<h2 id="win10环境hadoop安装2021版">Win10环境Hadoop安装（2021版）</h2>
+<ul>
 <li>安装</li>
 </ul>
 <p>建议安装版本：Hadoop3.0.0+Spark3.0.0+Hive3.1</p>
@@ -276,22 +284,16 @@
 <ul>
 <li>启动命令（注：需要打开cmd输入命令，直接打开文件无法启动）：</li>
 </ul>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">start-all.cmd</code></pre></div>
-
-
-
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">start-all.cmd<br></code></pre></div></td></tr></tbody></table></figure>
 <ul>
 <li><p>检测</p>
-<p><strong>出现四个任务管理且不报错，并不一定说明安装成功。测试是否开启成功：输入命令<code>jps</code></strong><br>出现下面四个才能说明安装成功，如果不出现四个说明安装没有成功，可能是上面第四步出现问题，重新配置。</p>
-</li>
+<p><strong>出现四个任务管理且不报错，并不一定说明安装成功。测试是否开启成功：输入命令<code>jps</code></strong> 出现下面四个才能说明安装成功，如果不出现四个说明安装没有成功，可能是上面第四步出现问题，重新配置。</p></li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20201031151402658.png#pic_center" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://img-blog.csdnimg.cn/20201031151402658.png#pic_center" srcset="/img/loading.gif" lazyload=""></p>
 <ul>
 <li><p>打开（Web端）</p>
-<div class="hljs code-wrapper"><pre><code class="hljs shell">http://localhost:9870/</code></pre></div>
-
-<p>在浏览器地址栏中输入：<a href="http://localhost:8088/" target="_blank" rel="noopener">http://localhost:8088</a>查看集群状态</p>
-</li>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">http://localhost:9870/<br></code></pre></div></td></tr></tbody></table></figure>
+<p>在浏览器地址栏中输入：<a href="http://localhost:8088/" target="_blank" rel="noopener">http://localhost:8088</a>查看集群状态</p></li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -432,6 +434,20 @@
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -549,13 +565,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

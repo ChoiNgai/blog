@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.6k 字
+      5.5k 字
     </span>
   
 
@@ -252,16 +252,16 @@
             <div class="markdown-body">
               <p>此文章转载于<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html" target="_blank" rel="noopener">Hadoop官方中文文档</a></p>
 <a id="more"></a>
-
-<h1 id="Hadoop分布式文件系统使用指南"><a href="#Hadoop分布式文件系统使用指南" class="headerlink" title="Hadoop分布式文件系统使用指南"></a>Hadoop分布式文件系统使用指南</h1><ul>
+<h1 id="hadoop分布式文件系统使用指南">Hadoop分布式文件系统使用指南</h1>
+<ul>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#目的" target="_blank" rel="noopener">目的</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#概述" target="_blank" rel="noopener">概述</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#先决条件" target="_blank" rel="noopener">先决条件</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#Web接口" target="_blank" rel="noopener">Web接口</a></li>
-<li>Shell命令<ul>
+<li>Shell命令
+<ul>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#DFSAdmin命令" target="_blank" rel="noopener">DFSAdmin命令</a></li>
-</ul>
-</li>
+</ul></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#Secondary+NameNode" target="_blank" rel="noopener">Secondary NameNode</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#Rebalancer" target="_blank" rel="noopener">Rebalancer</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#机架感知（Rack+awareness）" target="_blank" rel="noopener">机架感知（Rack awareness）</a></li>
@@ -272,8 +272,10 @@
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#可扩展性" target="_blank" rel="noopener">可扩展性</a></li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_user_guide.html#相关文档" target="_blank" rel="noopener">相关文档</a></li>
 </ul>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>本文档的目标是为Hadoop分布式文件系统（HDFS）的用户提供一个学习的起点，这里的HDFS既可以作为<a href="https://hadoop.apache.org/" target="_blank" rel="noopener">Hadoop</a>集群的一部分，也可以作为一个独立的分布式文件系统。虽然HDFS在很多环境下被设计成是可正确工作的，但是了解HDFS的工作原理对在特定集群上改进HDFS的运行性能和错误诊断都有极大的帮助。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>HDFS是Hadoop应用用到的一个最主要的分布式存储系统。一个HDFS集群主要由一个NameNode和很多个Datanode组成：Namenode管理文件系统的元数据，而Datanode存储了实际的数据。HDFS的体系结构在<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_design.html" target="_blank" rel="noopener">这里</a>有详细的描述。本文档主要关注用户以及管理员怎样和HDFS进行交互。<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_design.html" target="_blank" rel="noopener">HDFS架构设计</a>中的<a href="http://hadoop.apache.org/docs/r1.0.4/cn/images/hdfsarchitecture.gif" target="_blank" rel="noopener">图解</a>描述了Namenode、Datanode和客户端之间的基本的交互操作。基本上，客户端联系Namenode以获取文件的元数据或修饰属性，而真正的文件I/O操作是直接和Datanode进行交互的。</p>
+<h2 id="目的">目的</h2>
+<p>本文档的目标是为Hadoop分布式文件系统（HDFS）的用户提供一个学习的起点，这里的HDFS既可以作为<a href="https://hadoop.apache.org/" target="_blank" rel="noopener">Hadoop</a>集群的一部分，也可以作为一个独立的分布式文件系统。虽然HDFS在很多环境下被设计成是可正确工作的，但是了解HDFS的工作原理对在特定集群上改进HDFS的运行性能和错误诊断都有极大的帮助。</p>
+<h2 id="概述">概述</h2>
+<p>HDFS是Hadoop应用用到的一个最主要的分布式存储系统。一个HDFS集群主要由一个NameNode和很多个Datanode组成：Namenode管理文件系统的元数据，而Datanode存储了实际的数据。HDFS的体系结构在<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_design.html" target="_blank" rel="noopener">这里</a>有详细的描述。本文档主要关注用户以及管理员怎样和HDFS进行交互。<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_design.html" target="_blank" rel="noopener">HDFS架构设计</a>中的<a href="http://hadoop.apache.org/docs/r1.0.4/cn/images/hdfsarchitecture.gif" target="_blank" rel="noopener">图解</a>描述了Namenode、Datanode和客户端之间的基本的交互操作。基本上，客户端联系Namenode以获取文件的元数据或修饰属性，而真正的文件I/O操作是直接和Datanode进行交互的。</p>
 <p>下面列出了一些多数用户都比较感兴趣的重要特性。</p>
 <ul>
 <li>Hadoop（包括HDFS）非常适合在商用硬件（commodity hardware）上做分布式存储和计算，因为它不仅具有容错性和可扩展性，而且非常易于扩展。<a href="http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html" target="_blank" rel="noopener">Map-Reduce</a>框架以其在大型分布式系统应用上的简单性和可用性而著称，这个框架已经被集成进Hadoop中。</li>
@@ -281,7 +283,8 @@
 <li>用Java语言开发，支持所有的主流平台。</li>
 <li>支持类Shell命令，可直接和HDFS进行交互。</li>
 <li>NameNode和DataNode有内置的Web服务器，方便用户检查集群的当前状态。</li>
-<li>新特性和改进会定期加入HDFS的实现中。下面列出的是HDFS中常用特性的一部分：<ul>
+<li>新特性和改进会定期加入HDFS的实现中。下面列出的是HDFS中常用特性的一部分：
+<ul>
 <li>文件权限和授权。</li>
 <li>机架感知（Rack awareness）：在调度任务和分配存储空间时考虑节点的物理位置。</li>
 <li>安全模式：一种维护需要的管理模式。</li>
@@ -289,24 +292,27 @@
 <li>Rebalancer：当datanode之间数据不均衡时，平衡集群上的数据负载。</li>
 <li>升级和回滚：在软件更新后有异常发生的情形下，能够回滚到HDFS升级之前的状态。</li>
 <li>Secondary Namenode：对文件系统名字空间执行周期性的检查点，将Namenode上HDFS改动日志文件的大小控制在某个特定的限度下。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h2><p>下面的文档描述了如何安装和搭建Hadoop集群：</p>
+<h2 id="先决条件">先决条件</h2>
+<p>下面的文档描述了如何安装和搭建Hadoop集群：</p>
 <ul>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/quickstart.html" target="_blank" rel="noopener">Hadoop快速入门</a> 针对初次使用者。</li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/cluster_setup.html" target="_blank" rel="noopener">Hadoop集群搭建</a> 针对大规模分布式集群的搭建。</li>
 </ul>
 <p>文档余下部分假设用户已经安装并运行了至少包含一个Datanode节点的HDFS。就本文目的来说，Namenode和Datanode可以运行在同一个物理主机上。</p>
-<h2 id="Web接口"><a href="#Web接口" class="headerlink" title="Web接口"></a>Web接口</h2><p>NameNode和DataNode各自启动了一个内置的Web服务器，显示了集群当前的基本状态和信息。在默认配置下NameNode的首页地址是<a href="http://namenode-name:50070/。这个页面列出了集群里的所有DataNode和集群的基本状态。这个Web接口也可以用来浏览整个文件系统（使用NameNode首页上的&quot;Browse" target="_blank" rel="noopener">http://namenode-name:50070/。这个页面列出了集群里的所有DataNode和集群的基本状态。这个Web接口也可以用来浏览整个文件系统（使用NameNode首页上的"Browse</a> the file system”链接）。</p>
-<h2 id="Shell命令"><a href="#Shell命令" class="headerlink" title="Shell命令"></a>Shell命令</h2><p>Hadoop包括一系列的类shell的命令，可直接和HDFS以及其他Hadoop支持的文件系统进行交互。bin/hadoop fs -help 命令列出所有Hadoop Shell支持的命令。而 bin/hadoop fs -help command-name 命令能显示关于某个命令的详细信息。这些命令支持大多数普通文件系统的操作，比如复制文件、改变文件权限等。它还支持一些HDFS特有的操作，比如改变文件副本数目。</p>
-<p>‘bin/hadoop dfsadmin’ 命令支持一些和HDFS管理相关的操作。bin/hadoop dfsadmin -help 命令能列出所有当前支持的命令。比如：</p>
+<h2 id="web接口">Web接口</h2>
+<p>NameNode和DataNode各自启动了一个内置的Web服务器，显示了集群当前的基本状态和信息。在默认配置下NameNode的首页地址是http://namenode-name:50070/。这个页面列出了集群里的所有DataNode和集群的基本状态。这个Web接口也可以用来浏览整个文件系统（使用NameNode首页上的"Browse the file system"链接）。</p>
+<h2 id="shell命令">Shell命令</h2>
+<p>Hadoop包括一系列的类shell的命令，可直接和HDFS以及其他Hadoop支持的文件系统进行交互。bin/hadoop fs -help 命令列出所有Hadoop Shell支持的命令。而 bin/hadoop fs -help command-name 命令能显示关于某个命令的详细信息。这些命令支持大多数普通文件系统的操作，比如复制文件、改变文件权限等。它还支持一些HDFS特有的操作，比如改变文件副本数目。</p>
+<p>'bin/hadoop dfsadmin' 命令支持一些和HDFS管理相关的操作。bin/hadoop dfsadmin -help 命令能列出所有当前支持的命令。比如：</p>
 <ul>
 <li>-report：报告HDFS的基本统计信息。有些信息也可以在NameNode Web服务首页看到。</li>
 <li>-safemode：虽然通常并不需要，但是管理员的确可以手动让NameNode进入或离开安全模式。</li>
 <li>-finalizeUpgrade：删除上一次升级时制作的集群备份。</li>
 </ul>
-<h2 id="Secondary-NameNode"><a href="#Secondary-NameNode" class="headerlink" title="Secondary NameNode"></a>Secondary NameNode</h2><p>NameNode将对文件系统的改动追加保存到本地文件系统上的一个日志文件（edits）。当一个NameNode启动时，它首先从一个映像文件（fsimage）中读取HDFS的状态，接着应用日志文件中的edits操作。然后它将新的HDFS状态写入（fsimage）中，并使用一个空的edits文件开始正常操作。因为NameNode只有在启动阶段才合并fsimage和edits，所以久而久之日志文件可能会变得非常庞大，特别是对大型的集群。日志文件太大的另一个副作用是下一次NameNode启动会花很长时间。</p>
+<h2 id="secondary-namenode">Secondary NameNode</h2>
+<p>NameNode将对文件系统的改动追加保存到本地文件系统上的一个日志文件（edits）。当一个NameNode启动时，它首先从一个映像文件（fsimage）中读取HDFS的状态，接着应用日志文件中的edits操作。然后它将新的HDFS状态写入（fsimage）中，并使用一个空的edits文件开始正常操作。因为NameNode只有在启动阶段才合并fsimage和edits，所以久而久之日志文件可能会变得非常庞大，特别是对大型的集群。日志文件太大的另一个副作用是下一次NameNode启动会花很长时间。</p>
 <p>Secondary NameNode定期合并fsimage和edits日志，将edits日志文件大小控制在一个限度下。因为内存需求和NameNode在一个数量级上，所以通常secondary NameNode和NameNode运行在不同的机器上。Secondary NameNode通过bin/start-dfs.sh在conf/masters中指定的节点上启动。</p>
 <p>Secondary NameNode的检查点进程启动，是由两个配置参数控制的：</p>
 <ul>
@@ -322,7 +328,8 @@
 </ul>
 <p>NameNode会从fs.checkpoint.dir目录读取检查点， 并把它保存在dfs.name.dir目录下。 如果dfs.name.dir目录下有合法的镜像文件，NameNode会启动失败。 NameNode会检查fs.checkpoint.dir目录下镜像文件的一致性，但是不会去改动它。</p>
 <p>命令的使用方法请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html#secondarynamenode" target="_blank" rel="noopener">secondarynamenode 命令</a>.</p>
-<h2 id="Rebalancer"><a href="#Rebalancer" class="headerlink" title="Rebalancer"></a>Rebalancer</h2><p>HDFS的数据也许并不是非常均匀的分布在各个DataNode中。一个常见的原因是在现有的集群上经常会增添新的DataNode节点。当新增一个数据块（一个文件的数据被保存在一系列的块中）时，NameNode在选择DataNode接收这个数据块之前，会考虑到很多因素。其中的一些考虑的是：</p>
+<h2 id="rebalancer">Rebalancer</h2>
+<p>HDFS的数据也许并不是非常均匀的分布在各个DataNode中。一个常见的原因是在现有的集群上经常会增添新的DataNode节点。当新增一个数据块（一个文件的数据被保存在一系列的块中）时，NameNode在选择DataNode接收这个数据块之前，会考虑到很多因素。其中的一些考虑的是：</p>
 <ul>
 <li>将数据块的一个副本放在正在写这个数据块的节点上。</li>
 <li>尽量将数据块的不同副本分布在不同的机架上，这样集群可在完全失去某一机架的情况下还能存活。</li>
@@ -331,30 +338,37 @@
 </ul>
 <p>由于上述多种考虑需要取舍，数据可能并不会均匀分布在DataNode中。HDFS为管理员提供了一个工具，用于分析数据块分布和重新平衡DataNode上的数据分布。<a href="http://issues.apache.org/jira/browse/HADOOP-1652" target="_blank" rel="noopener">HADOOP-1652</a>的附件中的一个<a href="http://issues.apache.org/jira/secure/attachment/12368261/RebalanceDesign6.pdf" target="_blank" rel="noopener">PDF</a>是一个简要的rebalancer管理员指南。</p>
 <p>使用方法请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html#balancer" target="_blank" rel="noopener">balancer 命令</a>.</p>
-<h2 id="机架感知（Rack-awareness）"><a href="#机架感知（Rack-awareness）" class="headerlink" title="机架感知（Rack awareness）"></a>机架感知（Rack awareness）</h2><p>通常，大型Hadoop集群是以机架的形式来组织的，同一个机架上不同节点间的网络状况比不同机架之间的更为理想。另外，NameNode设法将数据块副本保存在不同的机架上以提高容错性。Hadoop允许集群的管理员通过配置dfs.network.script参数来确定节点所处的机架。当这个脚本配置完毕，每个节点都会运行这个脚本来获取它的机架ID。默认的安装假定所有的节点属于同一个机架。这个特性及其配置参数在<a href="http://issues.apache.org/jira/browse/HADOOP-692" target="_blank" rel="noopener">HADOOP-692</a>所附的<a href="http://issues.apache.org/jira/secure/attachment/12345251/Rack_aware_HDFS_proposal.pdf" target="_blank" rel="noopener">PDF</a>上有更详细的描述。</p>
-<h2 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h2><p>NameNode启动时会从fsimage和edits日志文件中装载文件系统的状态信息，接着它等待各个DataNode向它报告它们各自的数据块状态，这样，NameNode就不会过早地开始复制数据块，即使在副本充足的情况下。这个阶段，NameNode处于安全模式下。NameNode的安全模式本质上是HDFS集群的一种只读模式，此时集群不允许任何对文件系统或者数据块修改的操作。通常NameNode会在开始阶段自动地退出安全模式。如果需要，你也可以通过’bin/hadoop dfsadmin -safemode’命令显式地将HDFS置于安全模式。NameNode首页会显示当前是否处于安全模式。关于安全模式的更多介绍和配置信息请参考JavaDoc：<a href="https://hadoop.apache.org/core/docs/current/api/org/apache/hadoop/dfs/NameNode.html#setSafeMode(org.apache.hadoop.dfs.FSConstants.SafeModeAction)" target="_blank" rel="noopener">setSafeMode()</a>。</p>
-<h2 id="fsck"><a href="#fsck" class="headerlink" title="fsck"></a>fsck</h2><p>HDFS支持fsck命令来检查系统中的各种不一致状况。这个命令被设计来报告各种文件存在的问题，比如文件缺少数据块或者副本数目不够。不同于在本地文件系统上传统的fsck工具，这个命令并不会修正它检测到的错误。一般来说，NameNode会自动修正大多数可恢复的错误。HDFS的fsck不是一个Hadoop shell命令。它通过’bin/hadoop fsck’执行。 命令的使用方法请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html#fsck" target="_blank" rel="noopener">fsck命令</a> fsck可用来检查整个文件系统，也可以只检查部分文件。</p>
-<h2 id="升级和回滚"><a href="#升级和回滚" class="headerlink" title="升级和回滚"></a>升级和回滚</h2><p>当在一个已有集群上升级Hadoop时，像其他的软件升级一样，可能会有新的bug或一些会影响到现有应用的非兼容性变更出现。在任何有实际意义的HDSF系统上，丢失数据是不被允许的，更不用说重新搭建启动HDFS了。HDFS允许管理员退回到之前的Hadoop版本，并将集群的状态回滚到升级之前。更多关于HDFS升级的细节在[升级wiki](<a href="https://wiki.apache.org/hadoop/Hadoop" target="_blank" rel="noopener">https://wiki.apache.org/hadoop/Hadoop</a> Upgrade)上可以找到。HDFS在一个时间可以有一个这样的备份。在升级之前，管理员需要用bin/hadoop dfsadmin -finalizeUpgrade（升级终结操作）命令删除存在的备份文件。下面简单介绍一下一般的升级过程：</p>
+<h2 id="机架感知rack-awareness">机架感知（Rack awareness）</h2>
+<p>通常，大型Hadoop集群是以机架的形式来组织的，同一个机架上不同节点间的网络状况比不同机架之间的更为理想。另外，NameNode设法将数据块副本保存在不同的机架上以提高容错性。Hadoop允许集群的管理员通过配置dfs.network.script参数来确定节点所处的机架。当这个脚本配置完毕，每个节点都会运行这个脚本来获取它的机架ID。默认的安装假定所有的节点属于同一个机架。这个特性及其配置参数在<a href="http://issues.apache.org/jira/browse/HADOOP-692" target="_blank" rel="noopener">HADOOP-692</a>所附的<a href="http://issues.apache.org/jira/secure/attachment/12345251/Rack_aware_HDFS_proposal.pdf" target="_blank" rel="noopener">PDF</a>上有更详细的描述。</p>
+<h2 id="安全模式">安全模式</h2>
+<p>NameNode启动时会从fsimage和edits日志文件中装载文件系统的状态信息，接着它等待各个DataNode向它报告它们各自的数据块状态，这样，NameNode就不会过早地开始复制数据块，即使在副本充足的情况下。这个阶段，NameNode处于安全模式下。NameNode的安全模式本质上是HDFS集群的一种只读模式，此时集群不允许任何对文件系统或者数据块修改的操作。通常NameNode会在开始阶段自动地退出安全模式。如果需要，你也可以通过'bin/hadoop dfsadmin -safemode'命令显式地将HDFS置于安全模式。NameNode首页会显示当前是否处于安全模式。关于安全模式的更多介绍和配置信息请参考JavaDoc：<a href="https://hadoop.apache.org/core/docs/current/api/org/apache/hadoop/dfs/NameNode.html#setSafeMode(org.apache.hadoop.dfs.FSConstants.SafeModeAction)" target="_blank" rel="noopener">setSafeMode()</a>。</p>
+<h2 id="fsck">fsck</h2>
+<p>HDFS支持fsck命令来检查系统中的各种不一致状况。这个命令被设计来报告各种文件存在的问题，比如文件缺少数据块或者副本数目不够。不同于在本地文件系统上传统的fsck工具，这个命令并不会修正它检测到的错误。一般来说，NameNode会自动修正大多数可恢复的错误。HDFS的fsck不是一个Hadoop shell命令。它通过'bin/hadoop fsck'执行。 命令的使用方法请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html#fsck" target="_blank" rel="noopener">fsck命令</a> fsck可用来检查整个文件系统，也可以只检查部分文件。</p>
+<h2 id="升级和回滚">升级和回滚</h2>
+<p>当在一个已有集群上升级Hadoop时，像其他的软件升级一样，可能会有新的bug或一些会影响到现有应用的非兼容性变更出现。在任何有实际意义的HDSF系统上，丢失数据是不被允许的，更不用说重新搭建启动HDFS了。HDFS允许管理员退回到之前的Hadoop版本，并将集群的状态回滚到升级之前。更多关于HDFS升级的细节在<a href="https://wiki.apache.org/hadoop/Hadoop%20Upgrade" target="_blank" rel="noopener">升级wiki</a>上可以找到。HDFS在一个时间可以有一个这样的备份。在升级之前，管理员需要用bin/hadoop dfsadmin -finalizeUpgrade（升级终结操作）命令删除存在的备份文件。下面简单介绍一下一般的升级过程：</p>
 <ul>
 <li>升级 Hadoop 软件之前，请检查是否已经存在一个备份，如果存在，可执行升级终结操作删除这个备份。通过dfsadmin -upgradeProgress status命令能够知道是否需要对一个集群执行升级终结操作。</li>
 <li>停止集群并部署新版本的Hadoop。</li>
 <li>使用-upgrade选项运行新的版本（bin/start-dfs.sh -upgrade）。</li>
 <li>在大多数情况下，集群都能够正常运行。一旦我们认为新的HDFS运行正常（也许经过几天的操作之后），就可以对之执行升级终结操作。注意，在对一个集群执行升级终结操作之前，删除那些升级前就已经存在的文件并不会真正地释放DataNodes上的磁盘空间。</li>
-<li>如果需要退回到老版本，<ul>
+<li>如果需要退回到老版本，
+<ul>
 <li>停止集群并且部署老版本的Hadoop。</li>
 <li>用回滚选项启动集群（bin/start-dfs.h -rollback）。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="文件权限和安全性"><a href="#文件权限和安全性" class="headerlink" title="文件权限和安全性"></a>文件权限和安全性</h2><p>这里的文件权限和其他常见平台如Linux的文件权限类似。目前，安全性仅限于简单的文件权限。启动NameNode的用户被视为HDFS的超级用户。HDFS以后的版本将会支持网络验证协议（比如Kerberos）来对用户身份进行验证和对数据进行加密传输。具体的细节请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_permissions_guide.html" target="_blank" rel="noopener">权限使用管理指南</a>。</p>
-<h2 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h2><p>现在，Hadoop已经运行在上千个节点的集群上。<a href="https://wiki.apache.org/hadoop/PoweredBy" target="_blank" rel="noopener">Powered By Hadoop</a>页面列出了一些已将Hadoop部署在他们的大型集群上的组织。HDFS集群只有一个NameNode节点。目前，NameNode上可用内存大小是一个主要的扩展限制。在超大型的集群中，增大HDFS存储文件的平均大小能够增大集群的规模，而不需要增加NameNode的内存。默认配置也许并不适合超大规模的集群。<a href="https://wiki.apache.org/hadoop/FAQ" target="_blank" rel="noopener">Hadoop FAQ</a>页面列举了针对大型Hadoop集群的配置改进。</p>
-<h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><p>这个用户手册给用户提供了一个学习和使用HDSF文件系统的起点。本文档会不断地进行改进，同时，用户也可以参考更多的Hadoop和HDFS文档。下面的列表是用户继续学习的起点：</p>
+<h2 id="文件权限和安全性">文件权限和安全性</h2>
+<p>这里的文件权限和其他常见平台如Linux的文件权限类似。目前，安全性仅限于简单的文件权限。启动NameNode的用户被视为HDFS的超级用户。HDFS以后的版本将会支持网络验证协议（比如Kerberos）来对用户身份进行验证和对数据进行加密传输。具体的细节请参考<a href="http://hadoop.apache.org/docs/r1.0.4/cn/hdfs_permissions_guide.html" target="_blank" rel="noopener">权限使用管理指南</a>。</p>
+<h2 id="可扩展性">可扩展性</h2>
+<p>现在，Hadoop已经运行在上千个节点的集群上。<a href="https://wiki.apache.org/hadoop/PoweredBy" target="_blank" rel="noopener">Powered By Hadoop</a>页面列出了一些已将Hadoop部署在他们的大型集群上的组织。HDFS集群只有一个NameNode节点。目前，NameNode上可用内存大小是一个主要的扩展限制。在超大型的集群中，增大HDFS存储文件的平均大小能够增大集群的规模，而不需要增加NameNode的内存。默认配置也许并不适合超大规模的集群。<a href="https://wiki.apache.org/hadoop/FAQ" target="_blank" rel="noopener">Hadoop FAQ</a>页面列举了针对大型Hadoop集群的配置改进。</p>
+<h2 id="相关文档">相关文档</h2>
+<p>这个用户手册给用户提供了一个学习和使用HDSF文件系统的起点。本文档会不断地进行改进，同时，用户也可以参考更多的Hadoop和HDFS文档。下面的列表是用户继续学习的起点：</p>
 <ul>
 <li><a href="https://hadoop.apache.org/" target="_blank" rel="noopener">Hadoop官方主页</a>：所有Hadoop相关的起始页。</li>
 <li><a href="https://wiki.apache.org/hadoop/FrontPage" target="_blank" rel="noopener">Hadoop Wiki</a>：Hadoop Wiki文档首页。这个指南是Hadoop代码树中的一部分，与此不同，Hadoop Wiki是由Hadoop社区定期编辑的。</li>
 <li>Hadoop Wiki上的<a href="https://wiki.apache.org/hadoop/FAQ" target="_blank" rel="noopener">FAQ</a>。</li>
 <li>Hadoop <a href="https://hadoop.apache.org/core/docs/current/api/" target="_blank" rel="noopener">JavaDoc API</a>。</li>
-<li>Hadoop用户邮件列表：<a href="mailto:core-user@hadoop.apache.org">core-user[at]hadoop.apache.org</a>。</li>
+<li>Hadoop用户邮件列表：[core-user<a href="mailto:core-user@hadoop.apache.org">at]hadoop.apache.org</a>。</li>
 <li>查看conf/hadoop-default.xml文件。这里包括了大多数配置参数的简要描述。</li>
 <li><a href="http://hadoop.apache.org/docs/r1.0.4/cn/commands_manual.html" target="_blank" rel="noopener">命令手册</a>：命令使用说明。</li>
 </ul>
@@ -495,6 +509,20 @@
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -612,13 +640,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.2k 字
     </span>
   
 
@@ -254,76 +254,40 @@
             <div class="markdown-body">
               <p>Git常用命令汇总（懒得老是去看文档了）</p>
 <a id="more"></a>
-
-<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><p>在你存放项目代码的文件夹，输入代码新建Git本地仓库</p>
-<div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">git init</span></code></pre></div>
-
+<h3 id="新建">新建</h3>
+<p>在你存放项目代码的文件夹，输入代码新建Git本地仓库</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">git init</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>新建之后会出现一个git文件夹，并且存放项目代码的文件夹会出现一个<strong>绿色的勾</strong>,表示已经同步到本地分支；命令行用户最后面有个<strong>master</strong>，表示在本地的master分支。</p>
-<p> 此时可以通过命令git branch查看本地分支</p>
-<div class="hljs code-wrapper"><pre><code class="hljs mipsasm">git <span class="hljs-keyword">branch </span> <span class="hljs-comment">#查看本地分支</span>
-
-git <span class="hljs-keyword">branch </span>-r  <span class="hljs-comment">#查看远程分支</span>
-
-git <span class="hljs-keyword">branch </span>-a  <span class="hljs-comment">#查看所有分支</span></code></pre></div>
-
+<p>此时可以通过命令git branch查看本地分支</p>
+<figure class="highlight mipsasm"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">git <span class="hljs-keyword">branch </span> <span class="hljs-comment">#查看本地分支</span><br><br>git <span class="hljs-keyword">branch </span>-r  <span class="hljs-comment">#查看远程分支</span><br><br>git <span class="hljs-keyword">branch </span>-a  <span class="hljs-comment">#查看所有分支</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>在这里先不介绍远程，先学会本地版本控制</p>
 <p>如果需要创建其他分支，可以用切换分支的命令加上参数创建分支</p>
-<div class="hljs code-wrapper"><pre><code class="hljs q">git checkout <span class="hljs-built_in">dev</span> #切换到本地的<span class="hljs-built_in">dev</span>分支
-
-git checkout -b <span class="hljs-built_in">dev</span> #创建并切换到本地的<span class="hljs-built_in">dev</span>分支</code></pre></div>
-
-
-
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>修改文件后，<strong>绿色的勾</strong>会变成<strong>红色的感叹号</strong>，表示更新到git的分支(如果切换到了master分支，就表示该文件没有更新到master分支，如果切换到dev分支就表示该文件没有更新到dev分支)</p>
-<div class="hljs code-wrapper"><pre><code class="hljs avrasm">git <span class="hljs-keyword">add</span> -A  <span class="hljs-meta">#将所有文件添加到暂存区</span>
-
-git commit -m <span class="hljs-string">"first commit"</span> <span class="hljs-meta">#这一步是备注，注意这个步骤一定要有，否则会提交失败</span>
-
-git <span class="hljs-keyword">push</span> -u origin master <span class="hljs-meta">#表示提交到远程master分支，在此只是因为没有关联远程分支暂且不管</span></code></pre></div>
-
-<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>如果某个分支要更新到跟另一个分支的文件一样，使用merge</p>
+<figure class="highlight q"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs q">git checkout <span class="hljs-built_in">dev</span> #切换到本地的<span class="hljs-built_in">dev</span>分支<br><br>git checkout -b <span class="hljs-built_in">dev</span> #创建并切换到本地的<span class="hljs-built_in">dev</span>分支<br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="更新">更新</h3>
+<p>修改文件后，<strong>绿色的勾</strong>会变成<strong>红色的感叹号</strong>，表示更新到git的分支(如果切换到了master分支，就表示该文件没有更新到master分支，如果切换到dev分支就表示该文件没有更新到dev分支)</p>
+<figure class="highlight avrasm"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm">git <span class="hljs-keyword">add</span> -A  <span class="hljs-meta">#将所有文件添加到暂存区</span><br><br>git commit -m <span class="hljs-string">"first commit"</span> <span class="hljs-meta">#这一步是备注，注意这个步骤一定要有，否则会提交失败</span><br><br>git <span class="hljs-keyword">push</span> -u origin master <span class="hljs-meta">#表示提交到远程master分支，在此只是因为没有关联远程分支暂且不管</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="合并">合并</h3>
+<p>如果某个分支要更新到跟另一个分支的文件一样，使用merge</p>
 <p>假设现在是在本地dev分支</p>
-<div class="hljs code-wrapper"><pre><code class="hljs crmsh">git checkout <span class="hljs-keyword">master</span> <span class="hljs-title">#切换到本地master</span>
-
-git merge dev <span class="hljs-comment">#把本地dev分支合并到当前本地分支(master)中</span></code></pre></div>
-
-
-
-<h3 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h3><div class="hljs code-wrapper"><pre><code class="hljs dsconfig"><span class="hljs-string">git </span><span class="hljs-string">reflog	</span><span class="hljs-comment">#会显示id</span>
-
-<span class="hljs-string">git </span> <span class="hljs-string">reset </span><span class="hljs-built_in">--hard</span>  <span class="hljs-string">commit_id	</span><span class="hljs-comment">#commit_id填写git reflog显示的id</span></code></pre></div>
-
-
-
-<h3 id="关联远程"><a href="#关联远程" class="headerlink" title="关联远程"></a>关联远程</h3><div class="hljs code-wrapper"><pre><code class="hljs crmsh">git checkout <span class="hljs-literal">master</span>
-
-git remote add origin https://github.com/coneycode/hexo-git-backup.git <span class="hljs-comment">#添加远程仓库</span>
-
-git fetch origin <span class="hljs-keyword">master</span> <span class="hljs-title">#取回(名称为)origin</span>服务器的<span class="hljs-literal">master</span>分支，即拉取远程<span class="hljs-literal">master</span>分支</code></pre></div>
-
-<h2 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h2><h4 id=""><a href="#" class="headerlink" title=""></a></h4><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">git init   <span class="hljs-comment"># 本地创建仓库 </span>
-
-git <span class="hljs-keyword">add</span><span class="bash"> -A  <span class="hljs-comment"># 提交所有文件</span></span>
-
-git commit -m <span class="hljs-string">"first commit"</span>  <span class="hljs-comment"># 提交文件至本地缓存区</span>
-
-git remote <span class="hljs-keyword">add</span><span class="bash"> origin https://github.com/githubusername/githubrepositories.git <span class="hljs-comment">#添加远程仓库</span></span>
-
-git push -u origin master <span class="hljs-comment">#提交代码至远程仓库master分支</span></code></pre></div>
-
-
-
-<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200714064123166.png" srcset="/img/loading.gif" lazyload="" alt="image-20200714064123166"></p>
+<figure class="highlight crmsh"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">git checkout <span class="hljs-keyword">master</span> <span class="hljs-title">#切换到本地master</span><br><br>git merge dev <span class="hljs-comment">#把本地dev分支合并到当前本地分支(master)中</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="回滚">回滚</h3>
+<figure class="highlight dsconfig"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dsconfig"><span class="hljs-string">git </span><span class="hljs-string">reflog	</span><span class="hljs-comment">#会显示id</span><br><br><span class="hljs-string">git </span> <span class="hljs-string">reset </span><span class="hljs-built_in">--hard</span>  <span class="hljs-string">commit_id	</span><span class="hljs-comment">#commit_id填写git reflog显示的id</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h3 id="关联远程">关联远程</h3>
+<figure class="highlight crmsh"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">git checkout <span class="hljs-literal">master</span><br><br>git remote add origin https://github.com/coneycode/hexo-git-backup.git <span class="hljs-comment">#添加远程仓库</span><br><br>git fetch origin <span class="hljs-keyword">master</span> <span class="hljs-title">#取回(名称为)origin</span>服务器的<span class="hljs-literal">master</span>分支，即拉取远程<span class="hljs-literal">master</span>分支<br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="远程">远程</h2>
+<h4 id="section"></h4>
+<figure class="highlight dockerfile"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dockerfile">git init   <span class="hljs-comment"># 本地创建仓库 </span><br><br>git <span class="hljs-keyword">add</span><span class="bash"> -A  <span class="hljs-comment"># 提交所有文件</span></span><br><br>git commit -m <span class="hljs-string">"first commit"</span>  <span class="hljs-comment"># 提交文件至本地缓存区</span><br><br>git remote <span class="hljs-keyword">add</span><span class="bash"> origin https://github.com/githubusername/githubrepositories.git <span class="hljs-comment">#添加远程仓库</span></span><br><br>git push -u origin master <span class="hljs-comment">#提交代码至远程仓库master分支</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="报错">报错</h2>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200714064123166.png" srcset="/img/loading.gif" lazyload="" alt="image-20200714064123166"><figcaption aria-hidden="true">image-20200714064123166</figcaption>
+</figure>
 <p>解决办法：</p>
 <p>先</p>
-<div class="hljs code-wrapper"><pre><code class="hljs ada">git pull <span class="hljs-comment">--rebase origin master</span></code></pre></div>
-
+<figure class="highlight ada"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">git pull <span class="hljs-comment">--rebase origin master</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>再</p>
-<div class="hljs code-wrapper"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master</code></pre></div>
-
-
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">git官方中文文档</a></p>
+<figure class="highlight maxima"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> master<br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">git官方中文文档</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -461,6 +425,20 @@ git push -u origin master <span class="hljs-comment">#提交代码至远程仓�
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -578,13 +556,6 @@ git push -u origin master <span class="hljs-comment">#提交代码至远程仓�
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

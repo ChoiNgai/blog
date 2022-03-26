@@ -210,7 +210,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.3k 字
+      3.5k 字
     </span>
   
 
@@ -219,7 +219,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      11 分钟
     </span>
   
 
@@ -253,134 +253,13 @@
             <div class="markdown-body">
               <p>主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )</p>
 <a id="more"></a>
-
-
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本篇分别有主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )</p>
-<h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p><a href="https://baike.baidu.com/item/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90/829840?fr=aladdin" target="_blank" rel="noopener">主成分分析-百度百科</a><br>简单讲:主成分分析就是取出几个较少的变量尽可能多地反映原来变量的信息<br>(只看主要对结果有影的几个变量)<br>主成分分析适用于数学建模中筛选出少量变量对结果造成主要影响并用函数关系表征的情况</p>
-<div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%% 主成分分析 (降维)</span>
-clc, clear
-
-load example_1.txt  <span class="hljs-comment">%数据导入（数据要求：前几列为自变量，最后一列为因变量）</span>
-data = example_1;
-
-[m, n] = <span class="hljs-built_in">size</span>(data); 
-num = <span class="hljs-number">3</span>;   <span class="hljs-comment">% 选取的主成分的个数</span>
-
-mu = <span class="hljs-built_in">mean</span>(data); 
-sigma = std(data);  <span class="hljs-comment">%标准差</span>
-<span class="hljs-comment">%z-score标准化方法适用于属性A的最大值和最小值未知的情况，或有超出取值范围的离群数据的情况</span>
-<span class="hljs-comment">%标准化的新数据=（原数据-均值）/标准差</span>
-std_data = zscore(data);
-b = std_data(: , <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>);     <span class="hljs-comment">% 四个变量x1, x2, x3, x4</span>
-r = cov(b);                                <span class="hljs-comment">% 变量的协方差矩阵</span>
-
-<span class="hljs-comment">% 运用协方差矩阵进行PCA</span>
-[PC, latent, explained] = pcacov(r);  <span class="hljs-comment">%返回主成分(PC)、协方差矩阵X的特征值 (latent)和每个特征向量表征在观测量总方差中所占的百分数(explained)</span>
-<span class="hljs-comment">% 新的主成分z1 = PC(1,1)*x1 + PC(2,1)*x2 + PC(3,1)*x3 + PC(4,1)*x4  , z2 = ...</span>
-f = <span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sign</span>(sum(PC)), <span class="hljs-built_in">size</span>(PC, <span class="hljs-number">1</span>), <span class="hljs-number">1</span>);            <span class="hljs-comment">%sum(PC)表示对矩阵PC的列求和</span>
-PC = PC .* f;
-
-
-<span class="hljs-comment">%1.普通的最小二乘法回归</span>
-regress_args_b = [<span class="hljs-built_in">ones</span>(m, <span class="hljs-number">1</span>), b] \ std_data(:, <span class="hljs-keyword">end</span>);   <span class="hljs-comment">%标准化数据的回归方程系数</span>
-bzh = mu ./ sigma;
-<span class="hljs-comment">% 原始数据的常数项</span>
-ch10 = mu(<span class="hljs-keyword">end</span>) - bzh(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * regress_args_b(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>) * sigma(<span class="hljs-keyword">end</span>);
-fr_1 = regress_args_b(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>); fr_1 = fr_1';
-<span class="hljs-comment">% 原始数据的自变量的系数</span>
-ch1 = fr_1 ./ sigma(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * sigma(<span class="hljs-keyword">end</span>);
-<span class="hljs-comment">% 此时模型为 y = ch10 + ch1[1]*x1 + ch1[2] * x2 + ch1[3] * x3 + ch1[4] * x4</span>
-<span class="hljs-comment">% 计算均方误差</span>
-check1 = <span class="hljs-built_in">sqrt</span>(sum( (data(:, <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * ch1' + ch10 - data(:, <span class="hljs-keyword">end</span>)) .^<span class="hljs-number">2</span> ) / (m - n))
-
-
-<span class="hljs-comment">%2.主成分回归模型</span>
-pca_val = b * PC(:, <span class="hljs-number">1</span>:num);
-<span class="hljs-comment">%主成分数据的回归方程系数</span>
-regress_args_pca = [<span class="hljs-built_in">ones</span>(m, <span class="hljs-number">1</span>), pca_val] \ std_data(:, <span class="hljs-keyword">end</span>);
-<span class="hljs-built_in">beta</span> = PC(:, <span class="hljs-number">1</span>:num) * regress_args_pca(<span class="hljs-number">2</span>:num+<span class="hljs-number">1</span>);   <span class="hljs-comment">%标准化数据的回归方程系数</span>
-<span class="hljs-comment">% 原始数据的常数项</span>
-ch20 = mu(<span class="hljs-keyword">end</span>) - bzh(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * <span class="hljs-built_in">beta</span> * sigma(<span class="hljs-keyword">end</span>);
-fr_2 = beta';
-<span class="hljs-comment">% 原始数据的自变量的系数</span>
-ch2 = fr_2 ./ sigma(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * sigma(<span class="hljs-keyword">end</span>);
-<span class="hljs-comment">% 此时模型为 y = ch20 + ch2[1]*x1 + ch2[2] * x2 + ch2[3] * x3 + ch2[4] * x4</span>
-<span class="hljs-comment">% 计算均方误差</span>
-check2 = <span class="hljs-built_in">sqrt</span>(sum( (data(:, <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * ch2' + ch20 - data(:, <span class="hljs-keyword">end</span>)) .^<span class="hljs-number">2</span> ) / (m - num - <span class="hljs-number">1</span>))</code></pre></div>
-<h1 id="层次分析"><a href="#层次分析" class="headerlink" title="层次分析"></a>层次分析</h1><p><a href="https://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90/10986776?fr=aladdin" target="_blank" rel="noopener">层次分析-百度百科</a><br>简单讲：就是自己将两两影响因素作重要性对比得出判断矩阵，然后得出各个影响因素的权重<br>层次分析适用于数学建模多个变量对结果不同影响程度并用函数关系表征的情况</p>
-<div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%层次分析法（AHP)</span>
-<span class="hljs-built_in">disp</span>(<span class="hljs-string">'请输入判断矩阵A（n阶）'</span>);
-A = input(<span class="hljs-string">'A='</span>);
-[n,n] = <span class="hljs-built_in">size</span>(A);
-x = <span class="hljs-built_in">ones</span>(n,<span class="hljs-number">100</span>);
-y = <span class="hljs-built_in">ones</span>(n,<span class="hljs-number">100</span>);
-m = <span class="hljs-built_in">zeros</span>(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>);
-m(<span class="hljs-number">1</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-number">1</span>));
-y(:,<span class="hljs-number">1</span>) = x(:,<span class="hljs-number">1</span>);
-x(:,<span class="hljs-number">2</span>) = A*y(:,<span class="hljs-number">1</span>);
-m(<span class="hljs-number">2</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-number">2</span>));
-y(:,<span class="hljs-number">2</span>) = x(:,<span class="hljs-number">2</span>)/m(<span class="hljs-number">2</span>);
-p=<span class="hljs-number">0.0001</span>; <span class="hljs-built_in">i</span>=<span class="hljs-number">2</span>; k=<span class="hljs-built_in">abs</span>(m(<span class="hljs-number">2</span>)-m(<span class="hljs-number">1</span>));
-<span class="hljs-keyword">while</span> k&gt;p
-    <span class="hljs-built_in">i</span>=<span class="hljs-built_in">i</span>+<span class="hljs-number">1</span>;
-    x(:,<span class="hljs-built_in">i</span>) = A*y(:,<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>);
-    m(<span class="hljs-built_in">i</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-built_in">i</span>));
-    y(:,<span class="hljs-built_in">i</span>) = x(:,<span class="hljs-built_in">i</span>)/m(<span class="hljs-built_in">i</span>);
-    k=<span class="hljs-built_in">abs</span>(m(<span class="hljs-built_in">i</span>)-m(<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>));
-<span class="hljs-keyword">end</span>
-a = sum(y(:,<span class="hljs-built_in">i</span>));
-w = y(:,<span class="hljs-built_in">i</span>)/a;
-t = m(<span class="hljs-built_in">i</span>);
-<span class="hljs-built_in">disp</span>(w);
-<span class="hljs-comment">%一致性检验</span>
-CI = (t-n)/(n<span class="hljs-number">-1</span>);
-RI = [<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0.52</span> <span class="hljs-number">0.89</span> <span class="hljs-number">1.12</span> <span class="hljs-number">1.36</span> <span class="hljs-number">1.41</span> <span class="hljs-number">1.46</span> <span class="hljs-number">1.49</span> <span class="hljs-number">1.52</span> <span class="hljs-number">1.54</span> <span class="hljs-number">1.56</span> <span class="hljs-number">1.58</span> <span class="hljs-number">1.59</span>];
-CR = CI/RI(n);
-<span class="hljs-keyword">if</span> CR&lt;<span class="hljs-number">0.10</span>
-    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'此矩阵一致性可以接受！'</span>);
-    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'CI='</span>);<span class="hljs-built_in">disp</span>(CI);
-    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'CR='</span>);<span class="hljs-built_in">disp</span>(CR);
-<span class="hljs-keyword">end</span></code></pre></div>
-<h1 id="聚类分析"><a href="#聚类分析" class="headerlink" title="聚类分析"></a>聚类分析</h1><p><a href="https://baike.baidu.com/item/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/3450227?fr=aladdin" target="_blank" rel="noopener">聚类分析-百度百科</a><br>简单讲：就是多个影响因素按不同联系程度分类</p>
-<div class="hljs code-wrapper"><pre><code class="hljs pgsql">%聚类分析
-X;   %X为导入数据的名称(类型：数值矩阵)
-X=X<span class="hljs-string">';    %将矩阵X转置，按情况看是否需要此语句</span>
-<span class="hljs-string">Y=pdist(X);     %X为要聚类的数组</span>
-<span class="hljs-string">SF=squareform(Y);</span>
-<span class="hljs-string">Z=linkage(Y,'</span>averag<span class="hljs-string">e');</span>
-<span class="hljs-string">dendrogram(Z,0);</span>
-<span class="hljs-string">T=cluster(Z,'</span>maxclust<span class="hljs-string">',3);</span></code></pre></div>
-<h1 id="因子分析"><a href="#因子分析" class="headerlink" title="因子分析"></a>因子分析</h1><p><a href="https://baike.baidu.com/item/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90/91849" target="_blank" rel="noopener">因子分析-百度百科</a><br>可看作是主成分分析的推广，涉及的计算与主成分分析很类似</p>
-<div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%因子分析</span>
-clc,clear
-load ssgs.txt   <span class="hljs-comment">%把原始数据保存在纯文本文件ssgs.txt中</span>
-n=<span class="hljs-built_in">size</span>(ssgs,<span class="hljs-number">1</span>);
-x=ssgs(:,[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>]); y=ssgs(:,<span class="hljs-number">5</span>); <span class="hljs-comment">%分别提出自变量x1...x4和因变量x的值</span>
-x=zscore(x); <span class="hljs-comment">%数据标准化</span>
-r=corrcoef(x)  <span class="hljs-comment">%求相关系数矩阵</span>
-[vec1,val,con1]=pcacov(r)  <span class="hljs-comment">%进行主成分分析的相关计算</span>
-f1=<span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sign</span>(sum(vec1)),<span class="hljs-built_in">size</span>(vec1,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>);
-vec2=vec1.*f1;     <span class="hljs-comment">%特征向量正负号转换</span>
-f2=<span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sqrt</span>(val)',<span class="hljs-built_in">size</span>(vec2,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>); 
-a=vec2.*f2   <span class="hljs-comment">%求初等载荷矩阵</span>
-num=input(<span class="hljs-string">'请选择主因子的个数：'</span>);  <span class="hljs-comment">%交互式选择主因子的个数</span>
-am=a(:,[<span class="hljs-number">1</span>:num]);  <span class="hljs-comment">%提出num个主因子的载荷矩阵</span>
-[bm,t]=rotatefactors(am,<span class="hljs-string">'method'</span>, <span class="hljs-string">'varimax'</span>) <span class="hljs-comment">%am旋转变换,bm为旋转后的载荷阵</span>
-bt=[bm,a(:,[num+<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span>])];  <span class="hljs-comment">%旋转后全部因子的载荷矩阵,前两个旋转，后面不旋转</span>
-con2=sum(bt.^<span class="hljs-number">2</span>)       <span class="hljs-comment">%计算因子贡献</span>
-check=[con1,con2'/sum(con2)*<span class="hljs-number">100</span>]<span class="hljs-comment">%该语句是领会旋转意义,con1是未旋转前的贡献率</span>
-rate=con2(<span class="hljs-number">1</span>:num)/sum(con2) <span class="hljs-comment">%计算因子贡献率</span>
-coef=inv(r)*bm          <span class="hljs-comment">%计算得分函数的系数</span>
-score=x*coef           <span class="hljs-comment">%计算各个因子的得分</span>
-weight=rate/sum(rate)  <span class="hljs-comment">%计算得分的权重</span>
-Tscore=score*weight'   <span class="hljs-comment">%对各因子的得分进行加权求和，即求各企业综合得分</span>
-[STscore,ind]=<span class="hljs-built_in">sort</span>(Tscore,<span class="hljs-string">'descend'</span>)      <span class="hljs-comment">%对企业进行排序</span>
-display=[score(ind,:)';STscore';ind'] <span class="hljs-comment">%显示排序结果</span>
-[ccoef,p]=corrcoef([Tscore,y])    <span class="hljs-comment">%计算F与资产负债的相关系数</span>
-[d,dt,e,et,stats]=regress(Tscore,[<span class="hljs-built_in">ones</span>(n,<span class="hljs-number">1</span>),y]);<span class="hljs-comment">%计算F与资产负债的方程</span>
-d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的值</span></code></pre></div>
-
-
+<h2 id="介绍">介绍</h2>
+<p>本篇分别有主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )</p>
+<h1 id="主成分分析">主成分分析</h1>
+<p><a href="https://baike.baidu.com/item/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90/829840?fr=aladdin" target="_blank" rel="noopener">主成分分析-百度百科</a> 简单讲:主成分分析就是取出几个较少的变量尽可能多地反映原来变量的信息 (只看主要对结果有影的几个变量) 主成分分析适用于数学建模中筛选出少量变量对结果造成主要影响并用函数关系表征的情况</p>
+<figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%% 主成分分析 (降维)</span><br>clc, clear<br><br>load example_1.txt  <span class="hljs-comment">%数据导入（数据要求：前几列为自变量，最后一列为因变量）</span><br>data = example_1;<br><br>[m, n] = <span class="hljs-built_in">size</span>(data); <br>num = <span class="hljs-number">3</span>;   <span class="hljs-comment">% 选取的主成分的个数</span><br><br>mu = <span class="hljs-built_in">mean</span>(data); <br>sigma = std(data);  <span class="hljs-comment">%标准差</span><br><span class="hljs-comment">%z-score标准化方法适用于属性A的最大值和最小值未知的情况，或有超出取值范围的离群数据的情况</span><br><span class="hljs-comment">%标准化的新数据=（原数据-均值）/标准差</span><br>std_data = zscore(data);<br>b = std_data(: , <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>);     <span class="hljs-comment">% 四个变量x1, x2, x3, x4</span><br>r = cov(b);                                <span class="hljs-comment">% 变量的协方差矩阵</span><br><br><span class="hljs-comment">% 运用协方差矩阵进行PCA</span><br>[PC, latent, explained] = pcacov(r);  <span class="hljs-comment">%返回主成分(PC)、协方差矩阵X的特征值 (latent)和每个特征向量表征在观测量总方差中所占的百分数(explained)</span><br><span class="hljs-comment">% 新的主成分z1 = PC(1,1)*x1 + PC(2,1)*x2 + PC(3,1)*x3 + PC(4,1)*x4  , z2 = ...</span><br>f = <span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sign</span>(sum(PC)), <span class="hljs-built_in">size</span>(PC, <span class="hljs-number">1</span>), <span class="hljs-number">1</span>);            <span class="hljs-comment">%sum(PC)表示对矩阵PC的列求和</span><br>PC = PC .* f;<br><br><br><span class="hljs-comment">%1.普通的最小二乘法回归</span><br>regress_args_b = [<span class="hljs-built_in">ones</span>(m, <span class="hljs-number">1</span>), b] \ std_data(:, <span class="hljs-keyword">end</span>);   <span class="hljs-comment">%标准化数据的回归方程系数</span><br>bzh = mu ./ sigma;<br><span class="hljs-comment">% 原始数据的常数项</span><br>ch10 = mu(<span class="hljs-keyword">end</span>) - bzh(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * regress_args_b(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>) * sigma(<span class="hljs-keyword">end</span>);<br>fr_1 = regress_args_b(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>); fr_1 = fr_1';<br><span class="hljs-comment">% 原始数据的自变量的系数</span><br>ch1 = fr_1 ./ sigma(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * sigma(<span class="hljs-keyword">end</span>);<br><span class="hljs-comment">% 此时模型为 y = ch10 + ch1[1]*x1 + ch1[2] * x2 + ch1[3] * x3 + ch1[4] * x4</span><br><span class="hljs-comment">% 计算均方误差</span><br>check1 = <span class="hljs-built_in">sqrt</span>(sum( (data(:, <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * ch1' + ch10 - data(:, <span class="hljs-keyword">end</span>)) .^<span class="hljs-number">2</span> ) / (m - n))<br><br><br><span class="hljs-comment">%2.主成分回归模型</span><br>pca_val = b * PC(:, <span class="hljs-number">1</span>:num);<br><span class="hljs-comment">%主成分数据的回归方程系数</span><br>regress_args_pca = [<span class="hljs-built_in">ones</span>(m, <span class="hljs-number">1</span>), pca_val] \ std_data(:, <span class="hljs-keyword">end</span>);<br><span class="hljs-built_in">beta</span> = PC(:, <span class="hljs-number">1</span>:num) * regress_args_pca(<span class="hljs-number">2</span>:num+<span class="hljs-number">1</span>);   <span class="hljs-comment">%标准化数据的回归方程系数</span><br><span class="hljs-comment">% 原始数据的常数项</span><br>ch20 = mu(<span class="hljs-keyword">end</span>) - bzh(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * <span class="hljs-built_in">beta</span> * sigma(<span class="hljs-keyword">end</span>);<br>fr_2 = beta';<br><span class="hljs-comment">% 原始数据的自变量的系数</span><br>ch2 = fr_2 ./ sigma(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * sigma(<span class="hljs-keyword">end</span>);<br><span class="hljs-comment">% 此时模型为 y = ch20 + ch2[1]*x1 + ch2[2] * x2 + ch2[3] * x3 + ch2[4] * x4</span><br><span class="hljs-comment">% 计算均方误差</span><br>check2 = <span class="hljs-built_in">sqrt</span>(sum( (data(:, <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * ch2' + ch20 - data(:, <span class="hljs-keyword">end</span>)) .^<span class="hljs-number">2</span> ) / (m - num - <span class="hljs-number">1</span>))<br></code></pre></div></td></tr></tbody></table></figure>
+<h1 id="层次分析">层次分析</h1>
+<p><a href="https://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90/10986776?fr=aladdin" target="_blank" rel="noopener">层次分析-百度百科</a> 简单讲：就是自己将两两影响因素作重要性对比得出判断矩阵，然后得出各个影响因素的权重 层次分析适用于数学建模多个变量对结果不同影响程度并用函数关系表征的情况 </p><figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%层次分析法（AHP)</span><br><span class="hljs-built_in">disp</span>(<span class="hljs-string">'请输入判断矩阵A（n阶）'</span>);<br>A = input(<span class="hljs-string">'A='</span>);<br>[n,n] = <span class="hljs-built_in">size</span>(A);<br>x = <span class="hljs-built_in">ones</span>(n,<span class="hljs-number">100</span>);<br>y = <span class="hljs-built_in">ones</span>(n,<span class="hljs-number">100</span>);<br>m = <span class="hljs-built_in">zeros</span>(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>);<br>m(<span class="hljs-number">1</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-number">1</span>));<br>y(:,<span class="hljs-number">1</span>) = x(:,<span class="hljs-number">1</span>);<br>x(:,<span class="hljs-number">2</span>) = A*y(:,<span class="hljs-number">1</span>);<br>m(<span class="hljs-number">2</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-number">2</span>));<br>y(:,<span class="hljs-number">2</span>) = x(:,<span class="hljs-number">2</span>)/m(<span class="hljs-number">2</span>);<br>p=<span class="hljs-number">0.0001</span>; <span class="hljs-built_in">i</span>=<span class="hljs-number">2</span>; k=<span class="hljs-built_in">abs</span>(m(<span class="hljs-number">2</span>)-m(<span class="hljs-number">1</span>));<br><span class="hljs-keyword">while</span> k&gt;p<br>    <span class="hljs-built_in">i</span>=<span class="hljs-built_in">i</span>+<span class="hljs-number">1</span>;<br>    x(:,<span class="hljs-built_in">i</span>) = A*y(:,<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>);<br>    m(<span class="hljs-built_in">i</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-built_in">i</span>));<br>    y(:,<span class="hljs-built_in">i</span>) = x(:,<span class="hljs-built_in">i</span>)/m(<span class="hljs-built_in">i</span>);<br>    k=<span class="hljs-built_in">abs</span>(m(<span class="hljs-built_in">i</span>)-m(<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>));<br><span class="hljs-keyword">end</span><br>a = sum(y(:,<span class="hljs-built_in">i</span>));<br>w = y(:,<span class="hljs-built_in">i</span>)/a;<br>t = m(<span class="hljs-built_in">i</span>);<br><span class="hljs-built_in">disp</span>(w);<br><span class="hljs-comment">%一致性检验</span><br>CI = (t-n)/(n<span class="hljs-number">-1</span>);<br>RI = [<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0.52</span> <span class="hljs-number">0.89</span> <span class="hljs-number">1.12</span> <span class="hljs-number">1.36</span> <span class="hljs-number">1.41</span> <span class="hljs-number">1.46</span> <span class="hljs-number">1.49</span> <span class="hljs-number">1.52</span> <span class="hljs-number">1.54</span> <span class="hljs-number">1.56</span> <span class="hljs-number">1.58</span> <span class="hljs-number">1.59</span>];<br>CR = CI/RI(n);<br><span class="hljs-keyword">if</span> CR&lt;<span class="hljs-number">0.10</span><br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'此矩阵一致性可以接受！'</span>);<br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'CI='</span>);<span class="hljs-built_in">disp</span>(CI);<br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'CR='</span>);<span class="hljs-built_in">disp</span>(CR);<br><span class="hljs-keyword">end</span><br></code></pre></div></td></tr></tbody></table></figure> # 聚类分析 <a href="https://baike.baidu.com/item/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/3450227?fr=aladdin" target="_blank" rel="noopener">聚类分析-百度百科</a> 简单讲：就是多个影响因素按不同联系程度分类 <figure class="highlight pgsql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">%聚类分析<br>X;   %X为导入数据的名称(类型：数值矩阵)<br>X=X<span class="hljs-string">';    %将矩阵X转置，按情况看是否需要此语句</span><br><span class="hljs-string">Y=pdist(X);     %X为要聚类的数组</span><br><span class="hljs-string">SF=squareform(Y);</span><br><span class="hljs-string">Z=linkage(Y,'</span>averag<span class="hljs-string">e');</span><br><span class="hljs-string">dendrogram(Z,0);</span><br><span class="hljs-string">T=cluster(Z,'</span>maxclust<span class="hljs-string">',3);</span><br></code></pre></div></td></tr></tbody></table></figure> # 因子分析 <a href="https://baike.baidu.com/item/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90/91849" target="_blank" rel="noopener">因子分析-百度百科</a> 可看作是主成分分析的推广，涉及的计算与主成分分析很类似 <figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%因子分析</span><br>clc,clear<br>load ssgs.txt   <span class="hljs-comment">%把原始数据保存在纯文本文件ssgs.txt中</span><br>n=<span class="hljs-built_in">size</span>(ssgs,<span class="hljs-number">1</span>);<br>x=ssgs(:,[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>]); y=ssgs(:,<span class="hljs-number">5</span>); <span class="hljs-comment">%分别提出自变量x1...x4和因变量x的值</span><br>x=zscore(x); <span class="hljs-comment">%数据标准化</span><br>r=corrcoef(x)  <span class="hljs-comment">%求相关系数矩阵</span><br>[vec1,val,con1]=pcacov(r)  <span class="hljs-comment">%进行主成分分析的相关计算</span><br>f1=<span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sign</span>(sum(vec1)),<span class="hljs-built_in">size</span>(vec1,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>);<br>vec2=vec1.*f1;     <span class="hljs-comment">%特征向量正负号转换</span><br>f2=<span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sqrt</span>(val)',<span class="hljs-built_in">size</span>(vec2,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>); <br>a=vec2.*f2   <span class="hljs-comment">%求初等载荷矩阵</span><br>num=input(<span class="hljs-string">'请选择主因子的个数：'</span>);  <span class="hljs-comment">%交互式选择主因子的个数</span><br>am=a(:,[<span class="hljs-number">1</span>:num]);  <span class="hljs-comment">%提出num个主因子的载荷矩阵</span><br>[bm,t]=rotatefactors(am,<span class="hljs-string">'method'</span>, <span class="hljs-string">'varimax'</span>) <span class="hljs-comment">%am旋转变换,bm为旋转后的载荷阵</span><br>bt=[bm,a(:,[num+<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span>])];  <span class="hljs-comment">%旋转后全部因子的载荷矩阵,前两个旋转，后面不旋转</span><br>con2=sum(bt.^<span class="hljs-number">2</span>)       <span class="hljs-comment">%计算因子贡献</span><br>check=[con1,con2'/sum(con2)*<span class="hljs-number">100</span>]<span class="hljs-comment">%该语句是领会旋转意义,con1是未旋转前的贡献率</span><br>rate=con2(<span class="hljs-number">1</span>:num)/sum(con2) <span class="hljs-comment">%计算因子贡献率</span><br>coef=inv(r)*bm          <span class="hljs-comment">%计算得分函数的系数</span><br>score=x*coef           <span class="hljs-comment">%计算各个因子的得分</span><br>weight=rate/sum(rate)  <span class="hljs-comment">%计算得分的权重</span><br>Tscore=score*weight'   <span class="hljs-comment">%对各因子的得分进行加权求和，即求各企业综合得分</span><br>[STscore,ind]=<span class="hljs-built_in">sort</span>(Tscore,<span class="hljs-string">'descend'</span>)      <span class="hljs-comment">%对企业进行排序</span><br>display=[score(ind,:)';STscore';ind'] <span class="hljs-comment">%显示排序结果</span><br>[ccoef,p]=corrcoef([Tscore,y])    <span class="hljs-comment">%计算F与资产负债的相关系数</span><br>[d,dt,e,et,stats]=regress(Tscore,[<span class="hljs-built_in">ones</span>(n,<span class="hljs-number">1</span>),y]);<span class="hljs-comment">%计算F与资产负债的方程</span><br>d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的值</span><br></code></pre></div></td></tr></tbody></table></figure><p></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -435,9 +314,9 @@ d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/09/20/%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88/">
+                      <a href="/2019/10/26/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6GPU%E7%89%88%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%EF%BC%88%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">曲线拟合</span>
+                        <span class="hidden-mobile">深度学习框架GPU版前期准备（避坑指南）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -445,8 +324,8 @@ d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/09/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="hidden-mobile">学习笔记：计算机网络（断更）</span>
+                      <a href="/2019/09/20/%E6%9B%B2%E7%BA%BF%E6%8B%9F%E5%90%88/">
+                        <span class="hidden-mobile">曲线拟合</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -520,6 +399,20 @@ d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的�
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -637,13 +530,6 @@ d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的�
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

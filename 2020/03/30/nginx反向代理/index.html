@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      555 字
+      582 字
     </span>
   
 
@@ -254,30 +254,10 @@
             <div class="markdown-body">
               <p>Nginx是个好东西</p>
 <a id="more"></a>
-
 <p>通过Nginx反向代理加速网站访问速度</p>
 <p>ip示例：106.42.254.40</p>
 <p>二级域名示例：oj.example.com</p>
-<div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> { 
-    <span class="hljs-attribute">listen</span> <span class="hljs-number">443</span>; 
-    <span class="hljs-attribute">server_name</span> onj.example.com; 
-    
-    <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;
-    <span class="hljs-attribute">ssl_certificate</span> /www/wwwroot/ssl/oj/oj.example.com.crt;
-    <span class="hljs-attribute">ssl_certificate_key</span> /www/wwwroot/ssl/oj/oj.example.com   ssl_certificate_key /etc/ssl/2_baofeidyz.com.key;
-        <span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">5m</span>;
-        <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;
-        <span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
-        <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;
-        
-    <span class="hljs-attribute">location</span> / { 
-      <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>; 
-      <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>; 
-      <span class="hljs-attribute">proxy_pass</span> http://106.42.154.40/; 
-    } 
-}</code></pre></div>
-
-
+<figure class="highlight nginx"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-section">server</span> { <br>    <span class="hljs-attribute">listen</span> <span class="hljs-number">443</span>; <br>    <span class="hljs-attribute">server_name</span> onj.example.com; <br>    <br>    <span class="hljs-attribute">ssl</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">ssl_certificate</span> /www/wwwroot/ssl/oj/oj.example.com.crt;<br>    <span class="hljs-attribute">ssl_certificate_key</span> /www/wwwroot/ssl/oj/oj.example.com   ssl_certificate_key /etc/ssl/2_baofeidyz.com.key;<br>        <span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">5m</span>;<br>        <span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;<br>        <span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<br>        <span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br>        <br>    <span class="hljs-attribute">location</span> / { <br>      <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>; <br>      <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>; <br>      <span class="hljs-attribute">proxy_pass</span> http://106.42.154.40/; <br>    } <br>}<br></code></pre></div></td></tr></tbody></table></figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -415,6 +395,20 @@
   
 
   
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+
 </footer>
 
 
@@ -532,13 +526,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 
