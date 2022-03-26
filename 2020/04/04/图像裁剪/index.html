@@ -26,8 +26,8 @@
 <meta property="article:published_time" content="2020-04-04T12:55:30.000Z">
 <meta property="article:modified_time" content="2021-11-24T08:46:40.509Z">
 <meta property="article:author" content="CAIWEI">
-<meta property="article:tag" content="图像处理">
 <meta property="article:tag" content="matlab">
+<meta property="article:tag" content="图像处理">
 <meta name="twitter:card" content="summary_large_image">
   
   <title>图像裁剪 - CAIWEI的博客</title>
@@ -255,7 +255,8 @@
 <a id="more"></a>
 <ul>
 <li><p>文件目录树</p>
-<figure class="highlight css"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">│  <span class="hljs-selector-tag">ImageCut</span><span class="hljs-selector-class">.py</span><br>│<br>├─<span class="hljs-selector-tag">cut_img</span><br>│     <span class="hljs-selector-tag">cut_test</span><span class="hljs-selector-class">.jpg</span><br>│<br>└─<span class="hljs-selector-tag">images</span><br>      <span class="hljs-selector-tag">test</span><span class="hljs-selector-class">.jpg</span><br></code></pre></div></td></tr></tbody></table></figure></li>
+<figure class="highlight css"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">│  <span class="hljs-selector-tag">ImageCut</span><span class="hljs-selector-class">.py</span><br>│<br>├─<span class="hljs-selector-tag">cut_img</span><br>│     <span class="hljs-selector-tag">cut_test</span><span class="hljs-selector-class">.jpg</span><br>│<br>└─<span class="hljs-selector-tag">images</span><br>      <span class="hljs-selector-tag">test</span><span class="hljs-selector-class">.jpg</span><br></code></pre></div></td></tr></tbody></table></figure>
+</li>
 </ul>
 <hr>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 导入相关的库</span><br><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image<br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-comment">#读取images文件夹内的图片名称</span><br>images_list = os.listdir(<span class="hljs-string">'images/'</span>)<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,len(images_list),<span class="hljs-number">1</span>):<br><br>    <span class="hljs-comment"># 打开一张图</span><br>    img = Image.open(<span class="hljs-string">"images/"</span>+images_list[i])<br>    <span class="hljs-comment"># 图片尺寸</span><br>    img_size = img.size<br>    h = img_size[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 图片高度</span><br>    w = img_size[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 图片宽度</span><br><br>    x = <span class="hljs-number">0.2</span> * w<br>    y = <span class="hljs-number">0.1</span> * h<br>    w = <span class="hljs-number">0.55</span> * w<br>    h = <span class="hljs-number">0.75</span> * h<br><br>    <span class="hljs-comment"># 开始截取</span><br>    region = img.crop((x, y, x + w, y + h))<br><br>    <span class="hljs-keyword">if</span> (os.path.exists(<span class="hljs-string">'cut_img'</span>)==<span class="hljs-literal">False</span>):<br>        os.mkdir(<span class="hljs-string">"cut_img"</span>)<br><br><br>    <span class="hljs-comment"># 保存图片</span><br>    region.save(<span class="hljs-string">"cut_img"</span>+<span class="hljs-string">"/"</span>+<span class="hljs-string">"cut_"</span>+images_list[i])<br></code></pre></div></td></tr></tbody></table></figure>
@@ -294,9 +295,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
-                    
                       <a class="hover-with-bg" href="/tags/matlab/">matlab</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
                     
                   </div>
                 
@@ -409,7 +410,6 @@
       }
     </script>
   
-
 
 
 </footer>

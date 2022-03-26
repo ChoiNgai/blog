@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="《MySQL45》讲转载，侵删">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="">
+  <meta name="description" content="《MySQL45》讲转载，侵删">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL45讲">
+<meta property="og:url" content="http://example.com/2021/03/29/mysql45_jiang/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="《MySQL45》讲转载，侵删">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-28T18:27:14.000Z">
+<meta property="article:modified_time" content="2021-11-24T09:40:13.969Z">
+<meta property="article:author" content="CAIWEI">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>MySQL45讲 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL45讲">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-29 02:27" pubdate>
+        2021年3月29日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL45讲</h1>
+            
+            <div class="markdown-body">
+              <p>《MySQL45》讲转载，侵删</p>
+<a id="more"></a>
+<p>《MySQL45》讲转载，侵删</p>
+<p><a href="https://sao-operation.gitee.io/my-sql45/01.基础架构：一条SQL查询语句是如何执行的？.html" target="_blank" rel="noopener">01.基础架构：一条SQL查询语句是如何执行的？.html        </a><br><a href="https://sao-operation.gitee.io/my-sql45/02.日志系统：一条SQL更新语句是如何执行的？.html" target="_blank" rel="noopener">02.日志系统：一条SQL更新语句是如何执行的？.html        </a><br><a href="https://sao-operation.gitee.io/my-sql45/03.事务隔离：为什么你改了我还看不见？.html" target="_blank" rel="noopener">03.事务隔离：为什么你改了我还看不见？.html             </a><br><a href="https://sao-operation.gitee.io/my-sql45/04.深入浅出索引（上）.html" target="_blank" rel="noopener">04.深入浅出索引（上）.html                             </a><br><a href="https://sao-operation.gitee.io/my-sql45/05.深入浅出索引（下）.html" target="_blank" rel="noopener">05.深入浅出索引（下）.html                             </a><br><a href="https://sao-operation.gitee.io/my-sql45/06.全局锁和表锁%20：给表加个字段怎么有这么多阻碍？.html" target="_blank" rel="noopener">06.全局锁和表锁 ：给表加个字段怎么有这么多阻碍？.html </a><br><a href="https://sao-operation.gitee.io/my-sql45/07.行锁功过：怎么减少行锁对性能的影响？.html" target="_blank" rel="noopener">07.行锁功过：怎么减少行锁对性能的影响？.html           </a><br><a href="https://sao-operation.gitee.io/my-sql45/08.事务到底是隔离的还是不隔离的？.htmla" target="_blank" rel="noopener">08.事务到底是隔离的还是不隔离的？.htmla                </a><br><a href="https://sao-operation.gitee.io/my-sql45/09.普通索引和唯一索引，应该怎么选择？.html" target="_blank" rel="noopener">09.普通索引和唯一索引，应该怎么选择？.html             </a><br><a href="https://sao-operation.gitee.io/my-sql45/10.MySQL为什么有时候会选错索引？.html" target="_blank" rel="noopener">10.MySQL为什么有时候会选错索引？.html                  </a><br><a href="https://sao-operation.gitee.io/my-sql45/11.怎么给字符串字段加索引？.html" target="_blank" rel="noopener">11.怎么给字符串字段加索引？.html                       </a><br><a href="https://sao-operation.gitee.io/my-sql45/12.为什么我的MySQL会&quot;抖&quot;一下？.html" target="_blank" rel="noopener">12.为什么我的MySQL会“抖”一下？.html                    </a><br><a href="https://sao-operation.gitee.io/my-sql45/13.为什么表数据删掉一半，表文件大小不变？.html" target="_blank" rel="noopener">13.为什么表数据删掉一半，表文件大小不变？.html         </a><br><a href="https://sao-operation.gitee.io/my-sql45/14.count(×" target="_blank" rel="noopener">14.count(×)这么慢，我该怎么办？.html                   </a>这么慢，我该怎么办？.html                    )<br><a href="https://sao-operation.gitee.io/my-sql45/15.答疑文章（一）：日志和索引相关问题.html" target="_blank" rel="noopener">15.答疑文章（一）：日志和索引相关问题.html             </a><br><a href="https://sao-operation.gitee.io/my-sql45/16.&quot;order_by&quot;是怎么工作的？(1" target="_blank" rel="noopener">16.“order by”是怎么工作的？(1).html                    </a>.html                     )<br><a href="https://sao-operation.gitee.io/my-sql45/16.&quot;order_by&quot;是怎么工作的？.html" target="_blank" rel="noopener">16.“order by”是怎么工作的？.html                       </a><br><a href="https://sao-operation.gitee.io/my-sql45/17.如何正确地显示随机消息？(1" target="_blank" rel="noopener">17.如何正确地显示随机消息？(1).html                    </a>.html                     )<br><a href="https://sao-operation.gitee.io/my-sql45/17.如何正确地显示随机消息？.html" target="_blank" rel="noopener">17.如何正确地显示随机消息？.html                       </a><br><a href="https://sao-operation.gitee.io/my-sql45/18.为什么这些SQL语句逻辑相同性能却差异巨大？.html" target="_blank" rel="noopener">18.为什么这些SQL语句逻辑相同性能却差异巨大？.html      </a><br><a href="https://sao-operation.gitee.io/my-sql45/18.为什么这些SQL语句逻辑相同，性能却差异巨大？.html" target="_blank" rel="noopener">18.为什么这些SQL语句逻辑相同，性能却差异巨大？.html    </a><br><a href="https://sao-operation.gitee.io/my-sql45/19.为什么我只查一行的语句也执行这么慢？.html" target="_blank" rel="noopener">19.为什么我只查一行的语句也执行这么慢？.html           </a><br><a href="https://sao-operation.gitee.io/my-sql45/19.为什么我只查一行的语句，也执行这么慢？.html" target="_blank" rel="noopener">19.为什么我只查一行的语句，也执行这么慢？.html         </a><br><a href="https://sao-operation.gitee.io/my-sql45/20.幻读是什么幻读有什么问题？.html" target="_blank" rel="noopener">20.幻读是什么幻读有什么问题？.html                     </a><br><a href="https://sao-operation.gitee.io/my-sql45/21.为什么我只改一行的语句锁这么多？.html" target="_blank" rel="noopener">21.为什么我只改一行的语句锁这么多？.html               </a><br><a href="https://sao-operation.gitee.io/my-sql45/22.MySQL有哪些&quot;饮鸩止渴&quot;提高性能的方法？.html" target="_blank" rel="noopener">22.MySQL有哪些“饮鸩止渴”提高性能的方法？.html          </a><br><a href="https://sao-operation.gitee.io/my-sql45/23.MySQL是怎么保证数据不丢的？.html" target="_blank" rel="noopener">23.MySQL是怎么保证数据不丢的？.html                    </a><br><a href="https://sao-operation.gitee.io/my-sql45/24.MySQL是怎么保证主备一致的？.html" target="_blank" rel="noopener">24.MySQL是怎么保证主备一致的？.html                    </a><br><a href="https://sao-operation.gitee.io/my-sql45/25.MySQL是怎么保证高可用的？.html" target="_blank" rel="noopener">25.MySQL是怎么保证高可用的？.html                      </a><br><a href="https://sao-operation.gitee.io/my-sql45/26.备库为什么会延迟好几个小时？.html" target="_blank" rel="noopener">26.备库为什么会延迟好几个小时？.html                   </a><br><a href="https://sao-operation.gitee.io/my-sql45/27.主库出问题了从库怎么办？.html" target="_blank" rel="noopener">27.主库出问题了从库怎么办？.html                       </a><br><a href="https://sao-operation.gitee.io/my-sql45/28.读写分离有哪些坑？.html" target="_blank" rel="noopener">28.读写分离有哪些坑？.html                             </a><br><a href="https://sao-operation.gitee.io/my-sql45/29.如何判断一个数据库是不是出问题了？.html" target="_blank" rel="noopener">29.如何判断一个数据库是不是出问题了？.html             </a><br><a href="https://sao-operation.gitee.io/my-sql45/30.答疑文章（二）：用动态的观点看加锁.html" target="_blank" rel="noopener">30.答疑文章（二）：用动态的观点看加锁.html             </a><br><a href="https://sao-operation.gitee.io/my-sql45/31.误删数据后除了跑路还能怎么办？.html" target="_blank" rel="noopener">31.误删数据后除了跑路还能怎么办？.html                 </a><br><a href="https://sao-operation.gitee.io/my-sql45/32.为什么还有kill不掉的语句？.html" target="_blank" rel="noopener">32.为什么还有kill不掉的语句？.html                     </a><br><a href="https://sao-operation.gitee.io/my-sql45/33.我查这么多数据会不会把数据库内存打爆？.html" target="_blank" rel="noopener">33.我查这么多数据会不会把数据库内存打爆？.html         </a><br><a href="https://sao-operation.gitee.io/my-sql45/34.到底可不可以使用join？.html" target="_blank" rel="noopener">34.到底可不可以使用join？.html                         </a><br><a href="https://sao-operation.gitee.io/my-sql45/35.join语句怎么优化？.html" target="_blank" rel="noopener">35.join语句怎么优化？.html                             </a><br><a href="https://sao-operation.gitee.io/my-sql45/36.为什么临时表可以重名？.html" target="_blank" rel="noopener">36.为什么临时表可以重名？.html                         </a><br><a href="https://sao-operation.gitee.io/my-sql45/37.什么时候会使用内部临时表？.html" target="_blank" rel="noopener">37.什么时候会使用内部临时表？.html                     </a><br><a href="https://sao-operation.gitee.io/my-sql45/38.都说InnoDB好那还要不要使用Memory引擎？.html" target="_blank" rel="noopener">38.都说InnoDB好那还要不要使用Memory引擎？.html         </a><br><a href="https://sao-operation.gitee.io/my-sql45/39.自增主键为什么不是连续的？.html" target="_blank" rel="noopener">39.自增主键为什么不是连续的？.html                     </a><br><a href="https://sao-operation.gitee.io/my-sql45/40.insert语句的锁为什么这么多？.html" target="_blank" rel="noopener">40.insert语句的锁为什么这么多？.html                   </a><br><a href="https://sao-operation.gitee.io/my-sql45/41.怎么最快地复制一张表？.html" target="_blank" rel="noopener">41.怎么最快地复制一张表？.html                         </a><br><a href="https://sao-operation.gitee.io/my-sql45/42.grant之后要跟着flush_privileges吗？.html" target="_blank" rel="noopener">42.grant之后要跟着flush privileges吗？.html            </a><br><a href="https://sao-operation.gitee.io/my-sql45/43.要不要使用分区表？.html" target="_blank" rel="noopener">43.要不要使用分区表？.html                             </a><br><a href="https://sao-operation.gitee.io/my-sql45/44.答疑文章（三）：说一说这些好问题.html" target="_blank" rel="noopener">44.答疑文章（三）：说一说这些好问题.html               </a><br><a href="https://sao-operation.gitee.io/my-sql45/45.自增id用完怎么办？.html" target="_blank" rel="noopener">45.自增id用完怎么办？.html                             </a><br><a href="https://sao-operation.gitee.io/my-sql45/IT视频学习网-www.itspxx.com.url" target="_blank" rel="noopener">IT视频学习网-www.itspxx.com.url                        </a><br><a href="https://sao-operation.gitee.io/my-sql45/开篇词.这一次，让我们一起来搞懂MySQL.html" target="_blank" rel="noopener">开篇词.这一次，让我们一起来搞懂MySQL.html              </a><br><a href="https://sao-operation.gitee.io/my-sql45/文档列表.bat" target="_blank" rel="noopener">文档列表.bat                                           </a><br><a href="https://sao-operation.gitee.io/my-sql45/更多精品教程-itspxx.com.url" target="_blank" rel="noopener">更多精品教程-itspxx.com.url                            </a><br><a href="https://sao-operation.gitee.io/my-sql45/本教程由IT视频学习网提供.url" target="_blank" rel="noopener">本教程由IT视频学习网提供.url                           </a><br><a href="https://sao-operation.gitee.io/my-sql45/直播回顾.林晓斌：我的MySQL心路历程.html" target="_blank" rel="noopener">直播回顾.林晓斌：我的 MySQL 心路历程.html              </a><br><a href="https://sao-operation.gitee.io/my-sql45/结束语.点线网面一起构建MySQL知识网络.html" target="_blank" rel="noopener">结束语.点线网面一起构建MySQL知识网络.html              </a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/30/sql_wu_shi_ti/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL五十题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/27/mo_hu_ju_lei_suan_fa_python_ban/">
+                        <span class="hidden-mobile">模糊聚类算法python版</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

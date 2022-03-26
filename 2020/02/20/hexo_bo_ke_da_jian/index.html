@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="0元搭建自己的博客">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="">
+  <meta name="description" content="0元搭建自己的博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo博客搭建">
+<meta property="og:url" content="http://example.com/2020/02/20/hexo_bo_ke_da_jian/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="0元搭建自己的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200621220319488.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185000368.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185323511.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185504138.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185806555.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703190002407.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708221444940.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708220658307.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708221053504.png">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708223051543.png">
+<meta property="article:published_time" content="2020-02-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-24T08:24:01.250Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="建站">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200621220319488.png">
+  
+  <title>hexo博客搭建 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="hexo博客搭建">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-02-20 00:00" pubdate>
+        2020年2月20日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">hexo博客搭建</h1>
+            
+            <div class="markdown-body">
+              <p>0元搭建自己的博客</p>
+<a id="more"></a>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Hexo是一种静态网页框架，可以把md文件渲染成网页文件</p>
+<p>优点：简单易用，0成本</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
+<li>安装Git</li>
+<li>安装Nodejs</li>
+</ul>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>直接<a href="https://blog.csdn.net/sanxd/article/details/82624127" target="_blank" rel="noopener">下载安装</a>，记得<code>我的电脑-属性-高级系统设置-环境变量-系统/我的环境变量</code>里添加Git的安装路径（就是告诉自己的电脑Git在哪，这样就任何一个文件夹位置都能使用Git了）</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200621220319488.png" srcset="/img/loading.gif" lazyload="" alt="image-20200621220319488"></p>
+<p>例如Git安装在<code>D:\Git\git-2.22.0\</code>这个位置</p>
+<p>则环境变量里添加：</p>
+<p><code>D:\Git\git-2.22.0\usr\bin\</code></p>
+<p><code>D:\Git\git-2.22.0\usr\bin\ssh-keygen.exe</code></p>
+<h3 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h3><p>建议新手安装最新的稳定版本，同样也得在环境变量里添加，比如安装在<code>D:\nodejs</code>就添加<code>D:\nodejs</code></p>
+<h2 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h2><p>在某个文件夹位置点击鼠标右键，打开git bash，输入</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo init</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>git会自动拉取hexo的安装包</p>
+<p>安装完成会出现以下这些文件</p>
+<blockquote>
+<p>scaffolds                       配置文件，先别管</p>
+<p>themes                          hexo主题文件</p>
+<p>_config.yml                    hexo全局配置文件</p>
+<p>package.json                 记录依赖包</p>
+</blockquote>
+<p>如果网速差点的话，git在下载landscape的时候会看住（自己看看是不是），如果是的话直接在git bash 按<kbd>Ctrl</kbd>+<kbd>C</kbd>强行终止下载（这个主题文件可以先不要，换成别的主题文件就好了，除非你喜欢hexo默认的主题）</p>
+<p><strong>PS</strong>：配置好之后也会有一堆需要修改、美化，如果你觉得我的这个修改后的看着还行，可以直接<code>clone</code><a href="https://gitee.com/Sao-operation/hexo-matery" target="_blank" rel="noopener">本站修改后的主题配置</a></p>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>下载主题，放到hexo目录的theme文件夹内， <a href="https://hexo.io/zh-cn/docs/themes.html" target="_blank" rel="noopener">Hexo主题下载</a> ，比如我下载Sakura主题，并且把下载的文件修改成Sakura</p>
+<p>在hexo根目录打开_config.yml，把<code>theme: landscape</code>修改成<code>theme: Sakura</code>（注意英文冒号后面有个<strong>空格</strong>，没有的话会报错）</p>
+<h2 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h2><p>安装Hexo运行必备的插件，首先安装淘宝镜像（因为npm实在太慢了）</p>
+<p>安装cnpm，命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g cnpm --registry=https://registry.npm.taobao.org<br>1<br></code></pre></div></td></tr></tbody></table></figure>
+<p>安装后，使用以下命令测试是否安装成功</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cnpm -v<br>1<br></code></pre></div></td></tr></tbody></table></figure>
+<p>成功后，以后都使用 cnpm 代替以前 npm 来执行命令！</p>
+<ul>
+<li>安装必要插件</li>
+</ul>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">cnpm i <span class="hljs-comment">--save hexo-deployer-git </span><br>cnpm i <span class="hljs-comment">--save  hexo-generator-archive</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-index</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-tag</span><br>cnpm i <span class="hljs-comment">--save hexo-renderer-ejs</span><br>cnpm i <span class="hljs-comment">--save hexo-renderer-kramed</span><br>cnpm i <span class="hljs-comment">--save hexo-renderer-stylus</span><br>cnpm i <span class="hljs-comment">--save hexo-server</span><br>cnpm i <span class="hljs-comment">--save hexo-wordcount</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-category</span><br><br><span class="hljs-comment">#下面的是非必要插件</span><br>cnpm i <span class="hljs-comment">--save hexo-wordcount</span><br>cnpm i -S hexo-prism-plugin<br>cnpm i hexo-permalink-pinyin <span class="hljs-comment">--save</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-feed</span><br>cnpm <span class="hljs-keyword">install</span> hexo-generator-<span class="hljs-keyword">search</span> <span class="hljs-comment">--save</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>然后，输入<code>`hexo g</code>，等待md文件渲染成html文件再输入<code>hexo s</code></p>
+<p>打开浏览器输入<code>http://localhost:4000/</code></p>
+<h2 id="定制美化"><a href="#定制美化" class="headerlink" title="定制美化"></a>定制美化</h2><p>根据自己的需要定制啦，记得多用git add -A和git commit -m “提交缓存区”  保存，万一搞得报错了至少能用git reflog回滚。</p>
+<h2 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h2><p>如果网速可以建议用PicGo+github pages搭建图床（但是上传速度很慢）；也可以用七牛云、又拍云等搭建图床，但是这种我个人觉得要么收费要么不好用。</p>
+<p><a href="../../../07/06/da-jian-tu-chuang">我用coding/gitee+pcigo</a></p>
+<h2 id="本站修改后的主题"><a href="#本站修改后的主题" class="headerlink" title="本站修改后的主题"></a>本站修改后的主题</h2><p><a href="https://gitee.com/Sao-operation/hexo-matery" target="_blank" rel="noopener">国内仓库地址</a>，直接<code>git clone</code>下来 </p>
+<p>在电脑上找个合适的文件夹位置(放博客的位置)</p>
+<p>安装淘宝镜像</p>
+<figure class="highlight coffeescript"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> install cnpm -g --registry=http://registry.<span class="hljs-built_in">npm</span>.taobao.org <span class="hljs-comment">#全局安装</span><br><span class="hljs-built_in">npm</span> install cnpm --registry=http://registry.<span class="hljs-built_in">npm</span>.taobao.org		<span class="hljs-comment">#局部安装</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>安装上hexo必备的一些插件</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">cnpm i <span class="hljs-comment">--save hexo-wordcount</span><br>cnpm i <span class="hljs-comment">--save hexo-deployer-git </span><br>cnpm i -S hexo-prism-plugin<br>cnpm i hexo-permalink-pinyin <span class="hljs-comment">--save</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-feed</span><br>cnpm <span class="hljs-keyword">install</span> hexo-generator-<span class="hljs-keyword">search</span> <span class="hljs-comment">--save</span><br><br>cnpm i <span class="hljs-comment">--save  hexo-generator-archive</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-index</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-tag</span><br>cnpm i <span class="hljs-comment">--save hexo-renderer-ejs</span><br>cnpm i <span class="hljs-comment">--save hexo-renderer-kramed</span><br>cnpm i <span class="hljs-comment">--save hexo-renderer-stylus</span><br>cnpm i <span class="hljs-comment">--save hexo-server</span><br>cnpm i <span class="hljs-comment">--save hexo-wordcount</span><br>cnpm i <span class="hljs-comment">--save hexo-generator-category</span><br>cnpm i <span class="hljs-comment">--save hexo-filter-mermaid-diagrams</span><br></code></pre></div></td></tr></tbody></table></figure>
+<p>然后需要修改一些必要的配置</p>
+<p>首先在<strong>根目录</strong>的_config.yml修改自己的网站名，作者名等，url处填写自己的网站名</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185000368.png" srcset="/img/loading.gif" lazyload="" alt="网站地址"></p>
+<p>填写打开了 GitHub pages 或coding pages 的地址</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185323511.png" srcset="/img/loading.gif" lazyload="" alt="开启pages的远程仓库"></p>
+<p>如果要打开评论，这里推荐用Valine，在<strong>主题</strong>下的_config.yml，把enable的false改成true，并且注册Valine账号填写appId和appKey</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185504138.png" srcset="/img/loading.gif" lazyload="" alt="评论"></p>
+<p>另外主题配置下的github地址换成自己的github地址(还有好几个哦，自己搜索替换一下吧)</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703185806555.png" srcset="/img/loading.gif" lazyload="" alt="github地址"></p>
+<p>文章的img如果没有填写，就会从指定的图片里根据哈希码选择一张图片作为封面（还是在主题配置修改）</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200703190002407.png" srcset="/img/loading.gif" lazyload="" alt="文章封面图片"></p>
+<h2 id="hexo中的latex踩坑"><a href="#hexo中的latex踩坑" class="headerlink" title="hexo中的latex踩坑"></a>hexo中的latex踩坑</h2><p><strong>latex换行的bug(是插件渲染的问题，可以用四个/来换行)，其他方面都没毛病。</strong>hexo-renderer-pandoc 我也尝试过，但效果还来还是不如hexo-renderer-kramed（即上面安装的那个插件）如果不想用4个/来换行也可以参考下这个<a href="https://wangcong.net/article/HexoWihLaTeX.html" target="_blank" rel="noopener">Hexo中LaTeX公式渲染</a>或<a href="https://jdhao.github.io/2017/10/06/hexo-markdown-latex-equation/" target="_blank" rel="noopener">Hexo 书写 LaTeX 公式时的一些问题及解决方法</a></p>
+<p>（总之，hexo的latex渲染还是有点坑，但配置好其实也没毛病~推荐就用我上面指定的那些插件）</p>
+<p>如果用typora写出来的latex有问题的话，比如像这样</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708221444940.png" srcset="/img/loading.gif" lazyload="" alt="Typora写的公式VScode上看起来也没毛病"></p>
+<p>在各种markdown编辑器看着这个公式都能正常显示，但实际上经过hexo渲染打开的网页的就会像下图这样：</p>
+<center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708220658307.png" srcset="/img/loading.gif" lazyload="" width="50%"></center>
+
+
+
+<p>这个其实是因为Typora的markdown源码不标准，所以尽管在hexo的mathjax渲染出问题</p>
+<p>如果打开CSDN或者github的markdown编辑就会看出问题了</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708221053504.png" srcset="/img/loading.gif" lazyload="" alt="image-20200708221053504"></p>
+<p>其实问题就出在typora的公式块的两个<kbd> $ $ </kbd>不是相连的，所以正确的解法是把中间的<strong>空行</strong>还有一些<strong>多余的空格</strong>删除掉即可。</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200708223051543.png" srcset="/img/loading.gif" lazyload="" alt="$$$$中间不回车"></p>
+<p>正常显示之后，再把这段复制粘贴到vscode打开的md文件，hexo渲染出的网页就显示正常啦。</p>
+<p>(一句话，想办法让公式在CSDN的markdown编辑器显示正常即可)</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/web/">web</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BB%BA%E7%AB%99/">建站</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/23/tool/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">工具箱</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/02/20/dian_nao_tai_shi_ji_diy_ji_zu_zhuang/">
+                        <span class="hidden-mobile">台式机DIY及组装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

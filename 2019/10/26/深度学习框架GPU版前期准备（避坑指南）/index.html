@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025201549771.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025204744530.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200722785.png">
-<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210047587.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191025205954318.pngcudnn%E5%AE%89%E8%A3%85%20cudnn%E4%B8%8D%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%87%BA%E6%9D%A5%E4%B9%8B%E5%90%8E%E6%9C%89%E4%B8%AAcudn%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E6%89%93%E5%BC%80%EF%BC%8C%E9%87%8C%E9%9D%A2%E6%9C%89%E5%9B%9B%E4%B8%AA%E6%96%87%E4%BB%B6![%E5%9C%A8%E8%BF%99%E9%87%8C%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E6%8F%8F%E8%BF%B0](https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210047587.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210211626.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025194017560.png">
 <meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025194513642.png">
@@ -222,7 +222,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      974 字
     </span>
   
 
@@ -265,20 +265,18 @@
             <div class="markdown-body">
               <p>大坑</p>
 <a id="more"></a>
-<h3 id="深度学习框架安装前期准备">深度学习框架安装：前期准备</h3>
-<p>前情提要：相信安装过Pytorch、TensorFlow等框架的GPU版的人都知道，相比CPU版本安装，GPU版本的安装多么麻烦。但是，深度学习没GPU又不行啊（单纯靠CPU太慢了），故在此整理了教程上较为稀少的GPU版安装的前期准备，CUDA和CUDNN安装搞定了，剩下都问题不大啦！</p>
-<h4 id="下载cuda和cudnn">1. 下载cuda和cudnn</h4>
-<p>下载cudn之前先查看电脑显卡支持的最高版本： 控制面板-硬件和声音-NVIDIA面板-帮助-系统信息 <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025195852431.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 例如此处则支持10.1.168版本的cuda</p>
-<p>在此我下载cudnn9.0 cdunn官网下载：<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-toolkit-archive</a> <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200201528.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 选择适合电脑操作系统的版本，Windows和MAC OSX提供network和local两种版本下载，<strong>建议local</strong>（network版在安装中容易出错） <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200311349.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025201549771.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 安装完成之后等待检测 <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025204744530.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 也可以选择自定义安装，但请记住安装的位置</p>
-<p>#### 2. CUDNN下载</p>
-<p>cudnn下载官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a>（注：cudnn下载需要注册登录NVIDIA） <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200722785.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 下载与cuda对应的cudnn版本 将下载得到的cudnn解压包解压，别将cuda/include、cuda/lib、cuda/bin三个目录中的内容拷贝到C:FilesGPU Computing Toolkit.0对应的include、lib、bin目录下即可。 [在这里插入图片描述](https://img-blog.csdnimg.cn/20191025205954318.pngcudnn安装 cudnn不需要安装，解压出来之后有个cudn的文件夹，打开，里面有四个文件 <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210047587.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 将其复制到安装CUDA的位置 使用精简（推荐）安装则在以下位置： C:FilesGPU Computing Toolkit.0</p>
-<p>（v9.0是版本号，如果是其他版本则对应其他版本的文件夹名称） <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210211626.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"></p>
-<h4 id="安装anconada">3. 安装Anconada</h4>
-<p>官网下载：<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">https://www.anaconda.com/distribution/</a></p>
-<p>注意选择与操作系统匹配的版本<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025194017560.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025194513642.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 按照软件一般安装套路安装，但是建议添加环境变量这一步打上gou（否则得自己手动配置环境变量） PS：勾选之后字体会变红色警告，不用管</p>
-<ol start="2" type="1">
-<li>下载安装完成进入anoconda Prompt <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025193754912.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"> 嗯，前期准备到此结束（CUDN和CUDNN以及anoconda安装） <a href="https://blog.csdn.net/kan2281123066/article/details/93789303" target="_blank" rel="noopener">pytorch安装</a></li>
+<h3 id="深度学习框架安装：前期准备"><a href="#深度学习框架安装：前期准备" class="headerlink" title="深度学习框架安装：前期准备"></a>深度学习框架安装：前期准备</h3><p>前情提要：相信安装过Pytorch、TensorFlow等框架的GPU版的人都知道，相比CPU版本安装，GPU版本的安装多么麻烦。但是，深度学习没GPU又不行啊（单纯靠CPU太慢了），故在此整理了教程上较为稀少的GPU版安装的前期准备，CUDA和CUDNN安装搞定了，剩下都问题不大啦！</p>
+<h4 id="1-下载cuda和cudnn"><a href="#1-下载cuda和cudnn" class="headerlink" title="1.  下载cuda和cudnn"></a>1.  下载cuda和cudnn</h4><p> 下载cudn之前先查看电脑显卡支持的最高版本：<br> 控制面板-硬件和声音-NVIDIA面板-帮助-系统信息<br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025195852431.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br> 例如此处则支持10.1.168版本的cuda</p>
+<p>在此我下载cudnn9.0<br>cdunn官网下载：<a href="https://developer.nvidia.com/cuda-toolkit-archive" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-toolkit-archive</a><br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200201528.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>选择适合电脑操作系统的版本，Windows和MAC OSX提供network和local两种版本下载，<strong>建议local</strong>（network版在安装中容易出错）<br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200311349.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025201549771.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>安装完成之后等待检测<br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025204744530.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>也可以选择自定义安装，但请记住安装的位置</p>
+<h4 id="2-CUDNN下载"><a href="#2-CUDNN下载" class="headerlink" title="2. CUDNN下载"></a>2. CUDNN下载</h4><p>cudnn下载官网：<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download</a>（注：cudnn下载需要注册登录NVIDIA）<br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025200722785.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>下载与cuda对应的cudnn版本<br>将下载得到的cudnn解压包解压，别将cuda/include、cuda/lib、cuda/bin三个目录中的内容拷贝到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0对应的include、lib、bin目录下即可。<br><img src="https://img-blog.csdnimg.cn/20191025205954318.pngcudnn安装
+ cudnn不需要安装，解压出来之后有个cudn的文件夹，打开，里面有四个文件
+![在这里插入图片描述](https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210047587.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>将其复制到安装CUDA的位置<br>使用精简（推荐）安装则在以下位置：<br>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</p>
+<p>（v9.0是版本号，如果是其他版本则对应其他版本的文件夹名称）<br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025210211626.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"></p>
+<h4 id="3-安装Anconada"><a href="#3-安装Anconada" class="headerlink" title="3.  安装Anconada"></a>3.  安装Anconada</h4><p>官网下载：<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">https://www.anaconda.com/distribution/</a></p>
+<p> 注意选择与操作系统匹配的版本<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025194017560.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br> <img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025194513642.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>按照软件一般安装套路安装，但是建议添加环境变量这一步打上gou（否则得自己手动配置环境变量）<br>PS：勾选之后字体会变红色警告，不用管</p>
+<ol>
+<li>下载安装完成进入anoconda Prompt<br><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/20191025193754912.png" srcset="/img/loading.gif" lazyload="" alt="在这里插入图片描述"><br>嗯，前期准备到此结束（CUDN和CUDNN以及anoconda安装）<br><a href="https://blog.csdn.net/kan2281123066/article/details/93789303" target="_blank" rel="noopener">pytorch安装</a></li>
 </ol>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -430,7 +428,6 @@
       }
     </script>
   
-
 
 
 </footer>

@@ -254,28 +254,21 @@
             <div class="markdown-body">
               <p>解决opencv无法读取中文路径的问题并且增加参数使得读取图片类型与原方法相同</p>
 <a id="more"></a>
-<h2 id="摘要">摘要</h2>
-<p>解决opencv无法读取中文路径的问题</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>解决opencv无法读取中文路径的问题</p>
 <p><strong>关键词:</strong> python opencv</p>
-<h2 id="介绍">介绍</h2>
-<p>在python 3.x中使用opencv读取图片，如图</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/img1fe53f8f6cff405a69960785e4564ab.png" srcset="/img/loading.gif" lazyload=""></p>
-<center>
-图1
-</center>
-<p>但是当图片路径中有中文则会报错</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在python 3.x中使用opencv读取图片，如图</p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/img1fe53f8f6cff405a69960785e4564ab.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p></p><center>图1</center><br>但是当图片路径中有中文则会报错<p></p>
 <p>各位可以<code>print(img)</code></p>
 <p>看看是不是返回结果是None</p>
-<h2 id="解决办法">解决办法：</h2>
-<p>参照 <a href="https://www.zhihu.com/question/67157462/answer/251754530" target="_blank" rel="noopener">知乎 冰不语 的回答</a></p>
+<h2 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h2><p>参照 <a href="https://www.zhihu.com/question/67157462/answer/251754530" target="_blank" rel="noopener">知乎 冰不语 的回答</a> </p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">## 读取图像，解决imread不能读取中文路径的问题 </span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cv_imread</span><span class="hljs-params">(file_path)</span>:</span><br>	cv_img = cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), <span class="hljs-number">-1</span>)<br>	<span class="hljs-keyword">return</span> cv_img<br></code></pre></div></td></tr></tbody></table></figure>
 <p>但是看看图一，读取图片后面还有一个参数<code>cv2.IMREAD_GRAYSCALE</code></p>
 <p>如果需要在后面对图片处理一些相关操作，则可能会报错（我就遇到过）</p>
 <p>其实只需要把定义读取中文路径的函数里返回结果之前转换回一般的读取方式即可</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">## 读取图像，解决imread不能读取中文路径的问题 </span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cv_imread</span><span class="hljs-params">(file_path)</span>:</span><br>	cv_img = cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), <span class="hljs-number">-1</span>)<br>       cv_img = cv2.IMREAD_GRAYSCALE(img)<br>	<span class="hljs-keyword">return</span> cv_img<br></code></pre></div></td></tr></tbody></table></figure>
 <p>其他也是类似</p>
-<h2 id="参考资料">参考资料</h2>
-<p><a href="https://www.zhihu.com/question/67157462/answer/251754530" target="_blank" rel="noopener">Python 3.x 使用 opencv 无法读取中文路径如何解决？ 冰不语</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.zhihu.com/question/67157462/answer/251754530" target="_blank" rel="noopener">Python 3.x 使用 opencv 无法读取中文路径如何解决？ 冰不语 </a> </p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -426,7 +419,6 @@
       }
     </script>
   
-
 
 
 </footer>

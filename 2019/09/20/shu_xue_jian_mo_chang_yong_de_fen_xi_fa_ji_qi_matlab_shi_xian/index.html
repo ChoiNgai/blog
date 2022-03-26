@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="">
+  <meta name="description" content="主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学建模常用的分析法MATLAB实现">
+<meta property="og:url" content="http://example.com/2019/09/20/shu_xue_jian_mo_chang_yong_de_fen_xi_fa_ji_qi_matlab_shi_xian/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-24T08:45:10.761Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="matlab">
+<meta property="article:tag" content="数学建模">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>数学建模常用的分析法MATLAB实现 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数学建模常用的分析法MATLAB实现">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-09-20 00:00" pubdate>
+        2019年9月20日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数学建模常用的分析法MATLAB实现</h1>
+            
+            <div class="markdown-body">
+              <p>主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )</p>
+<a id="more"></a>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本篇分别有主成分分析，层次分析,聚类分析,因子分析的简单介绍以及在MATLAB（2018a）上使用的简单介绍 ( 附源码 )</p>
+<h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p><a href="https://baike.baidu.com/item/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90/829840?fr=aladdin" target="_blank" rel="noopener">主成分分析-百度百科</a><br>简单讲:主成分分析就是取出几个较少的变量尽可能多地反映原来变量的信息<br>(只看主要对结果有影的几个变量)<br>主成分分析适用于数学建模中筛选出少量变量对结果造成主要影响并用函数关系表征的情况</p>
+<figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%% 主成分分析 (降维)</span><br>clc, clear<br><br>load example_1.txt  <span class="hljs-comment">%数据导入（数据要求：前几列为自变量，最后一列为因变量）</span><br>data = example_1;<br><br>[m, n] = <span class="hljs-built_in">size</span>(data); <br>num = <span class="hljs-number">3</span>;   <span class="hljs-comment">% 选取的主成分的个数</span><br><br>mu = <span class="hljs-built_in">mean</span>(data); <br>sigma = std(data);  <span class="hljs-comment">%标准差</span><br><span class="hljs-comment">%z-score标准化方法适用于属性A的最大值和最小值未知的情况，或有超出取值范围的离群数据的情况</span><br><span class="hljs-comment">%标准化的新数据=（原数据-均值）/标准差</span><br>std_data = zscore(data);<br>b = std_data(: , <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>);     <span class="hljs-comment">% 四个变量x1, x2, x3, x4</span><br>r = cov(b);                                <span class="hljs-comment">% 变量的协方差矩阵</span><br><br><span class="hljs-comment">% 运用协方差矩阵进行PCA</span><br>[PC, latent, explained] = pcacov(r);  <span class="hljs-comment">%返回主成分(PC)、协方差矩阵X的特征值 (latent)和每个特征向量表征在观测量总方差中所占的百分数(explained)</span><br><span class="hljs-comment">% 新的主成分z1 = PC(1,1)*x1 + PC(2,1)*x2 + PC(3,1)*x3 + PC(4,1)*x4  , z2 = ...</span><br>f = <span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sign</span>(sum(PC)), <span class="hljs-built_in">size</span>(PC, <span class="hljs-number">1</span>), <span class="hljs-number">1</span>);            <span class="hljs-comment">%sum(PC)表示对矩阵PC的列求和</span><br>PC = PC .* f;<br><br><br><span class="hljs-comment">%1.普通的最小二乘法回归</span><br>regress_args_b = [<span class="hljs-built_in">ones</span>(m, <span class="hljs-number">1</span>), b] \ std_data(:, <span class="hljs-keyword">end</span>);   <span class="hljs-comment">%标准化数据的回归方程系数</span><br>bzh = mu ./ sigma;<br><span class="hljs-comment">% 原始数据的常数项</span><br>ch10 = mu(<span class="hljs-keyword">end</span>) - bzh(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * regress_args_b(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>) * sigma(<span class="hljs-keyword">end</span>);<br>fr_1 = regress_args_b(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>); fr_1 = fr_1';<br><span class="hljs-comment">% 原始数据的自变量的系数</span><br>ch1 = fr_1 ./ sigma(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * sigma(<span class="hljs-keyword">end</span>);<br><span class="hljs-comment">% 此时模型为 y = ch10 + ch1[1]*x1 + ch1[2] * x2 + ch1[3] * x3 + ch1[4] * x4</span><br><span class="hljs-comment">% 计算均方误差</span><br>check1 = <span class="hljs-built_in">sqrt</span>(sum( (data(:, <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * ch1' + ch10 - data(:, <span class="hljs-keyword">end</span>)) .^<span class="hljs-number">2</span> ) / (m - n))<br><br><br><span class="hljs-comment">%2.主成分回归模型</span><br>pca_val = b * PC(:, <span class="hljs-number">1</span>:num);<br><span class="hljs-comment">%主成分数据的回归方程系数</span><br>regress_args_pca = [<span class="hljs-built_in">ones</span>(m, <span class="hljs-number">1</span>), pca_val] \ std_data(:, <span class="hljs-keyword">end</span>);<br><span class="hljs-built_in">beta</span> = PC(:, <span class="hljs-number">1</span>:num) * regress_args_pca(<span class="hljs-number">2</span>:num+<span class="hljs-number">1</span>);   <span class="hljs-comment">%标准化数据的回归方程系数</span><br><span class="hljs-comment">% 原始数据的常数项</span><br>ch20 = mu(<span class="hljs-keyword">end</span>) - bzh(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * <span class="hljs-built_in">beta</span> * sigma(<span class="hljs-keyword">end</span>);<br>fr_2 = beta';<br><span class="hljs-comment">% 原始数据的自变量的系数</span><br>ch2 = fr_2 ./ sigma(<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * sigma(<span class="hljs-keyword">end</span>);<br><span class="hljs-comment">% 此时模型为 y = ch20 + ch2[1]*x1 + ch2[2] * x2 + ch2[3] * x3 + ch2[4] * x4</span><br><span class="hljs-comment">% 计算均方误差</span><br>check2 = <span class="hljs-built_in">sqrt</span>(sum( (data(:, <span class="hljs-number">1</span>:<span class="hljs-keyword">end</span><span class="hljs-number">-1</span>) * ch2' + ch20 - data(:, <span class="hljs-keyword">end</span>)) .^<span class="hljs-number">2</span> ) / (m - num - <span class="hljs-number">1</span>))<br></code></pre></div></td></tr></tbody></table></figure>
+<h1 id="层次分析"><a href="#层次分析" class="headerlink" title="层次分析"></a>层次分析</h1><p><a href="https://baike.baidu.com/item/%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90/10986776?fr=aladdin" target="_blank" rel="noopener">层次分析-百度百科</a><br>简单讲：就是自己将两两影响因素作重要性对比得出判断矩阵，然后得出各个影响因素的权重<br>层次分析适用于数学建模多个变量对结果不同影响程度并用函数关系表征的情况<br></p><figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%层次分析法（AHP)</span><br><span class="hljs-built_in">disp</span>(<span class="hljs-string">'请输入判断矩阵A（n阶）'</span>);<br>A = input(<span class="hljs-string">'A='</span>);<br>[n,n] = <span class="hljs-built_in">size</span>(A);<br>x = <span class="hljs-built_in">ones</span>(n,<span class="hljs-number">100</span>);<br>y = <span class="hljs-built_in">ones</span>(n,<span class="hljs-number">100</span>);<br>m = <span class="hljs-built_in">zeros</span>(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>);<br>m(<span class="hljs-number">1</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-number">1</span>));<br>y(:,<span class="hljs-number">1</span>) = x(:,<span class="hljs-number">1</span>);<br>x(:,<span class="hljs-number">2</span>) = A*y(:,<span class="hljs-number">1</span>);<br>m(<span class="hljs-number">2</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-number">2</span>));<br>y(:,<span class="hljs-number">2</span>) = x(:,<span class="hljs-number">2</span>)/m(<span class="hljs-number">2</span>);<br>p=<span class="hljs-number">0.0001</span>; <span class="hljs-built_in">i</span>=<span class="hljs-number">2</span>; k=<span class="hljs-built_in">abs</span>(m(<span class="hljs-number">2</span>)-m(<span class="hljs-number">1</span>));<br><span class="hljs-keyword">while</span> k&gt;p<br>    <span class="hljs-built_in">i</span>=<span class="hljs-built_in">i</span>+<span class="hljs-number">1</span>;<br>    x(:,<span class="hljs-built_in">i</span>) = A*y(:,<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>);<br>    m(<span class="hljs-built_in">i</span>) = <span class="hljs-built_in">max</span>(x(:,<span class="hljs-built_in">i</span>));<br>    y(:,<span class="hljs-built_in">i</span>) = x(:,<span class="hljs-built_in">i</span>)/m(<span class="hljs-built_in">i</span>);<br>    k=<span class="hljs-built_in">abs</span>(m(<span class="hljs-built_in">i</span>)-m(<span class="hljs-built_in">i</span><span class="hljs-number">-1</span>));<br><span class="hljs-keyword">end</span><br>a = sum(y(:,<span class="hljs-built_in">i</span>));<br>w = y(:,<span class="hljs-built_in">i</span>)/a;<br>t = m(<span class="hljs-built_in">i</span>);<br><span class="hljs-built_in">disp</span>(w);<br><span class="hljs-comment">%一致性检验</span><br>CI = (t-n)/(n<span class="hljs-number">-1</span>);<br>RI = [<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0.52</span> <span class="hljs-number">0.89</span> <span class="hljs-number">1.12</span> <span class="hljs-number">1.36</span> <span class="hljs-number">1.41</span> <span class="hljs-number">1.46</span> <span class="hljs-number">1.49</span> <span class="hljs-number">1.52</span> <span class="hljs-number">1.54</span> <span class="hljs-number">1.56</span> <span class="hljs-number">1.58</span> <span class="hljs-number">1.59</span>];<br>CR = CI/RI(n);<br><span class="hljs-keyword">if</span> CR&lt;<span class="hljs-number">0.10</span><br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'此矩阵一致性可以接受！'</span>);<br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'CI='</span>);<span class="hljs-built_in">disp</span>(CI);<br>    <span class="hljs-built_in">disp</span>(<span class="hljs-string">'CR='</span>);<span class="hljs-built_in">disp</span>(CR);<br><span class="hljs-keyword">end</span><br></code></pre></div></td></tr></tbody></table></figure><p></p>
+<h1 id="聚类分析"><a href="#聚类分析" class="headerlink" title="聚类分析"></a>聚类分析</h1><p><a href="https://baike.baidu.com/item/%E8%81%9A%E7%B1%BB%E5%88%86%E6%9E%90/3450227?fr=aladdin" target="_blank" rel="noopener">聚类分析-百度百科</a><br>简单讲：就是多个影响因素按不同联系程度分类<br></p><figure class="highlight pgsql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">%聚类分析<br>X;   %X为导入数据的名称(类型：数值矩阵)<br>X=X<span class="hljs-string">';    %将矩阵X转置，按情况看是否需要此语句</span><br><span class="hljs-string">Y=pdist(X);     %X为要聚类的数组</span><br><span class="hljs-string">SF=squareform(Y);</span><br><span class="hljs-string">Z=linkage(Y,'</span>averag<span class="hljs-string">e');</span><br><span class="hljs-string">dendrogram(Z,0);</span><br><span class="hljs-string">T=cluster(Z,'</span>maxclust<span class="hljs-string">',3);</span><br></code></pre></div></td></tr></tbody></table></figure><p></p>
+<h1 id="因子分析"><a href="#因子分析" class="headerlink" title="因子分析"></a>因子分析</h1><p><a href="https://baike.baidu.com/item/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90/91849" target="_blank" rel="noopener">因子分析-百度百科</a><br>可看作是主成分分析的推广，涉及的计算与主成分分析很类似<br></p><figure class="highlight matlab"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-comment">%因子分析</span><br>clc,clear<br>load ssgs.txt   <span class="hljs-comment">%把原始数据保存在纯文本文件ssgs.txt中</span><br>n=<span class="hljs-built_in">size</span>(ssgs,<span class="hljs-number">1</span>);<br>x=ssgs(:,[<span class="hljs-number">1</span>:<span class="hljs-number">4</span>]); y=ssgs(:,<span class="hljs-number">5</span>); <span class="hljs-comment">%分别提出自变量x1...x4和因变量x的值</span><br>x=zscore(x); <span class="hljs-comment">%数据标准化</span><br>r=corrcoef(x)  <span class="hljs-comment">%求相关系数矩阵</span><br>[vec1,val,con1]=pcacov(r)  <span class="hljs-comment">%进行主成分分析的相关计算</span><br>f1=<span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sign</span>(sum(vec1)),<span class="hljs-built_in">size</span>(vec1,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>);<br>vec2=vec1.*f1;     <span class="hljs-comment">%特征向量正负号转换</span><br>f2=<span class="hljs-built_in">repmat</span>(<span class="hljs-built_in">sqrt</span>(val)',<span class="hljs-built_in">size</span>(vec2,<span class="hljs-number">1</span>),<span class="hljs-number">1</span>); <br>a=vec2.*f2   <span class="hljs-comment">%求初等载荷矩阵</span><br>num=input(<span class="hljs-string">'请选择主因子的个数：'</span>);  <span class="hljs-comment">%交互式选择主因子的个数</span><br>am=a(:,[<span class="hljs-number">1</span>:num]);  <span class="hljs-comment">%提出num个主因子的载荷矩阵</span><br>[bm,t]=rotatefactors(am,<span class="hljs-string">'method'</span>, <span class="hljs-string">'varimax'</span>) <span class="hljs-comment">%am旋转变换,bm为旋转后的载荷阵</span><br>bt=[bm,a(:,[num+<span class="hljs-number">1</span>:<span class="hljs-keyword">end</span>])];  <span class="hljs-comment">%旋转后全部因子的载荷矩阵,前两个旋转，后面不旋转</span><br>con2=sum(bt.^<span class="hljs-number">2</span>)       <span class="hljs-comment">%计算因子贡献</span><br>check=[con1,con2'/sum(con2)*<span class="hljs-number">100</span>]<span class="hljs-comment">%该语句是领会旋转意义,con1是未旋转前的贡献率</span><br>rate=con2(<span class="hljs-number">1</span>:num)/sum(con2) <span class="hljs-comment">%计算因子贡献率</span><br>coef=inv(r)*bm          <span class="hljs-comment">%计算得分函数的系数</span><br>score=x*coef           <span class="hljs-comment">%计算各个因子的得分</span><br>weight=rate/sum(rate)  <span class="hljs-comment">%计算得分的权重</span><br>Tscore=score*weight'   <span class="hljs-comment">%对各因子的得分进行加权求和，即求各企业综合得分</span><br>[STscore,ind]=<span class="hljs-built_in">sort</span>(Tscore,<span class="hljs-string">'descend'</span>)      <span class="hljs-comment">%对企业进行排序</span><br>display=[score(ind,:)';STscore';ind'] <span class="hljs-comment">%显示排序结果</span><br>[ccoef,p]=corrcoef([Tscore,y])    <span class="hljs-comment">%计算F与资产负债的相关系数</span><br>[d,dt,e,et,stats]=regress(Tscore,[<span class="hljs-built_in">ones</span>(n,<span class="hljs-number">1</span>),y]);<span class="hljs-comment">%计算F与资产负债的方程</span><br>d,stats  <span class="hljs-comment">%显示回归系数，和相关统计量的值</span><br></code></pre></div></td></tr></tbody></table></figure><p></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/">数据科学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/matlab/">matlab</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/09/20/qu_xian_ni_he/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">曲线拟合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/09/16/xue_xi_bi_ji_ji_suan_ji_wang_luo/">
+                        <span class="hidden-mobile">学习笔记：计算机网络（断更）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

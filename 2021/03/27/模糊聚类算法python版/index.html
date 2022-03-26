@@ -255,8 +255,7 @@
             <div class="markdown-body">
               <p>多种无监督和半监督的模糊聚类算法python实现</p>
 <a id="more"></a>
-<h2 id="introduce">introduce</h2>
-<p>本开源项目为模糊聚类算法python代码，主要算法包括：</p>
+<h2 id="introduce"><a href="#introduce" class="headerlink" title="introduce"></a>introduce</h2><p>本开源项目为模糊聚类算法python代码，主要算法包括：</p>
 <ul>
 <li>FCM（模糊C均值算法）</li>
 <li>MEC （极大熵模糊聚类算法）</li>
@@ -265,11 +264,10 @@
 <li>eSFCM （基于信息熵的半监督模糊聚类算法）</li>
 <li>SMUC （基于度量学习与信息熵的半监督模糊聚类算法）</li>
 </ul>
-<p>项目链接：https://github.com/ChoiNgai/FuzzyClustering</p>
+<p>项目链接：<a href="https://github.com/ChoiNgai/FuzzyClustering" target="_blank" rel="noopener">https://github.com/ChoiNgai/FuzzyClustering</a></p>
 <p>以这些算法为基础的相关论文可参考本人的谷歌学术主页：<a href="https://scholar.google.com/citations?view_op=list_works&amp;hl=zh-CN&amp;user=pYX8lisAAAAJ" target="_blank" rel="noopener">Wei Cai，Guangdong University of Technology</a></p>
 <p>如有问题欢迎邮件一起探讨：caiwei-email@qq.com</p>
-<h2 id="项目结构">项目结构</h2>
-<ul>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><ul>
 <li>dataset：数据集</li>
 <li>ClusterAidedComputing.py ：包括聚类常用的一些函数</li>
 <li>ClusteringIteration.py ：包括聚类算法迭代式</li>
@@ -277,24 +275,20 @@
 <li>demo.py ： 演示脚本（运行此程序）</li>
 </ul>
 <p>算法都封装在FuzzyClustering.py里，FuzzyClustering.py调用ClusterAidedComputing.py和ClusteringIteration.py</p>
-<h2 id="算法调用">算法调用</h2>
-<h3 id="参数">参数</h3>
-<p>（以下为所有模糊聚类算法都有的参数）</p>
+<h2 id="算法调用"><a href="#算法调用" class="headerlink" title="算法调用"></a>算法调用</h2><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>（以下为所有模糊聚类算法都有的参数）</p>
 <p>data ：数据集，统一使用数组（darry）</p>
-<p>cluster_n ：类簇中心数</p>
+<p>cluster_n ：类簇中心数 </p>
 <p>max_iter ：最大迭代次数</p>
 <p>e ：目标函数值变化最小阈值</p>
 <p>printOn ：打印迭代情况开关（当printOn=1时打印迭代情况）</p>
-<h3 id="调用规则">调用规则</h3>
-<p>所有的函数都需要输入data和cluster_n，其余参数可能有预设参数（若有预设参数则可以不输入，不输入则采用默认参数）</p>
-<h3 id="算法函数">算法函数</h3>
-<ul>
+<h3 id="调用规则"><a href="#调用规则" class="headerlink" title="调用规则"></a>调用规则</h3><p>所有的函数都需要输入data和cluster_n，其余参数可能有预设参数（若有预设参数则可以不输入，不输入则采用默认参数）</p>
+<h3 id="算法函数"><a href="#算法函数" class="headerlink" title="算法函数"></a>算法函数</h3><ul>
 <li>FCM</li>
 </ul>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = fcm(data,cluster_n,m = <span class="hljs-number">2</span>,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,printOn = <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></tbody></table></figure>
 <p>或</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">U,V,obj_fcn = fcm(data,cluster_n)<br></code></pre></div></td></tr></tbody></table></figure>
-<p>如上，m ,max_iter,e ,printOn这四个参数已有默认参数，可不设置</p>
+<p>如上，m ,max_iter,e ,printOn这四个参数已有默认参数，可不设置 </p>
 <ul>
 <li>MEC</li>
 </ul>
@@ -303,7 +297,8 @@
 <ul>
 <li><p>KFCM</p>
 <p>sigma ：高斯核标准差</p>
-<p>lamda ：惩罚系数</p></li>
+<p>lamda ：惩罚系数</p>
+</li>
 </ul>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">kfcm(data,cluster_n,sigma=<span class="hljs-number">2</span>,m=<span class="hljs-number">2</span>,lamda=<span class="hljs-number">0.1</span>,max_iter = <span class="hljs-number">1000</span>,e = <span class="hljs-number">0.00001</span>,printOn = <span class="hljs-number">1</span>)<br></code></pre></div></td></tr></tbody></table></figure>
 <ul>
@@ -319,8 +314,7 @@
 <li>SMUC</li>
 </ul>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs smuc">U,V,obj_fcn = smuc(data,cluster_n,label,max_iter = 1000,e = 0.5,lamda=1,printOn = 1)<br></code></pre></div></td></tr></tbody></table></figure>
-<h3 id="例">例</h3>
-<p>迭代目标函数值变化图：</p>
+<h3 id="例"><a href="#例" class="headerlink" title="例"></a>例</h3><p>迭代目标函数值变化图：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/Figure_1.png" srcset="/img/loading.gif" lazyload="" alt="Figure_1"><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/image-20210325193158437.png" srcset="/img/loading.gif" lazyload="" alt="image-20210325193158437"></p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -474,7 +468,6 @@
       }
     </script>
   
-
 
 
 </footer>

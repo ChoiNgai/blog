@@ -209,7 +209,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      663 字
+      685 字
     </span>
   
 
@@ -252,28 +252,29 @@
             <div class="markdown-body">
               <p>学习北大李东风老师的R语言教程的笔记记录（断更）</p>
 <a id="more"></a>
-<h2 id="基础">基础</h2>
-<ul>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
 <li>四则运算</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">加</th>
-<th style="text-align: center;">减</th>
-<th style="text-align: center;">乘</th>
-<th style="text-align: center;">除</th>
+<tr>
+<th style="text-align:center">加</th>
+<th style="text-align:center">减</th>
+<th style="text-align:center">乘</th>
+<th style="text-align:center">除</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: center;">+</td>
-<td style="text-align: center;">-</td>
-<td style="text-align: center;">*</td>
-<td style="text-align: center;">/</td>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">/</td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>eg：<code>(1+5)-2*7/3</code></p>
 <p>注意括号要用英文的</p>
 <p>向量</p>
@@ -281,65 +282,71 @@
 <ul>
 <li>数学函数</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">平方根</th>
-<th style="text-align: center;">指数</th>
-<th style="text-align: center;">对数</th>
+<tr>
+<th style="text-align:center">平方根</th>
+<th style="text-align:center">指数</th>
+<th style="text-align:center">对数</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: center;">sqrt( )</td>
-<td style="text-align: center;">exp( )</td>
-<td style="text-align: center;">log( )</td>
+<tr>
+<td style="text-align:center">sqrt( )</td>
+<td style="text-align:center">exp( )</td>
+<td style="text-align:center">log( )</td>
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight r"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs r">sqrt(<span class="hljs-number">6.25</span>)<br></code></pre></div></td></tr></tbody></table></figure>
 <figure class="highlight r"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs r">x &lt;- <span class="hljs-number">1</span><br>exp(x)<br></code></pre></div></td></tr></tbody></table></figure>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">向下取整</th>
-<th style="text-align: center;">四舍五入取整</th>
-<th style="text-align: center;">向上取整</th>
+<tr>
+<th style="text-align:center">向下取整</th>
+<th style="text-align:center">四舍五入取整</th>
+<th style="text-align:center">向上取整</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: center;">round( )</td>
-<td style="text-align: center;">floor( )</td>
-<td style="text-align: center;">ceiling( )</td>
+<tr>
+<td style="text-align:center">round( )</td>
+<td style="text-align:center">floor( )</td>
+<td style="text-align:center">ceiling( )</td>
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight r"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs r">round(<span class="hljs-number">1.1234</span>, <span class="hljs-number">2</span>)  <span class="hljs-comment">#1.1234向下取整保留两位</span><br></code></pre></div></td></tr></tbody></table></figure>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: center;">正弦</th>
-<th style="text-align: center;">余弦</th>
-<th style="text-align: center;">正切</th>
-<th style="text-align: center;">圆周率</th>
+<tr>
+<th style="text-align:center">正弦</th>
+<th style="text-align:center">余弦</th>
+<th style="text-align:center">正切</th>
+<th style="text-align:center">圆周率</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: center;">round( )</td>
-<td style="text-align: center;">floor( )</td>
-<td style="text-align: center;">ceiling( )</td>
-<td style="text-align: center;">pi</td>
+<tr>
+<td style="text-align:center">round( )</td>
+<td style="text-align:center">floor( )</td>
+<td style="text-align:center">ceiling( )</td>
+<td style="text-align:center">pi</td>
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li>输出</li>
 </ul>
-<ol type="1">
+<ol>
 <li><code>print( )</code></li>
-<li><code>cat( )</code> 用于显示多项内容，eg: <code>cat("sin(pi/2)=", sin(pi/2), "\n")</code> 其中""表示换行</li>
+<li><code>cat( )</code>  用于显示多项内容，eg:  <code>cat("sin(pi/2)=", sin(pi/2), "\n")</code>     其中”\n”表示换行</li>
 </ol>
 <ul>
 <li>清屏</li>
@@ -354,13 +361,12 @@
 <li>绘图</li>
 </ul>
 <p><code>curve( )</code></p>
-<p>例如绘制$y=x^2 $在范围（-2，2）的图像： <code>curve(x^2, -2, 2)</code></p>
+<p>例如绘制$y=x^2 $在范围（-2，2）的图像： <code>curve(x^2, -2, 2)</code> </p>
 <p><code>abline(h=0)</code>表示绘制一条x=0的参考线</p>
 <p><code>barplot( )</code>绘制条形图</p>
 <figure class="highlight r"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs r">barplot(c(<span class="hljs-string">"男生"</span>=<span class="hljs-number">10</span>, <span class="hljs-string">"女生"</span>=<span class="hljs-number">7</span>), <br>             main=<span class="hljs-string">"男女生人数"</span>)<br></code></pre></div></td></tr></tbody></table></figure>
 <p><code>plot(1:10, sqrt(1:10))</code>绘制散点图 #第一个变量是x轴，第二个是y轴</p>
-<h2 id="常量与变量">常量与变量</h2>
-<script>
+<h2 id="常量与变量"><a href="#常量与变量" class="headerlink" title="常量与变量"></a>常量与变量</h2><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -508,7 +514,6 @@
       }
     </script>
   
-
 
 
 </footer>

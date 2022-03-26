@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="一个代替word的简洁文本编辑器">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="markdown 教程">
+  <meta name="description" content="一个代替word的简洁文本编辑器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown精简教程">
+<meta property="og:url" content="http://example.com/2019/11/15/markdown_jing_jian_jiao_cheng/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="一个代替word的简洁文本编辑器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/cover/185107-15811590679948.jpg">
+<meta property="article:published_time" content="2019-11-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-24T08:27:45.221Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="markdown 教程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/cover/185107-15811590679948.jpg">
+  
+  <title>Markdown精简教程 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Markdown精简教程">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-11-15 00:00" pubdate>
+        2019年11月15日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Markdown精简教程</h1>
+            
+            <div class="markdown-body">
+              <p>一个代替word的简洁文本编辑器</p>
+<a id="more"></a>
+<h2 id="为什么要用markdown？"><a href="#为什么要用markdown？" class="headerlink" title="为什么要用markdown？"></a>为什么要用markdown？</h2><p>emmm……word相比markdown，其优点在于不用排版（word不刻意去排版真的很难看）</p>
+<p>对新手来说，会觉得这纯粹找事，但是熟练之后不管是做笔记还是会议记录，甚至是写论文markdown都比已有的工具方便得多。</p>
+<p>此外markdown支持html和 latex 语法（word也支持latex，但那个渲染真的无语了）</p>
+<p>看看这么多人都用markdown，大部分都是刚学的时候觉得啥玩意？~之后，真香</p>
+<p>你能相信下面的全是用markdown写出来的吗？（只要动键盘就行了）</p>
+<p>水平分割线</p>
+<hr>
+<ul>
+<li>支持latex</li>
+</ul>
+<script type="math/tex; mode=display">
+y_{\theta}=\sum_{i=1}^n   \int_0^{+\infty}\frac{\sigma}{x^2} dx</script><ul>
+<li>代码块~语法高亮</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cv_imread</span><span class="hljs-params">(file_path)</span>:</span><br>				 cv_img=cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), <span class="hljs-number">-1</span>)<br>        		 cv_img = cv2.IMREAD_GRAYSCALE(img)<br>		<span class="hljs-keyword">return</span> cv_img<br></code></pre></div></td></tr></tbody></table></figure>
+<ul>
+<li>流程图</li>
+</ul>
+<div class="hljs code-wrapper"><pre class="mermaid">graph LR
+
+A[信源]--&gt;B[发送设备]
+B[发送设备]--&gt;C[信道]
+D[噪声源]--&gt;C[信道]
+C[信道]--&gt;E[接收设备]
+E[接收设备]--&gt;F[信宿]</pre></div>
+
+<ul>
+<li>有序列表</li>
+</ul>
+<ol>
+<li>任务A</li>
+<li>任务B<ol>
+<li>任务C</li>
+<li>任务D</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>无序列表</li>
+<li>列表<ul>
+<li>A</li>
+<li>B<ul>
+<li>D<ul>
+<li>E</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C</li>
+</ul>
+</li>
+</ul>
+<p><strong>加粗</strong>、<em>斜体</em>、<u>下划线</u></p>
+<p><a href="https://www.baidu.com/" target="_blank" rel="noopener">超链接</a></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg" srcset="/img/loading.gif" lazyload="" alt="引入图像"></p>
+<ul>
+<li><p>支持html，例如用html的<kbd>img</kbd>标签引入图像,<kbd>center</kbd>标签控制居中，<kbd>width</kbd>控制图片大小</p>
+<center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/paper/caiwei_study_2020.3-1.jpg" srcset="/img/loading.gif" lazyload="" width="30%"></center>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>表格</p>
+<p>| A    |  B   |    C |<br>| —— | :—: | —-: |<br>| 哈哈 | 呵呵 | 嗯哼 |</p>
+</li>
+</ul>
+<p>编写的文档很自然地可以导出成<kbd>html</kbd>或者<kbd>PDF</kbd>、<kbd>word</kbd>等,图像品质不会压缩。另外大多数博客平台都支持markdown排版，例如这篇就是用markdown写的(都是统一的，就不会像word那样出现乱码或者排版不对这些情况)。相比word，markdown更简洁，功能较少但能让人<strong>专注于写作</strong>（就是不需要去排版，但排版仍然会很好看）</p>
+<hr>
+<p>如果刚开始用不熟悉，也不是非得用键盘，有些markdown编辑软件支持鼠标点击打开某项功能，比如黑体、代码块，表格等。</p>
+<p>常见的一些markdown语法（其实语法不多，但一开始就记一堆，难免会让人难以接受，建议先掌握下面这些常用的，以后用写笔记markdown编辑器代替word就好啦，<strong>用过几次后自然熟悉</strong>）</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>一级标题: <kbd>#</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
+<p>二级标题: <kbd>##</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd> </p>
+<p>……</p>
+<p>六级标题: <kbd>######</kbd>+<kbd>空格</kbd>+<kbd>文字</kbd></p>
+<h2 id="黑体斜体"><a href="#黑体斜体" class="headerlink" title="黑体斜体"></a>黑体斜体</h2><p><kbd> * </kbd>  + <kbd>文字</kbd>+ <kbd> * </kbd>让文字变成斜体，注意中间不带空格，如：</p>
+<p><em>文字</em></p>
+<p><kbd><em> </em></kbd>+<kbd>文字</kbd>+ <kbd>**</kbd>  让文字变成黑体，注意中间不带空格，如：</p>
+<p><strong>文字</strong></p>
+<p>只一个<kbd>*</kbd>+<kbd>空格</kbd> 会出现一个点，如：</p>
+<ul>
+<li></li>
+</ul>
+<p>连续输入三个<kbd>*</kbd>会变成分割线，如:</p>
+<hr>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>[</kbd>  有序列表</p>
+<p><kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>]</kbd>   无序列表</p>
+<h2 id="代码块和公式块"><a href="#代码块和公式块" class="headerlink" title="代码块和公式块"></a>代码块和公式块</h2><p>代码块： <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>K</kbd>  </p>
+<p>latex公式块： <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>M</kbd>  </p>
+<p>这些是基础操作，如果各位还会写html或latex语法的话更佳，不会也不要紧，掌握上述命令即可自(wu)由(nai)写作。</p>
+<p>markdown编辑器有很多，我个人比较喜欢用typora，附上win10_64位的下载链接，<a href="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/download/typora-setup-x64.exe" target="_blank" rel="noopener">Typora</a></p>
+<p>官网： <a href="https://www.typora.io/" target="_blank" rel="noopener">https://www.typora.io/</a> (官网下载很慢哦)</p>
+<h2 id="emoji表情"><a href="#emoji表情" class="headerlink" title="emoji表情"></a>emoji表情</h2><p>此外还支持一堆emoji表情，不信你看👉 <a href="https://www.webfx.com/tools/emoji-cheat-sheet/" target="_blank" rel="noopener">emoji</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/11/21/linux_ji_chu_ming_ling/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">linux基础命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/11/03/hui_du_tu_chao_fen_bian_lu_chong_jian/">
+                        <span class="hidden-mobile">灰度图超分辨率重建</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

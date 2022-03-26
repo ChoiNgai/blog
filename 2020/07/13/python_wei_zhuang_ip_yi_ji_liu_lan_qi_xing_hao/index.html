@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#3cbdfe">
+  <meta name="description" content="python爬虫">
+  <meta name="author" content="CAIWEI">
+  <meta name="keywords" content="">
+  <meta name="description" content="python爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python伪装ip以及浏览器型号">
+<meta property="og:url" content="http://example.com/2020/07/13/python_wei_zhuang_ip_yi_ji_liu_lan_qi_xing_hao/index.html">
+<meta property="og:site_name" content="CAIWEI的博客">
+<meta property="og:description" content="python爬虫">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-13T13:47:13.000Z">
+<meta property="article:modified_time" content="2021-11-24T08:30:29.819Z">
+<meta property="article:author" content="CAIWEI">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>python伪装ip以及浏览器型号 - CAIWEI的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="CAIWEI的博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong> </strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/0.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="python伪装ip以及浏览器型号">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-07-13 21:47" pubdate>
+        2020年7月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">python伪装ip以及浏览器型号</h1>
+            
+            <div class="markdown-body">
+              <p>python爬虫</p>
+<a id="more"></a>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>爬虫通常需要伪装ip和浏览器，因为较大的数据网站都会做一些反爬虫防护，伪装ip和浏览器型号是<code>模拟登录</code>的基础。</p>
+<h2 id="获取代理ip"><a href="#获取代理ip" class="headerlink" title="获取代理ip"></a>获取代理ip</h2><p>芝麻http等可以拿到一些免费的代码ip，但说实话我不喜欢这样的（量太少）,下面用一个脚本来判断ip是否能ping 通。</p>
+<p>这里先随机生成ip地址放在<code>ip_original.txt</code>这个文件（每个ip地址独自一行），待判断的ip可以随机生成，也可以在某些网站获取，例如：<a href="http://www.shenjidaili.com/shareip/" target="_blank" rel="noopener">http://www.shenjidaili.com/shareip/</a></p>
+<p>把这些复制到的处理一下，去除<code>端口号</code>，只留ip地址，例如125.108.106.10存入txt文本中。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment">#judge_ip</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> xlwt<br><br><span class="hljs-comment">#读取txt文件里的ip地址存储为列表</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ReadTxtName</span><span class="hljs-params">(rootdir)</span>:</span><br>    lines = []<br>    <span class="hljs-keyword">with</span> open(rootdir, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> file_to_read:<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            line = file_to_read.readline()<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> line:<br>                <span class="hljs-keyword">break</span><br>            line = line.strip(<span class="hljs-string">'\n'</span>)<br>            lines.append(line)<br>    <span class="hljs-keyword">return</span> lines<br><br><br><span class="hljs-comment">#保存列表</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">text_save</span><span class="hljs-params">(filename, data)</span>:</span><span class="hljs-comment">#filename为写入文件的路径，data为要写入数据列表.</span><br>    file = open(filename,<span class="hljs-string">'a'</span>)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(len(data)):<br>        s = str(data[i]).replace(<span class="hljs-string">'['</span>,<span class="hljs-string">''</span>).replace(<span class="hljs-string">']'</span>,<span class="hljs-string">''</span>)<span class="hljs-comment">#去除[],这两行按数据不同，可以选择</span><br>        s = s.replace(<span class="hljs-string">"'"</span>,<span class="hljs-string">''</span>).replace(<span class="hljs-string">','</span>,<span class="hljs-string">''</span>) +<span class="hljs-string">'\n'</span>   <span class="hljs-comment">#去除单引号，逗号，每行末尾追加换行符</span><br>        file.write(s)<br>    file.close()<br>    print(<span class="hljs-string">"保存文件成功"</span>)<br><br>ip_list=ReadTxtName(<span class="hljs-string">'ip_original.txt'</span>)      <span class="hljs-comment">#读取待判断是否有效的ip列表</span><br>Effective_ip = [ ]  <span class="hljs-comment">#创建存储有效ip的列表</span><br><br><span class="hljs-comment">#判断ip是否可用</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>,len(ip_list)):<br>    result=os.system(<span class="hljs-string">'ping '</span>+ ip_list[i])   <span class="hljs-comment">#0为可用ip，1为不可用ip</span><br>    <span class="hljs-comment">#print("结果是",result)</span><br>    <span class="hljs-keyword">if</span> result == <span class="hljs-number">0</span>:<br>        Effective_ip.append( ip_list[i])<br>    <span class="hljs-keyword">else</span>:<br>        print(<span class="hljs-string">"第"</span>+str(i+<span class="hljs-number">1</span>)+<span class="hljs-string">"个ip无效"</span>)<br><br>    text_save(<span class="hljs-string">'ip_list.txt'</span>, Effective_ip)		<span class="hljs-comment">#保存有效ip</span><br></code></pre></div></td></tr></tbody></table></figure>
+<h2 id="伪装后打开网页"><a href="#伪装后打开网页" class="headerlink" title="伪装后打开网页"></a>伪装后打开网页</h2><figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> urllib.request<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> ssl<br><span class="hljs-keyword">import</span> random<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">openUrl</span><span class="hljs-params">(ip, agent)</span>:</span><br>    headers = {<span class="hljs-string">'User-Agent'</span>: agent}			<span class="hljs-comment">#伪装浏览器型号</span><br>    proxies = {<span class="hljs-string">'http'</span> : ip}					<span class="hljs-comment">#伪装ip地址</span><br>    requests.get(<span class="hljs-string">"https://www.baidu.com/"</span>, headers=headers, proxies=proxies, verify=<span class="hljs-literal">True</span>)<br>    ssl._create_default_https_context = ssl._create_unverified_context<br>    print(<span class="hljs-string">"Access to success."</span>)<br><br><span class="hljs-comment">#读取txt文件里的ip地址存储为列表</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">ReadTxtName</span><span class="hljs-params">(rootdir)</span>:</span><br>    lines = []<br>    <span class="hljs-keyword">with</span> open(rootdir, <span class="hljs-string">'r'</span>) <span class="hljs-keyword">as</span> file_to_read:<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            line = file_to_read.readline()<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> line:<br>                <span class="hljs-keyword">break</span><br>            line = line.strip(<span class="hljs-string">'\n'</span>)<br>            lines.append(line)<br>    <span class="hljs-keyword">return</span> lines    <br>    <br>    <br><span class="hljs-comment">#随机选取ip</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomIP</span><span class="hljs-params">(ip_list)</span>:</span><br>    ip = random.choice(ip_list)<br>    <span class="hljs-keyword">return</span> ip<br><br><br><span class="hljs-comment">#随机选取浏览器型号</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">randomUserAgent</span><span class="hljs-params">()</span>:</span><br>    UserAgent = random.choice([<br>        <span class="hljs-string">'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'</span>,<br>        <span class="hljs-string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36'</span>,<br>        <span class="hljs-string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36'</span>,<br>        <span class="hljs-string">'Mozilla/5.0(compatible;MSIE9.0;WindowsNT6.1;Trident/5.0)'</span>,<br>        <span class="hljs-string">'Mozilla/4.0(compatible;MSIE8.0;WindowsNT6.0;Trident/4.0)'</span>,<br>        <span class="hljs-string">'Mozilla/4.0(compatible;MSIE7.0;WindowsNT6.0)'</span>,<br>        <span class="hljs-string">'Opera/9.80(WindowsNT6.1;U;en)Presto/2.8.131Version/11.11'</span>,<br>        <span class="hljs-string">'Mozilla/5.0(WindowsNT6.1;rv:2.0.1)Gecko/20100101Firefox/4.0.1'</span>,<br>        <span class="hljs-string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.71 Safari/537.1 LBBROWSER'</span>,<br>        <span class="hljs-string">'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; QQDownload 732; .NET4.0C; .NET4.0E)'</span>,<br>        <span class="hljs-string">'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.84 Safari/535.11 SE 2.X MetaSr 1.0'</span>,<br>        <span class="hljs-string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.3.4000 Chrome/30.0.1599.101 Safari/537.36'</span>,<br>        <span class="hljs-string">'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 UBrowser/4.0.3214.0 Safari/537.36'</span><br><br><br>    ])<br>    <span class="hljs-keyword">return</span> UserAgent<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    	ip_list = ReadTxtName(<span class="hljs-string">'ip_list.txt'</span>)       <span class="hljs-comment">#读入有效ip储存为列表</span><br>        ip = randomIP(ip_list)						<span class="hljs-comment">#随机选择ip</span><br>        agent = randomUserAgent()					<span class="hljs-comment">#随机选择浏览器型号</span><br>        openUrl(ip, agent)							<span class="hljs-comment">#打开网页</span><br>        time.sleep(<span class="hljs-number">10</span>)<br></code></pre></div></td></tr></tbody></table></figure>
+<p>戛然而止<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f61d.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f61d.png?v8">😝</span>（因为剩下的要干什么我就不提供了，仅供学习或研究使用）</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/21/gitbook_an_zhuang_install_qia_zhu_jie_jue/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">gitbook安装—_install卡住解决</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/06/da_jian_tu_chuang/">
+                        <span class="hidden-mobile">图床</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     
+  </div>
+  
+
+  
+
+  
+
+
+
+  
+    <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+    <script>
+      if (window.mermaid) {
+        mermaid.initialize({theme: 'forest'});
+      }
+    </script>
+  
+
+
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const mathjax = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
