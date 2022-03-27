@@ -13,7 +13,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content=" hive课程实验">
+  <meta name="description" content="hive课程实验">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
   <meta name="description" content="hive课程实验">
@@ -235,7 +235,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      2.7k 字
     </span>
   
 
@@ -276,23 +276,26 @@
             <h1 style="display: none">Hive上机实验</h1>
             
             <div class="markdown-body">
-              <p> hive课程实验</p>
+              <p>hive课程实验</p>
 <a id="more"></a>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>该文为Hadoop基础实验中的hive实验</p>
-<h2 id="实验目的："><a href="#实验目的：" class="headerlink" title="实验目的："></a>实验目的：</h2><p>掌握hive的编程技术</p>
-<h2 id="实验步骤："><a href="#实验步骤：" class="headerlink" title="实验步骤："></a>实验步骤：</h2><p>1、创建数据库stu。</p>
+<h2 id="介绍">介绍</h2>
+<p>该文为Hadoop基础实验中的hive实验</p>
+<h2 id="实验目的">实验目的：</h2>
+<p>掌握hive的编程技术</p>
+<h2 id="实验步骤">实验步骤：</h2>
+<p>1、创建数据库stu。</p>
 <p>2、创建students表，表结构如下：</p>
-<p>id         int,</p>
-<p>name       string,</p>
-<p>gender      string,</p>
-<p>age         int,</p>
-<p>course_id    int,</p>
-<p>score      double,</p>
-<p>classes      string</p>
+<p>id int,</p>
+<p>name string,</p>
+<p>gender string,</p>
+<p>age int,</p>
+<p>course_id int,</p>
+<p>score double,</p>
+<p>classes string</p>
 <p>3、导入数据students_data.txt到students表。</p>
 <p>4、创建course表，表结构如下：</p>
-<p>course_id       int,</p>
-<p>course_name    string</p>
+<p>course_id int,</p>
+<p>course_name string</p>
 <p>5、导入数据course.txt到course表。</p>
 <p>6、创建动态分区表students_dynamic，以classes为分区字段。</p>
 <p>7、从students表导入数据到students_dynamic。</p>
@@ -304,89 +307,168 @@
 <p>13、统计students表中有多少门不同的课程。</p>
 <p>14、查询Mary所选修课程的课程编号和分数。</p>
 <p>15、找出所有学生中，course_id为30的课程，分数最高的同学。输出该同学姓名、分数、课程名称、所在班级到屏幕。</p>
-<h2 id="实验方案"><a href="#实验方案" class="headerlink" title="实验方案"></a>实验方案</h2><p>打开hive( 在hadoop根目录执行)</p>
+<h2 id="实验方案">实验方案</h2>
+<p>打开hive( 在hadoop根目录执行)</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">start-dfs.sh<br></code></pre></div></td></tr></tbody></table></figure>
 <p>该语句为打开hdfs分布式文件系统，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image002.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image002.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>start-yarn.sh</p>
 <p>该语句为打开资源调度框架yarn，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image004.png" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image004.png" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">service mysqld start<br></code></pre></div></td></tr></tbody></table></figure>
 <p>该语句为打开mysql数据库，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image006.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image006.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">hive<br></code></pre></div></td></tr></tbody></table></figure>
 <p>该语句为打开hive，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image008.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image008.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>由于hive是部署在hdfs上的组件，故打开hive之前要打开hdfs和yarn框架来调度资源，而hive产生的元数据存储在mysql中，故打开hdfs和yarn之后，且在打开hive之前要打开mysql。</p>
-<p>1.</p>
+<ol type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> stu;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>该语句为创建名为stu的数据库，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image010.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>2.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image010.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="2" type="1">
+<li></li>
+</ol>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">use stu;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>该语句为使用数据库stu，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image012.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image012.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> students(<span class="hljs-keyword">id</span> <span class="hljs-built_in">int</span>,<span class="hljs-keyword">name</span> <span class="hljs-keyword">string</span>,gender <span class="hljs-keyword">string</span>,age <span class="hljs-built_in">int</span>,course_id <span class="hljs-built_in">int</span>,score <span class="hljs-keyword">double</span>,classes <span class="hljs-keyword">string</span>) <span class="hljs-keyword">row</span> <span class="hljs-keyword">format</span> <span class="hljs-keyword">delimited</span> <span class="hljs-keyword">fields</span> <span class="hljs-keyword">terminated</span> <span class="hljs-keyword">by</span> <span class="hljs-string">','</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>创建名为students的表格，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image014.png" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>3.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image014.png" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="3" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">load</span> <span class="hljs-keyword">data</span> <span class="hljs-keyword">local</span> inpath <span class="hljs-string">'/simple/data/students_data.txt'</span> overwrite <span class="hljs-keyword">into</span> <span class="hljs-keyword">table</span> students;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>从本地加载数据到表students中，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image016.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>4.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image016.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="4" type="1">
+<li></li>
+</ol>
 <figure class="highlight"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">hive&gt; create table course(course_id int,course_name string) row format delimited fields terminated by ',';<br></code></pre></div></td></tr></tbody></table></figure>
 <p>创建名为course的表，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image018.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>5.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image018.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="5" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">load</span> <span class="hljs-keyword">data</span> <span class="hljs-keyword">local</span> inpath <span class="hljs-string">'/simple/data/course.txt'</span> overwrite <span class="hljs-keyword">into</span> <span class="hljs-keyword">table</span> course;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>从本地加载数据到表course中，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image020.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>6.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image020.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="6" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">set</span> hive.exec.dynamic.partition=<span class="hljs-literal">true</span>;<br><br><span class="hljs-keyword">set</span> hive.exec.dynamic.partition.mode=nostrict;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>创建动态分区表之前要先开启分区，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image022.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image022.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> students_dynamic(<span class="hljs-keyword">id</span> <span class="hljs-built_in">int</span>,<span class="hljs-keyword">name</span> <span class="hljs-keyword">string</span>,gender <span class="hljs-keyword">string</span>,age <span class="hljs-built_in">int</span>,course_id <span class="hljs-built_in">int</span>,score <span class="hljs-keyword">double</span>,classes <span class="hljs-keyword">string</span>) partitioned <span class="hljs-keyword">by</span>(<span class="hljs-keyword">class</span> <span class="hljs-keyword">string</span>) <span class="hljs-keyword">row</span> <span class="hljs-keyword">format</span> <span class="hljs-keyword">delimited</span> <span class="hljs-keyword">fields</span> <span class="hljs-keyword">terminated</span> <span class="hljs-keyword">by</span> <span class="hljs-string">','</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>创建动态分区表，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image024.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image024.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>7．</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> overwrite <span class="hljs-keyword">table</span> students_dynamic <span class="hljs-keyword">partition</span>(<span class="hljs-keyword">class</span>=<span class="hljs-string">'classA'</span>)<span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> students;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>在数据库stu中动态分区表students_dynamic中插入表students的数据，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image026.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image028.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>8.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image026.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image028.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="8" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> classes,<span class="hljs-keyword">avg</span>(score) <span class="hljs-keyword">from</span> students <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> classes;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>查询每个班的平均分数，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image030.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image032.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>9.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image030.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image032.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="9" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">name</span>,score <span class="hljs-keyword">from</span> students;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>查询students表中所有学生的姓名、分数，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image034.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>10.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image034.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="10" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> students <span class="hljs-keyword">where</span> score&gt;=<span class="hljs-number">80</span> <span class="hljs-keyword">and</span> score&lt;=<span class="hljs-number">90</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>查询students表中成绩在80至90之间的记录的所有信息，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image036.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>11.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image036.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="11" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">name</span>,course_id,score <span class="hljs-keyword">from</span> students <span class="hljs-keyword">where</span> score&lt;<span class="hljs-number">60</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>查询students表中成绩在60以下的记录的姓名、课程编号（course_id）和分数，查询结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image038.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>12.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image038.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="12" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> students <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> score <span class="hljs-keyword">desc</span>,<span class="hljs-keyword">name</span> <span class="hljs-keyword">asc</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>将students表中的所有记录先按分数降序，当分数一样时，再按姓名升序排列，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image040.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image042.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>13.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image040.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image042.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="13" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">count</span><br><br>(<span class="hljs-keyword">distinct</span> course_id) <span class="hljs-keyword">from</span> students;<br></code></pre></div></td></tr></tbody></table></figure>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image044.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image046.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>14.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image044.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image046.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="14" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> course_id,score <span class="hljs-keyword">from</span> students <span class="hljs-keyword">where</span> <span class="hljs-keyword">name</span>==<span class="hljs-string">'Mary'</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>查询Mary所选修课程的课程编号和分数，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image048.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>15.</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image048.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol start="15" type="1">
+<li></li>
+</ol>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">name</span>,score,course_id,classes <span class="hljs-keyword">from</span> students a,(<span class="hljs-keyword">select</span> <span class="hljs-keyword">max</span>(score) max_score <span class="hljs-keyword">from</span> students <span class="hljs-keyword">where</span> course_id=<span class="hljs-number">30</span>) b <span class="hljs-keyword">where</span> a.score=b.max_score <span class="hljs-keyword">and</span> course_id=<span class="hljs-number">30</span>;<br></code></pre></div></td></tr></tbody></table></figure>
 <p>找出所有学生中，course_id为30的课程，分数最高的同学。输出该同学姓名、分数、 课程名称、所在班级到屏幕，运行结果如下：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image050.jpg" srcset="/img/loading.gif" lazyload="" alt="img"></p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/clip_image050.jpg" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

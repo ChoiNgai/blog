@@ -253,31 +253,26 @@
               <p>数据仓库命名规范</p>
 <a id="more"></a>
 <p>这里分为<strong>表命名规范</strong>、<strong>字段命名规范</strong>、<strong>指标命名规范</strong>、<strong>作业命名规范</strong>，通常涉及表命名规范</p>
-<h2 id="表命名规范"><a href="#表命名规范" class="headerlink" title="表命名规范"></a>表命名规范</h2><p>不同分层的表命名规范不一样（以下命名规范包括了库名），abc为补充的三个参数，具体见后面</p>
+<h2 id="表命名规范">表命名规范</h2>
+<p>不同分层的表命名规范不一样（以下命名规范包括了库名），abc为补充的三个参数，具体见后面</p>
 <ul>
 <li><p>ODS层</p>
 <p>即贴源层，由业务方直接导入，不会经过数据清洗转化。操作数据层定位于业务明细数据保留区，负责保留数据接入时点后历史变更数据，数据原则上全量保留。</p>
-<figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_ods</span>.</span></span>ods_系统名称(默认为空)_源表名_abc<br></code></pre></div></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_ods</span>.</span></span>ods_系统名称(默认为空)_源表名_abc<br></code></pre></div></td></tr></tbody></table></figure></li>
 <li><p>DW层</p>
 <p>由ODS层数据经过清洗转化而成。这一层整合后的业务过程明细数据，负责各业务场景整合、数据结构化、规范化，常用公共维度冗余加工，以及明细业务标签信息加工。另外，在该层也会做一部分的数据聚合，将相同主题的数据汇集到一张表中，提高数据的可用性。</p>
 <ul>
 <li><p>dim层（维表）</p>
-<figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_dw</span>.</span></span>dim_项目名_业务描述_abc<br></code></pre></div></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs reasonml">项目名<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">_dw</span>.</span></span>dim_项目名_业务描述_abc<br></code></pre></div></td></tr></tbody></table></figure></li>
 <li><p>dwv（业务明细）</p>
-<figure class="highlight haxe"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dwv_项目名<span class="hljs-literal">_</span>一级主题域<span class="hljs-literal">_</span>二级主题域<span class="hljs-literal">_</span>业务描述_abc<br></code></pre></div></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight haxe"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dwv_项目名<span class="hljs-literal">_</span>一级主题域<span class="hljs-literal">_</span>二级主题域<span class="hljs-literal">_</span>业务描述_abc<br></code></pre></div></td></tr></tbody></table></figure></li>
 <li><p>dwm（周期汇总）</p>
 <figure class="highlight haxe"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述<span class="hljs-literal">_</span>统计范围cycle[N]_abc<br></code></pre></div></td></tr></tbody></table></figure>
 <p>例如：</p>
-<p><code>projectname_dw.dwm_projectname_store_activity_byr_currcy_order_cycle7_sdt</code>说明：projectname是项目名，其数据粒度为店铺（store）+活动（activity）+买家（byr）+币种（currcy）;业务描述为下单（order）；统计的时间范围为近7天。</p>
-</li>
+<p><code>projectname_dw.dwm_projectname_store_activity_byr_currcy_order_cycle7_sdt</code>说明：projectname是项目名，其数据粒度为店铺（store）+活动（activity）+买家（byr）+币种（currcy）;业务描述为下单（order）；统计的时间范围为近7天。</p></li>
 <li><p>dws层（数据汇总服务）</p>
-<figure class="highlight haxe"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述_abc<br></code></pre></div></td></tr></tbody></table></figure>
-</li>
-</ul>
-</li>
+<figure class="highlight haxe"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs haxe">项目名_dw.dws_项目名<span class="hljs-literal">_</span>数据粒度<span class="hljs-literal">_</span>业务描述_abc<br></code></pre></div></td></tr></tbody></table></figure></li>
+</ul></li>
 </ul>
 <blockquote>
 <p><strong>abc 说明</strong></p>
@@ -292,29 +287,23 @@
 <li><p>数据采集作业（后缀import）</p>
 <p>一般是采集变成ods层数据</p>
 <figure class="highlight elm"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elm">项目名_ods.ods_系统名称_源表名_abc_<span class="hljs-keyword">import</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>如：projectname_ods.ods_projectname_orders_fct_import</p>
-</li>
+<p>如：projectname_ods.ods_projectname_orders_fct_import</p></li>
 <li><p>数据导出作业（后缀export）</p>
 <p>同采集作业，但后缀改成export</p>
-<p>projectname_store_method_h_export </p>
-</li>
+<p>projectname_store_method_h_export</p></li>
 <li><p>数据查询作业</p>
-<p>与产出目标表同名</p>
-</li>
+<p>与产出目标表同名</p></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="字段命名规范"><a href="#字段命名规范" class="headerlink" title="字段命名规范"></a>字段命名规范</h2><ul>
+<h2 id="字段命名规范">字段命名规范</h2>
+<ul>
 <li><p>度量词汇</p>
 <p>次数：cnt</p>
 <p>金额：amt</p>
 <p>时长：dr</p>
 <p>比例：rate</p>
 <p>百分比：pct</p>
-<p>环比：p2p</p>
-</li>
-</ul>
-<ul>
+<p>环比：p2p</p></li>
 <li><p>统计词汇</p>
 <p>订单金额：order_amt</p>
 <p>商品数：prod_cnt</p>
@@ -324,10 +313,7 @@
 <p>点击次数：click_cnt</p>
 <p>买家数：byr_cnt</p>
 <p>卖家数：sel_cnt</p>
-<p>店铺数：store_cnt</p>
-</li>
-</ul>
-<ul>
+<p>店铺数：store_cnt</p></li>
 <li><p>约定名词词汇</p>
 <p>gmv：成交金额</p>
 <p>cmv：取消金额</p>
@@ -341,10 +327,7 @@
 <p>used：使用</p>
 <p>unuse：待使用/未使用（不含已过期）</p>
 <p>source：来源</p>
-<p>promotion：优惠</p>
-</li>
-</ul>
-<ul>
+<p>promotion：优惠</p></li>
 <li><p>日期修饰词汇</p>
 <p>日：d</p>
 <p>小时：h</p>
@@ -353,31 +336,25 @@
 <p>月：m</p>
 <p>季度：q</p>
 <p>年：y</p>
-<p>七日：7d</p>
-</li>
-</ul>
-<ul>
+<p>七日：7d</p></li>
 <li><p>聚合词汇</p>
 <p>total：历史累计</p>
 <p>avg：平均</p>
-<p>std：截止到当前统计日期</p>
-</li>
-</ul>
-<ul>
+<p>std：截止到当前统计日期</p></li>
 <li><p>业务场景词汇</p>
 <p>order：下单</p>
 <p>pay：支付</p>
 <p>refund：退款</p>
-<p>return_goods：退货  </p>
+<p>return_goods：退货</p>
 <p>subs：订阅</p>
 <p>reg：注册</p>
-<p>login：登录  </p>
+<p>login：登录</p>
 <p>visit：访问</p>
 <p>add_chart：购物车</p>
-<p>site：站点</p>
-</li>
+<p>site：站点</p></li>
 </ul>
-<h2 id="指标命名规范"><a href="#指标命名规范" class="headerlink" title="指标命名规范"></a>指标命名规范</h2><p>1、指标统一：数据指标的内容及对应的命名、属性需要保持唯一性，无歧义。</p>
+<h2 id="指标命名规范">指标命名规范</h2>
+<p>1、指标统一：数据指标的内容及对应的命名、属性需要保持唯一性，无歧义。</p>
 <p>2、指标统一目前只针对单一业务，暂不考虑跨业务间场景</p>
 <p>3、指标统一命名：修饰语（业务场景限定条件）+对象+方法+时间范围 如cancel_order_cnt_1d</p>
 <p>修饰语（业务场景限定条件）：cancel 取消；</p>
@@ -385,8 +362,8 @@
 <p>统计方法：cnt 记数，对订单进行去重统计；</p>
 <p>统计周期：1d近一天的。</p>
 <p>4、原子、派生指标之间的定义和关系</p>
-<p>​    原子指标：基于某一业务事件行为下的度量，是业务定义中不可再拆分的指标，具有明确业务含义的名词 ，如支付金额。</p>
-<p>​    派生指标: 由原子指标＋多个修饰词（可选）＋时间周期。可以理解为对原子指标业务统计范围的圈定。如原子指标：支付金额，最近一天海外买家支付金额则为派生指标（最近一天为时间周期，海外为修饰词 买家作为维度，而不作为修饰词）</p>
+<p>​ 原子指标：基于某一业务事件行为下的度量，是业务定义中不可再拆分的指标，具有明确业务含义的名词 ，如支付金额。</p>
+<p>​ 派生指标: 由原子指标＋多个修饰词（可选）＋时间周期。可以理解为对原子指标业务统计范围的圈定。如原子指标：支付金额，最近一天海外买家支付金额则为派生指标（最近一天为时间周期，海外为修饰词 买家作为维度，而不作为修饰词）</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

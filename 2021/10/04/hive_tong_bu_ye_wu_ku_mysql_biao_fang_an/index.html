@@ -253,26 +253,26 @@
               <p>一些常见的Hive同步业务库MySQL（MySQL数据导入到Hive表）的操作</p>
 <a id="more"></a>
 <p>Hive表数据同步（数据采集）业务库MySQL表的步骤：</p>
-<ol>
+<ol type="1">
 <li>找到MySQL表，查看表结构或建表语句</li>
 <li>创建Hive表</li>
 <li>创建调度作业</li>
 <li>触发调度调度，核对数据</li>
 </ol>
 <p>具体来看看常见的<strong>全量同步</strong>和<strong>增量同步</strong>两种方式</p>
-<h2 id="全量同步采集"><a href="#全量同步采集" class="headerlink" title="全量同步采集"></a>全量同步采集</h2><p>我们以天表为例（也有小时表，但都一样的）</p>
-<ol>
+<h2 id="全量同步采集">全量同步采集</h2>
+<p>我们以天表为例（也有小时表，但都一样的）</p>
+<ol type="1">
 <li><p>找到mysql建表语句</p>
 <p>我们假设建表语句如下，这里只有三个字段</p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`mysql_store_gmv`</span> (<br>  <span class="hljs-string">`dt`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">25</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'日期'</span>,<br>  <span class="hljs-string">`store_id`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'店铺ID'</span>,<br>   <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span><br>  PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>)<br>) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT=<span class="hljs-number">4090</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8mb4 <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span><br></code></pre></div></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`mysql_store_gmv`</span> (<br>  <span class="hljs-string">`dt`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">25</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'日期'</span>,<br>  <span class="hljs-string">`store_id`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'店铺ID'</span>,<br>   <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span><br>  PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>)<br>) <span class="hljs-keyword">ENGINE</span>=<span class="hljs-keyword">InnoDB</span> AUTO_INCREMENT=<span class="hljs-number">4090</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">CHARSET</span>=utf8mb4 <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span><br></code></pre></div></td></tr></tbody></table></figure></li>
 <li><p>创建Hive表</p>
 <p>Hive表的创建与MySQL有点不一样，具体创建语句如下（推荐在MySQL建表语句的基础上做一些删减）</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`hive_store_gmv`</span> (<br>  <span class="hljs-string">`dt`</span> <span class="hljs-keyword">string</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'日期'</span>,<br>  <span class="hljs-string">`store_id`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'店铺ID'</span>,<br>   <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span><br>) <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>很明显，这里删掉了MySQL字段的一些默认信息，并且去除了主键和选择的存储引擎</p>
 <blockquote>
 <p>MySQL建表语句改成Hive建表的一些常见处理：（在MySQL建表语句的基础上修改）</p>
-<ol>
+<ol type="1">
 <li>删除DEFAULT NULL</li>
 <li>删除自增id</li>
 <li>删除主键</li>
@@ -280,39 +280,39 @@
 <li>varchar 改成string</li>
 <li>datetime改成string</li>
 <li>删除选择存储引擎和编码等信息</li>
-<li>……</li>
+<li>......</li>
 </ol>
-</blockquote>
-</li>
+</blockquote></li>
 <li><p>创建调度作业</p>
 <p>这里的话如果有比较完善的数据平台会相对简单点</p>
 <p>注意点：</p>
-<ol>
+<ol type="1">
 <li><p>不能<code>SELECT * FROM tablename</code>（因为随着业务的发展，表很可能会增加字段）</p>
 <p>正确的方式是该把需要同步的字段写出来，例如同步上表需要写成：</p>
-<p><code>SELECT dt,store_id,gmv FROM mysql_store_gmv</code></p>
-</li>
+<p><code>SELECT dt,store_id,gmv FROM mysql_store_gmv</code></p></li>
 <li><p>需要加上不在当天重复调度的WHERE条件</p>
-<p>这里需要考虑两个点，一个是对某天重复调度，所以需要考虑到触发作业后删除当天得到的数据；另一个就是非当天调度，比如在2021年9月12日这天跑过一次了，但是可能会2021年9月13日再触发一次这个同步作业</p>
-</li>
+<p>这里需要考虑两个点，一个是对某天重复调度，所以需要考虑到触发作业后删除当天得到的数据；另一个就是非当天调度，比如在2021年9月12日这天跑过一次了，但是可能会2021年9月13日再触发一次这个同步作业</p></li>
 </ol>
 <p>所以我们需要写出这样，调度作业触发后执行以下SQL：</p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 删除(删除Hive表的当天分区数据)</span><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> hive_store_gmv <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">PARTITION</span> (dt=<span class="hljs-keyword">CURDATE</span>());<br><br><span class="hljs-comment">-- 查询</span><br><span class="hljs-keyword">SELECT</span> dt,store_id,gmv <span class="hljs-keyword">FROM</span> mysql_store_gmv<br><span class="hljs-keyword">WHERE</span> dt &lt;= <span class="hljs-keyword">CURDATE</span>()	<br><br><span class="hljs-comment">-- 插入（插入到Hive表的当天分区）</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> hive_store_gmv <span class="hljs-keyword">PARTITION</span> (dt=<span class="hljs-keyword">CURDATE</span>())(<br>	dt,<br>    store_id,<br>    gmv<br>)<br><span class="hljs-keyword">VALUES</span>($<span class="hljs-number">0</span>,$<span class="hljs-number">1</span>,$<span class="hljs-number">2</span>)	<span class="hljs-comment">--三个字段</span><br></code></pre></div></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 删除(删除Hive表的当天分区数据)</span><br><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> hive_store_gmv <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">PARTITION</span> (dt=<span class="hljs-keyword">CURDATE</span>());<br><br><span class="hljs-comment">-- 查询</span><br><span class="hljs-keyword">SELECT</span> dt,store_id,gmv <span class="hljs-keyword">FROM</span> mysql_store_gmv<br><span class="hljs-keyword">WHERE</span> dt &lt;= <span class="hljs-keyword">CURDATE</span>()	<br><br><span class="hljs-comment">-- 插入（插入到Hive表的当天分区）</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> hive_store_gmv <span class="hljs-keyword">PARTITION</span> (dt=<span class="hljs-keyword">CURDATE</span>())(<br>	dt,<br>    store_id,<br>    gmv<br>)<br><span class="hljs-keyword">VALUES</span>($<span class="hljs-number">0</span>,$<span class="hljs-number">1</span>,$<span class="hljs-number">2</span>)	<span class="hljs-comment">--三个字段</span><br></code></pre></div></td></tr></tbody></table></figure></li>
 </ol>
-<h2 id="增量同步采集"><a href="#增量同步采集" class="headerlink" title="增量同步采集"></a>增量同步采集</h2><p>增量同步基本上与全量同步处理方法一样有第二步和第三步</p>
+<h2 id="增量同步采集">增量同步采集</h2>
+<p>增量同步基本上与全量同步处理方法一样有第二步和第三步</p>
 <p>增量同步一般建议创建dt分区（日期作为分区）</p>
 <p>增量同步需删除当天数据</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 删除</span><br><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> hive_store_gmv <span class="hljs-keyword">WHERE</span> dt = <span class="hljs-keyword">CURDATE</span>()	<span class="hljs-comment">--删除当天数据</span><br><br><span class="hljs-comment">-- 查询</span><br><span class="hljs-keyword">SELECT</span> dt,store_id,gmv <span class="hljs-keyword">FROM</span> mysql_store_gmv<br><span class="hljs-keyword">WHERE</span> dt = <span class="hljs-keyword">CURDATE</span>()<br><br><span class="hljs-comment">-- 插入（插入到Hive表的当天分区）</span><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> hive_store_gmv <span class="hljs-keyword">PARTITION</span> (dt=<span class="hljs-keyword">CURDATE</span>())(<br>	dt,<br>    store_id,<br>    gmv<br>)<br><span class="hljs-keyword">VALUES</span>($<span class="hljs-number">0</span>,$<span class="hljs-number">1</span>,$<span class="hljs-number">2</span>)	<span class="hljs-comment">--三个字段</span><br></code></pre></div></td></tr></tbody></table></figure>
-<h2 id="Hive表导入到MySQL表"><a href="#Hive表导入到MySQL表" class="headerlink" title="Hive表导入到MySQL表"></a>Hive表导入到MySQL表</h2><p>Hive表数据导入（数据采集）业务库MySQL表的步骤：(就Hive表和MySQL表反过来呗)</p>
-<ol>
+<h2 id="hive表导入到mysql表">Hive表导入到MySQL表</h2>
+<p>Hive表数据导入（数据采集）业务库MySQL表的步骤：(就Hive表和MySQL表反过来呗)</p>
+<ol type="1">
 <li>找到Hive表，查看表结构或建表语句</li>
 <li>创建MySQL表</li>
 <li>创建调度作业</li>
 <li>触发调度调度，核对数据</li>
 </ol>
-<h3 id="无自增id"><a href="#无自增id" class="headerlink" title="无自增id"></a>无自增id</h3><p>就跟采集那样，但是反过来</p>
-<h3 id="有自增id"><a href="#有自增id" class="headerlink" title="有自增id"></a>有自增id</h3><p>如果MySQL有自增id，那Hive表里是不用管的（hive插入的时候不用插入id这个字段）</p>
+<h3 id="无自增id">无自增id</h3>
+<p>就跟采集那样，但是反过来</p>
+<h3 id="有自增id">有自增id</h3>
+<p>如果MySQL有自增id，那Hive表里是不用管的（hive插入的时候不用插入id这个字段）</p>
 <p>如果Hive表结构是这样的</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`mysql_store_gmv`</span> (<br>  <span class="hljs-string">`dt`</span> <span class="hljs-keyword">string</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'日期'</span>,<br>  <span class="hljs-string">`store_id`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'店铺ID'</span>,<br>   <span class="hljs-string">`gmv`</span> <span class="hljs-built_in">int</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'该店铺当天成交金额总和'</span><br>) <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">'店铺gmv'</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>而MySQL又需要自增id，则MySQL建表语句是这样的（相比上面的例子，这里增加了id这个字段，注意后面的参数是<kbd>AUTO_INCREMENT</kbd>）</p>

@@ -13,15 +13,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#3cbdfe">
-  <meta name="description" content="学习…">
+  <meta name="description" content="学习...">
   <meta name="author" content="CAIWEI">
   <meta name="keywords" content="">
-  <meta name="description" content="学习…">
+  <meta name="description" content="学习...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信小程序反编译">
 <meta property="og:url" content="http://example.com/2020/03/25/wei_xin_xiao_cheng_xu_fan_bian_yi/index.html">
 <meta property="og:site_name" content="CAIWEI的博客">
-<meta property="og:description" content="学习…">
+<meta property="og:description" content="学习...">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://game.gtimg.cn/images/yxzj/img201606/skin/hero-info/176/176-bigskin-2.jpg">
 <meta property="article:published_time" content="2020-03-24T22:01:53.000Z">
@@ -252,56 +252,61 @@
             <h1 style="display: none">微信小程序反编译</h1>
             
             <div class="markdown-body">
-              <p>学习…</p>
+              <p>学习...</p>
 <a id="more"></a>
 <p>使用wxappUnpacker安装小程序反编译工具（2020.03）</p>
 <p><strong>关键词:</strong> 小程序 wxss</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>上次分享了<a href="工具：web前端爬取">web前端爬取工具</a> ，那么这次也同样讲讲微信小程序反编译吧，对于像博主这种审美奇低且前端技术渣渣的人来说，实在是利器呀。不过尽量只是反编译来学习研究啦！</p>
-<h2 id="安装反编译脚本"><a href="#安装反编译脚本" class="headerlink" title="安装反编译脚本"></a>安装反编译脚本</h2><p>首先，得先了解下怎么安装,内容过长，我就不Ctrl CV了(主要是安装简单，成功并且完美地编译难)</p>
+<h2 id="介绍">介绍</h2>
+<p>上次分享了<a href="工具：web前端爬取">web前端爬取工具</a> ，那么这次也同样讲讲微信小程序反编译吧，对于像博主这种审美奇低且前端技术渣渣的人来说，实在是利器呀。不过尽量只是反编译来学习研究啦！</p>
+<h2 id="安装反编译脚本">安装反编译脚本</h2>
+<p>首先，得先了解下怎么安装,内容过长，我就不Ctrl CV了(主要是安装简单，成功并且完美地编译难)</p>
 <p>完美地反编译出来难就难在微信小程序一直更新，但是编译工具又是旧的</p>
 <p>First,<a href="https://www.jianshu.com/p/97b7d5498dcd" target="_blank" rel="noopener">终于成功了，分享一波超详细小程序源码获取方法——图文!</a></p>
 <p>如果想省事，安装nodejs之后直接下载下面的链接的文件替换掉你的反编译工具：</p>
-<p><a href="https://gitee.com/Sao-operation/wxappUnpacker/repository/archive/master.zip" target="_blank" rel="noopener">https://gitee.com/Sao-operation/wxappUnpacker/repository/archive/master.zip</a></p>
+<p>https://gitee.com/Sao-operation/wxappUnpacker/repository/archive/master.zip</p>
 <p>如果你只是样式编译出问题了（就是page的wxss都是空白的），那么</p>
 <ul>
 <li>修改wxappUnpacker文件中的 <code>wuWxss.js</code></li>
 </ul>
 <figure class="highlight css"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">function</span> <span class="hljs-selector-tag">runVM</span>(<span class="hljs-selector-tag">name</span>, <span class="hljs-selector-tag">code</span>) {<br>      // let wxAppCode = {}, handle = {cssFile: name};<br>      // let vm = new VM({<br>      //    sandbox: Object.assign(new GwxCfg(), {<br>      //       __wxAppCode__: wxAppCode,<br>      //       setCssToHead: cssRebuild.bind(handle)<br>      //    })<br>      // });<br>      // vm.run(code);<br>      // for (let name in wxAppCode) if (name.endsWith(".wxss")) {<br>      //    handle.cssFile = path.resolve(frameName, "..", name);<br>      //    wxAppCode[name]();<br>      // }<br> <br>      let wxAppCode = {};<br>      let handle = {cssFile: name};<br>      let gg = new GwxCfg();<br>      let tsandbox = {<br>         $gwx: GwxCfg.prototype["$gwx"],<br>         __mainPageFrameReady__: GwxCfg.prototype["$gwx"],   //解决 $gwx is not defined<br>         __vd_version_info__: GwxCfg.prototype["$gwx"],  //解决 __vd_version_info__ is not defined<br>         __<span class="hljs-selector-tag">wxAppCode__</span>: <span class="hljs-selector-tag">wxAppCode</span>,<br>         <span class="hljs-selector-tag">setCssToHead</span>: <span class="hljs-selector-tag">cssRebuild</span><span class="hljs-selector-class">.bind</span>(<span class="hljs-selector-tag">handle</span>)<br>      }<br> <br>      let vm = new VM({sandbox: tsandbox});<br>      <span class="hljs-selector-tag">vm</span><span class="hljs-selector-class">.run</span>(<span class="hljs-selector-tag">code</span>);<br>      <span class="hljs-selector-tag">for</span> (<span class="hljs-selector-tag">let</span> <span class="hljs-selector-tag">name</span> <span class="hljs-selector-tag">in</span> <span class="hljs-selector-tag">wxAppCode</span>) {<br>         if (name.endsWith(".wxss")) {<br>            handle.cssFile = path.resolve(frameName, "..", name);<br>            <span class="hljs-selector-tag">wxAppCode</span><span class="hljs-selector-attr">[name]</span>();<br>         }<br>      }<br>   }<br></code></pre></div></td></tr></tbody></table></figure>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="获取wxapkg文件"><a href="#获取wxapkg文件" class="headerlink" title="获取wxapkg文件"></a>获取wxapkg文件</h3><ol>
+<h2 id="使用">使用</h2>
+<h3 id="获取wxapkg文件">获取wxapkg文件</h3>
+<ol type="1">
 <li><p>安装夜深模拟器（但是这里有个问题，夜深模拟器可能用不了，我只记得是多开器里开一个新的才行，而且以后每次使用都得切换成那个新的）</p>
-<center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/e09793ce1f6c1e1b7df8ee715ffe644.png" srcset="/img/loading.gif" lazyload="" width="50%"></center>
-</li>
-<li><p>打开夜深模拟器登录微信，点击需要学(piao)习(qie)的微信小程序</p>
-</li>
-</ol>
-<ol>
+<center>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/e09793ce1f6c1e1b7df8ee715ffe644.png" srcset="/img/loading.gif" lazyload="" width="50%"></p>
+</center></li>
+<li><p>打开夜深模拟器登录微信，点击需要学(piao)习(qie)的微信小程序</p></li>
 <li><p>打开RE文件管理器（没有的话就先安装吧）,到如下目录,打开这个看着名字是十六进制且很长的文件夹（每个人的会不一样）</p>
-<center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/ee216cc30578465e21856c8e9129287.png" srcset="/img/loading.gif" lazyload="" width="50%"></center>
-</li>
+<center>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/ee216cc30578465e21856c8e9129287.png" srcset="/img/loading.gif" lazyload="" width="50%"></p>
+</center></li>
 <li><p>进入如下目录，选择wxapkg文件（注意日期，例如红线部分意为6月17日）</p>
-<center><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/915a490aff677433a5788b2c0eca4ef.png" srcset="/img/loading.gif" lazyload="" width="100%"></center>
-</li>
-<li><p>想办法把wxapkg文件从夜深模拟器里发送到你的能找到到电脑文件夹里吧</p>
-</li>
+<center>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/blog/FrontEnd/915a490aff677433a5788b2c0eca4ef.png" srcset="/img/loading.gif" lazyload="" width="100%"></p>
+</center></li>
+<li><p>想办法把wxapkg文件从夜深模拟器里发送到你的能找到到电脑文件夹里吧</p></li>
 </ol>
-<h3 id="反编译"><a href="#反编译" class="headerlink" title="反编译"></a>反编译</h3><ol>
+<h3 id="反编译">反编译</h3>
+<ol type="1">
 <li><p>打开nodejs</p>
-<p> <img src="https://upload-images.jianshu.io/upload_images/19330433-85c7fe8788ed7a1f.png?imageMogr2/auto-orient/strip|imageView2/2/w/338/format/webp" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p> 跳转到反编译脚本的目录，例如反编译脚本呢放在D盘，且反编译脚本文件夹名为”wxappUnpacker“，如果是Windows系统( 如果是Linux去掉下面那个蛋疼的 /d)，则在node.js command pormpt输入：</p>
+<figure>
+<img src="https://upload-images.jianshu.io/upload_images/19330433-85c7fe8788ed7a1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/338/format/webp" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>跳转到反编译脚本的目录，例如反编译脚本呢放在D盘，且反编译脚本文件夹名为”wxappUnpacker“，如果是Windows系统( 如果是Linux去掉下面那个蛋疼的 /d)，则在node.js command pormpt输入：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd/d D:\wxappUnpacker<br></code></pre></div></td></tr></tbody></table></figure>
 <p>或</p>
-<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd D:\wxappUnpacker<br>cd D:<br></code></pre></div></td></tr></tbody></table></figure>
-</li>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd D:\wxappUnpacker<br>cd D:<br></code></pre></div></td></tr></tbody></table></figure></li>
 <li><p>跳转到反编译脚本的根目录之后，在电脑文件夹里找到wxapkg文件，例如wxapkg文件放在D盘，且文件名为_000000_1.wxapkg，则在node.js command pormpt输入：</p>
 <figure class="highlight shell"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">node wuWxapkg.js -d D:\_000000_1.wxapkg<br></code></pre></div></td></tr></tbody></table></figure>
-<p>再回车</p>
-</li>
-<li><p>最后去找和.wxapkg文件相同路径下的同名文件夹，该文件用<strong>微信开发者工具</strong>打开即可。</p>
-</li>
+<p>再回车</p></li>
+<li><p>最后去找和.wxapkg文件相同路径下的同名文件夹，该文件用<strong>微信开发者工具</strong>打开即可。</p></li>
 </ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>反编译…真香（我这是馋他的代码吗，我这是在学习研究）</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.jianshu.com/p/97b7d5498dcd" target="_blank" rel="noopener">终于成功了，分享一波超详细小程序源码获取方法——图文：顺毛驴_dedc</a></p>
-<p><a href="https://blog.csdn.net/weixin_34342992/article/details/91383119" target="_blank" rel="noopener">反编译微信小程序错误: $gwx is not defined和<strong>vd_version_info</strong> is not defined 已解决</a></p>
+<h2 id="结论">结论</h2>
+<p>反编译...真香（我这是馋他的代码吗，我这是在学习研究）</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://www.jianshu.com/p/97b7d5498dcd" target="_blank" rel="noopener">终于成功了，分享一波超详细小程序源码获取方法——图文：顺毛驴_dedc</a></p>
+<p><a href="https://blog.csdn.net/weixin_34342992/article/details/91383119" target="_blank" rel="noopener">反编译微信小程序错误: $gwx is not defined和__vd_version_info__ is not defined 已解决</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

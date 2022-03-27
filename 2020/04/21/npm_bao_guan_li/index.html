@@ -256,36 +256,46 @@
             <div class="markdown-body">
               <p>来看看npm安装并管理众多的软件包安装</p>
 <a id="more"></a>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>npm是个包管理工具（想象一个项目中上千个包该怎么管理，嗯，到底香在哪里不用我多说了吧？）</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ol>
+<h2 id="介绍">介绍</h2>
+<p>npm是个包管理工具（想象一个项目中上千个包该怎么管理，嗯，到底香在哪里不用我多说了吧？）</p>
+<h2 id="安装">安装</h2>
+<ol type="1">
 <li>安装git</li>
 <li>安装并配置nodejs</li>
 </ol>
-<h3 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h3><p>下载并安装Git，在<code>我的电脑-鼠标右键添加属性-高级系统设置-环境变量-系统变量-Path</code>处添加变量，例如安装路径是<code>D:\Git</code>，那么就添加变量</p>
+<h3 id="安装git">安装git</h3>
+<p>下载并安装Git，在<code>我的电脑-鼠标右键添加属性-高级系统设置-环境变量-系统变量-Path</code>处添加变量，例如安装路径是<code>D:\Git</code>，那么就添加变量</p>
 <p><a href="https://blog.csdn.net/sanxd/article/details/82624127" target="_blank" rel="noopener">具体看这个吧，太久了～我怕遗漏了什么步骤</a></p>
 <p><code>D:\Git\usr\bin\</code></p>
 <p><code>D:\Git\usr\bin\ssh-keygen.exe</code></p>
 <p>这样就能在电脑的任意文件夹位置打开git</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/80ef2b6371e96bf39133297493ccf7e.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
-<h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>nodejs安装没什么好说的，建议安装<code>最高版本的稳定版本</code>，直接在官网下载然后下一步～下一步</p>
-<p><a href="https://nodejs.org/dist/" target="_blank" rel="noopener">https://nodejs.org/dist/</a>    官网，直接选择合适的版本</p>
-<p>如果不知道怎么选，可以下载这个 <a href="https://nodejs.org/dist/v12.10.0/（现在是2020年）" target="_blank" rel="noopener">https://nodejs.org/dist/v12.10.0/（现在是2020年）</a></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>安装淘宝镜像</p>
-<p>npm config set registry <a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/80ef2b6371e96bf39133297493ccf7e.png" srcset="/img/loading.gif" lazyload=""></p>
+<h3 id="安装nodejs">安装nodejs</h3>
+<p>nodejs安装没什么好说的，建议安装<code>最高版本的稳定版本</code>，直接在官网下载然后下一步～下一步</p>
+<p>https://nodejs.org/dist/ 官网，直接选择合适的版本</p>
+<p>如果不知道怎么选，可以下载这个 https://nodejs.org/dist/v12.10.0/（现在是2020年）</p>
+<h2 id="配置">配置</h2>
+<p>安装淘宝镜像</p>
+<p>npm config set registry https://registry.npm.taobao.org</p>
 <p>之后就用<code>cnpm</code>命令代替<code>npm</code>命令了</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="　使用"></a>　使用</h2><p>一般项目把代码放到github等平台，都不会放依赖包的，为什么？因为有些人有这些依赖包了，有些人又没人，而且全都放到代码托管平台可能导致文件很大，所以合适的方式是写清楚自己用了什么依赖包。这些依赖包信息会写在一个叫<code>package.json</code>的文件，这个package.json打开是这样子的：</p>
-<p><img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200713015959811.png" srcset="/img/loading.gif" lazyload="" alt="package.json文件内容"></p>
+<p>##　使用</p>
+<p>一般项目把代码放到github等平台，都不会放依赖包的，为什么？因为有些人有这些依赖包了，有些人又没人，而且全都放到代码托管平台可能导致文件很大，所以合适的方式是写清楚自己用了什么依赖包。这些依赖包信息会写在一个叫<code>package.json</code>的文件，这个package.json打开是这样子的：</p>
+<figure>
+<img src="https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/md/image-20200713015959811.png" srcset="/img/loading.gif" lazyload="" alt="package.json文件内容"><figcaption aria-hidden="true">package.json文件内容</figcaption>
+</figure>
 <p>不用管这个，如果要安装上述依赖包，那么只要在放着package.json的这个文件目录打开<code>git bash</code>，输入</p>
 <figure class="highlight cmake"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">cnpm <span class="hljs-keyword">install</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>（这里使用淘宝镜像，所以是cnpm；如果不使用淘宝镜像则是<code>npm install</code>）</p>
 <p>然后会在当前目录生成一个<code>node_modules</code>文件夹，这个文件夹里就放着依赖包。</p>
-<h2 id="关于全局与局部安装依赖包"><a href="#关于全局与局部安装依赖包" class="headerlink" title="关于全局与局部安装依赖包"></a>关于全局与局部安装依赖包</h2><p>如果要安装某个依赖包，例如安装hexo-renderer-marked，则输入</p>
+<h2 id="关于全局与局部安装依赖包">关于全局与局部安装依赖包</h2>
+<p>如果要安装某个依赖包，例如安装hexo-renderer-marked，则输入</p>
 <figure class="highlight sql"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">cnpm <span class="hljs-keyword">install</span> hexo-renderer-kramed <span class="hljs-comment">--save</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>这样依赖包会安装在<strong>当前目录的</strong><code>node_modules</code>文件夹里，这种是局部安装的模式</p>
 <p>如果输入的是</p>
 <figure class="highlight cmake"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">cnpm <span class="hljs-keyword">install</span> -g hexo-renderer-kramed<br></code></pre></div></td></tr></tbody></table></figure>
 <p>则会安装到你的node文件夹目录下，即全局安装</p>
-<h3 id="关于版本号"><a href="#关于版本号" class="headerlink" title="关于版本号"></a>关于版本号</h3><p>如果要安装指定版本，可以在依赖包后面加上 <code>@版本号</code>，例如：</p>
+<h3 id="关于版本号">关于版本号</h3>
+<p>如果要安装指定版本，可以在依赖包后面加上 <code>@版本号</code>，例如：</p>
 <figure class="highlight angelscript"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">cnpm install hexo-renderer-<span class="hljs-symbol">kramed@</span><span class="hljs-number">0.1</span><span class="hljs-number">.4</span>  --save<br></code></pre></div></td></tr></tbody></table></figure>
 <p>有时候会见到<code>@^版本号</code>这样的，^表示匹配较高版本的包</p>
 <ul>

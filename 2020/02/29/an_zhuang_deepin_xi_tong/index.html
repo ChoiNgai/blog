@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      631 字
+      634 字
     </span>
   
 
@@ -254,19 +254,26 @@
             <div class="markdown-body">
               <p>如何安装国产操作系统deepin</p>
 <a id="more"></a>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本篇将介绍如何在一台新的电脑(比如组装机)从只有一个BOIS系统安装deepin系统（对于安装大多数linux系统来说，都是这个思路），这跟有操作系统的电脑安装双系统是一样的，操作上都是靠bois这个基本的输入输出系统完成。</p>
-<h2 id="可能遇上的问题"><a href="#可能遇上的问题" class="headerlink" title="可能遇上的问题"></a>可能遇上的问题</h2><p>安装Linux系统主要可能遇上的问题是<strong>显卡</strong>，因为目前个人电脑的显卡多是对windows系统定制的（苹果系统抛开另说），尽管NVIDIA和AMD有开源的显卡驱动，但是始终都是商用的性能比较好。</p>
+<h2 id="介绍">介绍</h2>
+<p>本篇将介绍如何在一台新的电脑(比如组装机)从只有一个BOIS系统安装deepin系统（对于安装大多数linux系统来说，都是这个思路），这跟有操作系统的电脑安装双系统是一样的，操作上都是靠bois这个基本的输入输出系统完成。</p>
+<h2 id="可能遇上的问题">可能遇上的问题</h2>
+<p>安装Linux系统主要可能遇上的问题是<strong>显卡</strong>，因为目前个人电脑的显卡多是对windows系统定制的（苹果系统抛开另说），尽管NVIDIA和AMD有开源的显卡驱动，但是始终都是商用的性能比较好。</p>
 <p>如果安装系统的时候<strong>显卡不怎么适配系统</strong>，那么就会导致安装完系统也无法开机。</p>
-<h2 id="安装系统"><a href="#安装系统" class="headerlink" title="安装系统"></a>安装系统</h2><p>例如用AMD R3安装deepin系统，安装的套路是:</p>
-<ol>
+<h2 id="安装系统">安装系统</h2>
+<p>例如用AMD R3安装deepin系统，安装的套路是:</p>
+<ol type="1">
 <li>首先准备一个储存空间8G以上的U盘，deepin官网下载<a href="https://www.deepin.org/zh/original/deepin-boot-maker/" target="_blank" rel="noopener">U盘制作工具</a>（软通碟等也可），<a href="https://www.deepin.org/zh/download/" target="_blank" rel="noopener">下载deepin系统</a>，制作U盘启动工具。</li>
 <li>需要安装的电脑插入U盘，狂按delete键（有些电脑是esc键，每个品牌不同，具体查资料看看）进入bois系统，把U盘启动设置为首启动项。</li>
 <li>按提示(套路)安装系统,安装完之后把进入bois系统把首启动项改回电脑系统。</li>
 </ol>
 <p>然鹅。。。</p>
-<h2 id="解决显卡问题"><a href="#解决显卡问题" class="headerlink" title="解决显卡问题"></a>解决显卡问题</h2><p> 问题：在制作好deepin安装盘后，从u盘启动，选择”Install Deepin”后，会进入<strong>黑屏</strong>状态，无法显示任何内容。<br>   解决方法（禁用显卡驱动）：<strong>加启动参数’nomodeset’</strong>, 在选择界面按e或tab（底部有提示）编辑启动参数，这样一般可以进行正常安装</p>
-<p> <img src="https://bbs.deepin.org/data/attachment/forum/201901/27/233231u74f77a0e7zh477d.png" srcset="/img/loading.gif" lazyload="" alt="img"> </p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://bbs.deepin.org/forum.php?mod=viewthread&amp;tid=174315&amp;from=singlemessage" target="_blank" rel="noopener">AMD锐龙 2200g安装和使用deepin</a></p>
+<h2 id="解决显卡问题">解决显卡问题</h2>
+<p>问题：在制作好deepin安装盘后，从u盘启动，选择"Install Deepin"后，会进入<strong>黑屏</strong>状态，无法显示任何内容。 解决方法（禁用显卡驱动）：<strong>加启动参数'nomodeset'</strong>, 在选择界面按e或tab（底部有提示）编辑启动参数，这样一般可以进行正常安装</p>
+<figure>
+<img src="https://bbs.deepin.org/data/attachment/forum/201901/27/233231u74f77a0e7zh477d.png" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://bbs.deepin.org/forum.php?mod=viewthread&amp;tid=174315&amp;from=singlemessage" target="_blank" rel="noopener">AMD锐龙 2200g安装和使用deepin</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

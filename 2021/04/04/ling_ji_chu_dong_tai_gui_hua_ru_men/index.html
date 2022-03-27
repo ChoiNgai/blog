@@ -211,7 +211,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.9k 字
+      3k 字
     </span>
   
 
@@ -255,67 +255,67 @@
               <p>动态规划方法解题</p>
 <a id="more"></a>
 <p>动态规划分为3个部分：</p>
-<ol>
+<ol type="1">
 <li>确定状态</li>
 <li>转移方程</li>
 <li>初始条件和边界情况</li>
 </ol>
 <ul>
 <li><p><strong>确定状态</strong></p>
-<p>即数列每个元素$f[i]$或矩阵每个元素$f[i][j]$代表着什么</p>
-</li>
+<p>即数列每个元素<span class="math inline">\(f[i]\)</span>或矩阵每个元素<span class="math inline">\(f[i][j]\)</span>代表着什么</p></li>
 <li><p><strong>转移方程</strong></p>
-<p>例如斐波那契数列的转移方程是$F(n) = F(n-1)+F(n-2)$，这个表示的是每个元素的关系</p>
-</li>
+<p>例如斐波那契数列的转移方程是<span class="math inline">\(F(n) = F(n-1)+F(n-2)\)</span>，这个表示的是每个元素的关系</p></li>
 <li><p><strong>初始条件和边界情况</strong></p>
-<p>初始条件，例如$f[0]$等于多少</p>
-<p>边界情况，什么时候停下，$i$的范围是多少</p>
-<p><a href="https://zhuanlan.zhihu.com/p/356804629" target="_blank" rel="noopener">参考：肝了好多天-动态规划十连-超细腻解析</a></p>
-</li>
+<p>初始条件，例如<span class="math inline">\(f[0]\)</span>等于多少</p>
+<p>边界情况，什么时候停下，<span class="math inline">\(i\)</span>的范围是多少</p>
+<p><a href="https://zhuanlan.zhihu.com/p/356804629" target="_blank" rel="noopener">参考：肝了好多天-动态规划十连-超细腻解析</a></p></li>
 </ul>
-<h3 id="斐波那契问题"><a href="#斐波那契问题" class="headerlink" title="斐波那契问题"></a>斐波那契问题</h3><ul>
+<h3 id="斐波那契问题">斐波那契问题</h3>
+<ul>
 <li><a href="https://leetcode-cn.com/problems/fibonacci-number/" target="_blank" rel="noopener">509. 斐波那契数</a></li>
 </ul>
-<script type="math/tex; mode=display">
-F(0) = 0,F(1) = 1    \\
-F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
-<p>从上述问题可知，初始条件为$F(0)=1,F(1)=1$</p>
+<p><span class="math display">\[
+F(0) = 0,F(1) = 1   \\
+F(n) = F(n-1)+F(n-2),n&gt;1
+\]</span></p>
+<p>给定<span class="math inline">\(n\)</span>，计算<span class="math inline">\(F(n)\)</span></p>
+<p>从上述问题可知，初始条件为<span class="math inline">\(F(0)=1,F(1)=1\)</span></p>
 <p>方法一（<strong>暴力递归-深度优先搜索</strong>）：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(self, n: int)</span> -&gt; int:</span><br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> self.fib(n - <span class="hljs-number">1</span>) + self.fib(n - <span class="hljs-number">2</span>)<br></code></pre></div></td></tr></tbody></table></figure>
 <p>不超时算我输，这里暴力递归显然没有利用上此前已计算出来的结果</p>
 <p>方法二（<strong>带记忆的方法</strong>）：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span><span class="hljs-params">(self, n: int)</span> -&gt; int:</span><br>        f = [<span class="hljs-number">0</span>] * (n+<span class="hljs-number">1</span>)	<span class="hljs-comment">#初始化一个元素个数为n+1且元素全为0的列表</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            f[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>            f[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>,len(f)):<br>                f[i] = f[i<span class="hljs-number">-1</span>] + f[i<span class="hljs-number">-2</span>]	<span class="hljs-comment">#转移方程</span><br>            <span class="hljs-keyword">return</span> f[<span class="hljs-number">-1</span>]	<span class="hljs-comment">#返回列表最后一个数</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>上述代码中，$f[i]$表示的是数列中第$i$个元素的数值（确定状态），$f(i) = f(i-1) + f(i-2)$（转移方程），$f(0) = f(1) = 1$（初始状态），迭代到第$n$个元素就停止（边界条件）</p>
+<p>上述代码中，<span class="math inline">\(f[i]\)</span>表示的是数列中第<span class="math inline">\(i\)</span>个元素的数值（确定状态），<span class="math inline">\(f(i) = f(i-1) + f(i-2)\)</span>（转移方程），<span class="math inline">\(f(0) = f(1) = 1\)</span>（初始状态），迭代到第<span class="math inline">\(n\)</span>个元素就停止（边界条件）</p>
 <p><a href="https://leetcode-cn.com/problems/climbing-stairs/solution/zhi-xin-hua-shi-pa-lou-ti-zhi-cong-bao-l-lo1t/" target="_blank" rel="noopener">参考：【知信】花式爬楼梯，从暴力爬楼梯，到动态规划爬楼梯</a></p>
 <p>斐波那契问题简单，如果换成具体问题呢？</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/climbing-stairs/" target="_blank" rel="noopener">70. 爬楼梯</a></li>
 </ul>
 <p>一样先<strong>确定状态</strong>，然后写出<strong>转移方程</strong>，最后是<strong>初始条件和边界情况</strong></p>
-<p>这里$f[i]$的值表示爬楼梯的方法数（确定状态）</p>
-<p>因为每次可以爬1或2步，所以到第$i$格楼梯的爬法（个数）都是由到$i-1$和到$i-2$阶楼梯的爬法相加，因而转移方程为$f(i) = f(i-1) + f(i-2)$</p>
-<p>初始条件$f(0) = f(1) = 1$（爬第一格楼梯和第二个楼梯只有一种方法），从2开始迭代到n+1（第一个元素用来存储第0格楼梯的爬法了，所以是n+1）从而可以确定边界条件</p>
+<p>这里<span class="math inline">\(f[i]\)</span>的值表示爬楼梯的方法数（确定状态）</p>
+<p>因为每次可以爬1或2步，所以到第<span class="math inline">\(i\)</span>格楼梯的爬法（个数）都是由到<span class="math inline">\(i-1\)</span>和到<span class="math inline">\(i-2\)</span>阶楼梯的爬法相加，因而转移方程为<span class="math inline">\(f(i) = f(i-1) + f(i-2)\)</span></p>
+<p>初始条件<span class="math inline">\(f(0) = f(1) = 1\)</span>（爬第一格楼梯和第二个楼梯只有一种方法），从2开始迭代到n+1（第一个元素用来存储第0格楼梯的爬法了，所以是n+1）从而可以确定边界条件</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(self, n: int)</span> -&gt; int:</span><br>        f = [<span class="hljs-number">0</span>]*(n+<span class="hljs-number">1</span>)	  <span class="hljs-comment">#生成n+1个元素的列表</span><br>        f[<span class="hljs-number">0</span>] = f[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>   <span class="hljs-comment"># 0格楼梯和1格楼梯只需要1步</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>,n+<span class="hljs-number">1</span>):<br>            f[i] = f[i<span class="hljs-number">-1</span>] + f[i<span class="hljs-number">-2</span>]	<span class="hljs-comment">#转移方程</span><br>        <span class="hljs-keyword">return</span> f[<span class="hljs-number">-1</span>]	<span class="hljs-comment">#列表的倒数第一个元素（最后一个元素）</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>这种是每次可以爬一步或两步的，同理，如果可以爬三步的，那转移方程则为$f(i) = f(i-1) + f(i-2) + f(i-3)$</p>
+<p>这种是每次可以爬一步或两步的，同理，如果可以爬三步的，那转移方程则为<span class="math inline">\(f(i) = f(i-1) + f(i-2) + f(i-3)\)</span></p>
 <p>具体题目看</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/three-steps-problem-lcci/" target="_blank" rel="noopener">面试题 08.01. 三步问题</a></li>
 </ul>
 <p>还是像之前那样先<strong>确定状态</strong>，然后写出<strong>转移方程</strong>，最后是<strong>初始条件和边界情况</strong></p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">waysToStep</span><span class="hljs-params">(self, n: int)</span> -&gt; int:</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">1</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">2</span><br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">3</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">4</span><br>        <span class="hljs-keyword">else</span>:<br>            dp = [<span class="hljs-number">0</span>] * (n+<span class="hljs-number">1</span>)<br>            dp[<span class="hljs-number">0</span>] = dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span><br>            dp[<span class="hljs-number">2</span>] = <span class="hljs-number">2</span><br>            dp[<span class="hljs-number">3</span>] = <span class="hljs-number">4</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">3</span>,n+<span class="hljs-number">1</span>):<br>                dp[i] = dp[i<span class="hljs-number">-1</span>] + dp[i<span class="hljs-number">-2</span>] + dp[i<span class="hljs-number">-3</span>]<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">-1</span>]%<span class="hljs-number">1000000007</span><br></code></pre></div></td></tr></tbody></table></figure>
-<p>上述代码中if部分为特例，else部分显然包括了状态（$f(i)$表示有多少种爬法）；转移方程则变成了$f(i) = f(i-1) + f(i-2) + f(i-3)$，迭代次数为到$n+1$停止（边界条件）</p>
+<p>上述代码中if部分为特例，else部分显然包括了状态（<span class="math inline">\(f(i)\)</span>表示有多少种爬法）；转移方程则变成了<span class="math inline">\(f(i) = f(i-1) + f(i-2) + f(i-3)\)</span>，迭代次数为到<span class="math inline">\(n+1\)</span>停止（边界条件）</p>
 <ul>
 <li><a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/" target="_blank" rel="noopener">746. 使用最小花费爬楼梯</a></li>
 </ul>
 <p>之前的题都是有几种爬楼梯的方法，这次题目换了一下，增加的条件是每爬一次都有体力消耗，求爬完楼梯最小体力消耗是多少（体力的最低花费）？</p>
 <p>套路：</p>
-<p><strong>确定状态</strong>：这次$f(i)$表示的不是有几种爬法了，因为题目求体力的最低花费，所以此时$f(i)$表示的是爬到第$i$格楼梯体力的最低花费；</p>
-<p><strong>转移方程</strong>：$f(i) = min[ f(i-1)+cost(i),f(i-2)+cost(i-1) ]$，$f(i)$表示爬到第$i$格楼梯体力的最低花费，因为每次可以爬楼梯1或2阶，所以爬到第$i$阶有两种可能：</p>
-<ol>
-<li>爬到第$i-1$阶再爬1步到第$i$阶（耗费体力为$f(i-1)+cost[i]$）</li>
-<li>爬到$i-2$阶再爬2步第$i$阶（耗费体力为$f(i-2)+cost[i-1]$）</li>
+<p><strong>确定状态</strong>：这次<span class="math inline">\(f(i)\)</span>表示的不是有几种爬法了，因为题目求体力的最低花费，所以此时<span class="math inline">\(f(i)\)</span>表示的是爬到第<span class="math inline">\(i\)</span>格楼梯体力的最低花费；</p>
+<p><strong>转移方程</strong>：<span class="math inline">\(f(i) = min[ f(i-1)+cost(i),f(i-2)+cost(i-1) ]\)</span>，<span class="math inline">\(f(i)\)</span>表示爬到第<span class="math inline">\(i\)</span>格楼梯体力的最低花费，因为每次可以爬楼梯1或2阶，所以爬到第<span class="math inline">\(i\)</span>阶有两种可能：</p>
+<ol type="1">
+<li>爬到第<span class="math inline">\(i-1\)</span>阶再爬1步到第<span class="math inline">\(i\)</span>阶（耗费体力为<span class="math inline">\(f(i-1)+cost[i]\)</span>）</li>
+<li>爬到<span class="math inline">\(i-2\)</span>阶再爬2步第<span class="math inline">\(i\)</span>阶（耗费体力为<span class="math inline">\(f(i-2)+cost[i-1]\)</span>）</li>
 </ol>
-<p>所以，显然两种方式里哪个小，则哪种就是到第$i$阶的体力最低花费，因而得到转移方程</p>
+<p>所以，显然两种方式里哪个小，则哪种就是到第<span class="math inline">\(i\)</span>阶的体力最低花费，因而得到转移方程</p>
 <p><strong>初始条件和边界情况</strong>：（懒得写了）</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minCostClimbingStairs</span><span class="hljs-params">(self, cost: List[int])</span> -&gt; int:</span><br>        <br>        n = len(cost)<br>        <span class="hljs-keyword">if</span> n == <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">return</span> min(cost)<br>        <span class="hljs-keyword">else</span>:<br>            x = [<span class="hljs-number">0</span>] * n<br>            x[<span class="hljs-number">1</span>] = min(cost[<span class="hljs-number">0</span>],cost[<span class="hljs-number">1</span>])<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">2</span>,len(x)):<br>                x[i] = min(x[i<span class="hljs-number">-1</span>]+cost[i],x[i<span class="hljs-number">-2</span>]+cost[i<span class="hljs-number">-1</span>])<br>            <span class="hljs-keyword">return</span> x[<span class="hljs-number">-1</span>]<br></code></pre></div></td></tr></tbody></table></figure>
 <p>leetcode斐波那契问题合集：</p>
@@ -326,18 +326,22 @@ F(n) = F(n-1)+F(n-2),n>1</script><p>给定$n$，计算$F(n)$</p>
 <p><a href="https://leetcode-cn.com/problems/three-steps-problem-lcci/" target="_blank" rel="noopener">面试题 08.01. 三步问题</a></p>
 <p><a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/" target="_blank" rel="noopener">746. 使用最小花费爬楼梯</a></p>
 <p><a href="https://leetcode-cn.com/problems/n-th-tribonacci-number/" target="_blank" rel="noopener">1137. 第 N 个泰波那契数</a></p>
-<h3 id="从左上角到右下角"><a href="#从左上角到右下角" class="headerlink" title="从左上角到右下角"></a>从左上角到右下角</h3><ul>
+<h3 id="从左上角到右下角">从左上角到右下角</h3>
+<ul>
 <li><a href="https://leetcode-cn.com/problems/unique-paths/" target="_blank" rel="noopener">62. 不同路径</a></li>
 </ul>
 <p>机器人位于 m x n 网格的左上角，每次<strong>只能向下</strong>或者<strong>向右</strong>移动一步。机器人试图达到网格的右下角</p>
 <p>问总共有多少条不同的路径？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/robot_maze.png" srcset="/img/loading.gif" lazyload="" alt="img"></p>
-<p>还是动态规划，只是一维变二维（即使$f(i)$变$f(i,j)$，莫慌）</p>
+<figure>
+<img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/robot_maze.png" srcset="/img/loading.gif" lazyload="" alt="img"><figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>还是动态规划，只是一维变二维（即使<span class="math inline">\(f(i)\)</span>变<span class="math inline">\(f(i,j)\)</span>，莫慌）</p>
 <p>还是像之前那样先<strong>确定状态</strong>，然后写出<strong>转移方程</strong>，最后是<strong>初始条件和边界情况</strong></p>
-<p><strong>确定状态</strong>:$f(i,j)$表示到第$i$行第$j$列的位置有多少种走法</p>
-<p><strong>转移方程</strong>:因为只能向下或向右，所以$f(i,j) = f(i-1,j)+f(i,j-1)$</p>
-<p><strong>初始条件和边界情况</strong>：初始条件为$f(0,0)=1$，注意$0\le i\le m-1$，$0\le j \le n-1$（从零开始数嘛）</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(self, m: int, n: int)</span> -&gt; int:</span><br>        f = [ [<span class="hljs-number">0</span>] * n ] * m <span class="hljs-comment">#生成m*n大小的矩阵</span><br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,m):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,n):<br>                <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> j &gt; <span class="hljs-number">0</span>:<br>                    f[i][j] = f[i<span class="hljs-number">-1</span>][j] + f[i][j<span class="hljs-number">-1</span>]<br>                <span class="hljs-keyword">elif</span> i &gt; <span class="hljs-number">0</span> :<br>                    f[i][j] = f[i<span class="hljs-number">-1</span>][j]<br>                <span class="hljs-keyword">elif</span> j &gt; <span class="hljs-number">0</span> :<br>                    f[i][j] = f[i][j<span class="hljs-number">-1</span>]<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">continue</span><br>        <span class="hljs-keyword">return</span> f[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>]<br></code></pre></div></td></tr></tbody></table></figure><script>
+<p><strong>确定状态</strong>:<span class="math inline">\(f(i,j)\)</span>表示到第<span class="math inline">\(i\)</span>行第<span class="math inline">\(j\)</span>列的位置有多少种走法</p>
+<p><strong>转移方程</strong>:因为只能向下或向右，所以<span class="math inline">\(f(i,j) = f(i-1,j)+f(i,j-1)\)</span></p>
+<p><strong>初始条件和边界情况</strong>：初始条件为<span class="math inline">\(f(0,0)=1\)</span>，注意<span class="math inline">\(0\le i\le m-1\)</span>，<span class="math inline">\(0\le j \le n-1\)</span>（从零开始数嘛）</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(self, m: int, n: int)</span> -&gt; int:</span><br>        f = [ [<span class="hljs-number">0</span>] * n ] * m <span class="hljs-comment">#生成m*n大小的矩阵</span><br>        f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,m):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,n):<br>                <span class="hljs-keyword">if</span> i &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> j &gt; <span class="hljs-number">0</span>:<br>                    f[i][j] = f[i<span class="hljs-number">-1</span>][j] + f[i][j<span class="hljs-number">-1</span>]<br>                <span class="hljs-keyword">elif</span> i &gt; <span class="hljs-number">0</span> :<br>                    f[i][j] = f[i<span class="hljs-number">-1</span>][j]<br>                <span class="hljs-keyword">elif</span> j &gt; <span class="hljs-number">0</span> :<br>                    f[i][j] = f[i][j<span class="hljs-number">-1</span>]<br>                <span class="hljs-keyword">else</span>:<br>                    <span class="hljs-keyword">continue</span><br>        <span class="hljs-keyword">return</span> f[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>]<br></code></pre></div></td></tr></tbody></table></figure>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }

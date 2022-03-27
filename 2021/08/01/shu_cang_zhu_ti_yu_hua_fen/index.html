@@ -259,33 +259,42 @@
               <p>数据仓库主体域划分一直是个难题</p>
 <a id="more"></a>
 <p>因为数据仓库是面向主题的，所以主题域的划分显得很重要，因为主题域的确定也意味着数据的目的是干什么的。有关于主题划分的文章较少，阿里大数据之路这本书也没有单独的章节来讲主题域的划分，因为这个是需要对业务场景来说的，而且就算确定的业务场景也没有说百分百该如何划分，我还见过一群在互联网大数据领域有着多年工作经验的数仓专家们讨论某个表该划分到哪个主题域。所以，以下内容仅代表我在数仓主题域的一些拙见。</p>
-<h2 id="什么是数据仓库主题域？"><a href="#什么是数据仓库主题域？" class="headerlink" title="什么是数据仓库主题域？"></a>什么是数据仓库主题域？</h2><p>主题域通常是联系较为紧密的数据主题的集合。可以根据业务的关注点，将这些数据主题划分到不同的主题域。主题域的确定必须由最终用户和数据仓库的设计人员共同完成。</p>
-<h2 id="划分主题域方法"><a href="#划分主题域方法" class="headerlink" title="划分主题域方法"></a>划分主题域方法</h2><h3 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h3><p>在业务调研之后，可以进行主题域的划分。划分主题域，需要分析各个业务模块中有哪些业务活动。通常我们按照以下方法划分主题域，可以按照用户企业的部门划分，也可以按照业务过程或者业务板块中的功能模块划分。</p>
+<h2 id="什么是数据仓库主题域">什么是数据仓库主题域？</h2>
+<p>主题域通常是联系较为紧密的数据主题的集合。可以根据业务的关注点，将这些数据主题划分到不同的主题域。主题域的确定必须由最终用户和数据仓库的设计人员共同完成。</p>
+<h2 id="划分主题域方法">划分主题域方法</h2>
+<h3 id="传统方法">传统方法</h3>
+<p>在业务调研之后，可以进行主题域的划分。划分主题域，需要分析各个业务模块中有哪些业务活动。通常我们按照以下方法划分主题域，可以按照用户企业的部门划分，也可以按照业务过程或者业务板块中的功能模块划分。</p>
 <ul>
 <li>按照系统划分：业务系统有几种，就划分为几类</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801204402.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801204402.png" srcset="/img/loading.gif" lazyload=""></p>
 <ul>
 <li>按业务划分：比如业务系统中有商品、交易、物流等过程，那这里的每一个过程就划分到一个主体域里。相对来说按业务划分主题域较常用。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801215033.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801215033.png" srcset="/img/loading.gif" lazyload=""></p>
 <ul>
 <li>按部门规划：比如公司内的生产、供应链、研发、销售等</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801204847.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
-<h3 id="数据中台常用方法"><a href="#数据中台常用方法" class="headerlink" title="数据中台常用方法"></a>数据中台常用方法</h3><p>目前较多大型互联网公司都有建设数据中台，这种模式下较多按业务划分。这种除了具有一级主题域以外，每个一级主题域还有二级主题域。具体架构图如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801214947.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801204847.png" srcset="/img/loading.gif" lazyload=""></p>
+<h3 id="数据中台常用方法">数据中台常用方法</h3>
+<p>目前较多大型互联网公司都有建设数据中台，这种模式下较多按业务划分。这种除了具有一级主题域以外，每个一级主题域还有二级主题域。具体架构图如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801214947.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>具体表现例子：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801215726.png" srcset="/img/loading.gif" lazyload="" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20210801215726.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>当然，在实际的业务中每个一级域下的二级域也不会就这么两三个。</p>
-<h2 id="主题域的核心"><a href="#主题域的核心" class="headerlink" title="主题域的核心"></a>主题域的核心</h2><p>为保障整个体系的生命力，主题域需要抽象提炼，并长期维护更新，但不轻易变动。划分数据域时，需满足以下两点：</p>
+<h2 id="主题域的核心">主题域的核心</h2>
+<p>为保障整个体系的生命力，主题域需要抽象提炼，并长期维护更新，但不轻易变动。划分数据域时，需满足以下两点：</p>
 <ul>
 <li>能涵盖当前所有的业务需求。</li>
 <li>能在新业务进入时，无影响地被包含进已有的主题域中和扩展新的主题域。</li>
 </ul>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><h3 id="一次能划分好主题域吗"><a href="#一次能划分好主题域吗" class="headerlink" title="一次能划分好主题域吗"></a>一次能划分好主题域吗</h3><p>首先，主题域是无法一次划分完整的，一般是一次先建立几个明确的主题，在大多数数据仓库的设计过程中都有一个主题域的选择过程。业务是一直发展的，因此设计之初不要想着一次把所有主题全部划分完整。我们可以遵循上面说的划分主题域的两个要点，后续采用迭代的方式补充。</p>
-<h3 id="划分为几个主题域合适"><a href="#划分为几个主题域合适" class="headerlink" title="划分为几个主题域合适"></a>划分为几个主题域合适</h3><p>主题域的个数由业务复杂度决定，但建议一级主题域在10个以内。</p>
-<h3 id="感觉可以划分到多个主题域？"><a href="#感觉可以划分到多个主题域？" class="headerlink" title="感觉可以划分到多个主题域？"></a>感觉可以划分到多个主题域？</h3><p>表只能属于一个一级主题域，在一些比较模糊中的报表中，例如如果有一级数据域：商品域、订阅域，那商品中的订阅该划分到商品域还是订阅域？</p>
+<h2 id="注意点">注意点</h2>
+<h3 id="一次能划分好主题域吗">一次能划分好主题域吗</h3>
+<p>首先，主题域是无法一次划分完整的，一般是一次先建立几个明确的主题，在大多数数据仓库的设计过程中都有一个主题域的选择过程。业务是一直发展的，因此设计之初不要想着一次把所有主题全部划分完整。我们可以遵循上面说的划分主题域的两个要点，后续采用迭代的方式补充。</p>
+<h3 id="划分为几个主题域合适">划分为几个主题域合适</h3>
+<p>主题域的个数由业务复杂度决定，但建议一级主题域在10个以内。</p>
+<h3 id="感觉可以划分到多个主题域">感觉可以划分到多个主题域？</h3>
+<p>表只能属于一个一级主题域，在一些比较模糊中的报表中，例如如果有一级数据域：商品域、订阅域，那商品中的订阅该划分到商品域还是订阅域？</p>
 <p>这种比较容易让人接受的是以<strong>数据内容</strong>来划分域。不同的人有不同的看法，但是数据团队一定要制定统一的规范。</p>
 <script>
         document.querySelectorAll('.github-emoji')
