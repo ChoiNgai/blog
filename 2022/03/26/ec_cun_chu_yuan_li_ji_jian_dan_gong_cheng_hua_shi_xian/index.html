@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326053704.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326194803.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326060953.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326064705.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220328004300.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326195929.jpg">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220327044741.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326081529.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326202446.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220327054646.png">
 <meta property="article:published_time" content="2022-03-25T20:52:41.000Z">
-<meta property="article:modified_time" content="2022-03-27T00:58:56.161Z">
+<meta property="article:modified_time" content="2022-03-27T17:54:50.070Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="存储">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45 分钟
+      47 分钟
     </span>
   
 
@@ -268,7 +268,7 @@
               <h1 id="ec存储">EC存储</h1>
 <a id="more"></a>
 <h2 id="为什么要ec">1. 为什么要EC？</h2>
-<p><strong>主要是为了省钱</strong>~ 众所周知（不知道也行），HDFS默认是三副本存储策略，即一样的数据在不同机架上保存三份，这样的好处是保证了数据存储的<strong>高容错性</strong>（其中的一两份数据损坏或者丢失了还能恢复）以及在使用的时候能够快速读取数据（因为机架位置、IO以及一些别的原因，这里略过暂时不说）</p>
+<p><strong>主要是为了省钱</strong>~ 众所周知（不知道也行），HDFS默认是三副本存储策略，即数据在不同机架上保存三份，这样的好处是保证了数据存储的<strong>高容错性</strong>（其中的一两份数据损坏或者丢失了还能恢复）以及在使用的时候能够快速读取数据（因为机架位置、IO以及一些别的原因，这里略过暂时不说）</p>
 <p>HDFS的这种三副本存储类似在现实中一些重要文件会电脑、U盘、网盘里各存一份，但这里带来了一个问题：<strong>存储利用率低</strong>。当文件很小的时候，其实这个问题都可以说不算什么问题...但是当今大数据时代，许多公司（尤其头部互联网公司）的数据量动辄几EB（以一般家庭电脑1TB的存储来计算，1EB相当于100万台电脑的存储。。），这就导致在保证数据可靠、稳定等前提下，需要付出在数据三倍的存储成本。为了解决存储冗余这个问题，所以会用到纠删码（Erasure Coding，简称<strong>EC</strong>）存储。</p>
 <blockquote>
 <p>本篇文章中默认只讲最经典的纠删码算法——里德-所罗门码（Reed-Solomon 码，简称 RS 码）以及其扩展的编码方式</p>
@@ -323,8 +323,8 @@ x_3 = 3
 <p>最简单的方式有，直接把这三个累加得到一个数值<span class="math inline">\(s_1\)</span>，那么当丢失其中一个数据后，将<span class="math inline">\(s_1\)</span>减去剩下的两个数据即可得到丢失的数据。</p></li>
 <li><p>当丢失两个数据</p>
 <p>还是按照上面那样再构造一个校验块，例如<span class="math inline">\(s_2=x_1+x_2+x_3\)</span>，但是这个不行，因为跟<span class="math inline">\(s_1=x_1+x_2+x_3\)</span>联立得到的两个方程显然无解，这种线性相关的就不行（线性代数中有讲）</p>
-<p>如果改成<span class="math inline">\(s2=7d_1+6d_2+3d_3\)</span>，联立两个方程显然可以解出<span class="math inline">\(s_1,s_2\)</span>，这两个就是校验块，用矩阵形式表示如下： $$ <span class="math display">\[\begin{equation}
-
+<p>如果改成<span class="math inline">\(s2=7d_1+6d_2+3d_3\)</span>，联立两个方程显然可以解出<span class="math inline">\(s_1,s_2\)</span>，这两个就是校验块，用矩阵形式表示如下： <span class="math display">\[
+\begin{equation}
 \left[ \begin{array}{ccc}
 1 &amp; 1 &amp; 1\\
 7 &amp; 6 &amp; 3
@@ -342,23 +342,30 @@ s_1\\
 s_2
 \end{array} 
 \right ]
-\end{equation}\]</span> <span class="math display">\[
-左边这个[[1,1,1],[7,6,3]]叫做**生成矩阵**(generator matrix, GM) ，他需要保证是**可逆**的（生成矩阵可逆保证了不会出现上面那种线性相关的情况），所以一般需要有一个规律性取值的生成矩阵，比如**范德蒙德矩阵**。
-\]</span> $$</p>
+\end{equation}
+\]</span> 左边这个[[1,1,1],[7,6,3]]叫做<strong>生成矩阵</strong>(generator matrix, GM) ，他需要保证是<strong>可逆</strong>的（生成矩阵可逆保证了不会出现上面那种线性相关的情况），所以一般需要有一个规律性取值的生成矩阵，比如<strong>范德蒙德矩阵</strong>。 <span class="math display">\[
+\left[ \begin{array}{ccc}
+1 &amp; 1 &amp;...&amp; 1 \\
+1 &amp; 2 &amp; ...&amp;n \\
+...   &amp;...&amp;...&amp;...        \\
+1^{m-1} &amp; 2^{m-1} &amp;...&amp; n^{m-1}
+\end{array} 
+\right ]
+\]</span></p>
 <p>关于上面例子中为什么不能线性相关的补充：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326060953.png" srcset="/img/loading.gif" lazyload=""></p>
-<p>在EC存储里出现这种线性相关，简单来讲类似这种情况解<span class="math inline">\(x_1,x_2\)</span>： <span class="math display">\[
-\left\{
-\begin{array}{**lr**}  
-x_1 + x_2  = 1 \\
-x_1 + x_2  = 1
-\end{array}  
-\right.
-\]</span> （小学生都知道解个锤子哦。。）</p></li>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326060953.png" srcset="/img/loading.gif" lazyload=""></p></li>
 </ul>
+<p>在EC存储里出现这种线性相关，简单来讲类似下面这种方程解出<span class="math inline">\(x_1,x_2\)</span>： <span class="math display">\[
+  \left\{
+\begin{array}{**lr**}  
+  x_1 + x_2  = 1 \\
+  x_1 + x_2  = 1
+  \end{array}  
+  \right.
+\]</span> （小学生都知道解个锤子哦。。）</p>
 <h3 id="数据恢复">2.3 数据恢复</h3>
-<p>这部分生成矩阵用范德蒙德矩阵为例，因为两个相乘的矩阵大小需要满足大小分别为m1*m2、m2*m3（即要对齐），所以在范德蒙德矩阵上面增加个单位矩阵扩展下，<kbd>生成矩阵</kbd> * <kbd>数据块</kbd> = <kbd>数据块+校验块</kbd>： $$ <span class="math display">\[\begin{equation}
-
+<p>这部分生成矩阵用范德蒙德矩阵为例，因为两个相乘的矩阵大小需要满足大小分别为m1*m2、m2*m3（即要对齐），所以在范德蒙德矩阵上面增加个单位矩阵扩展下，<kbd>生成矩阵</kbd> * <kbd>数据块</kbd> = <kbd>数据块+校验块</kbd>： <span class="math display">\[
+\begin{equation}
 \left[ \begin{array}{ccc}
 1 &amp; 0 &amp; ... &amp; 0\\
 0 &amp; 1 &amp; ... &amp; 0\\
@@ -387,9 +394,10 @@ s_1 \\
 s_m
 \end{array} 
 \right ]
-\end{equation}\]</span> $$ 假设前m个数据块缺失了（两个相乘的矩阵行列要对应上，所以不管是缺失1个还是缺失m个数据，都得用一样大小的矩阵），现在要恢复数据。</p>
+\end{equation}
+\]</span> 假设前m个数据块缺失了（两个相乘的矩阵行列要对应上，所以不管是缺失1个还是缺失m个数据，都得用一样大小的矩阵），现在要恢复数据。</p>
 <p>因为缺失的是前面的m个数据块，所以这里把生成矩阵的前m行去掉，数据块对应矩阵的前m行也去掉再后面补上校验块，相乘得到的就是<kbd>数据块+校验块</kbd>，如图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326064705.png" srcset="/img/loading.gif" lazyload=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220328004300.png" srcset="/img/loading.gif" lazyload=""></p>
 <p>式子写出来大概是这样： $$ <span class="math display">\[\begin{equation}
 
 \left[ \begin{array}{ccc}
@@ -439,7 +447,7 @@ s_m
 <li><p>恢复数据</p></li>
 </ol>
 <p>​ 恢复线程先根据EC组现有的数据情况，从远程或本地获取必要的数据进行解码，恢复失效数据。</p>
-<p>此外，如果有一些可视化界面的话会更好点，那么就像模像样的算是一个完整的落地了，架构大致如下：</p>
+<p>架构大致如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326195929.jpg" srcset="/img/loading.gif" lazyload="" style="zoom:50%;"></p>
 <p>除了上述必要的模块，还需要用一些数学方法来优化计算，否则对计算资源的消耗实在太大。</p>
 <h4 id="生成矩阵优化">3.1.1 生成矩阵优化</h4>
@@ -509,7 +517,7 @@ C_{ij} = \frac{1}{x_i-y_j}
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220327080403.png" srcset="/img/loading.gif" lazyload="" alt="3副本存储示意图" style="zoom:50%;"></p>
 <p>上图是连续存储(连续布局),HDFS的三副本以及Hadoop 3.0之前的EC存储就是这种存储方法.</p>
 <p><strong>条形布局</strong>(条带存储)</p>
-<p>再来看看下图的条带存储(条带布局,条形存储,条形布局)</p>
+<p>再来看看下图的条带存储(条带布局,条形存储,条形布局)，这张图实际上跟上面的黑白条形图是相同的</p>
 <figure>
 <img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220327080512.png" srcset="/img/loading.gif" lazyload="" alt="EC 存储示意图"><figcaption aria-hidden="true">EC 存储示意图</figcaption>
 </figure>
@@ -545,9 +553,6 @@ C_{ij} = \frac{1}{x_i-y_j}
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-string">'''</span><br><span class="hljs-string">作用：对小于m个None的list,将其部分元素改成None保证刚好m个None</span><br><span class="hljs-string"></span><br><span class="hljs-string">输入:</span><br><span class="hljs-string">    check_data: 包含校验块的缺失数据</span><br><span class="hljs-string">    loss_idx:   缺失数据的索引</span><br><span class="hljs-string">    m:          校验块个数</span><br><span class="hljs-string">输出:</span><br><span class="hljs-string">    check_data: 相比输入更多缺失的数据（缺失个数为m）</span><br><span class="hljs-string">    loss_idx:   输出check_data缺失数据的索引</span><br><span class="hljs-string">'''</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">none_enough</span><span class="hljs-params">(check_data,loss_idx,m)</span>:</span><br>    loss_idx = loss_idx.tolist()<br>    i = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> len(loss_idx) &lt; m:<br>        check_data[i] = <span class="hljs-literal">None</span><br>        loss_idx = np.where(np.array(check_data) == <span class="hljs-literal">None</span>)[<span class="hljs-number">0</span>]<br>        i = i + <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> check_data,loss_idx<br></code></pre></div></td></tr></tbody></table></figure>
 <p>对list类型的数据EC生成校验块并恢复的主要程序如下：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>m = <span class="hljs-number">3</span>                       <span class="hljs-comment">#生成校验块个数</span><br>generator_matrix = <span class="hljs-string">'vander'</span> <span class="hljs-comment">#生成矩阵选择范德蒙德矩阵</span><br><br>data = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>]<br><span class="hljs-comment"># data = np.arange(1,6,1)</span><br>k = len(data)<br><br>check_block = reedsolomon(data,m,generator_matrix)<br><br><span class="hljs-comment"># test</span><br>data[<span class="hljs-number">0</span>] = <span class="hljs-literal">None</span>          <span class="hljs-comment"># 缺失数据（缺失个数小于等于m）</span><br>data[<span class="hljs-number">1</span>] = <span class="hljs-literal">None</span><br>data[<span class="hljs-number">2</span>] = <span class="hljs-literal">None</span><br>print(data)<br><span class="hljs-comment"># check_block[1] = None	 #校验块缺失数据也可以</span><br><br><span class="hljs-comment"># 恢复数据</span><br>recover_data = verify(data,check_block,generator_matrix)<br>print(recover_data)<br></code></pre></div></td></tr></tbody></table></figure>
-<p><strong>demo完整源码</strong></p>
-<p>源码放在这了→_→<a href="https://pypi.org/project/ec-storage/" target="_blank" rel="noopener">ec-storage</a></p>
-<p>（PS：1.0.0版本的代码里没实现柯西矩阵作为生成矩阵以及伽罗华域优化）</p>
 <p>至今最简单的demo就完成了，在这个demo里数学原理上不涉及稀疏矩阵计算也不涉及超大矩阵运算，更不涉及底层的SIMD指令集加速；在工程实现也不涉及定时监控，离线EC、在线EC等方式 ~ 写个demo简简单单.</p>
 <p>那完成单机版demo后可是试试适用分布式的操作，鉴于技术水平借助一下spark框架(pyspark)来实现.</p>
 <p><strong>RDD格式数据的EC存储demo</strong></p>
@@ -559,6 +564,24 @@ C_{ij} = \frac{1}{x_i-y_j}
 <p><code>generator_matrix.multiply(data).toCoordinateMatrix().entries.collect()</code>是将生成矩阵与缺失数据的数据块和校验块拼接的矩阵相乘,这里可以实现下超大矩阵的优化用来代替spark原生的矩阵乘法.</p>
 <p>这个函数里后面的数据格式转换部分的代码不应该这样实现(虽然能用),因为直接<code>collect()</code>会占用很大的内存,而且转换成list之后不再是分布式数据集(rdd不好操作,这里我就直接转成list操作了,只是个示例,切勿模仿).</p>
 <p>恢复数据的代码也是类似,这里就不放了.</p>
+<p><strong>demo完整源码</strong></p>
+<p>源码放在这了→_→<a href="https://pypi.org/project/ec-storage/" target="_blank" rel="noopener">ec-storage</a></p>
+<p>（PS：1.0.0版本的代码里没实现柯西矩阵作为生成矩阵以及伽罗华域优化）</p>
+<h2 id="知名开源库">5. 知名开源库</h2>
+<p>上面纯属只当入门阅读参考，实际上用于生产环境的比较多用以下知名的开源库（当然也可以全自己造）：</p>
+<ul>
+<li><p><a href="https://github.com/intel/isa-l" target="_blank" rel="noopener">Intel 出品的 ISA-L</a></p>
+<p>汇编写的，生成矩阵就是本文中提到拼接单位矩阵的方式，支持柯西矩阵作为生成矩阵，支持的指令集扩展丰富，下至 SSE，上到 AVX512，平台适应性最强。</p></li>
+<li><p><a href="http://jerasure.org/" target="_blank" rel="noopener">J.S.Plank 教授领导的 Jerasure</a></p>
+<p>C语言写的，支持 <span class="math inline">\(GF(2^4)\)</span> - <span class="math inline">\(GF(2^{128})\)</span> 之间的有限域运算</p></li>
+<li><p><a href="https://github.com/klauspost/reedsolomon" target="_blank" rel="noopener">klauspost 的个人项目</a></p>
+<p>golang语言写的，借助go的特性实现了SIMD加速，语法简单，可作为入门阅读参考</p>
+<p>其对于较大的数据块，编码速度会有巨大的下滑，而且复速度明显慢于编码速度</p></li>
+</ul>
+<blockquote>
+<p>上面的demo本来想继续做的，但是很遗憾python因为有GIL锁的原因，计算密集型任务开启多线程未必会加速，所以在线EC的方法难以实现，而且本文在理论阐述和工程实现上有挺多纰漏，最后就在此画上句号吧。</p>
+<p>希望下一篇能写一下<strong>极限存储</strong>o(<em>￣▽￣</em>)ブ</p>
+</blockquote>
 <h2 id="ref">Ref</h2>
 <p><a href="https://blog.csdn.net/weixin_31059129/article/details/79794928" target="_blank" rel="noopener">EC存储原理初探</a></p>
 <p><a href="https://www.cnblogs.com/qiniu/p/6703629.html" target="_blank" rel="noopener">如何选择纠删码编码引擎 | 纠删码技术详解（上）</a></p>
@@ -567,6 +590,7 @@ C_{ij} = \frac{1}{x_i-y_j}
 <p><a href="http://hejunhao.me/archives/1503" target="_blank" rel="noopener">Spark 大规模稀疏矩阵乘法</a></p>
 <p><a href="https://blog.csdn.net/m0_37870649/article/details/104302318" target="_blank" rel="noopener">spark实现大矩阵运算</a></p>
 <p><a href="https://blog.csdn.net/u010376788/article/details/49764805" target="_blank" rel="noopener">基于Spark实现的超大矩阵运算</a></p>
+<p><a href="https://blog.csdn.net/sinat_22510827/article/details/108291786?utm_medium=distribute.wap_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-2-108291786.wap_agg_so&amp;utm_term=ec%E5%AD%98%E5%82%A8hadoop" target="_blank" rel="noopener">Hadoop EC的一个实现</a></p>
 <p><a href="https://mp.weixin.qq.com/s/AW0MmiBxTlkweJFaluu4vQ" target="_blank" rel="noopener">HDFS EC在滴滴的实践</a></p>
 <p><a href="https://mp.weixin.qq.com/s/q5oOdjE59A_7Oetq5hL8zw" target="_blank" rel="noopener">OPPO数据湖统一存储技术实践</a></p>
 <p><a href="https://www.zhihu.com/question/22072020" target="_blank" rel="noopener">有人能解释一下伽罗瓦域和GF(2^8)吗？</a></p>
