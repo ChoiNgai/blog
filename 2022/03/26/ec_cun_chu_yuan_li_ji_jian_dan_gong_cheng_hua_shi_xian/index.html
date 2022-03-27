@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220326202446.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220327054646.png">
 <meta property="article:published_time" content="2022-03-25T20:52:41.000Z">
-<meta property="article:modified_time" content="2022-03-27T17:54:50.070Z">
+<meta property="article:modified_time" content="2022-03-27T18:12:07.301Z">
 <meta property="article:author" content="CAIWEI">
 <meta property="article:tag" content="存储">
 <meta name="twitter:card" content="summary_large_image">
@@ -198,7 +198,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/0.jpg') no-repeat center center;
+         style="background: url('https://auto2dev.coding.net/p/ImageHostingService/d/ImageHostingService/git/raw/master/higan/catoon_thumbnail/catoon_2200.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -462,7 +462,7 @@ C_{ij} = \frac{1}{x_i-y_j}
 <p>伽罗华域的加法和减法为异或运算，乘法和除法需要基于生成多项式计算出<span class="math inline">\(gfilog\)</span>表，例如<span class="math inline">\(GF(2^4)\)</span>的<span class="math inline">\(gfilog\)</span>表如下所示：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/ChoiNgai/ImageServer/img/20220327044741.png" srcset="/img/loading.gif" lazyload="" style="zoom: 80%;"></p>
 <p>在该<span class="math inline">\(GF(2^8)\)</span>中以<span class="math inline">\(8*9\)</span>的计算过程如下所示（如果值大于<span class="math inline">\(2^w\)</span>，需要模<span class="math inline">\(2^w\)</span>）： <span class="math display">\[
-8∗9=x_8 x_9=x^{17}=x^{17\%15}=x2=4
+8∗9=x_8 x_9=x^{17}=x^{17\%15}=x^2=4
 \]</span> 另外，因为恢复数据的时候涉及逆矩阵，柯西矩阵求逆计算较为复杂，所以工程实现上一般建议提前准备好柯西矩阵的乘法逆元表。创建以柯西矩阵为生成矩阵的伪代码如下：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 数据块大小为k</span><br><span class="hljs-comment"># 校验块个数为m</span><br><br><span class="hljs-comment"># rows为行数，cols为列数</span><br><br><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>A = np.zeros((k,k))	<span class="hljs-comment">#单位矩阵</span><br><span class="hljs-comment"># 生成单位矩阵</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(m):<br>    A[i][i] = <span class="hljs-number">1</span><br>    <br>C = np.zeros((m,k)) <span class="hljs-comment">#柯西矩阵</span><br><span class="hljs-comment"># 生成柯西矩阵</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(m):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(k):<br>        d = i**j<br>        C[i][j] = inverseTable[d] <span class="hljs-comment">#查乘法逆元表(这个是自定义的函数)</span><br></code></pre></div></td></tr></tbody></table></figure>
 <p>Intel 的EC库有实现柯西矩阵作为生成矩阵的EC存储</p>
